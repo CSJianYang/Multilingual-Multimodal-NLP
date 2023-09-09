@@ -437,6 +437,7 @@ class TransformerEncoder(nn.Module):
         # 添加位置信息
         src = self.positional_encoding(src)  # [B, T1, E]
         src = self.transformer_encoder(src, src_key_padding_mask=src_key_padding_mask)  # [B, T1, E]
+        
         return src
 
     @staticmethod

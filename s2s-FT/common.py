@@ -161,8 +161,20 @@ def batch_loss(encoder, decoder, X, Y, loss, flag, mode, device):
         #dec_state = (enc_outputs[:, -1, :].unsqueeze(0), enc_outputs[:, -1, :].unsqueeze(0))
         batch_size, time_step, hidden_size = enc_outputs.size()
         #dec_state = (decoder.embedding(X.new(1, batch_size).fill_(0)), decoder.embedding(X.new(1, batch_size).fill_(0)))
-        h0 = torch.zeros(decoder.layers, batch_size, decoder.hidden_dim).to(device)
-        c0 = torch.zeros(decoder.layers, batch_size, decoder.hidden_dim).to(device)
+        one_piece = enc_outputs[:, -1, :]
+        one_piece = one_piece.unsqueeze(dim=0)
+        h0 = c0 = None
+        for i in range(decoder.layers):
+            if i == 0:
+                h0 = one_piece
+                c0 = one_piece
+            else:
+                h0 = torch.cat([one_piece, h0], dim=0)
+                c0 = torch.cat([one_piece, c0], dim=0)
+        # h0 = torch.zeros(decoder.layers, batch_size, decoder.hidden_dim).to(device)
+        # c0 = torch.zeros(decoder.layers, batch_size, decoder.hidden_dim).to(device)
+        h0 = h0.contiguous()
+        c0 = c0.contiguous()
         dec_state = (h0, c0)
         # dec_state: [2, num_layers, B, H]
         # h0: [num_layers, B, H]
@@ -218,6 +230,7 @@ def train_LSTM(encoder, decoder, trainloader, testloader, lr, num_epochs, mode, 
     val_acc_all = []
     enc_optimizer = torch.optim.AdamW(encoder.parameters(), lr=lr)
     dec_optimizer = torch.optim.AdamW(decoder.parameters(), lr=lr)
+
     enc_scheduler = timm.scheduler.CosineLRScheduler(optimizer=enc_optimizer,
                                                  t_initial=num_epochs,
                                                  lr_min=1e-5,
@@ -230,13 +243,16 @@ def train_LSTM(encoder, decoder, trainloader, testloader, lr, num_epochs, mode, 
                                                  warmup_t=75,
                                                  warmup_lr_init=1e-4
                                                  )
+    
     loss = nn.CrossEntropyLoss(reduction='none')
     for epoch in range(num_epochs):
         print('-' * 10)
         print('Epoch {}/{}'.format(epoch + 1, num_epochs))
         # 调整两个优化器的学习率
+        
         enc_scheduler.step(epoch)
         dec_scheduler.step(epoch)
+        
         # 每个epoch有两个阶段,训练阶段和验证阶段
         train_loss = 0.0
         train_corrects = 0

@@ -99,7 +99,7 @@ if __name__ == "__main__":
         enc_module = TransformerEncoder(vocab_size, embedding_dim).to(device)
         dec_module = LstmDecoder(vocab_size, embedding_dim, hidden_dim, layer_dim, output_dim, embedding_dim).to(device)
         enc_module, dec_module, train_process = train_LSTM(enc_module, dec_module, train_loader, test_loader, lr=0.01,
-                                                           num_epochs=700, mode=1, device=device)
+                                                           num_epochs=1000, mode=1, device=device)
         torch.save(enc_module, './module_data/TLEnet.pth')
         torch.save(dec_module, './module_data/TLDnet.pth')
         csv_name = './csv_data/TL_process.csv'

@@ -5,24 +5,24 @@
 **LSTM+LSTM**
 
 ~~~
-python train_model.py -encoder LSTM -decoder LSTM -dataset ./data_920_new.csv -cuda 3
+python train_model.py -encoder LSTM -decoder LSTM -train_dataset ./test_seq_100_train.csv -test_dataset ./test_seq_100_test.csv -cuda 0
 ~~~
 
 **Transformer+LSTM**
 
 ~~~
-python train_model.py -encoder Transformer -decoder LSTM -dataset ./data_920_new.csv -cuda 3
+python train_model.py -encoder Transformer -decoder LSTM -train_dataset ./test_seq_100_train.csv -test_dataset ./test_seq_100_test.csv -cuda 0
 ~~~
 
 **LSTM+Transformer**
 
 ~~~
-python train_model.py -encoder LSTM -decoder Transformer -dataset ./data_920_new.csv -cuda 2
+python train_model.py -encoder LSTM -decoder Transformer -train_dataset ./test_seq_100_train.csv -test_dataset ./test_seq_100_test.csv -cuda 0
 ~~~
 
 **Trnasformer+LSTM**
 
 ~~~
-python train_model.py -encoder Transformer -decoder Transformer -dataset ./data_920_new.csv -cuda 1
+python train_model.py -encoder Transformer -decoder Transformer -train_dataset ./test_seq_100_train.csv -test_dataset ./test_seq_100_test.csv -cuda 0
 ~~~
 

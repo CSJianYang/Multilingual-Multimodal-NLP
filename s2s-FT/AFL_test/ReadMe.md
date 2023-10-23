@@ -1,4 +1,4 @@
-![image](https://github.com/CSJianYang/Multilingual-Multimodal-NLP/assets/77664227/56064cd5-a3b8-421d-ad03-2982495be139)## 测试用的命令，请在afl-2.52b下面进行测试
+## 测试用的命令，请在afl-2.52b下面进行测试
 
 **测试objdump的**
 

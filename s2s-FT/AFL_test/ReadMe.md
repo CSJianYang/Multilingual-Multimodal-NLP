@@ -21,5 +21,11 @@ timeout 12h ./afl-fuzz -i testcases/others/elf/ -o ./nm ../binutils-2.27/binutil
 ![图片](./readme的图片2.png)
 
 在做完这一切后在afl-2.52b下面运行下面命令
-```make```
-```make install```
+
+~~~
+make
+~~~
+
+~~~
+make install
+~~~

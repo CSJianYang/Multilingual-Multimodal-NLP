@@ -28,3 +28,5 @@ timeout 12h ./afl-fuzz -i testcases/others/elf/ -o ./nm ../binutils-2.27/binutil
 make
 make install
 ~~~
+
+做完测试所需要做的就可以直接运行最上面的代码分别测试3个程序

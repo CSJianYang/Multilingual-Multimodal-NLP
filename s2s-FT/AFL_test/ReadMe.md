@@ -20,6 +20,7 @@ timeout 12h ./afl-fuzz -i testcases/others/elf/ -o ./nm ../binutils-2.27/binutil
 其实改的时候就可以针对于moduleload-LL.py中的run函数中运行模型那一块进行替换即可.
 ![图片](./readme的图片2.png)
 在moduleload-LL.py中同样需要新建err.txt和fragment.txt，位置自定义，而in.txt和out.txt的路径和之前建的一样。
+
 在做完这一切后在afl-2.52b下面运行下面命令更新afl-fuzz
 
 

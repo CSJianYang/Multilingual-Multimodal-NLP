@@ -11,3 +11,4 @@ timeout 12h ./afl-fuzz -i testcases/others/elf/ -o ./readelf ../binutils-2.27/bi
 **测试nm的**
 
 timeout 12h ./afl-fuzz -i testcases/others/elf/ -o ./nm ../binutils-2.27/binutils/nm-new -a testcases/others/elf/small_exec.elf @@
+![图片](./readme的图片.png)

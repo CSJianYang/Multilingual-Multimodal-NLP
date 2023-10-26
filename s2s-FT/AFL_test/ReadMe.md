@@ -1,5 +1,9 @@
 ## 测试用的命令，请在afl-2.52b下面进行测试
+### 测试之前所需要的必须步骤
+```
+cd afl-2.52b
 
+```
 **测试objdump的**
 
 timeout 12h ./afl-fuzz -i testcases/others/elf/ -o ./objdump ../binutils-2.27/binutils/objdump -x -a -d testcases/others/elf/small_exec.elf @@

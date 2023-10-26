@@ -23,8 +23,8 @@ $ vim Makefile
 如果出现libpython3.9m.so.1.0: cannot open shared object file，请将/XX/lib下的libpython3.9m.so.1.0放入/usr/lib里面
 对工具进行初始化
 ```
+```
 $ make 
-
 $ sudo make install
 ```
 **测试objdump的**

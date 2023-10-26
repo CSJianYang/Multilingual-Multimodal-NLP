@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Leetflex Banned Accounts",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1952236,
+                "content": [
+                    {
+                        "username": "HexagonSun",
+                        "content": "For anyone approaching this problem... the test cases do not work for me. Output says wrong answer. But submitting the solution worked fine."
+                    },
+                    {
+                        "username": "jfmsouza",
+                        "content": "Same issue"
+                    },
+                    {
+                        "username": "Nandika_01",
+                        "content": "[@Jeremiah Brookes](/HexagonSun) : Same issue . "
+                    }
+                ]
+            }
+        ]
+    }
+]

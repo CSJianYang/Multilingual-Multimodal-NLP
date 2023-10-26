@@ -1,0 +1,43 @@
+[
+    {
+        "title": "League Statistics",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1777368,
+                "content": [
+                    {
+                        "username": "user7363AQ",
+                        "content": "Why would people use sql to calculate this?"
+                    },
+                    {
+                        "username": "Manirag",
+                        "content": "You write your code once and you just re-run your query as the league progresses and you get all the metrics you want as compared to manual efforts in Excel. You can use other programming languages too, but if you want to automate things Programming approach is better than Excel"
+                    },
+                    {
+                        "username": "hero4future",
+                        "content": "just saving you the trouble, just a hint the rest you figure out yourself:\n- order by 3 desc, 6 desc, 4"
+                    }
+                ]
+            },
+            {
+                "id": 1889692,
+                "content": [
+                    {
+                        "username": "user7363AQ",
+                        "content": "Why would people use sql to calculate this?"
+                    },
+                    {
+                        "username": "Manirag",
+                        "content": "You write your code once and you just re-run your query as the league progresses and you get all the metrics you want as compared to manual efforts in Excel. You can use other programming languages too, but if you want to automate things Programming approach is better than Excel"
+                    },
+                    {
+                        "username": "hero4future",
+                        "content": "just saving you the trouble, just a hint the rest you figure out yourself:\n- order by 3 desc, 6 desc, 4"
+                    }
+                ]
+            }
+        ]
+    }
+]

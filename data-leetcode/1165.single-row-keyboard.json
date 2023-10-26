@@ -1,0 +1,72 @@
+[
+    {
+        "title": "Single-Row Keyboard",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1701794,
+                "content": [
+                    {
+                        "username": "YuanPJ",
+                        "content": "Is this question proposed by Google Japan?\\n\\n![Gboard \\u68D2\\u30D0\\u30FC\\u30B8\\u30E7\\u30F3](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWqKeShk9VxoF79V_wb8JGhgeSOepWfNrdmp2Cv9Afi7Wals5-PlcL2C8iE8XJ9FYBwH_xah5S1zrmRkqNqIQbA9Aft3j3lOl6G6la8keTliVYbBkCG6to-pOt4MgAt_N77tgahZ-so0SPM828qbcPDWWxgeyan6wox_fck1HLLELUCI4SR70/s1999/image3.jpg)\\n\\nRef: https://landing.google.co.jp/________________/\\n"
+                    },
+                    {
+                        "username": "FelixLin99",
+                        "content": "Can anyone tell me why my answer is not working???\nI believe we don't have to use hashmap or \".indexof\".\n\n` \n\nclass Solution:\n\n    def calDistToLeft(self, keyboard, c):\n        return (ord(c) + 26 - ord(keyboard[0]))%26\n\n    def calculateTime(self, keyboard: str, word: str) -> int:\n        res = 0\n        pre = keyboard[0]\n        for i in range(len(word)):\n            res += abs(self.calDistToLeft(keyboard, pre)  - self.calDistToLeft(keyboard, word[i]))\n            pre = word[i]\n        return res\n`\n\n"
+                    },
+                    {
+                        "username": "xxpracticexx",
+                        "content": "Please take a look at the Discussion Rules. "
+                    },
+                    {
+                        "username": "zhaonzh",
+                        "content": "Google Japan sponsored this question."
+                    }
+                ]
+            },
+            {
+                "id": 1715917,
+                "content": [
+                    {
+                        "username": "YuanPJ",
+                        "content": "Is this question proposed by Google Japan?\\n\\n![Gboard \\u68D2\\u30D0\\u30FC\\u30B8\\u30E7\\u30F3](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWqKeShk9VxoF79V_wb8JGhgeSOepWfNrdmp2Cv9Afi7Wals5-PlcL2C8iE8XJ9FYBwH_xah5S1zrmRkqNqIQbA9Aft3j3lOl6G6la8keTliVYbBkCG6to-pOt4MgAt_N77tgahZ-so0SPM828qbcPDWWxgeyan6wox_fck1HLLELUCI4SR70/s1999/image3.jpg)\\n\\nRef: https://landing.google.co.jp/________________/\\n"
+                    },
+                    {
+                        "username": "FelixLin99",
+                        "content": "Can anyone tell me why my answer is not working???\nI believe we don't have to use hashmap or \".indexof\".\n\n` \n\nclass Solution:\n\n    def calDistToLeft(self, keyboard, c):\n        return (ord(c) + 26 - ord(keyboard[0]))%26\n\n    def calculateTime(self, keyboard: str, word: str) -> int:\n        res = 0\n        pre = keyboard[0]\n        for i in range(len(word)):\n            res += abs(self.calDistToLeft(keyboard, pre)  - self.calDistToLeft(keyboard, word[i]))\n            pre = word[i]\n        return res\n`\n\n"
+                    },
+                    {
+                        "username": "xxpracticexx",
+                        "content": "Please take a look at the Discussion Rules. "
+                    },
+                    {
+                        "username": "zhaonzh",
+                        "content": "Google Japan sponsored this question."
+                    }
+                ]
+            },
+            {
+                "id": 1702747,
+                "content": [
+                    {
+                        "username": "YuanPJ",
+                        "content": "Is this question proposed by Google Japan?\\n\\n![Gboard \\u68D2\\u30D0\\u30FC\\u30B8\\u30E7\\u30F3](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWqKeShk9VxoF79V_wb8JGhgeSOepWfNrdmp2Cv9Afi7Wals5-PlcL2C8iE8XJ9FYBwH_xah5S1zrmRkqNqIQbA9Aft3j3lOl6G6la8keTliVYbBkCG6to-pOt4MgAt_N77tgahZ-so0SPM828qbcPDWWxgeyan6wox_fck1HLLELUCI4SR70/s1999/image3.jpg)\\n\\nRef: https://landing.google.co.jp/________________/\\n"
+                    },
+                    {
+                        "username": "FelixLin99",
+                        "content": "Can anyone tell me why my answer is not working???\nI believe we don't have to use hashmap or \".indexof\".\n\n` \n\nclass Solution:\n\n    def calDistToLeft(self, keyboard, c):\n        return (ord(c) + 26 - ord(keyboard[0]))%26\n\n    def calculateTime(self, keyboard: str, word: str) -> int:\n        res = 0\n        pre = keyboard[0]\n        for i in range(len(word)):\n            res += abs(self.calDistToLeft(keyboard, pre)  - self.calDistToLeft(keyboard, word[i]))\n            pre = word[i]\n        return res\n`\n\n"
+                    },
+                    {
+                        "username": "xxpracticexx",
+                        "content": "Please take a look at the Discussion Rules. "
+                    },
+                    {
+                        "username": "zhaonzh",
+                        "content": "Google Japan sponsored this question."
+                    }
+                ]
+            }
+        ]
+    }
+]

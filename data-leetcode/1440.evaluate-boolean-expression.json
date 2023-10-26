@@ -1,0 +1,93 @@
+[
+    {
+        "title": "Evaluate Boolean Expression",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1567100,
+                "content": [
+                    {
+                        "username": "cxy45",
+                        "content": "# Write your MySQL query statement below\\n\\n\\nSELECT E.*,\\nCASE E.operator\\nWHEN \">\" THEN IF(V1.value>V2.value,\"true\",\"false\")\\nWHEN \"=\" THEN IF(V1.value=V2.value,\"true\",\"false\")\\nWHEN \"<\" THEN IF(V1.value<V2.value,\"true\",\"false\")\\nEND AS value \\nFROM Expressions E LEFT JOIN Variables V1\\nON E.left_operand=V1.name\\nLEFT JOIN  Variables V2\\nON E.right_operand = V2.name"
+                    },
+                    {
+                        "username": "yfwei2022",
+                        "content": "\\'\\'\\'\\nwith e as (\\nselect e.*,\\ncase when operator = \\'>\\' then a.value > b.value\\n     when operator = \\'<\\' then a.value < b.value\\n     when operator = \\'=\\' then a.value = b.value\\nend as value_num\\nfrom expressions e\\nleft join variables a on a.name = e.left_operand\\nleft join variables b on b.name = e.right_operand\\n)\\nselect e.left_operand, e.operator, e.right_operand,\\ncase when value_num is True then \\'true\\'\\n     else \\'false\\' end as \\'value\\'\\nfrom e\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "saini5259",
+                        "content": "/* Write your PL/SQL query statement below */\\nselect left_operand,operator,right_operand,\\ncase when operator = \\'>\\' and v1.value > v2.value then \\'true\\'\\n     when operator = \\'<\\' and v1.value < v2.value then \\'true\\'\\n     when operator = \\'=\\' and v1.value = v2.value then \\'true\\' else \\'false\\' end value\\nfrom Expressions e join Variables v1\\non e.left_operand = v1.name \\njoin Variables v2 \\non e.right_operand = v2.name"
+                    },
+                    {
+                        "username": "snito46",
+                        "content": "\\'\\'\\'\\nselect a.*, (case when (case when (b.value-c.value)>0 then \\'>\\' when (b.value-c.value)<0 then \\'<\\' else \\'=\\' end)=a.operator then \\'true\\' else \\'false\\' end) value from Expressions a\\njoin Variables b on a.left_operand=b.name\\njoin Variables c on a.right_operand=c.name\\n\\'\\'\\'"
+                    }
+                ]
+            },
+            {
+                "id": 1576985,
+                "content": [
+                    {
+                        "username": "cxy45",
+                        "content": "# Write your MySQL query statement below\\n\\n\\nSELECT E.*,\\nCASE E.operator\\nWHEN \">\" THEN IF(V1.value>V2.value,\"true\",\"false\")\\nWHEN \"=\" THEN IF(V1.value=V2.value,\"true\",\"false\")\\nWHEN \"<\" THEN IF(V1.value<V2.value,\"true\",\"false\")\\nEND AS value \\nFROM Expressions E LEFT JOIN Variables V1\\nON E.left_operand=V1.name\\nLEFT JOIN  Variables V2\\nON E.right_operand = V2.name"
+                    },
+                    {
+                        "username": "yfwei2022",
+                        "content": "\\'\\'\\'\\nwith e as (\\nselect e.*,\\ncase when operator = \\'>\\' then a.value > b.value\\n     when operator = \\'<\\' then a.value < b.value\\n     when operator = \\'=\\' then a.value = b.value\\nend as value_num\\nfrom expressions e\\nleft join variables a on a.name = e.left_operand\\nleft join variables b on b.name = e.right_operand\\n)\\nselect e.left_operand, e.operator, e.right_operand,\\ncase when value_num is True then \\'true\\'\\n     else \\'false\\' end as \\'value\\'\\nfrom e\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "saini5259",
+                        "content": "/* Write your PL/SQL query statement below */\\nselect left_operand,operator,right_operand,\\ncase when operator = \\'>\\' and v1.value > v2.value then \\'true\\'\\n     when operator = \\'<\\' and v1.value < v2.value then \\'true\\'\\n     when operator = \\'=\\' and v1.value = v2.value then \\'true\\' else \\'false\\' end value\\nfrom Expressions e join Variables v1\\non e.left_operand = v1.name \\njoin Variables v2 \\non e.right_operand = v2.name"
+                    },
+                    {
+                        "username": "snito46",
+                        "content": "\\'\\'\\'\\nselect a.*, (case when (case when (b.value-c.value)>0 then \\'>\\' when (b.value-c.value)<0 then \\'<\\' else \\'=\\' end)=a.operator then \\'true\\' else \\'false\\' end) value from Expressions a\\njoin Variables b on a.left_operand=b.name\\njoin Variables c on a.right_operand=c.name\\n\\'\\'\\'"
+                    }
+                ]
+            },
+            {
+                "id": 1576010,
+                "content": [
+                    {
+                        "username": "cxy45",
+                        "content": "# Write your MySQL query statement below\\n\\n\\nSELECT E.*,\\nCASE E.operator\\nWHEN \">\" THEN IF(V1.value>V2.value,\"true\",\"false\")\\nWHEN \"=\" THEN IF(V1.value=V2.value,\"true\",\"false\")\\nWHEN \"<\" THEN IF(V1.value<V2.value,\"true\",\"false\")\\nEND AS value \\nFROM Expressions E LEFT JOIN Variables V1\\nON E.left_operand=V1.name\\nLEFT JOIN  Variables V2\\nON E.right_operand = V2.name"
+                    },
+                    {
+                        "username": "yfwei2022",
+                        "content": "\\'\\'\\'\\nwith e as (\\nselect e.*,\\ncase when operator = \\'>\\' then a.value > b.value\\n     when operator = \\'<\\' then a.value < b.value\\n     when operator = \\'=\\' then a.value = b.value\\nend as value_num\\nfrom expressions e\\nleft join variables a on a.name = e.left_operand\\nleft join variables b on b.name = e.right_operand\\n)\\nselect e.left_operand, e.operator, e.right_operand,\\ncase when value_num is True then \\'true\\'\\n     else \\'false\\' end as \\'value\\'\\nfrom e\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "saini5259",
+                        "content": "/* Write your PL/SQL query statement below */\\nselect left_operand,operator,right_operand,\\ncase when operator = \\'>\\' and v1.value > v2.value then \\'true\\'\\n     when operator = \\'<\\' and v1.value < v2.value then \\'true\\'\\n     when operator = \\'=\\' and v1.value = v2.value then \\'true\\' else \\'false\\' end value\\nfrom Expressions e join Variables v1\\non e.left_operand = v1.name \\njoin Variables v2 \\non e.right_operand = v2.name"
+                    },
+                    {
+                        "username": "snito46",
+                        "content": "\\'\\'\\'\\nselect a.*, (case when (case when (b.value-c.value)>0 then \\'>\\' when (b.value-c.value)<0 then \\'<\\' else \\'=\\' end)=a.operator then \\'true\\' else \\'false\\' end) value from Expressions a\\njoin Variables b on a.left_operand=b.name\\njoin Variables c on a.right_operand=c.name\\n\\'\\'\\'"
+                    }
+                ]
+            },
+            {
+                "id": 1573944,
+                "content": [
+                    {
+                        "username": "cxy45",
+                        "content": "# Write your MySQL query statement below\\n\\n\\nSELECT E.*,\\nCASE E.operator\\nWHEN \">\" THEN IF(V1.value>V2.value,\"true\",\"false\")\\nWHEN \"=\" THEN IF(V1.value=V2.value,\"true\",\"false\")\\nWHEN \"<\" THEN IF(V1.value<V2.value,\"true\",\"false\")\\nEND AS value \\nFROM Expressions E LEFT JOIN Variables V1\\nON E.left_operand=V1.name\\nLEFT JOIN  Variables V2\\nON E.right_operand = V2.name"
+                    },
+                    {
+                        "username": "yfwei2022",
+                        "content": "\\'\\'\\'\\nwith e as (\\nselect e.*,\\ncase when operator = \\'>\\' then a.value > b.value\\n     when operator = \\'<\\' then a.value < b.value\\n     when operator = \\'=\\' then a.value = b.value\\nend as value_num\\nfrom expressions e\\nleft join variables a on a.name = e.left_operand\\nleft join variables b on b.name = e.right_operand\\n)\\nselect e.left_operand, e.operator, e.right_operand,\\ncase when value_num is True then \\'true\\'\\n     else \\'false\\' end as \\'value\\'\\nfrom e\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "saini5259",
+                        "content": "/* Write your PL/SQL query statement below */\\nselect left_operand,operator,right_operand,\\ncase when operator = \\'>\\' and v1.value > v2.value then \\'true\\'\\n     when operator = \\'<\\' and v1.value < v2.value then \\'true\\'\\n     when operator = \\'=\\' and v1.value = v2.value then \\'true\\' else \\'false\\' end value\\nfrom Expressions e join Variables v1\\non e.left_operand = v1.name \\njoin Variables v2 \\non e.right_operand = v2.name"
+                    },
+                    {
+                        "username": "snito46",
+                        "content": "\\'\\'\\'\\nselect a.*, (case when (case when (b.value-c.value)>0 then \\'>\\' when (b.value-c.value)<0 then \\'<\\' else \\'=\\' end)=a.operator then \\'true\\' else \\'false\\' end) value from Expressions a\\njoin Variables b on a.left_operand=b.name\\njoin Variables c on a.right_operand=c.name\\n\\'\\'\\'"
+                    }
+                ]
+            }
+        ]
+    }
+]

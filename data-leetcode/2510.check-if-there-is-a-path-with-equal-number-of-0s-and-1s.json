@@ -1,0 +1,84 @@
+[
+    {
+        "title": "Check if There is a Path With Equal Number of 0's And 1's",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1986436,
+                "content": [
+                    {
+                        "username": "RobertSkonieczny",
+                        "content": "Can I get some help here. I am super confused on how this is not working.\n`class Solution {\n    public boolean isThereAPath(int[][] grid) {\n        this.memo = new Boolean[grid.length][grid[0].length];\n        return dfs(grid, 0, 0, 0, new boolean[grid.length][grid[0].length]);\n    }\n\n    private Boolean[][] memo;\n\n    public boolean dfs(int[][] grid, int i, int j, int count, boolean[][] visited) {\n        if (i < 0 || j < 0 || i >= grid.length || j >= grid[i].length) {\n            return false;\n        }\n\n        int newCount = count + ((grid[i][j] == 0) ? -1 : 1);\n\n        if (i == grid.length-1 && j == grid[0].length-1) {\n            return newCount == 0;\n        }\n\n        if (visited[i][j]) {\n            return false;\n        }\n\n        if (memo[i][j] != null) {\n            return memo[i][j];\n        }\n\n        visited[i][j] = true;\n\n        memo[i][j] = dfs(grid,i + 1,j, newCount, visited)|| dfs(grid,i, j + 1, newCount, visited);\n\n        visited[i][j] = false;\n\n        return memo[i][j];\n    }\n}`"
+                    },
+                    {
+                        "username": "venompool",
+                        "content": "Definitely a HARD problem, wonder why its been put in medium category."
+                    },
+                    {
+                        "username": "SkinheadBob",
+                        "content": "maybe it\\'s because the test cases are not too strict on space complexity?"
+                    },
+                    {
+                        "username": "stefan1096",
+                        "content": "Naive dynamic programming solution passes all testcases,even if it is very slow"
+                    },
+                    {
+                        "username": "abhineshp",
+                        "content": "[[0,0,0,0],[0,1,1,1],[0,1,0,0]]\nThis test does not work correctly for my code but is accepted by the leetcode."
+                    }
+                ]
+            },
+            {
+                "id": 1929642,
+                "content": [
+                    {
+                        "username": "RobertSkonieczny",
+                        "content": "Can I get some help here. I am super confused on how this is not working.\n`class Solution {\n    public boolean isThereAPath(int[][] grid) {\n        this.memo = new Boolean[grid.length][grid[0].length];\n        return dfs(grid, 0, 0, 0, new boolean[grid.length][grid[0].length]);\n    }\n\n    private Boolean[][] memo;\n\n    public boolean dfs(int[][] grid, int i, int j, int count, boolean[][] visited) {\n        if (i < 0 || j < 0 || i >= grid.length || j >= grid[i].length) {\n            return false;\n        }\n\n        int newCount = count + ((grid[i][j] == 0) ? -1 : 1);\n\n        if (i == grid.length-1 && j == grid[0].length-1) {\n            return newCount == 0;\n        }\n\n        if (visited[i][j]) {\n            return false;\n        }\n\n        if (memo[i][j] != null) {\n            return memo[i][j];\n        }\n\n        visited[i][j] = true;\n\n        memo[i][j] = dfs(grid,i + 1,j, newCount, visited)|| dfs(grid,i, j + 1, newCount, visited);\n\n        visited[i][j] = false;\n\n        return memo[i][j];\n    }\n}`"
+                    },
+                    {
+                        "username": "venompool",
+                        "content": "Definitely a HARD problem, wonder why its been put in medium category."
+                    },
+                    {
+                        "username": "SkinheadBob",
+                        "content": "maybe it\\'s because the test cases are not too strict on space complexity?"
+                    },
+                    {
+                        "username": "stefan1096",
+                        "content": "Naive dynamic programming solution passes all testcases,even if it is very slow"
+                    },
+                    {
+                        "username": "abhineshp",
+                        "content": "[[0,0,0,0],[0,1,1,1],[0,1,0,0]]\nThis test does not work correctly for my code but is accepted by the leetcode."
+                    }
+                ]
+            },
+            {
+                "id": 1916543,
+                "content": [
+                    {
+                        "username": "RobertSkonieczny",
+                        "content": "Can I get some help here. I am super confused on how this is not working.\n`class Solution {\n    public boolean isThereAPath(int[][] grid) {\n        this.memo = new Boolean[grid.length][grid[0].length];\n        return dfs(grid, 0, 0, 0, new boolean[grid.length][grid[0].length]);\n    }\n\n    private Boolean[][] memo;\n\n    public boolean dfs(int[][] grid, int i, int j, int count, boolean[][] visited) {\n        if (i < 0 || j < 0 || i >= grid.length || j >= grid[i].length) {\n            return false;\n        }\n\n        int newCount = count + ((grid[i][j] == 0) ? -1 : 1);\n\n        if (i == grid.length-1 && j == grid[0].length-1) {\n            return newCount == 0;\n        }\n\n        if (visited[i][j]) {\n            return false;\n        }\n\n        if (memo[i][j] != null) {\n            return memo[i][j];\n        }\n\n        visited[i][j] = true;\n\n        memo[i][j] = dfs(grid,i + 1,j, newCount, visited)|| dfs(grid,i, j + 1, newCount, visited);\n\n        visited[i][j] = false;\n\n        return memo[i][j];\n    }\n}`"
+                    },
+                    {
+                        "username": "venompool",
+                        "content": "Definitely a HARD problem, wonder why its been put in medium category."
+                    },
+                    {
+                        "username": "SkinheadBob",
+                        "content": "maybe it\\'s because the test cases are not too strict on space complexity?"
+                    },
+                    {
+                        "username": "stefan1096",
+                        "content": "Naive dynamic programming solution passes all testcases,even if it is very slow"
+                    },
+                    {
+                        "username": "abhineshp",
+                        "content": "[[0,0,0,0],[0,1,1,1],[0,1,0,0]]\nThis test does not work correctly for my code but is accepted by the leetcode."
+                    }
+                ]
+            }
+        ]
+    }
+]

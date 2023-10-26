@@ -1,0 +1,60 @@
+[
+    {
+        "title": "Count the Number of Good Subsequences",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1775825,
+                "content": [
+                    {
+                        "username": "aryonbe",
+                        "content": "This not medium. First we need to find count pattern. Then it is related to combination. To compute combination, we need Fermat\\'s Little Thm."
+                    },
+                    {
+                        "username": "seilov",
+                        "content": "Can some one explain this question?\\nWhat is the example of good subsequences in case \"aabb\"?"
+                    },
+                    {
+                        "username": "readman",
+                        "content": "To reduce the time of step by step calculation part using pow(n,p-2,p), we could use https://oi-wiki.org/math/number-theory/inverse/ \\n\\n\\u7EBF\\u6027\\u6C42\\u9006\\u5143"
+                    }
+                ]
+            },
+            {
+                "id": 1802018,
+                "content": [
+                    {
+                        "username": "aryonbe",
+                        "content": "This not medium. First we need to find count pattern. Then it is related to combination. To compute combination, we need Fermat\\'s Little Thm."
+                    },
+                    {
+                        "username": "seilov",
+                        "content": "Can some one explain this question?\\nWhat is the example of good subsequences in case \"aabb\"?"
+                    },
+                    {
+                        "username": "readman",
+                        "content": "To reduce the time of step by step calculation part using pow(n,p-2,p), we could use https://oi-wiki.org/math/number-theory/inverse/ \\n\\n\\u7EBF\\u6027\\u6C42\\u9006\\u5143"
+                    }
+                ]
+            },
+            {
+                "id": 1776206,
+                "content": [
+                    {
+                        "username": "aryonbe",
+                        "content": "This not medium. First we need to find count pattern. Then it is related to combination. To compute combination, we need Fermat\\'s Little Thm."
+                    },
+                    {
+                        "username": "seilov",
+                        "content": "Can some one explain this question?\\nWhat is the example of good subsequences in case \"aabb\"?"
+                    },
+                    {
+                        "username": "readman",
+                        "content": "To reduce the time of step by step calculation part using pow(n,p-2,p), we could use https://oi-wiki.org/math/number-theory/inverse/ \\n\\n\\u7EBF\\u6027\\u6C42\\u9006\\u5143"
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,115 @@
+[
+    {
+        "title": "Find Cutoff Score for Each School",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1567654,
+                "content": [
+                    {
+                        "username": "Carloszone",
+                        "content": "Update:\\nthe problem is correct.\\n\\nI was misleaded by the \\'student_count\\'. I think it meas the count of students who got a certain score, but it is the total count of students who scored higher than a certain score.\\n\\n\\nThanks shrivastavasonal7\\n\\n\\n---\\nAccording to description, schools want to know** the minimum score requirement**, which means all students whose score higher than the minimum can apply this school.\\n\\nSo, in the example, if the minimum score of the school id 10 is 749, it means the avaliable students are 10+60+76+76 = 222 exceeded the school capacity.\\n\\nBased on the result, the real condition is** to find a target score and only students who got the same score can apply this school**."
+                    },
+                    {
+                        "username": "jack_scotland_123",
+                        "content": "Anyone getting the correct Output  and Matching Expected and the result comes back as wrong ? "
+                    },
+                    {
+                        "username": "leyantaliatang",
+                        "content": "SELECT school_id,IFNULL(MIN(e.score),-1) AS Score\\nFROM schools s LEFT JOIN exam e\\nON s.capacity >= e.student_count\\nGROUP BY 1;"
+                    },
+                    {
+                        "username": "hpareek1995",
+                        "content": "Please if anyone can help, this query is not satisfying all the conditions why?\\n\\nwith cte as (\\nselect school_id, capacity, min(score) as score from schools s cross join exam e where capacity>student_count group by 1,2 order by 1\\n) \\nselect s1.school_id, IFNULL(s2.score, -1 ) as score from schools s1 left join cte s2 using (school_id) order by 1"
+                    },
+                    {
+                        "username": "M3T",
+                        "content": "Hi hpareek1995, you can try inserting the \"=\" sign after the \">\" in the WHERE clause"
+                    }
+                ]
+            },
+            {
+                "id": 1833556,
+                "content": [
+                    {
+                        "username": "Carloszone",
+                        "content": "Update:\\nthe problem is correct.\\n\\nI was misleaded by the \\'student_count\\'. I think it meas the count of students who got a certain score, but it is the total count of students who scored higher than a certain score.\\n\\n\\nThanks shrivastavasonal7\\n\\n\\n---\\nAccording to description, schools want to know** the minimum score requirement**, which means all students whose score higher than the minimum can apply this school.\\n\\nSo, in the example, if the minimum score of the school id 10 is 749, it means the avaliable students are 10+60+76+76 = 222 exceeded the school capacity.\\n\\nBased on the result, the real condition is** to find a target score and only students who got the same score can apply this school**."
+                    },
+                    {
+                        "username": "jack_scotland_123",
+                        "content": "Anyone getting the correct Output  and Matching Expected and the result comes back as wrong ? "
+                    },
+                    {
+                        "username": "leyantaliatang",
+                        "content": "SELECT school_id,IFNULL(MIN(e.score),-1) AS Score\\nFROM schools s LEFT JOIN exam e\\nON s.capacity >= e.student_count\\nGROUP BY 1;"
+                    },
+                    {
+                        "username": "hpareek1995",
+                        "content": "Please if anyone can help, this query is not satisfying all the conditions why?\\n\\nwith cte as (\\nselect school_id, capacity, min(score) as score from schools s cross join exam e where capacity>student_count group by 1,2 order by 1\\n) \\nselect s1.school_id, IFNULL(s2.score, -1 ) as score from schools s1 left join cte s2 using (school_id) order by 1"
+                    },
+                    {
+                        "username": "M3T",
+                        "content": "Hi hpareek1995, you can try inserting the \"=\" sign after the \">\" in the WHERE clause"
+                    }
+                ]
+            },
+            {
+                "id": 1922729,
+                "content": [
+                    {
+                        "username": "Carloszone",
+                        "content": "Update:\\nthe problem is correct.\\n\\nI was misleaded by the \\'student_count\\'. I think it meas the count of students who got a certain score, but it is the total count of students who scored higher than a certain score.\\n\\n\\nThanks shrivastavasonal7\\n\\n\\n---\\nAccording to description, schools want to know** the minimum score requirement**, which means all students whose score higher than the minimum can apply this school.\\n\\nSo, in the example, if the minimum score of the school id 10 is 749, it means the avaliable students are 10+60+76+76 = 222 exceeded the school capacity.\\n\\nBased on the result, the real condition is** to find a target score and only students who got the same score can apply this school**."
+                    },
+                    {
+                        "username": "jack_scotland_123",
+                        "content": "Anyone getting the correct Output  and Matching Expected and the result comes back as wrong ? "
+                    },
+                    {
+                        "username": "leyantaliatang",
+                        "content": "SELECT school_id,IFNULL(MIN(e.score),-1) AS Score\\nFROM schools s LEFT JOIN exam e\\nON s.capacity >= e.student_count\\nGROUP BY 1;"
+                    },
+                    {
+                        "username": "hpareek1995",
+                        "content": "Please if anyone can help, this query is not satisfying all the conditions why?\\n\\nwith cte as (\\nselect school_id, capacity, min(score) as score from schools s cross join exam e where capacity>student_count group by 1,2 order by 1\\n) \\nselect s1.school_id, IFNULL(s2.score, -1 ) as score from schools s1 left join cte s2 using (school_id) order by 1"
+                    },
+                    {
+                        "username": "M3T",
+                        "content": "Hi hpareek1995, you can try inserting the \"=\" sign after the \">\" in the WHERE clause"
+                    }
+                ]
+            },
+            {
+                "id": 1664745,
+                "content": [
+                    {
+                        "username": "Carloszone",
+                        "content": "Update:\\nthe problem is correct.\\n\\nI was misleaded by the \\'student_count\\'. I think it meas the count of students who got a certain score, but it is the total count of students who scored higher than a certain score.\\n\\n\\nThanks shrivastavasonal7\\n\\n\\n---\\nAccording to description, schools want to know** the minimum score requirement**, which means all students whose score higher than the minimum can apply this school.\\n\\nSo, in the example, if the minimum score of the school id 10 is 749, it means the avaliable students are 10+60+76+76 = 222 exceeded the school capacity.\\n\\nBased on the result, the real condition is** to find a target score and only students who got the same score can apply this school**."
+                    },
+                    {
+                        "username": "jack_scotland_123",
+                        "content": "Anyone getting the correct Output  and Matching Expected and the result comes back as wrong ? "
+                    },
+                    {
+                        "username": "leyantaliatang",
+                        "content": "SELECT school_id,IFNULL(MIN(e.score),-1) AS Score\\nFROM schools s LEFT JOIN exam e\\nON s.capacity >= e.student_count\\nGROUP BY 1;"
+                    },
+                    {
+                        "username": "hpareek1995",
+                        "content": "Please if anyone can help, this query is not satisfying all the conditions why?\\n\\nwith cte as (\\nselect school_id, capacity, min(score) as score from schools s cross join exam e where capacity>student_count group by 1,2 order by 1\\n) \\nselect s1.school_id, IFNULL(s2.score, -1 ) as score from schools s1 left join cte s2 using (school_id) order by 1"
+                    },
+                    {
+                        "username": "M3T",
+                        "content": "Hi hpareek1995, you can try inserting the \"=\" sign after the \">\" in the WHERE clause"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Maximum Number of People That Can Be Caught in Tag",
+        "question_content": null,
+        "solutions": [],
+        "discussions": []
+    }
+]

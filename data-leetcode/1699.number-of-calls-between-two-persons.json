@@ -1,0 +1,240 @@
+[
+    {
+        "title": "Number of Calls Between Two Persons",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1570473,
+                "content": [
+                    {
+                        "username": "PraveenChander",
+                        "content": "\\nwith CTE as (\\nselect from_id, to_id, duration from calls where from_id<to_id\\nunion all\\nselect to_id, from_id, duration from calls where to_id<from_id\\n)\\n\\nselect distinct from_id as person1, to_id as person2, count(duration) over (partition by from_id, to_id) as call_count, sum(duration) over (partition by from_id, to_id) as total_duration from CTE"
+                    },
+                    {
+                        "username": "baobui258",
+                        "content": "```\\n# Write your MySQL query statement below\\nselect\\n    person1, person2, count(*) as call_count, sum(duration) as total_duration\\nfrom\\n(\\n    select\\n        (case when from_id < to_id then from_id else to_id end) as person1,\\n        (case when from_id < to_id then to_id else from_id end) as person2,\\n        duration\\n    from\\n        Calls\\n) a\\ngroup by person1, person2\\n```"
+                    },
+                    {
+                        "username": "DHAVAL0704",
+                        "content": "\\nselect from_id as person1, to_id as person2, count(*) as call_count, sum(duration) as total_duration from\\n(select\\ncase when from_id>to_id then to_id else from_id end as from_id,\\ncase when from_id<to_id then to_id else from_id end as to_id, duration\\nfrom calls) a\\ngroup by person1, person2\\n"
+                    },
+                    {
+                        "username": "eliaiye",
+                        "content": "WITH sorted AS(SELECT IF(from_id<to_id, from_id, to_id) AS from_id, IF(from_id>to_id, from_id, to_id) AS to_id, duration FROM Calls)\\n\\nSELECT from_id AS person1, to_id AS person2, COUNT(from_id) AS call_count,SUM(duration) AS total_duration\\nFROM sorted\\nGROUP BY from_id, to_id"
+                    },
+                    {
+                        "username": "meheruna",
+                        "content": "\\nselect distinct person1, person2, count(duration) as call_count, sum(duration)as total_duration from (\\nselect from_id as person1, to_id as person2, duration from Calls\\nunion all\\nselect to_id as person1, from_id as person2, duration from Calls\\n)a \\nwhere person1<person2\\ngroup by person1, person2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n(select *, sum(duration) over (partition by from_id * to_id)total_duration,\\ncount(*) over (partition by from_id * to_id) call_count,\\ndense_rank() over (partition by from_id * to_id order by from_id)dr\\n from calls)\\n\\nselect distinct from_id person1, to_id person2, call_count, total_duration  from cte \\nwhere dr = 1"
+                    },
+                    {
+                        "username": "adityachatterjee",
+                        "content": "I used the below query. The first test case itself if not passing. However, the expected and the actual output matches. Can someone please help explain the reason.\\n\\nSELECT SUBSTRING_INDEX(CALL_GROUP,\\'-\\',1) AS PERSON1,SUBSTRING_INDEX(CALL_GROUP,\\'-\\',-1) AS PERSON2,\\nCOUNT(CALL_GROUP) AS CALL_COUNT,SUM(DURATION) AS TOTAL_DURATION\\nFROM(SELECT FROM_ID,TO_ID, \\nCASE\\n    WHEN FROM_ID>TO_ID THEN CONCAT(TO_ID,\"-\",FROM_ID)\\n    ELSE CONCAT(FROM_ID,\"-\",TO_ID)\\nEND AS CALL_GROUP,\\nDURATION\\nFROM CALLS)A\\nGROUP BY 1,2\\n\\nPLEASE REFRAIN FROM GIVING AN ALTERNATIVE SOLUTION TO THIS. I WANT TO UNDERSTAND WHY THE TEST CASE FAILS DESPITE THE OUTPUT AND EXPECTED MATCHING. "
+                    }
+                ]
+            },
+            {
+                "id": 1691986,
+                "content": [
+                    {
+                        "username": "PraveenChander",
+                        "content": "\\nwith CTE as (\\nselect from_id, to_id, duration from calls where from_id<to_id\\nunion all\\nselect to_id, from_id, duration from calls where to_id<from_id\\n)\\n\\nselect distinct from_id as person1, to_id as person2, count(duration) over (partition by from_id, to_id) as call_count, sum(duration) over (partition by from_id, to_id) as total_duration from CTE"
+                    },
+                    {
+                        "username": "baobui258",
+                        "content": "```\\n# Write your MySQL query statement below\\nselect\\n    person1, person2, count(*) as call_count, sum(duration) as total_duration\\nfrom\\n(\\n    select\\n        (case when from_id < to_id then from_id else to_id end) as person1,\\n        (case when from_id < to_id then to_id else from_id end) as person2,\\n        duration\\n    from\\n        Calls\\n) a\\ngroup by person1, person2\\n```"
+                    },
+                    {
+                        "username": "DHAVAL0704",
+                        "content": "\\nselect from_id as person1, to_id as person2, count(*) as call_count, sum(duration) as total_duration from\\n(select\\ncase when from_id>to_id then to_id else from_id end as from_id,\\ncase when from_id<to_id then to_id else from_id end as to_id, duration\\nfrom calls) a\\ngroup by person1, person2\\n"
+                    },
+                    {
+                        "username": "eliaiye",
+                        "content": "WITH sorted AS(SELECT IF(from_id<to_id, from_id, to_id) AS from_id, IF(from_id>to_id, from_id, to_id) AS to_id, duration FROM Calls)\\n\\nSELECT from_id AS person1, to_id AS person2, COUNT(from_id) AS call_count,SUM(duration) AS total_duration\\nFROM sorted\\nGROUP BY from_id, to_id"
+                    },
+                    {
+                        "username": "meheruna",
+                        "content": "\\nselect distinct person1, person2, count(duration) as call_count, sum(duration)as total_duration from (\\nselect from_id as person1, to_id as person2, duration from Calls\\nunion all\\nselect to_id as person1, from_id as person2, duration from Calls\\n)a \\nwhere person1<person2\\ngroup by person1, person2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n(select *, sum(duration) over (partition by from_id * to_id)total_duration,\\ncount(*) over (partition by from_id * to_id) call_count,\\ndense_rank() over (partition by from_id * to_id order by from_id)dr\\n from calls)\\n\\nselect distinct from_id person1, to_id person2, call_count, total_duration  from cte \\nwhere dr = 1"
+                    },
+                    {
+                        "username": "adityachatterjee",
+                        "content": "I used the below query. The first test case itself if not passing. However, the expected and the actual output matches. Can someone please help explain the reason.\\n\\nSELECT SUBSTRING_INDEX(CALL_GROUP,\\'-\\',1) AS PERSON1,SUBSTRING_INDEX(CALL_GROUP,\\'-\\',-1) AS PERSON2,\\nCOUNT(CALL_GROUP) AS CALL_COUNT,SUM(DURATION) AS TOTAL_DURATION\\nFROM(SELECT FROM_ID,TO_ID, \\nCASE\\n    WHEN FROM_ID>TO_ID THEN CONCAT(TO_ID,\"-\",FROM_ID)\\n    ELSE CONCAT(FROM_ID,\"-\",TO_ID)\\nEND AS CALL_GROUP,\\nDURATION\\nFROM CALLS)A\\nGROUP BY 1,2\\n\\nPLEASE REFRAIN FROM GIVING AN ALTERNATIVE SOLUTION TO THIS. I WANT TO UNDERSTAND WHY THE TEST CASE FAILS DESPITE THE OUTPUT AND EXPECTED MATCHING. "
+                    }
+                ]
+            },
+            {
+                "id": 1576943,
+                "content": [
+                    {
+                        "username": "PraveenChander",
+                        "content": "\\nwith CTE as (\\nselect from_id, to_id, duration from calls where from_id<to_id\\nunion all\\nselect to_id, from_id, duration from calls where to_id<from_id\\n)\\n\\nselect distinct from_id as person1, to_id as person2, count(duration) over (partition by from_id, to_id) as call_count, sum(duration) over (partition by from_id, to_id) as total_duration from CTE"
+                    },
+                    {
+                        "username": "baobui258",
+                        "content": "```\\n# Write your MySQL query statement below\\nselect\\n    person1, person2, count(*) as call_count, sum(duration) as total_duration\\nfrom\\n(\\n    select\\n        (case when from_id < to_id then from_id else to_id end) as person1,\\n        (case when from_id < to_id then to_id else from_id end) as person2,\\n        duration\\n    from\\n        Calls\\n) a\\ngroup by person1, person2\\n```"
+                    },
+                    {
+                        "username": "DHAVAL0704",
+                        "content": "\\nselect from_id as person1, to_id as person2, count(*) as call_count, sum(duration) as total_duration from\\n(select\\ncase when from_id>to_id then to_id else from_id end as from_id,\\ncase when from_id<to_id then to_id else from_id end as to_id, duration\\nfrom calls) a\\ngroup by person1, person2\\n"
+                    },
+                    {
+                        "username": "eliaiye",
+                        "content": "WITH sorted AS(SELECT IF(from_id<to_id, from_id, to_id) AS from_id, IF(from_id>to_id, from_id, to_id) AS to_id, duration FROM Calls)\\n\\nSELECT from_id AS person1, to_id AS person2, COUNT(from_id) AS call_count,SUM(duration) AS total_duration\\nFROM sorted\\nGROUP BY from_id, to_id"
+                    },
+                    {
+                        "username": "meheruna",
+                        "content": "\\nselect distinct person1, person2, count(duration) as call_count, sum(duration)as total_duration from (\\nselect from_id as person1, to_id as person2, duration from Calls\\nunion all\\nselect to_id as person1, from_id as person2, duration from Calls\\n)a \\nwhere person1<person2\\ngroup by person1, person2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n(select *, sum(duration) over (partition by from_id * to_id)total_duration,\\ncount(*) over (partition by from_id * to_id) call_count,\\ndense_rank() over (partition by from_id * to_id order by from_id)dr\\n from calls)\\n\\nselect distinct from_id person1, to_id person2, call_count, total_duration  from cte \\nwhere dr = 1"
+                    },
+                    {
+                        "username": "adityachatterjee",
+                        "content": "I used the below query. The first test case itself if not passing. However, the expected and the actual output matches. Can someone please help explain the reason.\\n\\nSELECT SUBSTRING_INDEX(CALL_GROUP,\\'-\\',1) AS PERSON1,SUBSTRING_INDEX(CALL_GROUP,\\'-\\',-1) AS PERSON2,\\nCOUNT(CALL_GROUP) AS CALL_COUNT,SUM(DURATION) AS TOTAL_DURATION\\nFROM(SELECT FROM_ID,TO_ID, \\nCASE\\n    WHEN FROM_ID>TO_ID THEN CONCAT(TO_ID,\"-\",FROM_ID)\\n    ELSE CONCAT(FROM_ID,\"-\",TO_ID)\\nEND AS CALL_GROUP,\\nDURATION\\nFROM CALLS)A\\nGROUP BY 1,2\\n\\nPLEASE REFRAIN FROM GIVING AN ALTERNATIVE SOLUTION TO THIS. I WANT TO UNDERSTAND WHY THE TEST CASE FAILS DESPITE THE OUTPUT AND EXPECTED MATCHING. "
+                    }
+                ]
+            },
+            {
+                "id": 1575848,
+                "content": [
+                    {
+                        "username": "PraveenChander",
+                        "content": "\\nwith CTE as (\\nselect from_id, to_id, duration from calls where from_id<to_id\\nunion all\\nselect to_id, from_id, duration from calls where to_id<from_id\\n)\\n\\nselect distinct from_id as person1, to_id as person2, count(duration) over (partition by from_id, to_id) as call_count, sum(duration) over (partition by from_id, to_id) as total_duration from CTE"
+                    },
+                    {
+                        "username": "baobui258",
+                        "content": "```\\n# Write your MySQL query statement below\\nselect\\n    person1, person2, count(*) as call_count, sum(duration) as total_duration\\nfrom\\n(\\n    select\\n        (case when from_id < to_id then from_id else to_id end) as person1,\\n        (case when from_id < to_id then to_id else from_id end) as person2,\\n        duration\\n    from\\n        Calls\\n) a\\ngroup by person1, person2\\n```"
+                    },
+                    {
+                        "username": "DHAVAL0704",
+                        "content": "\\nselect from_id as person1, to_id as person2, count(*) as call_count, sum(duration) as total_duration from\\n(select\\ncase when from_id>to_id then to_id else from_id end as from_id,\\ncase when from_id<to_id then to_id else from_id end as to_id, duration\\nfrom calls) a\\ngroup by person1, person2\\n"
+                    },
+                    {
+                        "username": "eliaiye",
+                        "content": "WITH sorted AS(SELECT IF(from_id<to_id, from_id, to_id) AS from_id, IF(from_id>to_id, from_id, to_id) AS to_id, duration FROM Calls)\\n\\nSELECT from_id AS person1, to_id AS person2, COUNT(from_id) AS call_count,SUM(duration) AS total_duration\\nFROM sorted\\nGROUP BY from_id, to_id"
+                    },
+                    {
+                        "username": "meheruna",
+                        "content": "\\nselect distinct person1, person2, count(duration) as call_count, sum(duration)as total_duration from (\\nselect from_id as person1, to_id as person2, duration from Calls\\nunion all\\nselect to_id as person1, from_id as person2, duration from Calls\\n)a \\nwhere person1<person2\\ngroup by person1, person2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n(select *, sum(duration) over (partition by from_id * to_id)total_duration,\\ncount(*) over (partition by from_id * to_id) call_count,\\ndense_rank() over (partition by from_id * to_id order by from_id)dr\\n from calls)\\n\\nselect distinct from_id person1, to_id person2, call_count, total_duration  from cte \\nwhere dr = 1"
+                    },
+                    {
+                        "username": "adityachatterjee",
+                        "content": "I used the below query. The first test case itself if not passing. However, the expected and the actual output matches. Can someone please help explain the reason.\\n\\nSELECT SUBSTRING_INDEX(CALL_GROUP,\\'-\\',1) AS PERSON1,SUBSTRING_INDEX(CALL_GROUP,\\'-\\',-1) AS PERSON2,\\nCOUNT(CALL_GROUP) AS CALL_COUNT,SUM(DURATION) AS TOTAL_DURATION\\nFROM(SELECT FROM_ID,TO_ID, \\nCASE\\n    WHEN FROM_ID>TO_ID THEN CONCAT(TO_ID,\"-\",FROM_ID)\\n    ELSE CONCAT(FROM_ID,\"-\",TO_ID)\\nEND AS CALL_GROUP,\\nDURATION\\nFROM CALLS)A\\nGROUP BY 1,2\\n\\nPLEASE REFRAIN FROM GIVING AN ALTERNATIVE SOLUTION TO THIS. I WANT TO UNDERSTAND WHY THE TEST CASE FAILS DESPITE THE OUTPUT AND EXPECTED MATCHING. "
+                    }
+                ]
+            },
+            {
+                "id": 1575330,
+                "content": [
+                    {
+                        "username": "PraveenChander",
+                        "content": "\\nwith CTE as (\\nselect from_id, to_id, duration from calls where from_id<to_id\\nunion all\\nselect to_id, from_id, duration from calls where to_id<from_id\\n)\\n\\nselect distinct from_id as person1, to_id as person2, count(duration) over (partition by from_id, to_id) as call_count, sum(duration) over (partition by from_id, to_id) as total_duration from CTE"
+                    },
+                    {
+                        "username": "baobui258",
+                        "content": "```\\n# Write your MySQL query statement below\\nselect\\n    person1, person2, count(*) as call_count, sum(duration) as total_duration\\nfrom\\n(\\n    select\\n        (case when from_id < to_id then from_id else to_id end) as person1,\\n        (case when from_id < to_id then to_id else from_id end) as person2,\\n        duration\\n    from\\n        Calls\\n) a\\ngroup by person1, person2\\n```"
+                    },
+                    {
+                        "username": "DHAVAL0704",
+                        "content": "\\nselect from_id as person1, to_id as person2, count(*) as call_count, sum(duration) as total_duration from\\n(select\\ncase when from_id>to_id then to_id else from_id end as from_id,\\ncase when from_id<to_id then to_id else from_id end as to_id, duration\\nfrom calls) a\\ngroup by person1, person2\\n"
+                    },
+                    {
+                        "username": "eliaiye",
+                        "content": "WITH sorted AS(SELECT IF(from_id<to_id, from_id, to_id) AS from_id, IF(from_id>to_id, from_id, to_id) AS to_id, duration FROM Calls)\\n\\nSELECT from_id AS person1, to_id AS person2, COUNT(from_id) AS call_count,SUM(duration) AS total_duration\\nFROM sorted\\nGROUP BY from_id, to_id"
+                    },
+                    {
+                        "username": "meheruna",
+                        "content": "\\nselect distinct person1, person2, count(duration) as call_count, sum(duration)as total_duration from (\\nselect from_id as person1, to_id as person2, duration from Calls\\nunion all\\nselect to_id as person1, from_id as person2, duration from Calls\\n)a \\nwhere person1<person2\\ngroup by person1, person2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n(select *, sum(duration) over (partition by from_id * to_id)total_duration,\\ncount(*) over (partition by from_id * to_id) call_count,\\ndense_rank() over (partition by from_id * to_id order by from_id)dr\\n from calls)\\n\\nselect distinct from_id person1, to_id person2, call_count, total_duration  from cte \\nwhere dr = 1"
+                    },
+                    {
+                        "username": "adityachatterjee",
+                        "content": "I used the below query. The first test case itself if not passing. However, the expected and the actual output matches. Can someone please help explain the reason.\\n\\nSELECT SUBSTRING_INDEX(CALL_GROUP,\\'-\\',1) AS PERSON1,SUBSTRING_INDEX(CALL_GROUP,\\'-\\',-1) AS PERSON2,\\nCOUNT(CALL_GROUP) AS CALL_COUNT,SUM(DURATION) AS TOTAL_DURATION\\nFROM(SELECT FROM_ID,TO_ID, \\nCASE\\n    WHEN FROM_ID>TO_ID THEN CONCAT(TO_ID,\"-\",FROM_ID)\\n    ELSE CONCAT(FROM_ID,\"-\",TO_ID)\\nEND AS CALL_GROUP,\\nDURATION\\nFROM CALLS)A\\nGROUP BY 1,2\\n\\nPLEASE REFRAIN FROM GIVING AN ALTERNATIVE SOLUTION TO THIS. I WANT TO UNDERSTAND WHY THE TEST CASE FAILS DESPITE THE OUTPUT AND EXPECTED MATCHING. "
+                    }
+                ]
+            },
+            {
+                "id": 1802066,
+                "content": [
+                    {
+                        "username": "PraveenChander",
+                        "content": "\\nwith CTE as (\\nselect from_id, to_id, duration from calls where from_id<to_id\\nunion all\\nselect to_id, from_id, duration from calls where to_id<from_id\\n)\\n\\nselect distinct from_id as person1, to_id as person2, count(duration) over (partition by from_id, to_id) as call_count, sum(duration) over (partition by from_id, to_id) as total_duration from CTE"
+                    },
+                    {
+                        "username": "baobui258",
+                        "content": "```\\n# Write your MySQL query statement below\\nselect\\n    person1, person2, count(*) as call_count, sum(duration) as total_duration\\nfrom\\n(\\n    select\\n        (case when from_id < to_id then from_id else to_id end) as person1,\\n        (case when from_id < to_id then to_id else from_id end) as person2,\\n        duration\\n    from\\n        Calls\\n) a\\ngroup by person1, person2\\n```"
+                    },
+                    {
+                        "username": "DHAVAL0704",
+                        "content": "\\nselect from_id as person1, to_id as person2, count(*) as call_count, sum(duration) as total_duration from\\n(select\\ncase when from_id>to_id then to_id else from_id end as from_id,\\ncase when from_id<to_id then to_id else from_id end as to_id, duration\\nfrom calls) a\\ngroup by person1, person2\\n"
+                    },
+                    {
+                        "username": "eliaiye",
+                        "content": "WITH sorted AS(SELECT IF(from_id<to_id, from_id, to_id) AS from_id, IF(from_id>to_id, from_id, to_id) AS to_id, duration FROM Calls)\\n\\nSELECT from_id AS person1, to_id AS person2, COUNT(from_id) AS call_count,SUM(duration) AS total_duration\\nFROM sorted\\nGROUP BY from_id, to_id"
+                    },
+                    {
+                        "username": "meheruna",
+                        "content": "\\nselect distinct person1, person2, count(duration) as call_count, sum(duration)as total_duration from (\\nselect from_id as person1, to_id as person2, duration from Calls\\nunion all\\nselect to_id as person1, from_id as person2, duration from Calls\\n)a \\nwhere person1<person2\\ngroup by person1, person2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n(select *, sum(duration) over (partition by from_id * to_id)total_duration,\\ncount(*) over (partition by from_id * to_id) call_count,\\ndense_rank() over (partition by from_id * to_id order by from_id)dr\\n from calls)\\n\\nselect distinct from_id person1, to_id person2, call_count, total_duration  from cte \\nwhere dr = 1"
+                    },
+                    {
+                        "username": "adityachatterjee",
+                        "content": "I used the below query. The first test case itself if not passing. However, the expected and the actual output matches. Can someone please help explain the reason.\\n\\nSELECT SUBSTRING_INDEX(CALL_GROUP,\\'-\\',1) AS PERSON1,SUBSTRING_INDEX(CALL_GROUP,\\'-\\',-1) AS PERSON2,\\nCOUNT(CALL_GROUP) AS CALL_COUNT,SUM(DURATION) AS TOTAL_DURATION\\nFROM(SELECT FROM_ID,TO_ID, \\nCASE\\n    WHEN FROM_ID>TO_ID THEN CONCAT(TO_ID,\"-\",FROM_ID)\\n    ELSE CONCAT(FROM_ID,\"-\",TO_ID)\\nEND AS CALL_GROUP,\\nDURATION\\nFROM CALLS)A\\nGROUP BY 1,2\\n\\nPLEASE REFRAIN FROM GIVING AN ALTERNATIVE SOLUTION TO THIS. I WANT TO UNDERSTAND WHY THE TEST CASE FAILS DESPITE THE OUTPUT AND EXPECTED MATCHING. "
+                    }
+                ]
+            },
+            {
+                "id": 1799565,
+                "content": [
+                    {
+                        "username": "PraveenChander",
+                        "content": "\\nwith CTE as (\\nselect from_id, to_id, duration from calls where from_id<to_id\\nunion all\\nselect to_id, from_id, duration from calls where to_id<from_id\\n)\\n\\nselect distinct from_id as person1, to_id as person2, count(duration) over (partition by from_id, to_id) as call_count, sum(duration) over (partition by from_id, to_id) as total_duration from CTE"
+                    },
+                    {
+                        "username": "baobui258",
+                        "content": "```\\n# Write your MySQL query statement below\\nselect\\n    person1, person2, count(*) as call_count, sum(duration) as total_duration\\nfrom\\n(\\n    select\\n        (case when from_id < to_id then from_id else to_id end) as person1,\\n        (case when from_id < to_id then to_id else from_id end) as person2,\\n        duration\\n    from\\n        Calls\\n) a\\ngroup by person1, person2\\n```"
+                    },
+                    {
+                        "username": "DHAVAL0704",
+                        "content": "\\nselect from_id as person1, to_id as person2, count(*) as call_count, sum(duration) as total_duration from\\n(select\\ncase when from_id>to_id then to_id else from_id end as from_id,\\ncase when from_id<to_id then to_id else from_id end as to_id, duration\\nfrom calls) a\\ngroup by person1, person2\\n"
+                    },
+                    {
+                        "username": "eliaiye",
+                        "content": "WITH sorted AS(SELECT IF(from_id<to_id, from_id, to_id) AS from_id, IF(from_id>to_id, from_id, to_id) AS to_id, duration FROM Calls)\\n\\nSELECT from_id AS person1, to_id AS person2, COUNT(from_id) AS call_count,SUM(duration) AS total_duration\\nFROM sorted\\nGROUP BY from_id, to_id"
+                    },
+                    {
+                        "username": "meheruna",
+                        "content": "\\nselect distinct person1, person2, count(duration) as call_count, sum(duration)as total_duration from (\\nselect from_id as person1, to_id as person2, duration from Calls\\nunion all\\nselect to_id as person1, from_id as person2, duration from Calls\\n)a \\nwhere person1<person2\\ngroup by person1, person2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n(select *, sum(duration) over (partition by from_id * to_id)total_duration,\\ncount(*) over (partition by from_id * to_id) call_count,\\ndense_rank() over (partition by from_id * to_id order by from_id)dr\\n from calls)\\n\\nselect distinct from_id person1, to_id person2, call_count, total_duration  from cte \\nwhere dr = 1"
+                    },
+                    {
+                        "username": "adityachatterjee",
+                        "content": "I used the below query. The first test case itself if not passing. However, the expected and the actual output matches. Can someone please help explain the reason.\\n\\nSELECT SUBSTRING_INDEX(CALL_GROUP,\\'-\\',1) AS PERSON1,SUBSTRING_INDEX(CALL_GROUP,\\'-\\',-1) AS PERSON2,\\nCOUNT(CALL_GROUP) AS CALL_COUNT,SUM(DURATION) AS TOTAL_DURATION\\nFROM(SELECT FROM_ID,TO_ID, \\nCASE\\n    WHEN FROM_ID>TO_ID THEN CONCAT(TO_ID,\"-\",FROM_ID)\\n    ELSE CONCAT(FROM_ID,\"-\",TO_ID)\\nEND AS CALL_GROUP,\\nDURATION\\nFROM CALLS)A\\nGROUP BY 1,2\\n\\nPLEASE REFRAIN FROM GIVING AN ALTERNATIVE SOLUTION TO THIS. I WANT TO UNDERSTAND WHY THE TEST CASE FAILS DESPITE THE OUTPUT AND EXPECTED MATCHING. "
+                    }
+                ]
+            }
+        ]
+    }
+]

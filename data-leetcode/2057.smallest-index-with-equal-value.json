@@ -1,0 +1,1595 @@
+[
+    {
+        "title": "Smallest Index With Equal Value",
+        "question_content": "Given a 0-indexed integer array nums, return the smallest index i of nums such that i mod 10 == nums[i], or -1 if such index does not exist.\nx mod y denotes the remainder when x is divided by y.\n&nbsp;\nExample 1:\n\nInput: nums = [0,1,2]\nOutput: 0\nExplanation: \ni=0: 0 mod 10 = 0 == nums[0].\ni=1: 1 mod 10 = 1 == nums[1].\ni=2: 2 mod 10 = 2 == nums[2].\nAll indices have i mod 10 == nums[i], so we return the smallest index 0.\n\nExample 2:\n\nInput: nums = [4,3,2,1]\nOutput: 2\nExplanation: \ni=0: 0 mod 10 = 0 != nums[0].\ni=1: 1 mod 10 = 1 != nums[1].\ni=2: 2 mod 10 = 2 == nums[2].\ni=3: 3 mod 10 = 3 != nums[3].\n2 is the only index which has i mod 10 == nums[i].\n\nExample 3:\n\nInput: nums = [1,2,3,4,5,6,7,8,9,0]\nOutput: -1\nExplanation: No index satisfies i mod 10 == nums[i].\n\n&nbsp;\nConstraints:\n\n\t1 <= nums.length <= 100\n\t0 <= nums[i] <= 9",
+        "solutions": [
+            {
+                "id": 1550013,
+                "title": "not-sure-what-is-the-point",
+                "content": "**Python 3**\\nPerhaps to solve it with a one-liner?\\n\\n```python\\nclass Solution:\\n    smallestEqual = lambda self, nums: next((i for i, n in enumerate(nums) if n == i % 10), -1)  \\n```\\n**C++**\\n```cpp\\nint smallestEqual(vector<int>& nums) {\\n    for (int i = 0; i < nums.size(); ++i)\\n        if (nums[i] == i % 10)\\n            return i;\\n    return -1;\\n}\\n```",
+                "solutionTags": [],
+                "code": "```python\\nclass Solution:\\n    smallestEqual = lambda self, nums: next((i for i, n in enumerate(nums) if n == i % 10), -1)  \\n```\n```cpp\\nint smallestEqual(vector<int>& nums) {\\n    for (int i = 0; i < nums.size(); ++i)\\n        if (nums[i] == i % 10)\\n            return i;\\n    return -1;\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1549993,
+                "title": "python3-1-line",
+                "content": "Please check out this [commit](https://github.com/gaosanyong/leetcode/commit/4001168494179e85482f91afbf0cd66b908544f3) for my solutions of weekly 265. \\n```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        return next((i for i, x in enumerate(nums) if i%10 == x), -1)\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        return next((i for i, x in enumerate(nums) if i%10 == x), -1)\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1568125,
+                "title": "python-simple-and-short-solution",
+                "content": "**Python :**\\n\\n```\\ndef smallestEqual(self, nums: List[int]) -> int:\\n\\tfor idx, n in enumerate(nums):\\n\\t\\tif idx % 10 == n:\\n\\t\\t\\treturn idx\\n\\treturn -1 \\n```\\n\\n**Like it ? please upvote !**",
+                "solutionTags": [
+                    "Python",
+                    "Python3"
+                ],
+                "code": "```\\ndef smallestEqual(self, nums: List[int]) -> int:\\n\\tfor idx, n in enumerate(nums):\\n\\t\\tif idx % 10 == n:\\n\\t\\t\\treturn idx\\n\\treturn -1 \\n```",
+                "codeTag": "Python3"
+            },
+            {
+                "id": 1550381,
+                "title": "java-solution-without-using-mod",
+                "content": "Perhaps the point is to ask the follow up question to implement it without using mod.\\n```10*d1 + d2``` is all possible indices which can only go up to 99 (constraints). ```(10*d1 + d2)%10 = d2```\\n```java\\n public int smallestEqual(int[] a) {\\n        for (int d1 = 0; d1 <= 9; d1++)\\n            for (int d2 = 0; d2 <= 9 && 10 * d1 + d2 < a.length; d2++)\\n                if (d2 == a[d1 * 10 + d2])\\n                    return d1 * 10 + d2;\\n        return -1;\\n    }",
+                "solutionTags": [],
+                "code": "```10*d1 + d2```\n```(10*d1 + d2)%10 = d2```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 1550667,
+                "title": "c-simple-3-line-solution",
+                "content": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int i = 0;\\n        while (i < nums.size() && i % 10 != nums[i]) i++;\\n        return i >= nums.size() ? -1 : i;\\n    }\\n};\\n```\\n**Like it? please upvote!**",
+                "solutionTags": [
+                    "C"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int i = 0;\\n        while (i < nums.size() && i % 10 != nums[i]) i++;\\n        return i >= nums.size() ? -1 : i;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2769633,
+                "title": "java-straight-forward-solution",
+                "content": "\\n\\n# Complexity\\n- Time complexity: O(n)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n      for(int i = 0; i < nums.length; i ++) {\\n           if(i % 10 == nums[i]) { \\n               return i;\\n               \\n           }\\n       }\\n        return - 1;  \\n    }\\n}\\n```\\n# PLEASE UPVOTE IF IT WAS HELPFULL",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n      for(int i = 0; i < nums.length; i ++) {\\n           if(i % 10 == nums[i]) { \\n               return i;\\n               \\n           }\\n       }\\n        return - 1;  \\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1632333,
+                "title": "easiest-javascript-solution-o-n",
+                "content": "```\\n/**\\n * @param {number[]} nums\\n * @return {number}\\n */\\nvar smallestEqual = function(nums) {\\n    return nums.findIndex((n, i) => i % 10 === n)\\n};\\n```",
+                "solutionTags": [
+                    "JavaScript"
+                ],
+                "code": "```\\n/**\\n * @param {number[]} nums\\n * @return {number}\\n */\\nvar smallestEqual = function(nums) {\\n    return nums.findIndex((n, i) => i % 10 === n)\\n};\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 1558084,
+                "title": "python-1-line-99-speed-95-memory-usage",
+                "content": "![image](https://assets.leetcode.com/users/images/2f825987-9b44-4e1a-9f80-502bf041cc7f_1635991024.3918374.png)\\n\\nMake use of recursion to loop over ```nums``` array. Return ```-1``` if ```i``` exceeds the last index of ```nums```\\n```\\nclass Solution(object):\\n    def smallestEqual(self, nums, i=0):\\n        return -1 if i == len(nums) else ( i if i%10 == nums[i] else self.smallestEqual(nums, i+1) )",
+                "solutionTags": [
+                    "Python",
+                    "Python3",
+                    "Recursion"
+                ],
+                "code": "```nums```\n```-1```\n```i```\n```nums```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3251532,
+                "title": "python3-beats-98-62-beginner-simple-solution",
+                "content": "![image.png](https://assets.leetcode.com/users/images/e2f89b95-ef02-4717-8c6f-8b4a6e2b1d2c_1677840452.4258904.png)\\n\\n\\n# Code\\n```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i%10 == nums[i]:\\n                return i\\n                break\\n        return -1\\n```\\n![image.png](https://assets.leetcode.com/users/images/d7d77fea-776f-40a6-8c7c-0cfd2a24c6ae_1677840466.5254948.png)\\n",
+                "solutionTags": [
+                    "Python3",
+                    "Array"
+                ],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i%10 == nums[i]:\\n                return i\\n                break\\n        return -1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2784837,
+                "title": "smallest-index-with-equal-value-solution-in-short",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nint smallestEqual(int* nums, int numsSize){\\n    for(int i=0;i<numsSize;i++)\\n    {\\n        if(i%10==nums[i])\\n        {\\n            return i;\\n        }\\n    }\\n    return -1;\\n\\n\\n}\\n```",
+                "solutionTags": [
+                    "C"
+                ],
+                "code": "```\\nint smallestEqual(int* nums, int numsSize){\\n    for(int i=0;i<numsSize;i++)\\n    {\\n        if(i%10==nums[i])\\n        {\\n            return i;\\n        }\\n    }\\n    return -1;\\n\\n\\n}\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 1565344,
+                "title": "c-simple-solutions-explained-100-time-0ms-80-space-22mb",
+                "content": "I am not sure if there is a single problem easier than this on the whole suite of 2000+ problems published so far, as this one is literally just about following instructions, but, hey, whatever.\\n\\nStill worth giving it a shot and in an interview you might still gain some points in the eyes of your interviewer if you mention that since modulo operations are rather expensive, we will not bother with them when the currently parsed argument is `> 9`.\\n\\nOther than that, we will have a main loop to parse the whole `nums`, `return` the first index `i` matching our condition (if any) and otherwise, exiting the loop, `return` `-1`.\\n\\nThe code:\\n\\n```cpp\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for (int i = 0, len = nums.size(), n; i < len; i++) {\\n            n = nums[i];\\n            if (n < 10 && n == i % 10) return i;\\n        }\\n        return -1;\\n    }\\n};\\n```\\n\\nEven better if we rule out the modulo operation altogether:\\n\\n```cpp\\nconstexpr int mods[101] = {\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9\\n};\\n\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for (int i = 0, len = nums.size(), n; i < len; i++) {\\n            n = nums[i];\\n            if (n < 10 && n == mods[i]) return i;\\n        }\\n        return -1;\\n    }\\n};\\n```\\n\\nIn constant space, maybe? Hell, yeah - this one gave me `0` ms \\uD83D\\uDC4D :\\n\\n```cpp\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for (int i = 0, j = 0, len = nums.size(), n; i < len; i++, j++) {\\n            n = nums[i];\\n            if (j == 10) j -= 10;\\n            if (n < 10 && n == j) return i;\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "C",
+                    "Math"
+                ],
+                "code": "```cpp\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for (int i = 0, len = nums.size(), n; i < len; i++) {\\n            n = nums[i];\\n            if (n < 10 && n == i % 10) return i;\\n        }\\n        return -1;\\n    }\\n};\\n```\n```cpp\\nconstexpr int mods[101] = {\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,\\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9\\n};\\n\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for (int i = 0, len = nums.size(), n; i < len; i++) {\\n            n = nums[i];\\n            if (n < 10 && n == mods[i]) return i;\\n        }\\n        return -1;\\n    }\\n};\\n```\n```cpp\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for (int i = 0, j = 0, len = nums.size(), n; i < len; i++, j++) {\\n            n = nums[i];\\n            if (j == 10) j -= 10;\\n            if (n < 10 && n == j) return i;\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1577624,
+                "title": "c-code",
+                "content": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int index=0;index<nums.size();index++)\\n        {\\n            if(index%10==nums[index])\\n                return index;\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "C"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int index=0;index<nums.size();index++)\\n        {\\n            if(index%10==nums[index])\\n                return index;\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1554116,
+                "title": "javascript-solutions-2-100-39-68ms-also-a-1-liner",
+                "content": "**Answer 1 - 100%/39%, 68ms:**\\n- Create a for loop that iterates through the `nums` array.\\n- Inside the loop use an if statement to check if  `nums[i] % 10 === i % 10`. If true, return `i`.\\n\\t- example\\n\\t\\t- nums = [ 3, 3, 5, 1, 8, 2, 3, 0, 1, 2, 3, 7, 6, 9, **4**, 1 ]\\n\\t\\t- when `i = 14`, the loop will compute if `4 % 10 === 14 % 10` which is true as both sides will equal 4.\\n\\t\\t- return `i`, which is 14.\\n- If the loop doesn\\'t return a value, return -1.\\n\\n**Solution:**\\n\\n```\\nvar smallestEqual = function(nums) {\\n    for(let i = 0; i < nums.length; i++){ if (nums[i] % 10 === i % 10) { return i } }\\n    return -1\\n};\\n```\\n\\n---\\n**One-Liner - 85%/39%, 88ms:**\\n\\n- Start by mapping to a new array. If `nums[i] % 10 === i % 10` map `i`, else map 100\\n\\t- `...nums.map((x, i) => (nums[i] % 10 === i % 10) ? i : 100 )`\\n- Find the min of the newly mapped array with Math.min()\\n\\t- `Math.min(  ...nums.map((x, i) => (nums[i] % 10 === i % 10) ? i : 100 )`\\n- Place the value into an array and filter for it being less than 100. If the min value from the previous step is 100 that means none of the indexed numbers qualified for the result, filtering out 100 will leave us with an empty array.\\n\\t- `[ Math.min(  ...nums.map((x, i) => (nums[i] % 10 === i % 10) ? i : 100 ) ) ].filter(x => x < 100)`\\n- Inside a Math.max() function spread the new array and incude a -1. If there was an indexed number in the array that will be the answer returned, if not then we will return -1.\\n\\t- `Math.max( ...[ Math.min(  ...nums.map((x, i) => (nums[i] % 10 === i % 10) ? i : 100 ) ) ].filter(x => x < 100) , -1)`\\n\\n```\\nvar smallestEqual = (nums) => Math.max( ...[ Math.min(  ...nums.map((x, i) => (nums[i] % 10 === i % 10) ? i : 100 ) ) ].filter(x => x < 100) , -1);\\n```",
+                "solutionTags": [
+                    "JavaScript"
+                ],
+                "code": "```\\nvar smallestEqual = function(nums) {\\n    for(let i = 0; i < nums.length; i++){ if (nums[i] % 10 === i % 10) { return i } }\\n    return -1\\n};\\n```\n```\\nvar smallestEqual = (nums) => Math.max( ...[ Math.min(  ...nums.map((x, i) => (nums[i] % 10 === i % 10) ? i : 100 ) ) ].filter(x => x < 100) , -1);\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 1551232,
+                "title": "rust-one-liner-solutions",
+                "content": "1. Simple solution with MOD-operation\\n```\\nimpl Solution {\\n    pub fn smallest_equal(nums: Vec<i32>) -> i32 {\\n        nums.iter()\\n            .zip(0..)\\n            .position(|(x, i)| i % 10 == *x)\\n            .map_or(-1, |i| i as i32)\\n    }\\n}\\n```\\n2. Solution with cycle index (w/o MOD)\\n```\\nimpl Solution {\\n    pub fn smallest_equal(nums: Vec<i32>) -> i32 {\\n        nums.iter()\\n            .zip((0..10).cycle())\\n            .position(|(x, i)| i == *x)\\n            .map_or(-1, |i| i as i32)\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Rust"
+                ],
+                "code": "```\\nimpl Solution {\\n    pub fn smallest_equal(nums: Vec<i32>) -> i32 {\\n        nums.iter()\\n            .zip(0..)\\n            .position(|(x, i)| i % 10 == *x)\\n            .map_or(-1, |i| i as i32)\\n    }\\n}\\n```\n```\\nimpl Solution {\\n    pub fn smallest_equal(nums: Vec<i32>) -> i32 {\\n        nums.iter()\\n            .zip((0..10).cycle())\\n            .position(|(x, i)| i == *x)\\n            .map_or(-1, |i| i as i32)\\n    }\\n}\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 2938263,
+                "title": "accepted-swift",
+                "content": "```\\nclass Solution {\\n    func smallestEqual(_ nums: [Int]) -> Int {\\n        nums.indices.first { $0 % 10 == nums[$0] } ?? -1\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Swift"
+                ],
+                "code": "```\\nclass Solution {\\n    func smallestEqual(_ nums: [Int]) -> Int {\\n        nums.indices.first { $0 % 10 == nums[$0] } ?? -1\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2797479,
+                "title": "java-short-and-simple",
+                "content": "### **Please Upvote** :D\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int min = 101;\\n\\n        for (int i = 0; i < nums.length; i++) {\\n            if (i % 10 == nums[i]) {\\n                min = Math.min(min, i);\\n            }\\n        }\\n\\n        return min == 101 ? -1 : min;\\n    }\\n}\\n\\n// TC: O(n), SC: O(1)\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int min = 101;\\n\\n        for (int i = 0; i < nums.length; i++) {\\n            if (i % 10 == nums[i]) {\\n                min = Math.min(min, i);\\n            }\\n        }\\n\\n        return min == 101 ? -1 : min;\\n    }\\n}\\n\\n// TC: O(n), SC: O(1)\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2589580,
+                "title": "python3-best-solution",
+                "content": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i%10==nums[i]:\\n                return i\\n        return -1\\n```",
+                "solutionTags": [
+                    "Python"
+                ],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i%10==nums[i]:\\n                return i\\n        return -1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2572342,
+                "title": "java-easy-solution",
+                "content": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n       for(int i=0;i<nums.length;i++) {\\n           if(i%10==nums[i]) { \\n               return i;\\n               \\n           }\\n}\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n       for(int i=0;i<nums.length;i++) {\\n           if(i%10==nums[i]) { \\n               return i;\\n               \\n           }\\n}\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2496083,
+                "title": "easy-solution-100-java-or-c",
+                "content": "\\n\\n<p align=\"center\">\\n  <a href=\"https://github.com/professorDeveloper\"><img src=\"https://readme-typing-svg.herokuapp.com?font=Time+New+Roman&color=%23C8BE25&size=25&center=true&vCenter=true&width=500&height=100&lines=I+am+Hud+Azamov;I+am+Mobile+Developer;Hello+LeetCode;Mobile+Programmer;I+am+from+Uzbekistan;My+best+code+Kotlin;\\uD83C\\uDF31+I\\u2019m+currently+learning+Flutter;\\uD83D\\uDC6F+I\\u2019m+looking+to+collaborate+with+other+content+creators\"></a>\\n</p>\\n\\n![image](https://assets.leetcode.com/users/images/6ecdad44-4d8e-4ce3-9df0-d277a116d425_1661696491.5766337.png)\\n\\n# C++ Solution\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        // i mod 10 == nums[i]\\n        for(int i=0;i<nums.size();i++)\\n            if(i%10 == nums[i]) return i;\\n        return -1;\\n    }\\n};\\n```\\n\\n\\n# Java Solution\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for (int i = 0; i < nums.length; i++) {\\n            if (nums[i] == i % 10) {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```\\n",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        // i mod 10 == nums[i]\\n        for(int i=0;i<nums.size();i++)\\n            if(i%10 == nums[i]) return i;\\n        return -1;\\n    }\\n};\\n```\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for (int i = 0; i < nums.length; i++) {\\n            if (nums[i] == i % 10) {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2377309,
+                "title": "easiest-javascript-solution-with-o-n",
+                "content": "var smallestEqual = function(nums) {\\n    let arr = nums.length;\\n    for(let i=0;i<arr;i++){\\n        if(i % 10== nums[i]){\\n            return  i\\n        } \\n    }\\n\\n    return -1\\n    \\n};",
+                "solutionTags": [
+                    "JavaScript"
+                ],
+                "code": "var smallestEqual = function(nums) {\\n    let arr = nums.length;\\n    for(let i=0;i<arr;i++){\\n        if(i % 10== nums[i]){\\n            return  i\\n        } \\n    }\\n\\n    return -1\\n    \\n};",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 1864589,
+                "title": "easy-pizzy-c-sol",
+                "content": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "C"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1553070,
+                "title": "simple-java-solution",
+                "content": "class Solution {\\n\\n    public int smallestEqual(int[] n) {\\n        int k=n.length;\\n        for(int i=0;i<k;i++)\\n        {\\n            if(i%10==n[i])\\n                return i;\\n        }\\n        return -1;\\n    }\\n}",
+                "solutionTags": [],
+                "code": "class Solution {\\n\\n    public int smallestEqual(int[] n) {\\n        int k=n.length;\\n        for(int i=0;i<k;i++)\\n        {\\n            if(i%10==n[i])\\n                return i;\\n        }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1550332,
+                "title": "c-easy-solution",
+                "content": "```\\n // PLEASE UPVOTE IF YOU LIKE THE SOLUTION !!\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int ans =-1;\\n        vector<int>k;\\n        \\n        for(int i=0;i<nums.size();i++)\\n        {\\n            if((  i%10 )== nums[i])\\n            {\\n                k.push_back(i);\\n                ans++;\\n                \\n        }}\\n        if(ans!=-1)\\n        {\\n        sort(k.begin(),k.end());\\n            return k[0];\\n        }\\n        else\\n        return ans;\\n        \\n    }\\n};",
+                "solutionTags": [
+                    "C"
+                ],
+                "code": "class Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int ans =-1;\\n        vector<int>k;\\n        \\n        for(int i=0;i<nums.size();i++)\\n        {\\n            if((  i%10 )== nums[i])\\n            {\\n                k.push_back(i);\\n                ans++;\\n                \\n        }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1550128,
+                "title": "simple-for-loop-solution",
+                "content": "```\\n/**\\n * @param {number[]} nums\\n * @return {number}\\n */\\nvar smallestEqual = function(nums) {\\n    let arr = [];\\n    \\n    for (let i = 0; i < nums.length; i++){\\n        if(i % 10 === nums[i]){\\n            arr.push(i);\\n        } \\n    }\\n    return arr.length === 0 ? -1 : Math.min(...arr);\\n};\\n```",
+                "solutionTags": [
+                    "JavaScript"
+                ],
+                "code": "```\\n/**\\n * @param {number[]} nums\\n * @return {number}\\n */\\nvar smallestEqual = function(nums) {\\n    let arr = [];\\n    \\n    for (let i = 0; i < nums.length; i++){\\n        if(i % 10 === nums[i]){\\n            arr.push(i);\\n        } \\n    }\\n    return arr.length === 0 ? -1 : Math.min(...arr);\\n};\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 1550061,
+                "title": "smallest-fastest-easy-solution",
+                "content": "`\\nclass Solution {\\n\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]) return i;\\n        }\\n        return -1;\\n    }\\n}`",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "class Solution {\\n\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]) return i;\\n        }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1550041,
+                "title": "rust-solution",
+                "content": "```\\nimpl Solution {\\n    pub fn smallest_equal(nums: Vec<i32>) -> i32 {\\n        for (i, v) in nums.iter().enumerate() {\\n            if i%10 == *v as usize {\\n                return i as i32;\\n            }\\n        }\\n        return -1;\\n    }\\n}",
+                "solutionTags": [
+                    "Rust"
+                ],
+                "code": "```\\nimpl Solution {\\n    pub fn smallest_equal(nums: Vec<i32>) -> i32 {\\n        for (i, v) in nums.iter().enumerate() {\\n            if i%10 == *v as usize {\\n                return i as i32;\\n            }\\n        }\\n        return -1;\\n    }\\n}",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3825784,
+                "title": "best-easy-solution-in-c",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n=nums.size();\\n\\n        for(int i=0;i<n;i++){\\n            if(i % 10 == nums[i]){\\n                return i;\\n            }\\n\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n=nums.size();\\n\\n        for(int i=0;i<n;i++){\\n            if(i % 10 == nums[i]){\\n                return i;\\n            }\\n\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3801152,
+                "title": "easy-javascript-solution-beats-98-97",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\n/**\\n * @param {number[]} nums\\n * @return {number}\\n */\\nvar smallestEqual = function(nums) {\\n    for(let i=0; i<nums.length; i++) {\\n        if(i%10 === nums[i]) return i\\n    }\\n    return -1\\n};\\n```",
+                "solutionTags": [
+                    "JavaScript"
+                ],
+                "code": "```\\n/**\\n * @param {number[]} nums\\n * @return {number}\\n */\\nvar smallestEqual = function(nums) {\\n    for(let i=0; i<nums.length; i++) {\\n        if(i%10 === nums[i]) return i\\n    }\\n    return -1\\n};\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3709317,
+                "title": "smallest-index-with-equal-value-java-solution-code",
+                "content": "# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int ans = 0;\\n        int temp = 0;\\n        int n = 0;\\n        for(int i=0; i<nums.length; i++){\\n            if(i%10 == nums[i]){\\n                temp = i;\\n\\n                if(n == 0){\\n                    ans = i;\\n                    n++;\\n                }\\n                \\n                if(ans > temp){\\n                    ans = temp;\\n                }\\n\\n            }\\n        }\\n        if(n != 0){\\n            return ans;\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int ans = 0;\\n        int temp = 0;\\n        int n = 0;\\n        for(int i=0; i<nums.length; i++){\\n            if(i%10 == nums[i]){\\n                temp = i;\\n\\n                if(n == 0){\\n                    ans = i;\\n                    n++;\\n                }\\n                \\n                if(ans > temp){\\n                    ans = temp;\\n                }\\n\\n            }\\n        }\\n        if(n != 0){\\n            return ans;\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3690023,
+                "title": "simple-java-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int smallestIndex = Integer.MAX_VALUE;\\n        for(int i = 0; i < nums.length; i++) {\\n            if(i % 10 == nums[i]) {\\n                smallestIndex = Integer.min(smallestIndex, i);\\n            }\\n            if(i == nums.length - 1 && smallestIndex == Integer.MAX_VALUE) {\\n                return -1;\\n            }\\n        }\\n        return smallestIndex;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java",
+                    "Array"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int smallestIndex = Integer.MAX_VALUE;\\n        for(int i = 0; i < nums.length; i++) {\\n            if(i % 10 == nums[i]) {\\n                smallestIndex = Integer.min(smallestIndex, i);\\n            }\\n            if(i == nums.length - 1 && smallestIndex == Integer.MAX_VALUE) {\\n                return -1;\\n            }\\n        }\\n        return smallestIndex;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3546124,
+                "title": "c-solution-very-simple-o-n",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\nNo need to traverse all array when found one value simply break, as only minimum value is required.If value is not find ans intialized with -1 will be returned.\\n# Complexity\\n- Time complexity:\\nO(N)\\n\\n- Space complexity:\\nO(1)\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int ans=-1;\\n        for(int i=0;i<nums.size();i++){\\n         \\n            if(i%10==nums[i]){\\n                ans=i;\\n                break;\\n            }\\n        }\\n  return ans;  }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int ans=-1;\\n        for(int i=0;i<nums.size();i++){\\n         \\n            if(i%10==nums[i]){\\n                ans=i;\\n                break;\\n            }\\n        }\\n  return ans;  }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3513175,
+                "title": "super-logic-using-python3",
+                "content": "\\n\\n# Simple explained Solution In Python3\\n```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        list1=[]\\n        for i in range(len(nums)):\\n            if((i%10) == nums[i]):\\n                list1.append(i)\\n        if len(nums)==len(list1):\\n            return 0\\n        if list1:\\n            return list1[0]\\n        return -1\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        list1=[]\\n        for i in range(len(nums)):\\n            if((i%10) == nums[i]):\\n                list1.append(i)\\n        if len(nums)==len(list1):\\n            return 0\\n        if list1:\\n            return list1[0]\\n        return -1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3363706,
+                "title": "java-very-easy-solution-beats-100-o-n",
+                "content": "# Have fun with my code (^__^)\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for (int i = 0; i < nums.length; i++)\\n            if (i % 10 == nums[i])\\n                return i;\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for (int i = 0; i < nums.length; i++)\\n            if (i % 10 == nums[i])\\n                return i;\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3316740,
+                "title": "smallest-index-with-equal-value-solution-in-c",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\nO(n)\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\nO(1)\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int i;\\n        for(i=0 ; i<nums.size() ; i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int i;\\n        for(i=0 ; i<nums.size() ; i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3314771,
+                "title": "easy-solution-java-python",
+                "content": "# Java\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0; i<nums.length; i++) {\\n            if(i % 10 == nums[i]) {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```\\n# Python\\n```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if (i % 10) == nums[i]:\\n                return i\\n        return -1\\n```\\nDo upvote if you like the Solution :)",
+                "solutionTags": [
+                    "Java",
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0; i<nums.length; i++) {\\n            if(i % 10 == nums[i]) {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```\n```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if (i % 10) == nums[i]:\\n                return i\\n        return -1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3309845,
+                "title": "c-easy-and-shorter-solution-intuitive-approach",
+                "content": "\\n\\n# Complexity\\n- Time complexity:\\nO(N)\\n\\n- Space complexity:\\nO(1)\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n\\n        int i,n = nums.size();\\n        int value=0;\\n        int f=0;\\n\\n        for(i=0;i<n;i++)\\n        {\\n            value = i%10;\\n            if(value==nums[i])\\n            {\\n                f=1;\\n                break;\\n            }\\n        }\\n        if(f==1)\\n        return i;\\n        else\\n        return -1;\\n        \\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n\\n        int i,n = nums.size();\\n        int value=0;\\n        int f=0;\\n\\n        for(i=0;i<n;i++)\\n        {\\n            value = i%10;\\n            if(value==nums[i])\\n            {\\n                f=1;\\n                break;\\n            }\\n        }\\n        if(f==1)\\n        return i;\\n        else\\n        return -1;\\n        \\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3151896,
+                "title": "c-solution-self-explanatory",
+                "content": "<!-- # Intuition -->\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n<!-- # Approach -->\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:$$O(n)$$\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:$$O(1)$$\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for (int i = 0 ; i < nums.size() ; i ++)\\n        {\\n            if ( (i % 10) == nums[i] )\\n            {\\n                return i ;\\n            }\\n        }\\n        return -1; \\n    }\\n};\\n```\\n![815a317f-9cdf-46e2-a397-af8869dafa2e_1673498197.3721023.png](https://assets.leetcode.com/users/images/4ad7c7e8-ac3b-44a3-9c07-4fd7fdbfa301_1675700088.7748973.png)\\n",
+                "solutionTags": [
+                    "C++",
+                    "Array"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for (int i = 0 ; i < nums.size() ; i ++)\\n        {\\n            if ( (i % 10) == nums[i] )\\n            {\\n                return i ;\\n            }\\n        }\\n        return -1; \\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3129545,
+                "title": "linear-search-o-n-time-o-1-space",
+                "content": "\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int val=-1;\\n        for(int i=0;i<nums.size();i++){\\n            if(i%10==nums[i])return i;\\n        }\\n        return val;\\n        \\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int val=-1;\\n        for(int i=0;i<nums.size();i++){\\n            if(i%10==nums[i])return i;\\n        }\\n        return val;\\n        \\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3013352,
+                "title": "simple-solution-on-swift",
+                "content": "# Code\\n```\\nclass Solution {\\n    func smallestEqual(_ nums: [Int]) -> Int {\\n        for i in 0..<nums.count where i % 10 == nums[i] {\\n            return i\\n        }\\n        return -1\\n    }\\n}\\n```\\n### Please upvote if you found the solution useful!",
+                "solutionTags": [
+                    "Swift"
+                ],
+                "code": "```\\nclass Solution {\\n    func smallestEqual(_ nums: [Int]) -> Int {\\n        for i in 0..<nums.count where i % 10 == nums[i] {\\n            return i\\n        }\\n        return -1\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2876262,
+                "title": "c-easy",
+                "content": "class Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n=nums.size();\\n        int count=0;\\n        int mn=INT_MAX;\\n        for(int i=0;i<n;i++){\\n            if(i%10==nums[i]){\\n                count=1;\\n                mn=min(mn,i);\\n            }\\n        }\\n        if(count==1)\\n            return mn;\\n        else\\n            return -1;\\n        \\n    }\\n};",
+                "solutionTags": [],
+                "code": "class Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n=nums.size();\\n        int count=0;\\n        int mn=INT_MAX;\\n        for(int i=0;i<n;i++){\\n            if(i%10==nums[i]){\\n                count=1;\\n                mn=min(mn,i);\\n            }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2798590,
+                "title": "java-simple-logic-linear-solution-2ms",
+                "content": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        \\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]) return i;    \\n        }\\n        return -1;\\n    }\\n}\\n```\\n![image](https://assets.leetcode.com/users/images/31f72a19-d415-49d1-88ec-96e7d8bb7f18_1668054698.499077.png)\\n\\n**Any Doubt ask down below :-D**",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        \\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]) return i;    \\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2787979,
+                "title": "python-sol-n",
+                "content": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        ans = []\\n        for i in range(len(nums)):\\n            if i % 10 == nums[i]:\\n                ans.append(i)\\n        \\n        return min(ans) if len(ans) > 0 else -1\\n```",
+                "solutionTags": [],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        ans = []\\n        for i in range(len(nums)):\\n            if i % 10 == nums[i]:\\n                ans.append(i)\\n        \\n        return min(ans) if len(ans) > 0 else -1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2640991,
+                "title": "python-o-n",
+                "content": "# Intuition JUET\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach easy understanding \\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity: best: O(1)\\n-                  wrost :O(N)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        n=len(nums)\\n        for i in range(n):\\n            if i%10==nums[i]:\\n                return i\\n        return -1\\n```",
+                "solutionTags": [
+                    "Python3",
+                    "Array"
+                ],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        n=len(nums)\\n        for i in range(n):\\n            if i%10==nums[i]:\\n                return i\\n        return -1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2615283,
+                "title": "java-solution",
+                "content": "```\\n public int smallestEqual(int[] nums) {\\n        int res =-1;\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }\\n        }\\n        return res;\\n        \\n    }",
+                "solutionTags": [
+                    "Array"
+                ],
+                "code": "```\\n public int smallestEqual(int[] nums) {\\n        int res =-1;\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }\\n        }\\n        return res;\\n        \\n    }",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 2589983,
+                "title": "java-100-clear-solution-no-comment",
+                "content": "class Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i = 0; i < nums.length; i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "class Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i = 0; i < nums.length; i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2589040,
+                "title": "with-explanation-comments-time-24-ms-30-31-space-22-mb-78-76",
+                "content": "**Like it? ->Upvote please!** \\u30C4\\n\\n\\'\\'\\'\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        \\n        //loop over the whole array elements\\n        for(int i=0;i<nums.size();i++)\\n            //check if the current index is divisible by the current value\\n            if(i%10==nums[i])\\n                //if yes-> return the valid index\\n                return i;\\n        \\n        //if no-> return -1\\n        return -1;\\n    }\\n};\\n\\'\\'\\'\\n\\n**Like it? ->Upvote please!** \\u30C4\\n**If still not understood, feel free to comment. I will help you out**\\n**Happy Coding :)**",
+                "solutionTags": [
+                    "C++",
+                    "C",
+                    "Array"
+                ],
+                "code": "class Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        \\n        //loop over the whole array elements\\n        for(int i=0;i<nums.size();i++)\\n            //check if the current index is divisible by the current value\\n            if(i%10==nums[i])\\n                //if yes-> return the valid index\\n                return i;\\n        \\n        //if no-> return -1\\n        return -1;\\n    }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2549386,
+                "title": "java-1ms-100-faster-3-line-solution",
+                "content": "class Solution {\\n    public int smallestEqual(int[] nums) {\\n\\n        for(int i=0;i<nums.length;i++){\\n            if(nums[i]%10==i%10){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "class Solution {\\n    public int smallestEqual(int[] nums) {\\n\\n        for(int i=0;i<nums.length;i++){\\n            if(nums[i]%10==i%10){\\n                return i;\\n            }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2501817,
+                "title": "100-t-c-easy-short-solution",
+                "content": "```\\nPLEASE UPVOTE IF YOU LIKE\\n```\\n```\\n        for (int i = 0; i < nums.length; i++) {\\n            if (i % 10 == nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nPLEASE UPVOTE IF YOU LIKE\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 2438832,
+                "title": "c-easy-solution-100-easy-solution-only-using-simple-loop",
+                "content": "# Easiest C++ Solution\\n\\n**class Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n = nums.size();\\n        int finalans = -1;\\n        for(int i=0;i<n;i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                finalans = i;\\n                break;\\n            }\\n        }\\n        return finalans;\\n    }\\n};**",
+                "solutionTags": [
+                    "C++",
+                    "C"
+                ],
+                "code": "class Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n = nums.size();\\n        int finalans = -1;\\n        for(int i=0;i<n;i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                finalans = i;\\n                break;\\n            }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2399906,
+                "title": "100-00-faster-java-solution",
+                "content": "This question is a waste of time if you are not a beginner.\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int res = -1;\\n        for (int i = 0; i< nums.length; ++i) {\\n            if (i%10==nums[i]) {\\n                res = i;\\n                break;\\n            }\\n        }\\n        return res;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int res = -1;\\n        for (int i = 0; i< nums.length; ++i) {\\n            if (i%10==nums[i]) {\\n                res = i;\\n                break;\\n            }\\n        }\\n        return res;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2369057,
+                "title": "c-3-lines-code-easiest-ig",
+                "content": "class Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        \\n        for(int i = 0; i < nums.size(); i++){\\n            if(i % 10 == nums[i]) return i;\\n        }\\n        return -1;\\n    }\\n};",
+                "solutionTags": [
+                    "C++",
+                    "C"
+                ],
+                "code": "class Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        \\n        for(int i = 0; i < nums.size(); i++){\\n            if(i % 10 == nums[i]) return i;\\n        }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2347753,
+                "title": "c-easiest-approach",
+                "content": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```\\n",
+                "solutionTags": [
+                    "C"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2307115,
+                "title": "smallest-index-with-equal-value-c-cpp",
+                "content": "The question is straightforward asking you to calculate the minimum index satisfying the given condition : i%10==nums[i]\\nJust take one variable for storing the minimum index and if you did not get any index satisfying the given condition just simply return -1.\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n = nums.size();\\n        int mini = INT_MAX;\\n        for(int i=0;i<n;i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                mini = min(mini,i);\\n                break;\\n            }\\n        }\\n        return mini==INT_MAX?-1:mini;\\n    }\\n};\\n```\\n\\nWithout taking extra variable for storing index :\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n = nums.size();\\n        for(int i=0;i<n;i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```\\n\\nFor both codes :\\nTime Complexity : O(N)\\nSpace Complexity : O(1)\\n\\n**If you understand the code and approach well, then please upvote this post!!!**",
+                "solutionTags": [
+                    "C++",
+                    "C"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n = nums.size();\\n        int mini = INT_MAX;\\n        for(int i=0;i<n;i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                mini = min(mini,i);\\n                break;\\n            }\\n        }\\n        return mini==INT_MAX?-1:mini;\\n    }\\n};\\n```\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n = nums.size();\\n        for(int i=0;i<n;i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2128534,
+                "title": "100-faster",
+                "content": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n       \\n        for(int i=0; i<nums.length; i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n               return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n       \\n        for(int i=0; i<nums.length; i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n               return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2114000,
+                "title": "simple-smooth-c-solution-cpp-easy-understand",
+                "content": "\\t// simple smooth\\n\\t\\n\\tclass Solution {\\n\\tpublic:\\n\\t\\tint smallestEqual(vector<int>& nums) {\\n\\t\\t\\tint i = 0;\\n\\t\\t\\twhile(  i < nums.size() && i % 10 != nums[i]) i++; \\n\\t\\t\\treturn  i >= nums.size() ? -1 : i;\\n\\t\\t}\\n\\t};",
+                "solutionTags": [
+                    "C++",
+                    "C"
+                ],
+                "code": "class Solution {\\n\\tpublic:\\n\\t\\tint smallestEqual(vector<int>& nums) {\\n\\t\\t\\tint i = 0;\\n\\t\\t\\twhile(  i < nums.size() && i % 10 != nums[i]) i++; \\n\\t\\t\\treturn  i >= nums.size() ? -1 : i;\\n\\t\\t}",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2113991,
+                "title": "simple",
+                "content": "\\tclass Solution {\\n\\t\\tpublic int smallestEqual(int[] nums) {\\n\\t\\t\\tfor(int i=0;i<nums.length;i++){\\n\\t\\t\\t\\tif(i%10==nums[i]){\\n\\t\\t\\t\\t\\treturn i;\\n\\t\\t\\t\\t}\\n\\t\\t\\t}\\n\\t\\t\\treturn -1;\\n\\t\\t}\\n\\t}",
+                "solutionTags": [],
+                "code": "class Solution {\\n\\t\\tpublic int smallestEqual(int[] nums) {\\n\\t\\t\\tfor(int i=0;i<nums.length;i++){\\n\\t\\t\\t\\tif(i%10==nums[i]){\\n\\t\\t\\t\\t\\treturn i;\\n\\t\\t\\t\\t}",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2079711,
+                "title": "java-solution-faster-than-94",
+                "content": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i = 0;i<nums.length;i++)\\n            if(i%10==nums[i])\\n                return i;\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i = 0;i<nums.length;i++)\\n            if(i%10==nums[i])\\n                return i;\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2026121,
+                "title": "easy-python-solution",
+                "content": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        res = []\\n        \\n        for i in range(len(nums)):\\n            if i % 10 == nums[i]:\\n                res.append(i)\\n        \\n        if len(res) > 0:\\n            return min(res)\\n        else:\\n            return -1\\n```",
+                "solutionTags": [
+                    "Python"
+                ],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        res = []\\n        \\n        for i in range(len(nums)):\\n            if i % 10 == nums[i]:\\n                res.append(i)\\n        \\n        if len(res) > 0:\\n            return min(res)\\n        else:\\n            return -1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 2001016,
+                "title": "c-beginner-friendly-solution",
+                "content": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n=nums.size();\\n        for(int i=0;i<n;i++){\\n            if(i%10==nums[i]){\\n            return i;\\n            break;}\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n=nums.size();\\n        for(int i=0;i<n;i++){\\n            if(i%10==nums[i]){\\n            return i;\\n            break;}\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1870782,
+                "title": "java-solution-o-n",
+                "content": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for (int i = 0; i < nums.length; i++) {\\n            if (i % 10 == nums[i]) {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for (int i = 0; i < nums.length; i++) {\\n            if (i % 10 == nums[i]) {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1843673,
+                "title": "without-modular-operator-follow-up-question",
+                "content": "**With modulus it\\'s easy, here is without modulus**\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int index = 0;\\n        for (int i = 0 ; i < nums.length; i++) {\\n            if (index == nums[i]) {\\n                return i;\\n            }\\n            if (++index== 10) {\\n               index = 0;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```\\n",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int index = 0;\\n        for (int i = 0 ; i < nums.length; i++) {\\n            if (index == nums[i]) {\\n                return i;\\n            }\\n            if (++index== 10) {\\n               index = 0;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1784390,
+                "title": "c-easy-solution-o-n-time-complexity-clean-code",
+                "content": "**Please Upvote if you found this useful.**\\n\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) \\n    {\\n        for(int i=0; i<nums.size(); i++)\\n        {\\n            if(i % 10== nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "C"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) \\n    {\\n        for(int i=0; i<nums.size(); i++)\\n        {\\n            if(i % 10== nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1657922,
+                "title": "c-one-loop",
+                "content": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for (int i = 0; i < nums.size(); i++) {\\n            if ( (i % 10) == nums[i]) return i;  \\n        } \\n        return -1;        \\n    }\\n};\\n```",
+                "solutionTags": [],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for (int i = 0; i < nums.size(); i++) {\\n            if ( (i % 10) == nums[i]) return i;  \\n        } \\n        return -1;        \\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1622680,
+                "title": "c-no-mod-no-multi-only-add-simple-solution",
+                "content": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int idx = 0;\\n        for (int i = 0 ; i < nums.size(); ++i) {\\n            if (idx == nums[i]) {\\n                return i;\\n            }\\n            if (++idx == 10) {\\n                idx = 0;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int idx = 0;\\n        for (int i = 0 ; i < nums.size(); ++i) {\\n            if (idx == nums[i]) {\\n                return i;\\n            }\\n            if (++idx == 10) {\\n                idx = 0;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1597754,
+                "title": "java-runtime-100-simple-3-line-solution",
+                "content": "if you find it useful, please upvote it)\\n```\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0; i<nums.length; i++)\\n            if((i-nums[i])%10==0) return i;\\n        return -1;\\n    }\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0; i<nums.length; i++)\\n            if((i-nums[i])%10==0) return i;\\n        return -1;\\n    }\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 1591405,
+                "title": "python3-1-line",
+                "content": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        return min([i for i,el in enumerate(nums) if i%10==el],default=-1)\\n```",
+                "solutionTags": [],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        return min([i for i,el in enumerate(nums) if i%10==el],default=-1)\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1577635,
+                "title": "c-lmao",
+                "content": "**Just follow the description given nd it;\\'s done !**\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int idx = 0; idx < nums.size(); idx++){\\n            if(idx % 10 == nums[idx])\\n                return idx;\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "C"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int idx = 0; idx < nums.size(); idx++){\\n            if(idx % 10 == nums[idx])\\n                return idx;\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1572396,
+                "title": "c-easy-solution-with-1-for-loop-explanation",
+                "content": "class Solution {\\npublic:\\n     int smallestEqual(vector<int>& nums) \\n    {\\n*         int ans=INT_MAX;\\n        for(int i=0;i<nums.size();i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                ans = min(ans,i);\\n            }\\n        }\\n        if(ans==INT_MAX)\\n        {\\n            return -1;\\n        }\\n        return ans;\\n    }\\n}",
+                "solutionTags": [],
+                "code": "class Solution {\\npublic:\\n     int smallestEqual(vector<int>& nums) \\n    {\\n*         int ans=INT_MAX;\\n        for(int i=0;i<nums.size();i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                ans = min(ans,i);\\n            }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1567544,
+                "title": "python-easy-code-beats-100",
+                "content": "```\\ndef smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i%10==nums[i]: return i\\n        return -1\\n```",
+                "solutionTags": [
+                    "Python"
+                ],
+                "code": "```\\ndef smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i%10==nums[i]: return i\\n        return -1\\n```",
+                "codeTag": "Python3"
+            },
+            {
+                "id": 1559296,
+                "title": "kotlin",
+                "content": "```\\nclass Solution {\\n    fun smallestEqual(nums: IntArray): Int =\\n        nums.withIndex()\\n            .find { (index, num) -> index % 10 == num }\\n            ?.index ?: -1\\n}\\n```",
+                "solutionTags": [],
+                "code": "```\\nclass Solution {\\n    fun smallestEqual(nums: IntArray): Int =\\n        nums.withIndex()\\n            .find { (index, num) -> index % 10 == num }\\n            ?.index ?: -1\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1558371,
+                "title": "easy-java-solution",
+                "content": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int k=0;\\n        int flag=0;\\n        int arr[]= new int[nums.length];\\n        for(int i=0;i<nums.length;i++){\\n            arr[k]= i%10;\\n            k++;\\n        }\\n        for(int i=0;i<nums.length;i++){\\n            if(nums[i]==arr[i]){\\n                flag=1;\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n\\n```",
+                "solutionTags": [],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int k=0;\\n        int flag=0;\\n        int arr[]= new int[nums.length];\\n        for(int i=0;i<nums.length;i++){\\n            arr[k]= i%10;\\n            k++;\\n        }\\n        for(int i=0;i<nums.length;i++){\\n            if(nums[i]==arr[i]){\\n                flag=1;\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1555621,
+                "title": "c",
+                "content": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0; i<nums.size(); i++)\\n        {\\n            if(i%10==nums[i])\\n                return i;\\n        }\\n        return -1;\\n    }\\n};",
+                "solutionTags": [],
+                "code": "class Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0; i<nums.size(); i++)\\n        {\\n            if(i%10==nums[i])\\n                return i;\\n        }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1555548,
+                "title": "python3-easy-o-n",
+                "content": "\\tclass Solution:\\n\\t\\tdef smallestEqual(self, nums: List[int]) -> int:\\n\\t\\t\\tfor idx,val in enumerate(nums):\\n\\t\\t\\t\\tif idx%10==val:\\n\\t\\t\\t\\t\\treturn idx\\n\\t\\t\\treturn -1",
+                "solutionTags": [],
+                "code": "\\tclass Solution:\\n\\t\\tdef smallestEqual(self, nums: List[int]) -> int:\\n\\t\\t\\tfor idx,val in enumerate(nums):\\n\\t\\t\\t\\tif idx%10==val:\\n\\t\\t\\t\\t\\treturn idx\\n\\t\\t\\treturn -1",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1552410,
+                "title": "python",
+                "content": "\\n```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if(nums[i]==(i%10)):\\n                return i\\n        return -1\\n```",
+                "solutionTags": [],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if(nums[i]==(i%10)):\\n                return i\\n        return -1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1551431,
+                "title": "super-simple-python-solution",
+                "content": "```\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for idx,elem in enumerate(nums):\\n            if idx % 10 == elem:\\n                return idx\\n        return -1\\n        \\n```",
+                "solutionTags": [],
+                "code": "```\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for idx,elem in enumerate(nums):\\n            if idx % 10 == elem:\\n                return idx\\n        return -1\\n        \\n```",
+                "codeTag": "Python3"
+            },
+            {
+                "id": 1551043,
+                "title": "golang-solution",
+                "content": "Why is this problem even there?\\n\\n```\\nfunc smallestEqual(nums []int) int {\\n    for i := range nums {\\n        if i % 10 == nums[i] {\\n            return i\\n        }\\n    }\\n    \\n    return -1\\n}\\n```",
+                "solutionTags": [
+                    "Go"
+                ],
+                "code": "```\\nfunc smallestEqual(nums []int) int {\\n    for i := range nums {\\n        if i % 10 == nums[i] {\\n            return i\\n        }\\n    }\\n    \\n    return -1\\n}\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 1550415,
+                "title": "java-solution-o-n",
+                "content": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for (int i = 0; i < nums.length; i++) {\\n            if(i%10==nums[i]) {\\n                return i;\\n            }\\n        }\\n        \\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for (int i = 0; i < nums.length; i++) {\\n            if(i%10==nums[i]) {\\n                return i;\\n            }\\n        }\\n        \\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1550261,
+                "title": "python-easy-solution",
+                "content": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i % 10 == nums[i]:\\n                return i\\n        return -1\\n```\\nIf u understood the code then plz UPVOTE....thnx in adv",
+                "solutionTags": [
+                    "Python"
+                ],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i % 10 == nums[i]:\\n                return i\\n        return -1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1550190,
+                "title": "c-100-fast",
+                "content": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n      for(int i=0; i<nums.size(); i++){\\n          if(i%10==nums[i]) return i;\\n      }   \\n        return -1;\\n    }\\n};",
+                "solutionTags": [],
+                "code": "class Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n      for(int i=0; i<nums.size(); i++){\\n          if(i%10==nums[i]) return i;\\n      }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 1549962,
+                "title": "short-easy-c-java-python",
+                "content": "**C++**\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++){\\n            if(i%10 == nums[i]) return i;\\n        }\\n        return -1;\\n    }\\n};\\n```\\n**Java**\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if(nums[i]==i%10) return i;\\n        }\\n        return -1;\\n    }\\n}\\n```\\n**Python**\\n```\\nclass Solution:\\n\\tdef smallestEqual(self, nums: List[int]) -> int:\\n\\t\\tfor i, num in enumerate(nums):\\n\\t\\t\\tif i % 10 == num:\\n\\t\\t\\t\\treturn i\\n\\t\\treturn -1\\n\\n```\\nFeel free to ask any question in the comment section.\\n**I hope that you\\'ve found the solution useful.**\\nIn that case, **please do upvote and encourage me** to on my quest to document all leetcode problems\\uD83D\\uDE03\\nHappy Coding :)\\n",
+                "solutionTags": [
+                    "C++",
+                    "Java",
+                    "Python",
+                    "C"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++){\\n            if(i%10 == nums[i]) return i;\\n        }\\n        return -1;\\n    }\\n};\\n```\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if(nums[i]==i%10) return i;\\n        }\\n        return -1;\\n    }\\n}\\n```\n```\\nclass Solution:\\n\\tdef smallestEqual(self, nums: List[int]) -> int:\\n\\t\\tfor i, num in enumerate(nums):\\n\\t\\t\\tif i % 10 == num:\\n\\t\\t\\t\\treturn i\\n\\t\\treturn -1\\n\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4080578,
+                "title": "java-easy-approach",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4079656,
+                "title": "simple-solution-in-javascript",
+                "content": "\\n# Code\\n```\\nvar smallestEqual = function(nums) {\\n    for(let i = 0; i < nums.length; i++)\\n    {\\n       if(nums[i] % 10 === i % 10)\\n            return i; \\n    }\\n    return -1;\\n};\\n```",
+                "solutionTags": [
+                    "JavaScript"
+                ],
+                "code": "```\\nvar smallestEqual = function(nums) {\\n    for(let i = 0; i < nums.length; i++)\\n    {\\n       if(nums[i] % 10 === i % 10)\\n            return i; \\n    }\\n    return -1;\\n};\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 4073563,
+                "title": "c-easy-clean-code-easy-to-understand-beginners-friendly-beats-97-11-of-c-users",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:O(nlogn)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        vector<int>ans;\\n        int cnt=0,g;\\n        for(int i=0;i<nums.size();i++){\\n            if((i%10)==nums[i]){\\n               ans.push_back(i);\\n                cnt+=1;\\n            }\\n        }\\n        sort(ans.begin(),ans.end());\\n        if(cnt!=0){\\n            return ans[0];\\n        }\\n        return -1;\\n        \\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Array"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        vector<int>ans;\\n        int cnt=0,g;\\n        for(int i=0;i<nums.size();i++){\\n            if((i%10)==nums[i]){\\n               ans.push_back(i);\\n                cnt+=1;\\n            }\\n        }\\n        sort(ans.begin(),ans.end());\\n        if(cnt!=0){\\n            return ans[0];\\n        }\\n        return -1;\\n        \\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4073477,
+                "title": "smallestequal-efficient-97-83",
+                "content": "# Intuition\\n- To solve this problem, we need to find the smallest index `i` such that `i mod 10` equals `nums[i]` or return -1 if no such index exists.\\n\\n# Approach\\n- We can iterate through the array `nums`, checking each index `i` to see if `i mod 10` is equal to `nums[i]`.\\n- If we find an index `i` that satisfies the condition, we return `i`.\\n- If no such index is found, we return -1.\\n\\n# Complexity\\n- Time complexity: O(n) where `n` is the length of the input array `nums`.\\n- Space complexity: O(1)\\n\\n# Code\\n```\\npublic class Solution {\\n    public int SmallestEqual(int[] nums) {\\n        for(int i = 0; i < nums.Length; i++){\\n            if( i % 10 == nums[i]) return i;\\n        }\\n\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "C#"
+                ],
+                "code": "```\\npublic class Solution {\\n    public int SmallestEqual(int[] nums) {\\n        for(int i = 0; i < nums.Length; i++){\\n            if( i % 10 == nums[i]) return i;\\n        }\\n\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4072960,
+                "title": "warning-for-beginners",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if(i % 10 == nums[i]) return i;\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if(i % 10 == nums[i]) return i;\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4063306,
+                "title": "easy-to-understand-java-solution-o-n",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int i =0;\\n        int count =0;\\n        for(i =0; i<nums.length; i++){\\n            if(i%10==nums[i]){\\n                break;\\n            }\\n            else{\\n                count=count+1;\\n            }\\n        }\\n        if(count == nums.length){\\n            return -1;\\n        }\\n        return i;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int i =0;\\n        int count =0;\\n        for(i =0; i<nums.length; i++){\\n            if(i%10==nums[i]){\\n                break;\\n            }\\n            else{\\n                count=count+1;\\n            }\\n        }\\n        if(count == nums.length){\\n            return -1;\\n        }\\n        return i;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4048839,
+                "title": "easy-4-line-code-for-this-prob",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\nO(n)\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n       \\n        for(int i = 0 ; i<nums.length; i++){\\n\\n            if(i%10 == nums[i]){\\n             return i;\\n            }\\n        }\\n  \\n\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n       \\n        for(int i = 0 ; i<nums.length; i++){\\n\\n            if(i%10 == nums[i]){\\n             return i;\\n            }\\n        }\\n  \\n\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4047299,
+                "title": "js",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\n/**\\n * @param {number[]} nums\\n * @return {number}\\n */\\nvar smallestEqual = function(nums) {\\n    for(let i=0;i<nums.length;i++){\\n        if(i%10===nums[i])\\n        return i\\n    }\\n    return -1;\\n};\\n```",
+                "solutionTags": [
+                    "JavaScript"
+                ],
+                "code": "```\\n/**\\n * @param {number[]} nums\\n * @return {number}\\n */\\nvar smallestEqual = function(nums) {\\n    for(let i=0;i<nums.length;i++){\\n        if(i%10===nums[i])\\n        return i\\n    }\\n    return -1;\\n};\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 4047023,
+                "title": "simplest-java-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) \\n    {\\n    for(int i=0;i<nums.length;i++)\\n    {\\n        if(i%10==nums[i])\\n        {\\n            return i;\\n        }\\n    }\\n    return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) \\n    {\\n    for(int i=0;i<nums.length;i++)\\n    {\\n        if(i%10==nums[i])\\n        {\\n            return i;\\n        }\\n    }\\n    return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4039768,
+                "title": "simple-linear-search-c",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n = nums.size();\\n        int index = -1;\\n        for(int i=0;i<n;i++){\\n            if( i % 10 == nums[i]){\\n                index = i;\\n                break;\\n            }\\n        }\\n        return index;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n = nums.size();\\n        int index = -1;\\n        for(int i=0;i<n;i++){\\n            if( i % 10 == nums[i]){\\n                index = i;\\n                break;\\n            }\\n        }\\n        return index;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4011677,
+                "title": "100-beats-in-java",
+                "content": "# Complexity\\n- Time complexity:O(n)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i = 0; i<nums.length ; i++)\\n        if(i%10 == nums[i]) return i;\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i = 0; i<nums.length ; i++)\\n        if(i%10 == nums[i]) return i;\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4011113,
+                "title": "99-75-faster",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\nO(n)\\n\\n- Space complexity:\\nO(1)\\n\\n# Code\\n```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i % 10 == nums[i]:\\n                return i\\n        return -1\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i % 10 == nums[i]:\\n                return i\\n        return -1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4007667,
+                "title": "simple-easy-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\n/**\\n * @param {number[]} nums\\n * @return {number}\\n */\\nvar smallestEqual = function(nums) {\\n    for(let i=0;i<nums.length;i++){\\n        if(nums[i]===i%10){\\n            return i\\n        }\\n    }\\n    return -1\\n};\\n```",
+                "solutionTags": [
+                    "JavaScript"
+                ],
+                "code": "```\\n/**\\n * @param {number[]} nums\\n * @return {number}\\n */\\nvar smallestEqual = function(nums) {\\n    for(let i=0;i<nums.length;i++){\\n        if(nums[i]===i%10){\\n            return i\\n        }\\n    }\\n    return -1\\n};\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 4002159,
+                "title": "c",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n=nums.size(); int mini=-1;\\n         int i;\\n        for( i=0;i<n;i++)\\n        {\\n            if(i % 10==nums[i])\\n            {\\n                mini=i;\\n                break;\\n            }\\n            \\n        }\\n        return mini;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int n=nums.size(); int mini=-1;\\n         int i;\\n        for( i=0;i<n;i++)\\n        {\\n            if(i % 10==nums[i])\\n            {\\n                mini=i;\\n                break;\\n            }\\n            \\n        }\\n        return mini;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3994217,
+                "title": "easy-java-solution-runtime-0-ms",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if(nums[i]==i%10)\\n                return i;\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if(nums[i]==i%10)\\n                return i;\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3987813,
+                "title": "racket-solution-with-continuation",
+                "content": "\\n# Complexity\\n- Time complexity: $$O(n)$$ \\n\\n- Space complexity: $$O(1)$$\\n\\n# Code\\n```racket\\n(define/contract (smallest-equal nums)\\n  (-> (listof exact-integer?) exact-integer?)\\n  (call/cc\\n   (lambda (break)\\n     (let loop ([i 0]\\n                [ls nums])\\n       (cond [(null? ls) -1]\\n             [(= (car ls) (remainder i 10)) (break i)]\\n             [else (loop (add1 i)\\n                         (cdr ls))]))))\\n   \\n  )\\n\\n```",
+                "solutionTags": [
+                    "Racket"
+                ],
+                "code": "```racket\\n(define/contract (smallest-equal nums)\\n  (-> (listof exact-integer?) exact-integer?)\\n  (call/cc\\n   (lambda (break)\\n     (let loop ([i 0]\\n                [ls nums])\\n       (cond [(null? ls) -1]\\n             [(= (car ls) (remainder i 10)) (break i)]\\n             [else (loop (add1 i)\\n                         (cdr ls))]))))\\n   \\n  )\\n\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3984695,
+                "title": "java-and-python-solution-beats-100",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\nO(n)\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\nO(1)\\n\\n# Java\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i =0 ; i < nums.length; i++){\\n            if(i % 10 == nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```\\n\\n# Python\\n```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i % 10 == nums[i]:\\n                return i\\n        return -1    \\n        \\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i =0 ; i < nums.length; i++){\\n            if(i % 10 == nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```\n```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i % 10 == nums[i]:\\n                return i\\n        return -1    \\n        \\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3972518,
+                "title": "java-1ms-for-loop-anyone-can-do-leetcode-easiest-approach",
+                "content": "\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int ans=-1;\\n        for(int i=0; i<nums.length; i++)\\n        {\\n           if(i%10== nums[i])\\n           {\\n               ans = i;\\n               break;\\n           }\\n            \\n        }\\n        return ans;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int ans=-1;\\n        for(int i=0; i<nums.length; i++)\\n        {\\n           if(i%10== nums[i])\\n           {\\n               ans = i;\\n               break;\\n           }\\n            \\n        }\\n        return ans;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3960093,
+                "title": "easy",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0; i <nums.length; i++){\\n            if(i%10 == nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0; i <nums.length; i++){\\n            if(i%10 == nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3960091,
+                "title": "100-beats-java-code",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n       for(int i =0;i<nums.length;i++){\\n           int n=i%10;\\n           if(n==nums[i]){\\n               return i;\\n           }\\n       }\\n       return -1; \\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n       for(int i =0;i<nums.length;i++){\\n           int n=i%10;\\n           if(n==nums[i]){\\n               return i;\\n           }\\n       }\\n       return -1; \\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3959201,
+                "title": "c-first-thought",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity: O(1), O(n)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0; i<nums.size(); i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }\\n        }\\n        return {-1};\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0; i<nums.size(); i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }\\n        }\\n        return {-1};\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3944939,
+                "title": "easy-solution-in-java-runtime-0-ms-100-beats-for-loop-by-sethupathi-k",
+                "content": "# Intuition\\nKPRIET\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n\\n        int c=0;\\n\\n        for(int i=0 ; i<nums.length ; i++){\\n\\n            if(nums[i] == i%10){\\n                  return i;\\n            }\\n        }\\n\\n        return -1;\\n        \\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n\\n        int c=0;\\n\\n        for(int i=0 ; i<nums.length ; i++){\\n\\n            if(nums[i] == i%10){\\n                  return i;\\n            }\\n        }\\n\\n        return -1;\\n        \\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3921875,
+                "title": "java-o-n-beats-100",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n              if(nums == null || nums.length == 0) {\\n         return -1;\\n      }\\n\\n      for(int i = 0; i < nums.length; i++) {\\n         if(i % 10 == nums[i]) {\\n            return i;\\n         }\\n      }\\n\\n      return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n              if(nums == null || nums.length == 0) {\\n         return -1;\\n      }\\n\\n      for(int i = 0; i < nums.length; i++) {\\n         if(i % 10 == nums[i]) {\\n            return i;\\n         }\\n      }\\n\\n      return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3908558,
+                "title": "simple-java-solution-easy-problem-on-leetcode",
+                "content": "Just a normal approach by using test case logic \\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if((i%10) == nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n        \\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if((i%10) == nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n        \\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3904842,
+                "title": "python-easy-clean-solution",
+                "content": "# Complexity\\n- Time complexity: O(n)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        res = -1\\n        for i, val in enumerate(nums):\\n            if i % 10 == val:\\n                return i\\n        return res \\n```\\n![catty.png](https://assets.leetcode.com/users/images/2956c14c-029e-4c83-b2e1-1a2eabb28fd4_1691940964.328111.png)\\n",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        res = -1\\n        for i, val in enumerate(nums):\\n            if i % 10 == val:\\n                return i\\n        return res \\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3903219,
+                "title": "easy-and-clear-cut-way-in-dart",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n  int smallestEqual(List<int> nums) {\\n      for(int i=0; i<nums.length; i++){\\n          if(i%10==nums[i]){\\n              return i;\\n          }\\n      }\\n       return -1;\\n  }\\n}\\n```",
+                "solutionTags": [
+                    "Dart"
+                ],
+                "code": "```\\nclass Solution {\\n  int smallestEqual(List<int> nums) {\\n      for(int i=0; i<nums.length; i++){\\n          if(i%10==nums[i]){\\n              return i;\\n          }\\n      }\\n       return -1;\\n  }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3903214,
+                "title": "beats-easy-beginner-friendly-solution-simple-and-easy-java-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3900021,
+                "title": "easy-c-solution-using-stl-and-with-time-complexity-o-n",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity: O(n)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: O(N)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {       \\n        vector<int> res;\\n\\n        for(int i = 0; i < nums.size(); ++i){\\n            if(i % 10 == nums[i]%10 ) res.push_back(i);\\n        }\\n        if (!res.empty()) // if(res.size()!=0)\\n           return *min_element(res.begin(), res.end());\\n\\n    return -1;\\n    }\\n};\\n```\\n",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {       \\n        vector<int> res;\\n\\n        for(int i = 0; i < nums.size(); ++i){\\n            if(i % 10 == nums[i]%10 ) res.push_back(i);\\n        }\\n        if (!res.empty()) // if(res.size()!=0)\\n           return *min_element(res.begin(), res.end());\\n\\n    return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3887936,
+                "title": "easy-and-simple-solution-in-c-tc-o-n",
+                "content": "# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int ans=-1;\\n        for(int i=0;i<nums.size();i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                ans =i;\\n                break;\\n            }\\n        }\\n        return ans;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int ans=-1;\\n        for(int i=0;i<nums.size();i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                ans =i;\\n                break;\\n            }\\n        }\\n        return ans;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3869651,
+                "title": "basic-python-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\n\\n\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i % 10 == nums[i]:\\n                return i\\n        return -1  # Return -1 if no such index is found\\n\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\n\\n\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i % 10 == nums[i]:\\n                return i\\n        return -1  # Return -1 if no such index is found\\n\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3845054,
+                "title": "easy-cpp-solution",
+                "content": "# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int ans = -1, size = nums.size();\\n        for(int i=0; i<size; i++){\\n            if(i%10 == nums[i]){\\n                ans = i;\\n                break;\\n            }\\n        }\\n        return ans;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int ans = -1, size = nums.size();\\n        for(int i=0; i<size; i++){\\n            if(i%10 == nums[i]){\\n                ans = i;\\n                break;\\n            }\\n        }\\n        return ans;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3838136,
+                "title": "quickest-solution",
+                "content": "\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++)\\n            if(i%10==nums[i]) return i;\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++)\\n            if(i%10==nums[i]) return i;\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3825437,
+                "title": "very-basic-java-soln-100",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++)\\n            if(i%10==nums[i])\\n                return i;\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++)\\n            if(i%10==nums[i])\\n                return i;\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3823953,
+                "title": "simple-java-solution-tc-o-n-and-sc-o-1",
+                "content": "# Intuition\\nStore the very first index if \"index mod 10 == nums[index]\" this will be our least index value.\\n\\n# Approach\\nIterate over the array and check if \"index % 10 == nums[index]\" if it is true then store the index in variable and break at that point because we don\\'t need whatever happens to other indices. Here we need least index such that \"index mod 10 == nums[index]\".\\n\\n# Complexity\\n- Time complexity: O(n)\\n\\n- Space complexity: O(1)\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int store = -1;\\n        int index =-1;\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]){\\n                index = i;\\n                break;\\n            }\\n        }\\n        return index;\\n    }\\n}\\n```\\nPlease Upvote if you like it ;)",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int store = -1;\\n        int index =-1;\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]){\\n                index = i;\\n                break;\\n            }\\n        }\\n        return index;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3823622,
+                "title": "simple-and-very-short-solution-in-cpp",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0; i<nums.size(); i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0; i<nums.size(); i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3818185,
+                "title": "begineer-friendly-easy-to-understand-explained-approach-c-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\nTo $$return$$ min value of index, store valid index in another array and sort it, to return minimum value.\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n- Initialize another array ans.\\n- run a loop from $$0 \\\\ -> nums.size()$$\\n- **if each itertion follows the condition $$if(i \\\\% 10 == nums[i])$$ , Store that i\\'th index in ans array.**\\n- if there is no such index the size of ans will be $$0$$, hence $$return\\\\ -1$$\\n- else $$Sort$$ ans Array, and $$Return\\\\ ans[0]$$ i.e Smallest Index.\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n$$O(nLogn)\\\\ + C$$ due to sort function.\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n$$O(N)$$ due to ans Vector.\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) \\n    {\\n        vector<int> ans;\\n        for(int i =0;i<nums.size();i++)\\n        {\\n            if(i % 10 == nums[i])\\n            {\\n                ans.push_back(i);\\n            }\\n        }\\n        if(ans.size() > 0)\\n        {\\n        sort(ans.begin(),ans.end());\\n        return ans[0];\\n        }\\n        else return -1;\\n\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) \\n    {\\n        vector<int> ans;\\n        for(int i =0;i<nums.size();i++)\\n        {\\n            if(i % 10 == nums[i])\\n            {\\n                ans.push_back(i);\\n            }\\n        }\\n        if(ans.size() > 0)\\n        {\\n        sort(ans.begin(),ans.end());\\n        return ans[0];\\n        }\\n        else return -1;\\n\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3816865,
+                "title": "easy-to-understand-with-explanation",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\nWe have to traverse the array from i = 0, and check the given condition for each value of i. The first index that satisfy the condition is our answer. So simply just return the index.\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i = 0; i < nums.length; i++){\\n            if(i % 10 == nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java",
+                    "Array"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i = 0; i < nums.length; i++){\\n            if(i % 10 == nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3810864,
+                "title": "easy-c",
+                "content": "\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0; i<nums.size(); i++){\\n            if(i%10 == nums[i])return i;\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0; i<nums.size(); i++){\\n            if(i%10 == nums[i])return i;\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3786238,
+                "title": "very-easy-java-solution",
+                "content": "\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int ans=-1;\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]){\\n                ans=i;\\n                break;\\n            }\\n        }\\n        return ans;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int ans=-1;\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]){\\n                ans=i;\\n                break;\\n            }\\n        }\\n        return ans;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3780776,
+                "title": "java-solution-100-faster",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3780775,
+                "title": "c-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++){\\n            if(i%10==nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3776596,
+                "title": "beats-100-in-javascript",
+                "content": "\\n\\n# Code\\n```\\n/**\\n * @param {number[]} nums\\n * @return {number}\\n */\\nvar smallestEqual = function(nums) {\\n    for(let i = 0; i < nums.length; i++) {\\n        if(i % 10 === nums[i]) return i;\\n    }\\n    return -1;\\n};\\n```",
+                "solutionTags": [
+                    "JavaScript"
+                ],
+                "code": "```\\n/**\\n * @param {number[]} nums\\n * @return {number}\\n */\\nvar smallestEqual = function(nums) {\\n    for(let i = 0; i < nums.length; i++) {\\n        if(i % 10 === nums[i]) return i;\\n    }\\n    return -1;\\n};\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3766459,
+                "title": "easy-solution-99-54ms",
+                "content": "\\n\\n# Code\\n```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            j = i // 10\\n            j *= 10\\n            if i-j == nums[i]:\\n                return i\\n        else:\\n            return -1\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            j = i // 10\\n            j *= 10\\n            if i-j == nums[i]:\\n                return i\\n        else:\\n            return -1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3765031,
+                "title": "simple-solution-to-understand",
+                "content": "# Intuition\\nHere i need to get the lowest index value with a condition which is i%10 == nums[i].\\n\\n# Approach\\nInitialized the variable result as infinite to hold the return value then iterate throught the list and checks the condition for each iteration that if i%10 = nums[i] or not then if it is equal just check another condition too to change the value or result that it if it is less than the current result value or not.After the loop execution check the condition that if the value of result is that the one initialized or not if it is then return -1 else  return the result.\\n\\n# Complexity\\n- Time complexity:O(n)\\n\\n- Space complexity:O(1)\\n\\n# Code\\n```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        result=float(\\'inf\\')\\n        for i in range(len(nums)):\\n            if i%10 == nums[i] and i<result:\\n                result=i\\n        if result != float(\\'inf\\'):\\n            return result\\n        else:\\n            return -1\\n\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        result=float(\\'inf\\')\\n        for i in range(len(nums)):\\n            if i%10 == nums[i] and i<result:\\n                result=i\\n        if result != float(\\'inf\\'):\\n            return result\\n        else:\\n            return -1\\n\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3764165,
+                "title": "c-solution-easy-to-understand",
+                "content": "\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++)\\n        {\\n            if(i%10==nums[i])\\n            return i;\\n        }return -1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++)\\n        {\\n            if(i%10==nums[i])\\n            return i;\\n        }return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3751136,
+                "title": "c-easy-solution-to-understand",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++){\\n            int div=i%10;\\n            if(div==nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++){\\n            int div=i%10;\\n            if(div==nums[i]){\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3745784,
+                "title": "easy-solution-4-lines-code",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int max=99999,min=-1;\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]){\\n                 max=Math.min(max,i);\\n                 min=max;\\n            }\\n        }\\n        return min;\\n        \\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int max=99999,min=-1;\\n        for(int i=0;i<nums.length;i++){\\n            if(i%10==nums[i]){\\n                 max=Math.min(max,i);\\n                 min=max;\\n            }\\n        }\\n        return min;\\n        \\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3742172,
+                "title": "c-4-line-code-simple-and-easy-approach",
+                "content": "# Intuition\\nWe have to return the value of smallest index for which index%10 = nums[index]\\n\\n# Approach\\nWe run for loop for all index of nums where we take each index as i, for each index i we check whether i%10 == nums[i], if the condition is satisfied we return i, and it is the smallest index as we are starting from the lowest index 0 and going to the highest index in our loop, then if the loop is completed yet we are not able to return a value, it means that such an index was not found hence we return -1 in that case.\\n\\n# Complexity\\n- Time complexity:\\nO(n)\\n\\n- Space complexity:\\nO(1)\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0; i<nums.size(); i++)\\n        {\\n            if((i%10)==nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0; i<nums.size(); i++)\\n        {\\n            if((i%10)==nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3739116,
+                "title": "simple-c-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n### **O(n)**\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int min = 101;\\n        int pos = -1;\\n        for(int i=0;i<nums.size();i++){\\n            if(i%10==nums[i]){\\n                if(i<min){\\n                    min = i;\\n                    pos = min;\\n                }\\n            }\\n        }\\n        return pos;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int min = 101;\\n        int pos = -1;\\n        for(int i=0;i<nums.size();i++){\\n            if(i%10==nums[i]){\\n                if(i<min){\\n                    min = i;\\n                    pos = min;\\n                }\\n            }\\n        }\\n        return pos;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3738981,
+                "title": "c-solution-easy-to-understand",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity: O(N)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++)\\n        {\\n            if(i%10==nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3738780,
+                "title": "c-magic",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int mini=INT_MAX;\\n        for(int i=0;i<nums.size();i++){\\n            if(i%10==nums[i]){\\n                mini=min(mini,i);\\n            }\\n        }\\n        if(mini==INT_MAX){\\n            mini=-1;\\n        }\\n        return mini;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int mini=INT_MAX;\\n        for(int i=0;i<nums.size();i++){\\n            if(i%10==nums[i]){\\n                mini=min(mini,i);\\n            }\\n        }\\n        if(mini==INT_MAX){\\n            mini=-1;\\n        }\\n        return mini;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3736745,
+                "title": "easy-to-understand",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int n=nums.length;\\n        for(int i=0;i<n;i++){\\n            if(nums[i]==i%10){\\n                return i;\\n            }\\n        }\\n\\n    return -1;    \\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int n=nums.length;\\n        for(int i=0;i<n;i++){\\n            if(nums[i]==i%10){\\n                return i;\\n            }\\n        }\\n\\n    return -1;    \\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3732975,
+                "title": "easy-and-fast-solution-in-javascript-with-explanation",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\n/**\\n * @param {number[]} nums\\n * @return {number}\\n */\\nvar smallestEqual = function(nums) {\\n    let arr = []; // initialize an empty array arr\\n    for(let i=0; i<nums.length; i++){ // loop through every element of array\\n        let mod = i % 10; // find remainder using % remainder operator for i and 10\\n        if(mod == nums[i]){ // if mod is equal to nums[i] then push i in arr\\n            arr.push(i);\\n        }\\n    }\\n    if(arr.length === 0){ // if arraay length is equal to zero then return -1\\n        return -1;\\n    }else{ // else return minimum value of arr\\n        return Math.min(...arr);\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "JavaScript"
+                ],
+                "code": "```\\n/**\\n * @param {number[]} nums\\n * @return {number}\\n */\\nvar smallestEqual = function(nums) {\\n    let arr = []; // initialize an empty array arr\\n    for(let i=0; i<nums.length; i++){ // loop through every element of array\\n        let mod = i % 10; // find remainder using % remainder operator for i and 10\\n        if(mod == nums[i]){ // if mod is equal to nums[i] then push i in arr\\n            arr.push(i);\\n        }\\n    }\\n    if(arr.length === 0){ // if arraay length is equal to zero then return -1\\n        return -1;\\n    }else{ // else return minimum value of arr\\n        return Math.min(...arr);\\n    }\\n};\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3727882,
+                "title": "easy-solution-in-c",
+                "content": "# Intuition\\n\\n\\n# Approach\\n\\n\\n# Complexity\\n- Time complexity:\\nO(n)\\n\\n- Space complexity:\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int idx=-1;\\n        for(int i=0;i<nums.size();i++){\\n            if(i%10==nums[i]){\\n                idx=i;\\n                break;\\n            }\\n        }\\n        return idx;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int idx=-1;\\n        for(int i=0;i<nums.size();i++){\\n            if(i%10==nums[i]){\\n                idx=i;\\n                break;\\n            }\\n        }\\n        return idx;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3720812,
+                "title": "python-math-simple-o-n",
+                "content": "```\\ndef smallestEqual(self, nums: List[int]) -> int:\\n        mini  = float(\\'inf\\')\\n        x = mini\\n        for i in range(len(nums)):\\n            if i % 10 == nums[i]:\\n                mini = min(mini,i)\\n        if mini == x:\\n            return -1\\n        return mini",
+                "solutionTags": [],
+                "code": "```\\ndef smallestEqual(self, nums: List[int]) -> int:\\n        mini  = float(\\'inf\\')\\n        x = mini\\n        for i in range(len(nums)):\\n            if i % 10 == nums[i]:\\n                mini = min(mini,i)\\n        if mini == x:\\n            return -1\\n        return mini",
+                "codeTag": "Python3"
+            },
+            {
+                "id": 3715693,
+                "title": "easy-java-solution-1ms",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int x=-1;\\n        for(int i=0;i<nums.length;i++){\\n            if((i%10)==nums[i]){\\n             x=i;\\n              break;\\n            }\\n           \\n        }\\n        return x;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int x=-1;\\n        for(int i=0;i<nums.length;i++){\\n            if((i%10)==nums[i]){\\n             x=i;\\n              break;\\n            }\\n           \\n        }\\n        return x;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3715690,
+                "title": "easy-java-solution-1ms",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int x=-1;\\n        for(int i=0;i<nums.length;i++){\\n            if((i%10)==nums[i]){\\n             x=i;\\n              break;\\n            }\\n           \\n        }\\n        return x;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int x=-1;\\n        for(int i=0;i<nums.length;i++){\\n            if((i%10)==nums[i]){\\n             x=i;\\n              break;\\n            }\\n           \\n        }\\n        return x;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3715689,
+                "title": "easy-java-solution-1ms",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int x=-1;\\n        for(int i=0;i<nums.length;i++){\\n            if((i%10)==nums[i]){\\n             x=i;\\n              break;\\n            }\\n           \\n        }\\n        return x;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int x=-1;\\n        for(int i=0;i<nums.length;i++){\\n            if((i%10)==nums[i]){\\n             x=i;\\n              break;\\n            }\\n           \\n        }\\n        return x;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3715688,
+                "title": "easy-java-solution-1ms",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int x=-1;\\n        for(int i=0;i<nums.length;i++){\\n            if((i%10)==nums[i]){\\n             x=i;\\n              break;\\n            }\\n           \\n        }\\n        return x;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int x=-1;\\n        for(int i=0;i<nums.length;i++){\\n            if((i%10)==nums[i]){\\n             x=i;\\n              break;\\n            }\\n           \\n        }\\n        return x;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3708267,
+                "title": "smallest-index-equal-value",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int min = Integer.MAX_VALUE;\\n        for(int i=0;i<nums.length;i++)\\n        {\\n            if(i%10==nums[i])\\n            min = Math.min(min,i);\\n        }\\n        if(min==Integer.MAX_VALUE)\\n        return -1;\\n        else\\n        return min;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int min = Integer.MAX_VALUE;\\n        for(int i=0;i<nums.length;i++)\\n        {\\n            if(i%10==nums[i])\\n            min = Math.min(min,i);\\n        }\\n        if(min==Integer.MAX_VALUE)\\n        return -1;\\n        else\\n        return min;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3693135,
+                "title": "using-for-loop-one-time",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i==nums[i] or i%10==nums[i]:\\n                return i\\n        return -1\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i==nums[i] or i%10==nums[i]:\\n                return i\\n        return -1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3688914,
+                "title": "simple-c-solution",
+                "content": "# Approach\\nStarting with i=0, check the condition for each index. The first one you find to be true is the smallest index.\\n\\n# Complexity\\n- Time complexity: $$O(n)$$\\n- Space complexity: $$O(1)$$\\n\\n# Code\\n```\\npublic class Solution\\n{\\n    public int SmallestEqual(int[] nums)\\n    {\\n        for (var i = 0; i < nums.Length; i++)\\n        {\\n            if (i % 10 == nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "C#"
+                ],
+                "code": "```\\npublic class Solution\\n{\\n    public int SmallestEqual(int[] nums)\\n    {\\n        for (var i = 0; i < nums.Length; i++)\\n        {\\n            if (i % 10 == nums[i])\\n            {\\n                return i;\\n            }\\n        }\\n\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3686239,
+                "title": "super-easy-solution-using-java-beats-100",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        \\n        for( int i=0; i< nums.length; i++)\\n        {\\n            if(i %10 == nums[i])\\n               return i;\\n        }\\n\\n        return -1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        \\n        for( int i=0; i< nums.length; i++)\\n        {\\n            if(i %10 == nums[i])\\n               return i;\\n        }\\n\\n        return -1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3677314,
+                "title": "c-easiest-solution-for-beginners",
+                "content": "# Intuition\\nIF THE MOD OF INDEX == ELEMENT OF THAT SPECIFIC INDEX THEN RETURN THAT VALUE AND THEN BREAK THE LOOP TO PREVENT  MEMORY OVERFLOW\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\nFIND THE VALUE OF INDEX BY MOD AND CHECK IF ELEMENT OF THAT INDEX IS  EQUAL OR NIT\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int temp=-1;\\n        for(int i=0;i<nums.size();i++){\\n            if(nums[i]==i%10){\\n                temp=i;\\n                break;\\n            }}\\n            \\n            \\n        return temp;\\n\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        int temp=-1;\\n        for(int i=0;i<nums.size();i++){\\n            if(nums[i]==i%10){\\n                temp=i;\\n                break;\\n            }}\\n            \\n            \\n        return temp;\\n\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3677089,
+                "title": "python-beats-60",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i%10 == nums[i]:\\n                return i\\n        else:\\n            return -1\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def smallestEqual(self, nums: List[int]) -> int:\\n        for i in range(len(nums)):\\n            if i%10 == nums[i]:\\n                return i\\n        else:\\n            return -1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3672695,
+                "title": "simple-approach-beats-100",
+                "content": "# Intuition\\nDo a modulo division by the index to the items.\\n\\n# Approach\\n1. Iterate the given array\\n2. Check for conditions on whether the index % items equals to the index of the given array\\n3. If condition is true return the index number \\n4. Else return -1\\n\\n# Complexity\\n- Time complexity:\\nO(n)\\n\\n- Space complexity:\\nO(1)\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i = 0 ; i < nums.length ; i++){\\n            if(i % 10 == nums[i])\\n            return i;\\n        } \\n        return -1;  \\n    }\\n}\\n\\n//SC : O(1)\\n//TC : O(N)\\n```",
+                "solutionTags": [
+                    "Java",
+                    "Array"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        for(int i = 0 ; i < nums.length ; i++){\\n            if(i % 10 == nums[i])\\n            return i;\\n        } \\n        return -1;  \\n    }\\n}\\n\\n//SC : O(1)\\n//TC : O(N)\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3671734,
+                "title": "easy-to-undestand-100-beats-faster-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:O(N)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int ans=Integer.MAX_VALUE;\\n        int count=0;\\n        for(int i=0;i<nums.length;i++)\\n        {\\n            int k=i%10;\\n            \\n            if(nums[i]==k)\\n            {\\n                count++;\\n                            if(ans>i)\\n                {\\n                    ans=i;\\n                }\\n            }\\n        }\\n        if(count==0)\\n        {\\n            return -1;\\n        }\\n        return ans;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public int smallestEqual(int[] nums) {\\n        int ans=Integer.MAX_VALUE;\\n        int count=0;\\n        for(int i=0;i<nums.length;i++)\\n        {\\n            int k=i%10;\\n            \\n            if(nums[i]==k)\\n            {\\n                count++;\\n                            if(ans>i)\\n                {\\n                    ans=i;\\n                }\\n            }\\n        }\\n        if(count==0)\\n        {\\n            return -1;\\n        }\\n        return ans;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3665485,
+                "title": "swift-easy-to-understand-for-beginners",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    func smallestEqual(_ nums: [Int]) -> Int {\\n\\n        for (i, v) in nums.enumerated() {\\n            if i % 10 == nums[i] {\\n                return i\\n            }\\n        }\\n        \\n        return -1\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Swift",
+                    "Array",
+                    "Enumeration"
+                ],
+                "code": "```\\nclass Solution {\\n    func smallestEqual(_ nums: [Int]) -> Int {\\n\\n        for (i, v) in nums.enumerated() {\\n            if i % 10 == nums[i] {\\n                return i\\n            }\\n        }\\n        \\n        return -1\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3665183,
+                "title": "easy-approch-c",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        vector<int>res;\\n        int ans;\\n        for(int i=0;i<nums.size();i++){\\n            ans=i%10;\\n            if(ans==nums[i])\\n            res.push_back(i);\\n        }if(res.size()==0)\\n        return -1;\\n        else\\n        return res[0];\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        vector<int>res;\\n        int ans;\\n        for(int i=0;i<nums.size();i++){\\n            ans=i%10;\\n            if(ans==nums[i])\\n            res.push_back(i);\\n        }if(res.size()==0)\\n        return -1;\\n        else\\n        return res[0];\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3661883,
+                "title": "c-for-loop-beats-99-4-lines",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for (int i{}; i < nums.size(); ++i)\\n            if (i % 10 == nums.at(i))\\n                return i;\\n        return -1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for (int i{}; i < nums.size(); ++i)\\n            if (i % 10 == nums.at(i))\\n                return i;\\n        return -1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            }
+        ],
+        "discussions": [
+            {
+                "id": 1738531,
+                "content": [
+                    {
+                        "username": "anujgupta7815",
+                        "content": "class Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++)\\n        {\\n            if((i%10)==nums[i])\\n                return i;\\n        }\\n        return -1;\\n    }\\n};"
+                    },
+                    {
+                        "username": "manojkr6637",
+                        "content": "Due to Over thinking my code is complex. Thx"
+                    },
+                    {
+                        "username": "sagarhasan273",
+                        "content": "\\treturn [ i % 10 == nums[i] for i in range(len(nums))].index(True) if True in [ i % 10 == nums[i] for i in range(len(nums))] else -1"
+                    },
+                    {
+                        "username": "Jason-Law",
+                        "content": "Like: 320, Dislike: 114. I don\\'t understand, it is a good easy problem. \\uD83E\\uDD10"
+                    },
+                    {
+                        "username": "District_12",
+                        "content": "It\\'s because it is useless, it not teaches us anything."
+                    },
+                    {
+                        "username": "mbush8",
+                        "content": "I think it\\'s because it\\'s TOO easy. I was trying to find the catch or the trick, and was a bit disappointed when I realized it\\'s as simple as it looks."
+                    },
+                    {
+                        "username": "had0uken",
+                        "content": "I think it is not the best explanation. Firstly, I could not understand what I have to do. \\nMoreover, people who understood what they have to do quickly may thought that the problem is very easy. Not for job interview. "
+                    }
+                ]
+            },
+            {
+                "id": 1576352,
+                "content": [
+                    {
+                        "username": "anujgupta7815",
+                        "content": "class Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++)\\n        {\\n            if((i%10)==nums[i])\\n                return i;\\n        }\\n        return -1;\\n    }\\n};"
+                    },
+                    {
+                        "username": "manojkr6637",
+                        "content": "Due to Over thinking my code is complex. Thx"
+                    },
+                    {
+                        "username": "sagarhasan273",
+                        "content": "\\treturn [ i % 10 == nums[i] for i in range(len(nums))].index(True) if True in [ i % 10 == nums[i] for i in range(len(nums))] else -1"
+                    },
+                    {
+                        "username": "Jason-Law",
+                        "content": "Like: 320, Dislike: 114. I don\\'t understand, it is a good easy problem. \\uD83E\\uDD10"
+                    },
+                    {
+                        "username": "District_12",
+                        "content": "It\\'s because it is useless, it not teaches us anything."
+                    },
+                    {
+                        "username": "mbush8",
+                        "content": "I think it\\'s because it\\'s TOO easy. I was trying to find the catch or the trick, and was a bit disappointed when I realized it\\'s as simple as it looks."
+                    },
+                    {
+                        "username": "had0uken",
+                        "content": "I think it is not the best explanation. Firstly, I could not understand what I have to do. \\nMoreover, people who understood what they have to do quickly may thought that the problem is very easy. Not for job interview. "
+                    }
+                ]
+            },
+            {
+                "id": 1931158,
+                "content": [
+                    {
+                        "username": "anujgupta7815",
+                        "content": "class Solution {\\npublic:\\n    int smallestEqual(vector<int>& nums) {\\n        for(int i=0;i<nums.size();i++)\\n        {\\n            if((i%10)==nums[i])\\n                return i;\\n        }\\n        return -1;\\n    }\\n};"
+                    },
+                    {
+                        "username": "manojkr6637",
+                        "content": "Due to Over thinking my code is complex. Thx"
+                    },
+                    {
+                        "username": "sagarhasan273",
+                        "content": "\\treturn [ i % 10 == nums[i] for i in range(len(nums))].index(True) if True in [ i % 10 == nums[i] for i in range(len(nums))] else -1"
+                    },
+                    {
+                        "username": "Jason-Law",
+                        "content": "Like: 320, Dislike: 114. I don\\'t understand, it is a good easy problem. \\uD83E\\uDD10"
+                    },
+                    {
+                        "username": "District_12",
+                        "content": "It\\'s because it is useless, it not teaches us anything."
+                    },
+                    {
+                        "username": "mbush8",
+                        "content": "I think it\\'s because it\\'s TOO easy. I was trying to find the catch or the trick, and was a bit disappointed when I realized it\\'s as simple as it looks."
+                    },
+                    {
+                        "username": "had0uken",
+                        "content": "I think it is not the best explanation. Firstly, I could not understand what I have to do. \\nMoreover, people who understood what they have to do quickly may thought that the problem is very easy. Not for job interview. "
+                    }
+                ]
+            }
+        ]
+    }
+]

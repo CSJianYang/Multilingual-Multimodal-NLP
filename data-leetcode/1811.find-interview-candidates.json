@@ -1,0 +1,134 @@
+[
+    {
+        "title": "Find Interview Candidates",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1576405,
+                "content": [
+                    {
+                        "username": "user5544Lo",
+                        "content": "# Write your MySQL query statement below\\nWITH temp0 AS (\\nSELECT contest_id, gold_medal AS m from Contests\\nUNION ALL\\nSELECT contest_id, silver_medal AS m from Contests\\nUNION ALL\\nSELECT contest_id, bronze_medal AS m from Contests)\\n\\nSELECT DISTINCT u.name, u.mail\\nFROM Users u\\nJOIN \\n(SELECT gold_medal as user_id\\nFROM Contests\\nGROUP BY gold_medal\\nHAVING COUNT(gold_medal) >= 3\\n\\nUNION ALL\\n\\nSELECT a.m\\nFROM temp0 a\\nJOIN temp0 b ON b.contest_id = a.contest_id +1 AND b.m = a.m\\nJOIN temp0 c ON c.contest_id = a.contest_id +2 AND c.m = a.m) t ON t.user_id = u.user_id\\n"
+                    },
+                    {
+                        "username": "luke19",
+                        "content": "with CTE as \\n(select contest_id,gold_medal as medal from Contests\\nunion all\\nselect contest_id,silver_medal as medal from Contests\\nunion all\\nselect contest_id,bronze_medal as medal from Contests)\\n\\n\\nselect name,mail from  (\\nselect distinct a.medal as user_id from CTE a \\njoin CTE b on (a.medal=b.medal and a.contest_id+1=b.contest_id)\\njoin CTE c on (b.medal=c.medal and b.contest_id+1=c.contest_id)\\nunion\\nselect distinct gold_medal as user_id from Contests\\ngroup by gold_medal\\nhaving count(gold_medal)>=3) t\\nJoin  Users using(user_id)\\n"
+                    },
+                    {
+                        "username": "joshuafeng1994",
+                        "content": "WITH cte_medal AS (\\nSELECT contest_id, gold_medal as user_id, \\'gold\\' AS medal_type\\nFROM Contests\\nUNION ALL\\nSELECT contest_id, silver_medal as user_id, \\'silver\\' AS medal_type\\nFROM Contests\\nUNION ALL\\nSELECT contest_id, bronze_medal as user_id, \\'bronze\\' AS medal_type\\nFROM Contests\\n)\\n\\nSELECT distinct u.name, u.mail\\nFROM cte_medal c\\nJOIN Users u ON c.user_id = u.user_id\\nWHERE \\n(c.contest_id+1, c.user_id) IN (SELECT contest_id, user_id FROM cte_medal)\\nAND\\n(c.contest_id+2, c.user_id) IN (SELECT contest_id, user_id FROM cte_medal)\\nOR\\nc.user_id IN (SELECT user_id FROM cte_medal WHERE medal_type = \\'gold\\' GROUP BY user_id HAVING COUNT(*)>=3)"
+                    },
+                    {
+                        "username": "AlinaTDS",
+                        "content": "With Medals as\\n((SELECT contest_id, gold_medal as winner, \"gold\" as medaltype FROM Contests) UNION\\n(SELECT contest_id, silver_medal as winner, \"silver\" as medaltype FROM Contests) UNION\\n(SELECT contest_id, bronze_medal as winner, \"bronze\" as medaltype FROM Contests))\\n\\n(SELECT DISTINCT name, mail\\nFROM Users \\nJOIN Medals\\non user_id = winner\\nWHERE (contest_id,winner)  IN (SELECT contest_id - 1 as contset_id, winner FROM Medals)\\nAND (contest_id,winner) IN (SELECT contest_id + 1 as contset_id, winner FROM Medals)\\nGROUP BY user_id)\\n\\nUNION\\n\\n(SELECT DISTINCT name, mail\\nFROM Users \\nJOIN Medals\\non user_id = winner\\nWHERE medaltype = \"gold\"\\nGROUP BY user_id\\nHAVING COUNT(DISTINCT contest_id) >= 3)"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "Took 1.5 hrs to analyse the data but finally did it :) (MS-SQL)\\n\\nwith cte as\\n(select  contest_id,mail,name, (case when user_id in (gold_medal, silver_medal ,bronze_medal) then 1 else 0\\nend) as pp\\nfrom contests, users)\\n\\nselect distinct c1.name, c1.mail from cte c1\\njoin cte c2 on c1.contest_id+ 1 = c2.contest_id and c1.mail = c2.mail\\njoin cte c3 on c1.contest_id + 2 = c3.contest_id and c1.mail = c3.mail\\nwhere c1.pp + c2.pp = 2 and c1.pp+ c3.pp = 2\\nunion \\nselect distinct name,mail from contests c\\njoin users u on c.gold_medal = u.user_id\\ngroup by gold_medal,name, mail\\nhaving count(*)> =3\\n\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1576319,
+                "content": [
+                    {
+                        "username": "user5544Lo",
+                        "content": "# Write your MySQL query statement below\\nWITH temp0 AS (\\nSELECT contest_id, gold_medal AS m from Contests\\nUNION ALL\\nSELECT contest_id, silver_medal AS m from Contests\\nUNION ALL\\nSELECT contest_id, bronze_medal AS m from Contests)\\n\\nSELECT DISTINCT u.name, u.mail\\nFROM Users u\\nJOIN \\n(SELECT gold_medal as user_id\\nFROM Contests\\nGROUP BY gold_medal\\nHAVING COUNT(gold_medal) >= 3\\n\\nUNION ALL\\n\\nSELECT a.m\\nFROM temp0 a\\nJOIN temp0 b ON b.contest_id = a.contest_id +1 AND b.m = a.m\\nJOIN temp0 c ON c.contest_id = a.contest_id +2 AND c.m = a.m) t ON t.user_id = u.user_id\\n"
+                    },
+                    {
+                        "username": "luke19",
+                        "content": "with CTE as \\n(select contest_id,gold_medal as medal from Contests\\nunion all\\nselect contest_id,silver_medal as medal from Contests\\nunion all\\nselect contest_id,bronze_medal as medal from Contests)\\n\\n\\nselect name,mail from  (\\nselect distinct a.medal as user_id from CTE a \\njoin CTE b on (a.medal=b.medal and a.contest_id+1=b.contest_id)\\njoin CTE c on (b.medal=c.medal and b.contest_id+1=c.contest_id)\\nunion\\nselect distinct gold_medal as user_id from Contests\\ngroup by gold_medal\\nhaving count(gold_medal)>=3) t\\nJoin  Users using(user_id)\\n"
+                    },
+                    {
+                        "username": "joshuafeng1994",
+                        "content": "WITH cte_medal AS (\\nSELECT contest_id, gold_medal as user_id, \\'gold\\' AS medal_type\\nFROM Contests\\nUNION ALL\\nSELECT contest_id, silver_medal as user_id, \\'silver\\' AS medal_type\\nFROM Contests\\nUNION ALL\\nSELECT contest_id, bronze_medal as user_id, \\'bronze\\' AS medal_type\\nFROM Contests\\n)\\n\\nSELECT distinct u.name, u.mail\\nFROM cte_medal c\\nJOIN Users u ON c.user_id = u.user_id\\nWHERE \\n(c.contest_id+1, c.user_id) IN (SELECT contest_id, user_id FROM cte_medal)\\nAND\\n(c.contest_id+2, c.user_id) IN (SELECT contest_id, user_id FROM cte_medal)\\nOR\\nc.user_id IN (SELECT user_id FROM cte_medal WHERE medal_type = \\'gold\\' GROUP BY user_id HAVING COUNT(*)>=3)"
+                    },
+                    {
+                        "username": "AlinaTDS",
+                        "content": "With Medals as\\n((SELECT contest_id, gold_medal as winner, \"gold\" as medaltype FROM Contests) UNION\\n(SELECT contest_id, silver_medal as winner, \"silver\" as medaltype FROM Contests) UNION\\n(SELECT contest_id, bronze_medal as winner, \"bronze\" as medaltype FROM Contests))\\n\\n(SELECT DISTINCT name, mail\\nFROM Users \\nJOIN Medals\\non user_id = winner\\nWHERE (contest_id,winner)  IN (SELECT contest_id - 1 as contset_id, winner FROM Medals)\\nAND (contest_id,winner) IN (SELECT contest_id + 1 as contset_id, winner FROM Medals)\\nGROUP BY user_id)\\n\\nUNION\\n\\n(SELECT DISTINCT name, mail\\nFROM Users \\nJOIN Medals\\non user_id = winner\\nWHERE medaltype = \"gold\"\\nGROUP BY user_id\\nHAVING COUNT(DISTINCT contest_id) >= 3)"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "Took 1.5 hrs to analyse the data but finally did it :) (MS-SQL)\\n\\nwith cte as\\n(select  contest_id,mail,name, (case when user_id in (gold_medal, silver_medal ,bronze_medal) then 1 else 0\\nend) as pp\\nfrom contests, users)\\n\\nselect distinct c1.name, c1.mail from cte c1\\njoin cte c2 on c1.contest_id+ 1 = c2.contest_id and c1.mail = c2.mail\\njoin cte c3 on c1.contest_id + 2 = c3.contest_id and c1.mail = c3.mail\\nwhere c1.pp + c2.pp = 2 and c1.pp+ c3.pp = 2\\nunion \\nselect distinct name,mail from contests c\\njoin users u on c.gold_medal = u.user_id\\ngroup by gold_medal,name, mail\\nhaving count(*)> =3\\n\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1575761,
+                "content": [
+                    {
+                        "username": "user5544Lo",
+                        "content": "# Write your MySQL query statement below\\nWITH temp0 AS (\\nSELECT contest_id, gold_medal AS m from Contests\\nUNION ALL\\nSELECT contest_id, silver_medal AS m from Contests\\nUNION ALL\\nSELECT contest_id, bronze_medal AS m from Contests)\\n\\nSELECT DISTINCT u.name, u.mail\\nFROM Users u\\nJOIN \\n(SELECT gold_medal as user_id\\nFROM Contests\\nGROUP BY gold_medal\\nHAVING COUNT(gold_medal) >= 3\\n\\nUNION ALL\\n\\nSELECT a.m\\nFROM temp0 a\\nJOIN temp0 b ON b.contest_id = a.contest_id +1 AND b.m = a.m\\nJOIN temp0 c ON c.contest_id = a.contest_id +2 AND c.m = a.m) t ON t.user_id = u.user_id\\n"
+                    },
+                    {
+                        "username": "luke19",
+                        "content": "with CTE as \\n(select contest_id,gold_medal as medal from Contests\\nunion all\\nselect contest_id,silver_medal as medal from Contests\\nunion all\\nselect contest_id,bronze_medal as medal from Contests)\\n\\n\\nselect name,mail from  (\\nselect distinct a.medal as user_id from CTE a \\njoin CTE b on (a.medal=b.medal and a.contest_id+1=b.contest_id)\\njoin CTE c on (b.medal=c.medal and b.contest_id+1=c.contest_id)\\nunion\\nselect distinct gold_medal as user_id from Contests\\ngroup by gold_medal\\nhaving count(gold_medal)>=3) t\\nJoin  Users using(user_id)\\n"
+                    },
+                    {
+                        "username": "joshuafeng1994",
+                        "content": "WITH cte_medal AS (\\nSELECT contest_id, gold_medal as user_id, \\'gold\\' AS medal_type\\nFROM Contests\\nUNION ALL\\nSELECT contest_id, silver_medal as user_id, \\'silver\\' AS medal_type\\nFROM Contests\\nUNION ALL\\nSELECT contest_id, bronze_medal as user_id, \\'bronze\\' AS medal_type\\nFROM Contests\\n)\\n\\nSELECT distinct u.name, u.mail\\nFROM cte_medal c\\nJOIN Users u ON c.user_id = u.user_id\\nWHERE \\n(c.contest_id+1, c.user_id) IN (SELECT contest_id, user_id FROM cte_medal)\\nAND\\n(c.contest_id+2, c.user_id) IN (SELECT contest_id, user_id FROM cte_medal)\\nOR\\nc.user_id IN (SELECT user_id FROM cte_medal WHERE medal_type = \\'gold\\' GROUP BY user_id HAVING COUNT(*)>=3)"
+                    },
+                    {
+                        "username": "AlinaTDS",
+                        "content": "With Medals as\\n((SELECT contest_id, gold_medal as winner, \"gold\" as medaltype FROM Contests) UNION\\n(SELECT contest_id, silver_medal as winner, \"silver\" as medaltype FROM Contests) UNION\\n(SELECT contest_id, bronze_medal as winner, \"bronze\" as medaltype FROM Contests))\\n\\n(SELECT DISTINCT name, mail\\nFROM Users \\nJOIN Medals\\non user_id = winner\\nWHERE (contest_id,winner)  IN (SELECT contest_id - 1 as contset_id, winner FROM Medals)\\nAND (contest_id,winner) IN (SELECT contest_id + 1 as contset_id, winner FROM Medals)\\nGROUP BY user_id)\\n\\nUNION\\n\\n(SELECT DISTINCT name, mail\\nFROM Users \\nJOIN Medals\\non user_id = winner\\nWHERE medaltype = \"gold\"\\nGROUP BY user_id\\nHAVING COUNT(DISTINCT contest_id) >= 3)"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "Took 1.5 hrs to analyse the data but finally did it :) (MS-SQL)\\n\\nwith cte as\\n(select  contest_id,mail,name, (case when user_id in (gold_medal, silver_medal ,bronze_medal) then 1 else 0\\nend) as pp\\nfrom contests, users)\\n\\nselect distinct c1.name, c1.mail from cte c1\\njoin cte c2 on c1.contest_id+ 1 = c2.contest_id and c1.mail = c2.mail\\njoin cte c3 on c1.contest_id + 2 = c3.contest_id and c1.mail = c3.mail\\nwhere c1.pp + c2.pp = 2 and c1.pp+ c3.pp = 2\\nunion \\nselect distinct name,mail from contests c\\njoin users u on c.gold_medal = u.user_id\\ngroup by gold_medal,name, mail\\nhaving count(*)> =3\\n\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1570891,
+                "content": [
+                    {
+                        "username": "user5544Lo",
+                        "content": "# Write your MySQL query statement below\\nWITH temp0 AS (\\nSELECT contest_id, gold_medal AS m from Contests\\nUNION ALL\\nSELECT contest_id, silver_medal AS m from Contests\\nUNION ALL\\nSELECT contest_id, bronze_medal AS m from Contests)\\n\\nSELECT DISTINCT u.name, u.mail\\nFROM Users u\\nJOIN \\n(SELECT gold_medal as user_id\\nFROM Contests\\nGROUP BY gold_medal\\nHAVING COUNT(gold_medal) >= 3\\n\\nUNION ALL\\n\\nSELECT a.m\\nFROM temp0 a\\nJOIN temp0 b ON b.contest_id = a.contest_id +1 AND b.m = a.m\\nJOIN temp0 c ON c.contest_id = a.contest_id +2 AND c.m = a.m) t ON t.user_id = u.user_id\\n"
+                    },
+                    {
+                        "username": "luke19",
+                        "content": "with CTE as \\n(select contest_id,gold_medal as medal from Contests\\nunion all\\nselect contest_id,silver_medal as medal from Contests\\nunion all\\nselect contest_id,bronze_medal as medal from Contests)\\n\\n\\nselect name,mail from  (\\nselect distinct a.medal as user_id from CTE a \\njoin CTE b on (a.medal=b.medal and a.contest_id+1=b.contest_id)\\njoin CTE c on (b.medal=c.medal and b.contest_id+1=c.contest_id)\\nunion\\nselect distinct gold_medal as user_id from Contests\\ngroup by gold_medal\\nhaving count(gold_medal)>=3) t\\nJoin  Users using(user_id)\\n"
+                    },
+                    {
+                        "username": "joshuafeng1994",
+                        "content": "WITH cte_medal AS (\\nSELECT contest_id, gold_medal as user_id, \\'gold\\' AS medal_type\\nFROM Contests\\nUNION ALL\\nSELECT contest_id, silver_medal as user_id, \\'silver\\' AS medal_type\\nFROM Contests\\nUNION ALL\\nSELECT contest_id, bronze_medal as user_id, \\'bronze\\' AS medal_type\\nFROM Contests\\n)\\n\\nSELECT distinct u.name, u.mail\\nFROM cte_medal c\\nJOIN Users u ON c.user_id = u.user_id\\nWHERE \\n(c.contest_id+1, c.user_id) IN (SELECT contest_id, user_id FROM cte_medal)\\nAND\\n(c.contest_id+2, c.user_id) IN (SELECT contest_id, user_id FROM cte_medal)\\nOR\\nc.user_id IN (SELECT user_id FROM cte_medal WHERE medal_type = \\'gold\\' GROUP BY user_id HAVING COUNT(*)>=3)"
+                    },
+                    {
+                        "username": "AlinaTDS",
+                        "content": "With Medals as\\n((SELECT contest_id, gold_medal as winner, \"gold\" as medaltype FROM Contests) UNION\\n(SELECT contest_id, silver_medal as winner, \"silver\" as medaltype FROM Contests) UNION\\n(SELECT contest_id, bronze_medal as winner, \"bronze\" as medaltype FROM Contests))\\n\\n(SELECT DISTINCT name, mail\\nFROM Users \\nJOIN Medals\\non user_id = winner\\nWHERE (contest_id,winner)  IN (SELECT contest_id - 1 as contset_id, winner FROM Medals)\\nAND (contest_id,winner) IN (SELECT contest_id + 1 as contset_id, winner FROM Medals)\\nGROUP BY user_id)\\n\\nUNION\\n\\n(SELECT DISTINCT name, mail\\nFROM Users \\nJOIN Medals\\non user_id = winner\\nWHERE medaltype = \"gold\"\\nGROUP BY user_id\\nHAVING COUNT(DISTINCT contest_id) >= 3)"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "Took 1.5 hrs to analyse the data but finally did it :) (MS-SQL)\\n\\nwith cte as\\n(select  contest_id,mail,name, (case when user_id in (gold_medal, silver_medal ,bronze_medal) then 1 else 0\\nend) as pp\\nfrom contests, users)\\n\\nselect distinct c1.name, c1.mail from cte c1\\njoin cte c2 on c1.contest_id+ 1 = c2.contest_id and c1.mail = c2.mail\\njoin cte c3 on c1.contest_id + 2 = c3.contest_id and c1.mail = c3.mail\\nwhere c1.pp + c2.pp = 2 and c1.pp+ c3.pp = 2\\nunion \\nselect distinct name,mail from contests c\\njoin users u on c.gold_medal = u.user_id\\ngroup by gold_medal,name, mail\\nhaving count(*)> =3\\n\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1780786,
+                "content": [
+                    {
+                        "username": "user5544Lo",
+                        "content": "# Write your MySQL query statement below\\nWITH temp0 AS (\\nSELECT contest_id, gold_medal AS m from Contests\\nUNION ALL\\nSELECT contest_id, silver_medal AS m from Contests\\nUNION ALL\\nSELECT contest_id, bronze_medal AS m from Contests)\\n\\nSELECT DISTINCT u.name, u.mail\\nFROM Users u\\nJOIN \\n(SELECT gold_medal as user_id\\nFROM Contests\\nGROUP BY gold_medal\\nHAVING COUNT(gold_medal) >= 3\\n\\nUNION ALL\\n\\nSELECT a.m\\nFROM temp0 a\\nJOIN temp0 b ON b.contest_id = a.contest_id +1 AND b.m = a.m\\nJOIN temp0 c ON c.contest_id = a.contest_id +2 AND c.m = a.m) t ON t.user_id = u.user_id\\n"
+                    },
+                    {
+                        "username": "luke19",
+                        "content": "with CTE as \\n(select contest_id,gold_medal as medal from Contests\\nunion all\\nselect contest_id,silver_medal as medal from Contests\\nunion all\\nselect contest_id,bronze_medal as medal from Contests)\\n\\n\\nselect name,mail from  (\\nselect distinct a.medal as user_id from CTE a \\njoin CTE b on (a.medal=b.medal and a.contest_id+1=b.contest_id)\\njoin CTE c on (b.medal=c.medal and b.contest_id+1=c.contest_id)\\nunion\\nselect distinct gold_medal as user_id from Contests\\ngroup by gold_medal\\nhaving count(gold_medal)>=3) t\\nJoin  Users using(user_id)\\n"
+                    },
+                    {
+                        "username": "joshuafeng1994",
+                        "content": "WITH cte_medal AS (\\nSELECT contest_id, gold_medal as user_id, \\'gold\\' AS medal_type\\nFROM Contests\\nUNION ALL\\nSELECT contest_id, silver_medal as user_id, \\'silver\\' AS medal_type\\nFROM Contests\\nUNION ALL\\nSELECT contest_id, bronze_medal as user_id, \\'bronze\\' AS medal_type\\nFROM Contests\\n)\\n\\nSELECT distinct u.name, u.mail\\nFROM cte_medal c\\nJOIN Users u ON c.user_id = u.user_id\\nWHERE \\n(c.contest_id+1, c.user_id) IN (SELECT contest_id, user_id FROM cte_medal)\\nAND\\n(c.contest_id+2, c.user_id) IN (SELECT contest_id, user_id FROM cte_medal)\\nOR\\nc.user_id IN (SELECT user_id FROM cte_medal WHERE medal_type = \\'gold\\' GROUP BY user_id HAVING COUNT(*)>=3)"
+                    },
+                    {
+                        "username": "AlinaTDS",
+                        "content": "With Medals as\\n((SELECT contest_id, gold_medal as winner, \"gold\" as medaltype FROM Contests) UNION\\n(SELECT contest_id, silver_medal as winner, \"silver\" as medaltype FROM Contests) UNION\\n(SELECT contest_id, bronze_medal as winner, \"bronze\" as medaltype FROM Contests))\\n\\n(SELECT DISTINCT name, mail\\nFROM Users \\nJOIN Medals\\non user_id = winner\\nWHERE (contest_id,winner)  IN (SELECT contest_id - 1 as contset_id, winner FROM Medals)\\nAND (contest_id,winner) IN (SELECT contest_id + 1 as contset_id, winner FROM Medals)\\nGROUP BY user_id)\\n\\nUNION\\n\\n(SELECT DISTINCT name, mail\\nFROM Users \\nJOIN Medals\\non user_id = winner\\nWHERE medaltype = \"gold\"\\nGROUP BY user_id\\nHAVING COUNT(DISTINCT contest_id) >= 3)"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "Took 1.5 hrs to analyse the data but finally did it :) (MS-SQL)\\n\\nwith cte as\\n(select  contest_id,mail,name, (case when user_id in (gold_medal, silver_medal ,bronze_medal) then 1 else 0\\nend) as pp\\nfrom contests, users)\\n\\nselect distinct c1.name, c1.mail from cte c1\\njoin cte c2 on c1.contest_id+ 1 = c2.contest_id and c1.mail = c2.mail\\njoin cte c3 on c1.contest_id + 2 = c3.contest_id and c1.mail = c3.mail\\nwhere c1.pp + c2.pp = 2 and c1.pp+ c3.pp = 2\\nunion \\nselect distinct name,mail from contests c\\njoin users u on c.gold_medal = u.user_id\\ngroup by gold_medal,name, mail\\nhaving count(*)> =3\\n\\n\\n"
+                    }
+                ]
+            }
+        ]
+    }
+]

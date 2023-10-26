@@ -1,0 +1,207 @@
+[
+    {
+        "title": "Project Employees III",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1570498,
+                "content": [
+                    {
+                        "username": "JonAbhi12",
+                        "content": "WITH temp AS(SELECT p.project_id,p.employee_id,e.name,DENSE_RANK()OVER(PARTITION BY p.project_id ORDER BY e.experience_years DESC) AS experience_rank\\nfrom Project p \\nINNER JOIN Employee e \\nON p.employee_id=e.employee_id)\\n\\nSELECT project_id,employee_id FROM temp WHERE experience_rank=1\\n\\nExplanation:\\nThe result of the temporary table for the given input looks like this:\\n\"project_id\" \"employee_id\"     \"name\"          \"experience_rank\"\\n1\\t\\t\\t\\t             1 \\t\\t\\t\\t     \"Khaled\" \\t                  1\\n1\\t\\t\\t\\t             3 \\t\\t\\t\\t     \"John\" \\t                    1\\n1\\t\\t\\t\\t             2 \\t\\t\\t\\t     \"Ali\" \\t\\t                       2\\n2\\t\\t\\t\\t             1 \\t\\t\\t\\t     \"Khaled\"                     1\\n2\\t\\t\\t\\t             4 \\t\\t\\t\\t     \"Doe\"\\t\\t                    2\\n\\nNow finally from above result set we use the experience_rank=1 condition to get the most experienced employee based on project"
+                    },
+                    {
+                        "username": "jkim664",
+                        "content": "why do we need the partition by clause here"
+                    },
+                    {
+                        "username": "chiz3",
+                        "content": "WITH A AS\\n(\\nSELECT project_id,\\n    e.employee_id,\\n    e.experience_years\\nFROM project\\nLEFT JOIN Employee AS E\\nON project.employee_id = E.employee_id\\n),\\n\\nB AS\\n(\\nSELECT project_id,\\n    MAX(experience_years) as m\\nFROM A\\nGROUP BY project_id\\n)\\n\\n\\n\\nSELECT A.project_id, A.employee_id\\nFROM A\\nJOIN B ON A.project_id = B.project_id\\nAND A.experience_years=B.m"
+                    },
+                    {
+                        "username": "bhatewara",
+                        "content": "\\'\\'\\'\\n\\nwith expCTE as (\\nselect p.project_id,p.employee_id,e.experience_years, dense_rank() over (partition by project_id order by experience_years desc) as exprank\\nfrom project p\\nleft join employee e\\non p.employee_id = e.employee_id\\n    )\\n    \\nselect project_id,employee_id\\nfrom expCTE \\nwhere exprank = 1;\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "siddhantdube",
+                        "content": "`\nWITH TMP_RNK AS (SELECT P.PROJECT_ID, P.EMPLOYEE_ID,\n        RANK() OVER (\n            PARTITION BY P.PROJECT_ID\n            ORDER BY E.EXPERIENCE_YEARS DESC\n        ) AS RNK\nFROM PROJECT P\nJOIN EMPLOYEE E \nON P.EMPLOYEE_ID = E.EMPLOYEE_ID)\nSELECT PROJECT_ID, EMPLOYEE_ID \nFROM TMP_RNK \nWHERE RNK = 1; \n`"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n(select project_id, p.employee_id ,experience_years, max(experience_years) over (partition by project_id order by experience_years desc)maxEY from project p \\njoin employee e on p.employee_id = e.employee_id)\\n\\n\\nselect project_id,employee_id from cte \\nwhere (experience_years- maxEY) = 0"
+                    },
+                    {
+                        "username": "chriswang2020com",
+                        "content": "with tmp1 as (   \\nselect  Employee.employee_id, project_id, experience_years, dense_rank() over (partition by project_id order by experience_years desc) as ranking\\nfrom Project JOIN Employee on Project.employee_id = Employee.employee_id)\\n\\nselect project_id, employee_id from tmp1\\nwhere ranking = 1\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1576543,
+                "content": [
+                    {
+                        "username": "JonAbhi12",
+                        "content": "WITH temp AS(SELECT p.project_id,p.employee_id,e.name,DENSE_RANK()OVER(PARTITION BY p.project_id ORDER BY e.experience_years DESC) AS experience_rank\\nfrom Project p \\nINNER JOIN Employee e \\nON p.employee_id=e.employee_id)\\n\\nSELECT project_id,employee_id FROM temp WHERE experience_rank=1\\n\\nExplanation:\\nThe result of the temporary table for the given input looks like this:\\n\"project_id\" \"employee_id\"     \"name\"          \"experience_rank\"\\n1\\t\\t\\t\\t             1 \\t\\t\\t\\t     \"Khaled\" \\t                  1\\n1\\t\\t\\t\\t             3 \\t\\t\\t\\t     \"John\" \\t                    1\\n1\\t\\t\\t\\t             2 \\t\\t\\t\\t     \"Ali\" \\t\\t                       2\\n2\\t\\t\\t\\t             1 \\t\\t\\t\\t     \"Khaled\"                     1\\n2\\t\\t\\t\\t             4 \\t\\t\\t\\t     \"Doe\"\\t\\t                    2\\n\\nNow finally from above result set we use the experience_rank=1 condition to get the most experienced employee based on project"
+                    },
+                    {
+                        "username": "jkim664",
+                        "content": "why do we need the partition by clause here"
+                    },
+                    {
+                        "username": "chiz3",
+                        "content": "WITH A AS\\n(\\nSELECT project_id,\\n    e.employee_id,\\n    e.experience_years\\nFROM project\\nLEFT JOIN Employee AS E\\nON project.employee_id = E.employee_id\\n),\\n\\nB AS\\n(\\nSELECT project_id,\\n    MAX(experience_years) as m\\nFROM A\\nGROUP BY project_id\\n)\\n\\n\\n\\nSELECT A.project_id, A.employee_id\\nFROM A\\nJOIN B ON A.project_id = B.project_id\\nAND A.experience_years=B.m"
+                    },
+                    {
+                        "username": "bhatewara",
+                        "content": "\\'\\'\\'\\n\\nwith expCTE as (\\nselect p.project_id,p.employee_id,e.experience_years, dense_rank() over (partition by project_id order by experience_years desc) as exprank\\nfrom project p\\nleft join employee e\\non p.employee_id = e.employee_id\\n    )\\n    \\nselect project_id,employee_id\\nfrom expCTE \\nwhere exprank = 1;\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "siddhantdube",
+                        "content": "`\nWITH TMP_RNK AS (SELECT P.PROJECT_ID, P.EMPLOYEE_ID,\n        RANK() OVER (\n            PARTITION BY P.PROJECT_ID\n            ORDER BY E.EXPERIENCE_YEARS DESC\n        ) AS RNK\nFROM PROJECT P\nJOIN EMPLOYEE E \nON P.EMPLOYEE_ID = E.EMPLOYEE_ID)\nSELECT PROJECT_ID, EMPLOYEE_ID \nFROM TMP_RNK \nWHERE RNK = 1; \n`"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n(select project_id, p.employee_id ,experience_years, max(experience_years) over (partition by project_id order by experience_years desc)maxEY from project p \\njoin employee e on p.employee_id = e.employee_id)\\n\\n\\nselect project_id,employee_id from cte \\nwhere (experience_years- maxEY) = 0"
+                    },
+                    {
+                        "username": "chriswang2020com",
+                        "content": "with tmp1 as (   \\nselect  Employee.employee_id, project_id, experience_years, dense_rank() over (partition by project_id order by experience_years desc) as ranking\\nfrom Project JOIN Employee on Project.employee_id = Employee.employee_id)\\n\\nselect project_id, employee_id from tmp1\\nwhere ranking = 1\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1574459,
+                "content": [
+                    {
+                        "username": "JonAbhi12",
+                        "content": "WITH temp AS(SELECT p.project_id,p.employee_id,e.name,DENSE_RANK()OVER(PARTITION BY p.project_id ORDER BY e.experience_years DESC) AS experience_rank\\nfrom Project p \\nINNER JOIN Employee e \\nON p.employee_id=e.employee_id)\\n\\nSELECT project_id,employee_id FROM temp WHERE experience_rank=1\\n\\nExplanation:\\nThe result of the temporary table for the given input looks like this:\\n\"project_id\" \"employee_id\"     \"name\"          \"experience_rank\"\\n1\\t\\t\\t\\t             1 \\t\\t\\t\\t     \"Khaled\" \\t                  1\\n1\\t\\t\\t\\t             3 \\t\\t\\t\\t     \"John\" \\t                    1\\n1\\t\\t\\t\\t             2 \\t\\t\\t\\t     \"Ali\" \\t\\t                       2\\n2\\t\\t\\t\\t             1 \\t\\t\\t\\t     \"Khaled\"                     1\\n2\\t\\t\\t\\t             4 \\t\\t\\t\\t     \"Doe\"\\t\\t                    2\\n\\nNow finally from above result set we use the experience_rank=1 condition to get the most experienced employee based on project"
+                    },
+                    {
+                        "username": "jkim664",
+                        "content": "why do we need the partition by clause here"
+                    },
+                    {
+                        "username": "chiz3",
+                        "content": "WITH A AS\\n(\\nSELECT project_id,\\n    e.employee_id,\\n    e.experience_years\\nFROM project\\nLEFT JOIN Employee AS E\\nON project.employee_id = E.employee_id\\n),\\n\\nB AS\\n(\\nSELECT project_id,\\n    MAX(experience_years) as m\\nFROM A\\nGROUP BY project_id\\n)\\n\\n\\n\\nSELECT A.project_id, A.employee_id\\nFROM A\\nJOIN B ON A.project_id = B.project_id\\nAND A.experience_years=B.m"
+                    },
+                    {
+                        "username": "bhatewara",
+                        "content": "\\'\\'\\'\\n\\nwith expCTE as (\\nselect p.project_id,p.employee_id,e.experience_years, dense_rank() over (partition by project_id order by experience_years desc) as exprank\\nfrom project p\\nleft join employee e\\non p.employee_id = e.employee_id\\n    )\\n    \\nselect project_id,employee_id\\nfrom expCTE \\nwhere exprank = 1;\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "siddhantdube",
+                        "content": "`\nWITH TMP_RNK AS (SELECT P.PROJECT_ID, P.EMPLOYEE_ID,\n        RANK() OVER (\n            PARTITION BY P.PROJECT_ID\n            ORDER BY E.EXPERIENCE_YEARS DESC\n        ) AS RNK\nFROM PROJECT P\nJOIN EMPLOYEE E \nON P.EMPLOYEE_ID = E.EMPLOYEE_ID)\nSELECT PROJECT_ID, EMPLOYEE_ID \nFROM TMP_RNK \nWHERE RNK = 1; \n`"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n(select project_id, p.employee_id ,experience_years, max(experience_years) over (partition by project_id order by experience_years desc)maxEY from project p \\njoin employee e on p.employee_id = e.employee_id)\\n\\n\\nselect project_id,employee_id from cte \\nwhere (experience_years- maxEY) = 0"
+                    },
+                    {
+                        "username": "chriswang2020com",
+                        "content": "with tmp1 as (   \\nselect  Employee.employee_id, project_id, experience_years, dense_rank() over (partition by project_id order by experience_years desc) as ranking\\nfrom Project JOIN Employee on Project.employee_id = Employee.employee_id)\\n\\nselect project_id, employee_id from tmp1\\nwhere ranking = 1\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1770604,
+                "content": [
+                    {
+                        "username": "JonAbhi12",
+                        "content": "WITH temp AS(SELECT p.project_id,p.employee_id,e.name,DENSE_RANK()OVER(PARTITION BY p.project_id ORDER BY e.experience_years DESC) AS experience_rank\\nfrom Project p \\nINNER JOIN Employee e \\nON p.employee_id=e.employee_id)\\n\\nSELECT project_id,employee_id FROM temp WHERE experience_rank=1\\n\\nExplanation:\\nThe result of the temporary table for the given input looks like this:\\n\"project_id\" \"employee_id\"     \"name\"          \"experience_rank\"\\n1\\t\\t\\t\\t             1 \\t\\t\\t\\t     \"Khaled\" \\t                  1\\n1\\t\\t\\t\\t             3 \\t\\t\\t\\t     \"John\" \\t                    1\\n1\\t\\t\\t\\t             2 \\t\\t\\t\\t     \"Ali\" \\t\\t                       2\\n2\\t\\t\\t\\t             1 \\t\\t\\t\\t     \"Khaled\"                     1\\n2\\t\\t\\t\\t             4 \\t\\t\\t\\t     \"Doe\"\\t\\t                    2\\n\\nNow finally from above result set we use the experience_rank=1 condition to get the most experienced employee based on project"
+                    },
+                    {
+                        "username": "jkim664",
+                        "content": "why do we need the partition by clause here"
+                    },
+                    {
+                        "username": "chiz3",
+                        "content": "WITH A AS\\n(\\nSELECT project_id,\\n    e.employee_id,\\n    e.experience_years\\nFROM project\\nLEFT JOIN Employee AS E\\nON project.employee_id = E.employee_id\\n),\\n\\nB AS\\n(\\nSELECT project_id,\\n    MAX(experience_years) as m\\nFROM A\\nGROUP BY project_id\\n)\\n\\n\\n\\nSELECT A.project_id, A.employee_id\\nFROM A\\nJOIN B ON A.project_id = B.project_id\\nAND A.experience_years=B.m"
+                    },
+                    {
+                        "username": "bhatewara",
+                        "content": "\\'\\'\\'\\n\\nwith expCTE as (\\nselect p.project_id,p.employee_id,e.experience_years, dense_rank() over (partition by project_id order by experience_years desc) as exprank\\nfrom project p\\nleft join employee e\\non p.employee_id = e.employee_id\\n    )\\n    \\nselect project_id,employee_id\\nfrom expCTE \\nwhere exprank = 1;\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "siddhantdube",
+                        "content": "`\nWITH TMP_RNK AS (SELECT P.PROJECT_ID, P.EMPLOYEE_ID,\n        RANK() OVER (\n            PARTITION BY P.PROJECT_ID\n            ORDER BY E.EXPERIENCE_YEARS DESC\n        ) AS RNK\nFROM PROJECT P\nJOIN EMPLOYEE E \nON P.EMPLOYEE_ID = E.EMPLOYEE_ID)\nSELECT PROJECT_ID, EMPLOYEE_ID \nFROM TMP_RNK \nWHERE RNK = 1; \n`"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n(select project_id, p.employee_id ,experience_years, max(experience_years) over (partition by project_id order by experience_years desc)maxEY from project p \\njoin employee e on p.employee_id = e.employee_id)\\n\\n\\nselect project_id,employee_id from cte \\nwhere (experience_years- maxEY) = 0"
+                    },
+                    {
+                        "username": "chriswang2020com",
+                        "content": "with tmp1 as (   \\nselect  Employee.employee_id, project_id, experience_years, dense_rank() over (partition by project_id order by experience_years desc) as ranking\\nfrom Project JOIN Employee on Project.employee_id = Employee.employee_id)\\n\\nselect project_id, employee_id from tmp1\\nwhere ranking = 1\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1734096,
+                "content": [
+                    {
+                        "username": "JonAbhi12",
+                        "content": "WITH temp AS(SELECT p.project_id,p.employee_id,e.name,DENSE_RANK()OVER(PARTITION BY p.project_id ORDER BY e.experience_years DESC) AS experience_rank\\nfrom Project p \\nINNER JOIN Employee e \\nON p.employee_id=e.employee_id)\\n\\nSELECT project_id,employee_id FROM temp WHERE experience_rank=1\\n\\nExplanation:\\nThe result of the temporary table for the given input looks like this:\\n\"project_id\" \"employee_id\"     \"name\"          \"experience_rank\"\\n1\\t\\t\\t\\t             1 \\t\\t\\t\\t     \"Khaled\" \\t                  1\\n1\\t\\t\\t\\t             3 \\t\\t\\t\\t     \"John\" \\t                    1\\n1\\t\\t\\t\\t             2 \\t\\t\\t\\t     \"Ali\" \\t\\t                       2\\n2\\t\\t\\t\\t             1 \\t\\t\\t\\t     \"Khaled\"                     1\\n2\\t\\t\\t\\t             4 \\t\\t\\t\\t     \"Doe\"\\t\\t                    2\\n\\nNow finally from above result set we use the experience_rank=1 condition to get the most experienced employee based on project"
+                    },
+                    {
+                        "username": "jkim664",
+                        "content": "why do we need the partition by clause here"
+                    },
+                    {
+                        "username": "chiz3",
+                        "content": "WITH A AS\\n(\\nSELECT project_id,\\n    e.employee_id,\\n    e.experience_years\\nFROM project\\nLEFT JOIN Employee AS E\\nON project.employee_id = E.employee_id\\n),\\n\\nB AS\\n(\\nSELECT project_id,\\n    MAX(experience_years) as m\\nFROM A\\nGROUP BY project_id\\n)\\n\\n\\n\\nSELECT A.project_id, A.employee_id\\nFROM A\\nJOIN B ON A.project_id = B.project_id\\nAND A.experience_years=B.m"
+                    },
+                    {
+                        "username": "bhatewara",
+                        "content": "\\'\\'\\'\\n\\nwith expCTE as (\\nselect p.project_id,p.employee_id,e.experience_years, dense_rank() over (partition by project_id order by experience_years desc) as exprank\\nfrom project p\\nleft join employee e\\non p.employee_id = e.employee_id\\n    )\\n    \\nselect project_id,employee_id\\nfrom expCTE \\nwhere exprank = 1;\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "siddhantdube",
+                        "content": "`\nWITH TMP_RNK AS (SELECT P.PROJECT_ID, P.EMPLOYEE_ID,\n        RANK() OVER (\n            PARTITION BY P.PROJECT_ID\n            ORDER BY E.EXPERIENCE_YEARS DESC\n        ) AS RNK\nFROM PROJECT P\nJOIN EMPLOYEE E \nON P.EMPLOYEE_ID = E.EMPLOYEE_ID)\nSELECT PROJECT_ID, EMPLOYEE_ID \nFROM TMP_RNK \nWHERE RNK = 1; \n`"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n(select project_id, p.employee_id ,experience_years, max(experience_years) over (partition by project_id order by experience_years desc)maxEY from project p \\njoin employee e on p.employee_id = e.employee_id)\\n\\n\\nselect project_id,employee_id from cte \\nwhere (experience_years- maxEY) = 0"
+                    },
+                    {
+                        "username": "chriswang2020com",
+                        "content": "with tmp1 as (   \\nselect  Employee.employee_id, project_id, experience_years, dense_rank() over (partition by project_id order by experience_years desc) as ranking\\nfrom Project JOIN Employee on Project.employee_id = Employee.employee_id)\\n\\nselect project_id, employee_id from tmp1\\nwhere ranking = 1\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1708818,
+                "content": [
+                    {
+                        "username": "JonAbhi12",
+                        "content": "WITH temp AS(SELECT p.project_id,p.employee_id,e.name,DENSE_RANK()OVER(PARTITION BY p.project_id ORDER BY e.experience_years DESC) AS experience_rank\\nfrom Project p \\nINNER JOIN Employee e \\nON p.employee_id=e.employee_id)\\n\\nSELECT project_id,employee_id FROM temp WHERE experience_rank=1\\n\\nExplanation:\\nThe result of the temporary table for the given input looks like this:\\n\"project_id\" \"employee_id\"     \"name\"          \"experience_rank\"\\n1\\t\\t\\t\\t             1 \\t\\t\\t\\t     \"Khaled\" \\t                  1\\n1\\t\\t\\t\\t             3 \\t\\t\\t\\t     \"John\" \\t                    1\\n1\\t\\t\\t\\t             2 \\t\\t\\t\\t     \"Ali\" \\t\\t                       2\\n2\\t\\t\\t\\t             1 \\t\\t\\t\\t     \"Khaled\"                     1\\n2\\t\\t\\t\\t             4 \\t\\t\\t\\t     \"Doe\"\\t\\t                    2\\n\\nNow finally from above result set we use the experience_rank=1 condition to get the most experienced employee based on project"
+                    },
+                    {
+                        "username": "jkim664",
+                        "content": "why do we need the partition by clause here"
+                    },
+                    {
+                        "username": "chiz3",
+                        "content": "WITH A AS\\n(\\nSELECT project_id,\\n    e.employee_id,\\n    e.experience_years\\nFROM project\\nLEFT JOIN Employee AS E\\nON project.employee_id = E.employee_id\\n),\\n\\nB AS\\n(\\nSELECT project_id,\\n    MAX(experience_years) as m\\nFROM A\\nGROUP BY project_id\\n)\\n\\n\\n\\nSELECT A.project_id, A.employee_id\\nFROM A\\nJOIN B ON A.project_id = B.project_id\\nAND A.experience_years=B.m"
+                    },
+                    {
+                        "username": "bhatewara",
+                        "content": "\\'\\'\\'\\n\\nwith expCTE as (\\nselect p.project_id,p.employee_id,e.experience_years, dense_rank() over (partition by project_id order by experience_years desc) as exprank\\nfrom project p\\nleft join employee e\\non p.employee_id = e.employee_id\\n    )\\n    \\nselect project_id,employee_id\\nfrom expCTE \\nwhere exprank = 1;\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "siddhantdube",
+                        "content": "`\nWITH TMP_RNK AS (SELECT P.PROJECT_ID, P.EMPLOYEE_ID,\n        RANK() OVER (\n            PARTITION BY P.PROJECT_ID\n            ORDER BY E.EXPERIENCE_YEARS DESC\n        ) AS RNK\nFROM PROJECT P\nJOIN EMPLOYEE E \nON P.EMPLOYEE_ID = E.EMPLOYEE_ID)\nSELECT PROJECT_ID, EMPLOYEE_ID \nFROM TMP_RNK \nWHERE RNK = 1; \n`"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n(select project_id, p.employee_id ,experience_years, max(experience_years) over (partition by project_id order by experience_years desc)maxEY from project p \\njoin employee e on p.employee_id = e.employee_id)\\n\\n\\nselect project_id,employee_id from cte \\nwhere (experience_years- maxEY) = 0"
+                    },
+                    {
+                        "username": "chriswang2020com",
+                        "content": "with tmp1 as (   \\nselect  Employee.employee_id, project_id, experience_years, dense_rank() over (partition by project_id order by experience_years desc) as ranking\\nfrom Project JOIN Employee on Project.employee_id = Employee.employee_id)\\n\\nselect project_id, employee_id from tmp1\\nwhere ranking = 1\\n"
+                    }
+                ]
+            }
+        ]
+    }
+]

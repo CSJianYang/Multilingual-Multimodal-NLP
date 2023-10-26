@@ -1,0 +1,134 @@
+[
+    {
+        "title": "Number of Ways to Build Sturdy Brick Wall",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1568750,
+                "content": [
+                    {
+                        "username": "xuyiouqd",
+                        "content": "this problem should be hard? not sure if I\\'m the only one who has the feeling..."
+                    },
+                    {
+                        "username": "XavierWantMoreMoney",
+                        "content": "Feels like Hard or definitely the higher end of Medium. Not straightforward to come up with how to construct the DP table. "
+                    },
+                    {
+                        "username": "stefan1096",
+                        "content": "Definitely above medium"
+                    },
+                    {
+                        "username": "SigmaCoder106",
+                        "content": "There are many HARD problems easier than this one!\\nSpent an entire day trying to get it accepted. And when it did, my solution was among the bottom 20%. :( "
+                    },
+                    {
+                        "username": "adhyayana",
+                        "content": "AnyOne please let me know the problem statement ,it\\'s confusing ,height = 2, width = 3, bricks = [1,2] , why bricks[0] = > width 1 and height =1 is not considered ?"
+                    }
+                ]
+            },
+            {
+                "id": 1708150,
+                "content": [
+                    {
+                        "username": "xuyiouqd",
+                        "content": "this problem should be hard? not sure if I\\'m the only one who has the feeling..."
+                    },
+                    {
+                        "username": "XavierWantMoreMoney",
+                        "content": "Feels like Hard or definitely the higher end of Medium. Not straightforward to come up with how to construct the DP table. "
+                    },
+                    {
+                        "username": "stefan1096",
+                        "content": "Definitely above medium"
+                    },
+                    {
+                        "username": "SigmaCoder106",
+                        "content": "There are many HARD problems easier than this one!\\nSpent an entire day trying to get it accepted. And when it did, my solution was among the bottom 20%. :( "
+                    },
+                    {
+                        "username": "adhyayana",
+                        "content": "AnyOne please let me know the problem statement ,it\\'s confusing ,height = 2, width = 3, bricks = [1,2] , why bricks[0] = > width 1 and height =1 is not considered ?"
+                    }
+                ]
+            },
+            {
+                "id": 1955096,
+                "content": [
+                    {
+                        "username": "xuyiouqd",
+                        "content": "this problem should be hard? not sure if I\\'m the only one who has the feeling..."
+                    },
+                    {
+                        "username": "XavierWantMoreMoney",
+                        "content": "Feels like Hard or definitely the higher end of Medium. Not straightforward to come up with how to construct the DP table. "
+                    },
+                    {
+                        "username": "stefan1096",
+                        "content": "Definitely above medium"
+                    },
+                    {
+                        "username": "SigmaCoder106",
+                        "content": "There are many HARD problems easier than this one!\\nSpent an entire day trying to get it accepted. And when it did, my solution was among the bottom 20%. :( "
+                    },
+                    {
+                        "username": "adhyayana",
+                        "content": "AnyOne please let me know the problem statement ,it\\'s confusing ,height = 2, width = 3, bricks = [1,2] , why bricks[0] = > width 1 and height =1 is not considered ?"
+                    }
+                ]
+            },
+            {
+                "id": 1930709,
+                "content": [
+                    {
+                        "username": "xuyiouqd",
+                        "content": "this problem should be hard? not sure if I\\'m the only one who has the feeling..."
+                    },
+                    {
+                        "username": "XavierWantMoreMoney",
+                        "content": "Feels like Hard or definitely the higher end of Medium. Not straightforward to come up with how to construct the DP table. "
+                    },
+                    {
+                        "username": "stefan1096",
+                        "content": "Definitely above medium"
+                    },
+                    {
+                        "username": "SigmaCoder106",
+                        "content": "There are many HARD problems easier than this one!\\nSpent an entire day trying to get it accepted. And when it did, my solution was among the bottom 20%. :( "
+                    },
+                    {
+                        "username": "adhyayana",
+                        "content": "AnyOne please let me know the problem statement ,it\\'s confusing ,height = 2, width = 3, bricks = [1,2] , why bricks[0] = > width 1 and height =1 is not considered ?"
+                    }
+                ]
+            },
+            {
+                "id": 1825547,
+                "content": [
+                    {
+                        "username": "xuyiouqd",
+                        "content": "this problem should be hard? not sure if I\\'m the only one who has the feeling..."
+                    },
+                    {
+                        "username": "XavierWantMoreMoney",
+                        "content": "Feels like Hard or definitely the higher end of Medium. Not straightforward to come up with how to construct the DP table. "
+                    },
+                    {
+                        "username": "stefan1096",
+                        "content": "Definitely above medium"
+                    },
+                    {
+                        "username": "SigmaCoder106",
+                        "content": "There are many HARD problems easier than this one!\\nSpent an entire day trying to get it accepted. And when it did, my solution was among the bottom 20%. :( "
+                    },
+                    {
+                        "username": "adhyayana",
+                        "content": "AnyOne please let me know the problem statement ,it\\'s confusing ,height = 2, width = 3, bricks = [1,2] , why bricks[0] = > width 1 and height =1 is not considered ?"
+                    }
+                ]
+            }
+        ]
+    }
+]

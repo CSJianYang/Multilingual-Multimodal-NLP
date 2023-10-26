@@ -1,0 +1,93 @@
+[
+    {
+        "title": "Grand Slam Titles",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1565714,
+                "content": [
+                    {
+                        "username": "tosscoin88",
+                        "content": "You guys all missed the point.  I sincerely appreciate the intent of the author ... as a Federer fan."
+                    },
+                    {
+                        "username": "pshingavi",
+                        "content": "with cte as (\\nselect year, \"wimbledon\" as \"Grand_slam\", Wimbledon as player_id\\nfrom Championships\\nunion all\\nselect year, \"Fr_open\" as \"Grand_slam\", Fr_open as player_id\\nfrom Championships\\nunion all\\nselect year, \"US_open\" as \"Grand_slam\", US_open as player_id\\nfrom Championships\\nunion all\\nselect year, \"Au_open\" as \"Grand_slam\", Au_open as player_id\\nfrom Championships)\\n\\nselect p.player_id, p.player_name, count(Grand_slam) as \"grand_slams_count\"\\nfrom cte as c\\njoin players as p\\non c.player_id = p.player_id\\ngroup by player_id"
+                    },
+                    {
+                        "username": "eeyoree",
+                        "content": "WITH cte AS(SELECT Wimbledon AS win\\nFROM Championships\\nUNION ALL\\nSELECT Fr_open AS win\\nFROM Championships\\nUNION ALL \\nSELECT US_open AS win\\nFROM Championships\\nUNION ALL\\nSELECT Au_open AS win\\nFROM Championships)\\n\\nSELECT player_id, player_name, COUNT(win) AS grand_slams_count\\nFROM Players p\\nJOIN cte c ON c.win = p.player_id\\nGROUP BY 1,2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n((select wimbledon, count(*)w_count\\nfrom Championships\\ngroup by wimbledon)\\nunion all\\n(select Fr_open, count(*)f_count\\nfrom Championships\\ngroup by Fr_open)\\nunion all\\n(select US_open, count(*)u_count\\nfrom Championships\\ngroup by US_open )\\nunion all\\n(select Au_open, count(*)au_count\\nfrom Championships\\ngroup by Au_open))\\n\\n\\nselect wimbledon as player_id, player_name, sum(w_count)grand_slams_count from cte c \\njoin players p on c.wimbledon = p.player_id\\ngroup by wimbledon,player_name\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1568628,
+                "content": [
+                    {
+                        "username": "tosscoin88",
+                        "content": "You guys all missed the point.  I sincerely appreciate the intent of the author ... as a Federer fan."
+                    },
+                    {
+                        "username": "pshingavi",
+                        "content": "with cte as (\\nselect year, \"wimbledon\" as \"Grand_slam\", Wimbledon as player_id\\nfrom Championships\\nunion all\\nselect year, \"Fr_open\" as \"Grand_slam\", Fr_open as player_id\\nfrom Championships\\nunion all\\nselect year, \"US_open\" as \"Grand_slam\", US_open as player_id\\nfrom Championships\\nunion all\\nselect year, \"Au_open\" as \"Grand_slam\", Au_open as player_id\\nfrom Championships)\\n\\nselect p.player_id, p.player_name, count(Grand_slam) as \"grand_slams_count\"\\nfrom cte as c\\njoin players as p\\non c.player_id = p.player_id\\ngroup by player_id"
+                    },
+                    {
+                        "username": "eeyoree",
+                        "content": "WITH cte AS(SELECT Wimbledon AS win\\nFROM Championships\\nUNION ALL\\nSELECT Fr_open AS win\\nFROM Championships\\nUNION ALL \\nSELECT US_open AS win\\nFROM Championships\\nUNION ALL\\nSELECT Au_open AS win\\nFROM Championships)\\n\\nSELECT player_id, player_name, COUNT(win) AS grand_slams_count\\nFROM Players p\\nJOIN cte c ON c.win = p.player_id\\nGROUP BY 1,2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n((select wimbledon, count(*)w_count\\nfrom Championships\\ngroup by wimbledon)\\nunion all\\n(select Fr_open, count(*)f_count\\nfrom Championships\\ngroup by Fr_open)\\nunion all\\n(select US_open, count(*)u_count\\nfrom Championships\\ngroup by US_open )\\nunion all\\n(select Au_open, count(*)au_count\\nfrom Championships\\ngroup by Au_open))\\n\\n\\nselect wimbledon as player_id, player_name, sum(w_count)grand_slams_count from cte c \\njoin players p on c.wimbledon = p.player_id\\ngroup by wimbledon,player_name\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1575007,
+                "content": [
+                    {
+                        "username": "tosscoin88",
+                        "content": "You guys all missed the point.  I sincerely appreciate the intent of the author ... as a Federer fan."
+                    },
+                    {
+                        "username": "pshingavi",
+                        "content": "with cte as (\\nselect year, \"wimbledon\" as \"Grand_slam\", Wimbledon as player_id\\nfrom Championships\\nunion all\\nselect year, \"Fr_open\" as \"Grand_slam\", Fr_open as player_id\\nfrom Championships\\nunion all\\nselect year, \"US_open\" as \"Grand_slam\", US_open as player_id\\nfrom Championships\\nunion all\\nselect year, \"Au_open\" as \"Grand_slam\", Au_open as player_id\\nfrom Championships)\\n\\nselect p.player_id, p.player_name, count(Grand_slam) as \"grand_slams_count\"\\nfrom cte as c\\njoin players as p\\non c.player_id = p.player_id\\ngroup by player_id"
+                    },
+                    {
+                        "username": "eeyoree",
+                        "content": "WITH cte AS(SELECT Wimbledon AS win\\nFROM Championships\\nUNION ALL\\nSELECT Fr_open AS win\\nFROM Championships\\nUNION ALL \\nSELECT US_open AS win\\nFROM Championships\\nUNION ALL\\nSELECT Au_open AS win\\nFROM Championships)\\n\\nSELECT player_id, player_name, COUNT(win) AS grand_slams_count\\nFROM Players p\\nJOIN cte c ON c.win = p.player_id\\nGROUP BY 1,2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n((select wimbledon, count(*)w_count\\nfrom Championships\\ngroup by wimbledon)\\nunion all\\n(select Fr_open, count(*)f_count\\nfrom Championships\\ngroup by Fr_open)\\nunion all\\n(select US_open, count(*)u_count\\nfrom Championships\\ngroup by US_open )\\nunion all\\n(select Au_open, count(*)au_count\\nfrom Championships\\ngroup by Au_open))\\n\\n\\nselect wimbledon as player_id, player_name, sum(w_count)grand_slams_count from cte c \\njoin players p on c.wimbledon = p.player_id\\ngroup by wimbledon,player_name\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1794588,
+                "content": [
+                    {
+                        "username": "tosscoin88",
+                        "content": "You guys all missed the point.  I sincerely appreciate the intent of the author ... as a Federer fan."
+                    },
+                    {
+                        "username": "pshingavi",
+                        "content": "with cte as (\\nselect year, \"wimbledon\" as \"Grand_slam\", Wimbledon as player_id\\nfrom Championships\\nunion all\\nselect year, \"Fr_open\" as \"Grand_slam\", Fr_open as player_id\\nfrom Championships\\nunion all\\nselect year, \"US_open\" as \"Grand_slam\", US_open as player_id\\nfrom Championships\\nunion all\\nselect year, \"Au_open\" as \"Grand_slam\", Au_open as player_id\\nfrom Championships)\\n\\nselect p.player_id, p.player_name, count(Grand_slam) as \"grand_slams_count\"\\nfrom cte as c\\njoin players as p\\non c.player_id = p.player_id\\ngroup by player_id"
+                    },
+                    {
+                        "username": "eeyoree",
+                        "content": "WITH cte AS(SELECT Wimbledon AS win\\nFROM Championships\\nUNION ALL\\nSELECT Fr_open AS win\\nFROM Championships\\nUNION ALL \\nSELECT US_open AS win\\nFROM Championships\\nUNION ALL\\nSELECT Au_open AS win\\nFROM Championships)\\n\\nSELECT player_id, player_name, COUNT(win) AS grand_slams_count\\nFROM Players p\\nJOIN cte c ON c.win = p.player_id\\nGROUP BY 1,2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "with cte as\\n((select wimbledon, count(*)w_count\\nfrom Championships\\ngroup by wimbledon)\\nunion all\\n(select Fr_open, count(*)f_count\\nfrom Championships\\ngroup by Fr_open)\\nunion all\\n(select US_open, count(*)u_count\\nfrom Championships\\ngroup by US_open )\\nunion all\\n(select Au_open, count(*)au_count\\nfrom Championships\\ngroup by Au_open))\\n\\n\\nselect wimbledon as player_id, player_name, sum(w_count)grand_slams_count from cte c \\njoin players p on c.wimbledon = p.player_id\\ngroup by wimbledon,player_name\\n"
+                    }
+                ]
+            }
+        ]
+    }
+]

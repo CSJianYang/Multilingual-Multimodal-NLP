@@ -1,0 +1,140 @@
+[
+    {
+        "title": "Largest Subarray Length K",
+        "question_content": null,
+        "solutions": [],
+        "discussions": []
+    },
+    {
+        "title": "Biggest Window Between Visits",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1570318,
+                "content": [
+                    {
+                        "username": "avibobby90",
+                        "content": "\\nwith cte as(\\nselect user_id,\\ndatediff(dd,visit_date,convert(date,isnull(Lead(visit_date) over(partition by user_id order by visit_date),\\'2021-1-1\\'))) as diff\\nfrom uservisits)\\n\\nselect user_id,max(diff) as biggest_window\\nfrom cte\\ngroup by user_id\\norder by user_id\\n"
+                    },
+                    {
+                        "username": "funnydman",
+                        "content": "it passed without order by"
+                    },
+                    {
+                        "username": "heygayu",
+                        "content": "The Output and Expected is exactly the same when I run the below. \\n\\n\\nSELECT c.user_id, c.window AS \\'biggest_window\\'\\nFROM\\n(SELECT b.user_id, b.window, DENSE_RANK () OVER (PARTITION BY b.user_id ORDER BY b.window DESC) AS \\'rank\\'\\nFROM\\n(SELECT a.user_id, DATEDIFF(a.date_after, a.visit_date) as \\'window\\'\\nFROM\\n(SELECT u.user_id, u.visit_date, COALESCE (LEAD (u.visit_date) OVER (PARTITION BY u.user_id ORDER BY u.visit_date ASC), \\'2021-01-01\\') as \\'date_after\\'\\nFROM UserVisits AS u\\nORDER BY u.visit_date ASC) AS a) AS b) AS c\\nWHERE c.rank = 1\\n\\nHowever, it throws back a results as \\'Wrong Answer\\'"
+                    },
+                    {
+                        "username": "aerlang0420",
+                        "content": "WITH helper AS (\n        SELECT *, RANK() OVER(PARTITION BY user_id ORDER BY visit_date) AS rnk\n        FROM UserVisits),\n helper1 AS (\n        SELECT h1.user_id, DATEDIFF(IFNULL(h2.visit_date, '2021-1-1'), h1.visit_date) AS diff\n        FROM helper AS h1\n        LEFT JOIN helper AS h2\n        ON h1.user_id = h2.user_id AND h1.rnk = h2.rnk-1\n    )\n\nSELECT DISTINCT user_id, MAX(diff) AS biggest_window\nFROM helper1\nGROUP BY user_id;"
+                    },
+                    {
+                        "username": "jessicachen1168",
+                        "content": "---subsquery with window function\\n\\nselect user_id, max(date1) as biggest_window\\nfrom \\n(\\nselect *, datediff(ifnull(lead(visit_date,1)over(partition by user_id order by visit_date),\\'2021-1-1\\'),visit_date)as date1\\nfrom UserVisits\\n) temp\\ngroup by user_id;"
+                    }
+                ]
+            },
+            {
+                "id": 1948953,
+                "content": [
+                    {
+                        "username": "avibobby90",
+                        "content": "\\nwith cte as(\\nselect user_id,\\ndatediff(dd,visit_date,convert(date,isnull(Lead(visit_date) over(partition by user_id order by visit_date),\\'2021-1-1\\'))) as diff\\nfrom uservisits)\\n\\nselect user_id,max(diff) as biggest_window\\nfrom cte\\ngroup by user_id\\norder by user_id\\n"
+                    },
+                    {
+                        "username": "funnydman",
+                        "content": "it passed without order by"
+                    },
+                    {
+                        "username": "heygayu",
+                        "content": "The Output and Expected is exactly the same when I run the below. \\n\\n\\nSELECT c.user_id, c.window AS \\'biggest_window\\'\\nFROM\\n(SELECT b.user_id, b.window, DENSE_RANK () OVER (PARTITION BY b.user_id ORDER BY b.window DESC) AS \\'rank\\'\\nFROM\\n(SELECT a.user_id, DATEDIFF(a.date_after, a.visit_date) as \\'window\\'\\nFROM\\n(SELECT u.user_id, u.visit_date, COALESCE (LEAD (u.visit_date) OVER (PARTITION BY u.user_id ORDER BY u.visit_date ASC), \\'2021-01-01\\') as \\'date_after\\'\\nFROM UserVisits AS u\\nORDER BY u.visit_date ASC) AS a) AS b) AS c\\nWHERE c.rank = 1\\n\\nHowever, it throws back a results as \\'Wrong Answer\\'"
+                    },
+                    {
+                        "username": "aerlang0420",
+                        "content": "WITH helper AS (\n        SELECT *, RANK() OVER(PARTITION BY user_id ORDER BY visit_date) AS rnk\n        FROM UserVisits),\n helper1 AS (\n        SELECT h1.user_id, DATEDIFF(IFNULL(h2.visit_date, '2021-1-1'), h1.visit_date) AS diff\n        FROM helper AS h1\n        LEFT JOIN helper AS h2\n        ON h1.user_id = h2.user_id AND h1.rnk = h2.rnk-1\n    )\n\nSELECT DISTINCT user_id, MAX(diff) AS biggest_window\nFROM helper1\nGROUP BY user_id;"
+                    },
+                    {
+                        "username": "jessicachen1168",
+                        "content": "---subsquery with window function\\n\\nselect user_id, max(date1) as biggest_window\\nfrom \\n(\\nselect *, datediff(ifnull(lead(visit_date,1)over(partition by user_id order by visit_date),\\'2021-1-1\\'),visit_date)as date1\\nfrom UserVisits\\n) temp\\ngroup by user_id;"
+                    }
+                ]
+            },
+            {
+                "id": 1857253,
+                "content": [
+                    {
+                        "username": "avibobby90",
+                        "content": "\\nwith cte as(\\nselect user_id,\\ndatediff(dd,visit_date,convert(date,isnull(Lead(visit_date) over(partition by user_id order by visit_date),\\'2021-1-1\\'))) as diff\\nfrom uservisits)\\n\\nselect user_id,max(diff) as biggest_window\\nfrom cte\\ngroup by user_id\\norder by user_id\\n"
+                    },
+                    {
+                        "username": "funnydman",
+                        "content": "it passed without order by"
+                    },
+                    {
+                        "username": "heygayu",
+                        "content": "The Output and Expected is exactly the same when I run the below. \\n\\n\\nSELECT c.user_id, c.window AS \\'biggest_window\\'\\nFROM\\n(SELECT b.user_id, b.window, DENSE_RANK () OVER (PARTITION BY b.user_id ORDER BY b.window DESC) AS \\'rank\\'\\nFROM\\n(SELECT a.user_id, DATEDIFF(a.date_after, a.visit_date) as \\'window\\'\\nFROM\\n(SELECT u.user_id, u.visit_date, COALESCE (LEAD (u.visit_date) OVER (PARTITION BY u.user_id ORDER BY u.visit_date ASC), \\'2021-01-01\\') as \\'date_after\\'\\nFROM UserVisits AS u\\nORDER BY u.visit_date ASC) AS a) AS b) AS c\\nWHERE c.rank = 1\\n\\nHowever, it throws back a results as \\'Wrong Answer\\'"
+                    },
+                    {
+                        "username": "aerlang0420",
+                        "content": "WITH helper AS (\n        SELECT *, RANK() OVER(PARTITION BY user_id ORDER BY visit_date) AS rnk\n        FROM UserVisits),\n helper1 AS (\n        SELECT h1.user_id, DATEDIFF(IFNULL(h2.visit_date, '2021-1-1'), h1.visit_date) AS diff\n        FROM helper AS h1\n        LEFT JOIN helper AS h2\n        ON h1.user_id = h2.user_id AND h1.rnk = h2.rnk-1\n    )\n\nSELECT DISTINCT user_id, MAX(diff) AS biggest_window\nFROM helper1\nGROUP BY user_id;"
+                    },
+                    {
+                        "username": "jessicachen1168",
+                        "content": "---subsquery with window function\\n\\nselect user_id, max(date1) as biggest_window\\nfrom \\n(\\nselect *, datediff(ifnull(lead(visit_date,1)over(partition by user_id order by visit_date),\\'2021-1-1\\'),visit_date)as date1\\nfrom UserVisits\\n) temp\\ngroup by user_id;"
+                    }
+                ]
+            },
+            {
+                "id": 1709040,
+                "content": [
+                    {
+                        "username": "avibobby90",
+                        "content": "\\nwith cte as(\\nselect user_id,\\ndatediff(dd,visit_date,convert(date,isnull(Lead(visit_date) over(partition by user_id order by visit_date),\\'2021-1-1\\'))) as diff\\nfrom uservisits)\\n\\nselect user_id,max(diff) as biggest_window\\nfrom cte\\ngroup by user_id\\norder by user_id\\n"
+                    },
+                    {
+                        "username": "funnydman",
+                        "content": "it passed without order by"
+                    },
+                    {
+                        "username": "heygayu",
+                        "content": "The Output and Expected is exactly the same when I run the below. \\n\\n\\nSELECT c.user_id, c.window AS \\'biggest_window\\'\\nFROM\\n(SELECT b.user_id, b.window, DENSE_RANK () OVER (PARTITION BY b.user_id ORDER BY b.window DESC) AS \\'rank\\'\\nFROM\\n(SELECT a.user_id, DATEDIFF(a.date_after, a.visit_date) as \\'window\\'\\nFROM\\n(SELECT u.user_id, u.visit_date, COALESCE (LEAD (u.visit_date) OVER (PARTITION BY u.user_id ORDER BY u.visit_date ASC), \\'2021-01-01\\') as \\'date_after\\'\\nFROM UserVisits AS u\\nORDER BY u.visit_date ASC) AS a) AS b) AS c\\nWHERE c.rank = 1\\n\\nHowever, it throws back a results as \\'Wrong Answer\\'"
+                    },
+                    {
+                        "username": "aerlang0420",
+                        "content": "WITH helper AS (\n        SELECT *, RANK() OVER(PARTITION BY user_id ORDER BY visit_date) AS rnk\n        FROM UserVisits),\n helper1 AS (\n        SELECT h1.user_id, DATEDIFF(IFNULL(h2.visit_date, '2021-1-1'), h1.visit_date) AS diff\n        FROM helper AS h1\n        LEFT JOIN helper AS h2\n        ON h1.user_id = h2.user_id AND h1.rnk = h2.rnk-1\n    )\n\nSELECT DISTINCT user_id, MAX(diff) AS biggest_window\nFROM helper1\nGROUP BY user_id;"
+                    },
+                    {
+                        "username": "jessicachen1168",
+                        "content": "---subsquery with window function\\n\\nselect user_id, max(date1) as biggest_window\\nfrom \\n(\\nselect *, datediff(ifnull(lead(visit_date,1)over(partition by user_id order by visit_date),\\'2021-1-1\\'),visit_date)as date1\\nfrom UserVisits\\n) temp\\ngroup by user_id;"
+                    }
+                ]
+            },
+            {
+                "id": 1702486,
+                "content": [
+                    {
+                        "username": "avibobby90",
+                        "content": "\\nwith cte as(\\nselect user_id,\\ndatediff(dd,visit_date,convert(date,isnull(Lead(visit_date) over(partition by user_id order by visit_date),\\'2021-1-1\\'))) as diff\\nfrom uservisits)\\n\\nselect user_id,max(diff) as biggest_window\\nfrom cte\\ngroup by user_id\\norder by user_id\\n"
+                    },
+                    {
+                        "username": "funnydman",
+                        "content": "it passed without order by"
+                    },
+                    {
+                        "username": "heygayu",
+                        "content": "The Output and Expected is exactly the same when I run the below. \\n\\n\\nSELECT c.user_id, c.window AS \\'biggest_window\\'\\nFROM\\n(SELECT b.user_id, b.window, DENSE_RANK () OVER (PARTITION BY b.user_id ORDER BY b.window DESC) AS \\'rank\\'\\nFROM\\n(SELECT a.user_id, DATEDIFF(a.date_after, a.visit_date) as \\'window\\'\\nFROM\\n(SELECT u.user_id, u.visit_date, COALESCE (LEAD (u.visit_date) OVER (PARTITION BY u.user_id ORDER BY u.visit_date ASC), \\'2021-01-01\\') as \\'date_after\\'\\nFROM UserVisits AS u\\nORDER BY u.visit_date ASC) AS a) AS b) AS c\\nWHERE c.rank = 1\\n\\nHowever, it throws back a results as \\'Wrong Answer\\'"
+                    },
+                    {
+                        "username": "aerlang0420",
+                        "content": "WITH helper AS (\n        SELECT *, RANK() OVER(PARTITION BY user_id ORDER BY visit_date) AS rnk\n        FROM UserVisits),\n helper1 AS (\n        SELECT h1.user_id, DATEDIFF(IFNULL(h2.visit_date, '2021-1-1'), h1.visit_date) AS diff\n        FROM helper AS h1\n        LEFT JOIN helper AS h2\n        ON h1.user_id = h2.user_id AND h1.rnk = h2.rnk-1\n    )\n\nSELECT DISTINCT user_id, MAX(diff) AS biggest_window\nFROM helper1\nGROUP BY user_id;"
+                    },
+                    {
+                        "username": "jessicachen1168",
+                        "content": "---subsquery with window function\\n\\nselect user_id, max(date1) as biggest_window\\nfrom \\n(\\nselect *, datediff(ifnull(lead(visit_date,1)over(partition by user_id order by visit_date),\\'2021-1-1\\'),visit_date)as date1\\nfrom UserVisits\\n) temp\\ngroup by user_id;"
+                    }
+                ]
+            }
+        ]
+    }
+]

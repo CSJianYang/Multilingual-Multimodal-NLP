@@ -1,0 +1,1826 @@
+[
+    {
+        "title": "Count Total Number of Colored Cells",
+        "question_content": "There exists an infinitely large two-dimensional grid of uncolored unit cells. You are given a positive integer n, indicating that you must do the following routine for n minutes:\n\n\tAt the first minute, color any arbitrary unit cell blue.\n\tEvery minute thereafter, color blue every uncolored cell that touches a blue cell.\n\nBelow is a pictorial representation of the state of the grid after minutes 1, 2, and 3.\nReturn the number of colored cells at the end of n minutes.\n&nbsp;\nExample 1:\n\nInput: n = 1\nOutput: 1\nExplanation: After 1 minute, there is only 1 blue cell, so we return 1.\n\nExample 2:\n\nInput: n = 2\nOutput: 5\nExplanation: After 2 minutes, there are 4 colored cells on the boundary and 1 in the center, so we return 5. \n\n&nbsp;\nConstraints:\n\n\t1 <= n <= 105",
+        "solutions": [
+            {
+                "id": 3256196,
+                "title": "java-c-python-cut-and-combine-o-1",
+                "content": "# **Intuition**\\nCut and Combine.\\n<br>\\n\\n# **Solution 1**\\n![image](https://assets.leetcode.com/users/images/16c708d1-14d2-4959-9b44-83f186c79c8e_1677945863.7645595.png)\\n\\nCut the original graph into 4 parts:\\nOne triangle stairs of size `n`, \\nTwo triangle stairs of size `n - 1`, \\nOne triangle stairs of size `n - 2`,\\n\\nsize `n` and size `n - 1` make up a sequare of size `n`\\nsize `n - 1` and size `n - 2` make up a sequare of size `n - 1`\\n\\nSo the total area is `n * n + (n - 1) * (n - 1)`.\\n\\nAlso we need to take care that it won\\'t overflow the range of integer,\\nso need to convert to long type first.\\n<br>\\n\\n\\n**Java**\\n```java\\n    public long coloredCells(int n) {\\n        return 1l * n * n + 1l * (n - 1) * (n - 1);\\n    }\\n```\\n\\n**C++**\\n```cpp\\n    long long coloredCells(int n) {\\n        return 1l * n * n + 1l * (n - 1) * (n - 1);\\n    }\\n```\\n\\n**Python**\\n```py\\n    def coloredCells(self, n: int) -> int:\\n        return n * n + (n - 1) * (n - 1)\\n```\\n<br>\\n\\n# **Solution 2**\\n![image](https://assets.leetcode.com/users/images/fb1d9b7a-78e0-4237-907a-ba7f57177373_1677947477.5902114.png)\\n\\nCut the original graph into 5 parts:\\nOne square of size `1`, \\nFour triangle stairs of size `n - 1`, \\n\\nTwo size `n - 1` make up a rectangle of size `n * (n - 1)`\\n\\nSo the total area is `2 * n * (n - 1) + 1`.\\n\\nAlso we need to take care that it won\\'t overflow the range of integer,\\nso need to convert to long type first.\\n<br>\\n\\n**Java**\\n```java\\n    public long coloredCells(int n) {\\n        return 2l * n * (n - 1) + 1;\\n    }\\n```\\n\\n**C++**\\n```cpp\\n    long long coloredCells(int n) {\\n        return 2l * n * (n - 1) + 1;\\n    }\\n```\\n\\n**Python**\\n```py\\n    def coloredCells(self, n: int) -> int:\\n        return 2 * n * (n - 1) + 1\\n```\\n<br>\\n\\n# **Complexity**\\nTime `O(1)`\\nSpace `O(1)`\\n<br>\\n",
+                "solutionTags": [
+                    "Java",
+                    "Python",
+                    "C"
+                ],
+                "code": "```java\\n    public long coloredCells(int n) {\\n        return 1l * n * n + 1l * (n - 1) * (n - 1);\\n    }\\n```\n```cpp\\n    long long coloredCells(int n) {\\n        return 1l * n * n + 1l * (n - 1) * (n - 1);\\n    }\\n```\n```py\\n    def coloredCells(self, n: int) -> int:\\n        return n * n + (n - 1) * (n - 1)\\n```\n```java\\n    public long coloredCells(int n) {\\n        return 2l * n * (n - 1) + 1;\\n    }\\n```\n```cpp\\n    long long coloredCells(int n) {\\n        return 2l * n * (n - 1) + 1;\\n    }\\n```\n```py\\n    def coloredCells(self, n: int) -> int:\\n        return 2 * n * (n - 1) + 1\\n```",
+                "codeTag": "Python3"
+            },
+            {
+                "id": 3256418,
+                "title": "explained-sum-of-arithmetic-mean-very-simple-easy-to-understand-solution",
+                "content": "\\n```\\n/*\\nAns is sum of arithmatic of 4 of (n-1) terms + 1.\\nfor n = 1, ans = 1\\nfor n = 2, ans = 1 + 4\\nfor n = 3, ans = 1 + 4 + 8\\nfor n = 4, ans = 1 + 4 + 8 + 12\\n\\nSo from above observation we conclude that \\nwe need to return 1+ (arithmatic sum of first n-1 terms of 4)\\n*/\\n\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n == 1) return 1;\\n        long long t  = n-1;\\n        return 1 + (t * (8 + (t-1)*4))/2;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\n/*\\nAns is sum of arithmatic of 4 of (n-1) terms + 1.\\nfor n = 1, ans = 1\\nfor n = 2, ans = 1 + 4\\nfor n = 3, ans = 1 + 4 + 8\\nfor n = 4, ans = 1 + 4 + 8 + 12\\n\\nSo from above observation we conclude that \\nwe need to return 1+ (arithmatic sum of first n-1 terms of 4)\\n*/\\n\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n == 1) return 1;\\n        long long t  = n-1;\\n        return 1 + (t * (8 + (t-1)*4))/2;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3257772,
+                "title": "shortest-1-liner-with-intuition",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n```\\n1 + 4*1 + 4*2 + .. + 4*(n-1)\\n= 1 + 4 * (1 + 2 + .. + n-1)\\n= 1 + 4 * (n * (n-1) / 2)\\n= 1 + n * (n-1) * 2\\n```\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity: O(1)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```java\\nclass Solution {\\n    public long coloredCells(int n) {\\n        return 1+(long)n*(n-1)*2;\\n    }\\n}\\n\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\n1 + 4*1 + 4*2 + .. + 4*(n-1)\\n= 1 + 4 * (1 + 2 + .. + n-1)\\n= 1 + 4 * (n * (n-1) / 2)\\n= 1 + n * (n-1) * 2\\n```\n```java\\nclass Solution {\\n    public long coloredCells(int n) {\\n        return 1+(long)n*(n-1)*2;\\n    }\\n}\\n\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256663,
+                "title": "100-solution-explained-intuition-code-explanation",
+                "content": "# Intuition\\n1, 3, 5,..., 2 * i - 1, ..., 2 * n - 1 = n * n.\\n1, 3, 5,..., 2 * i - 1, ..., 2 * n - 3 = (n - 1) * (n - 1)\\n\\nThese two arithmetic sequences represent the number of cells on each row of the upper half and lower half of the grid, respectively.\\n\\nFor the first sequence, we start with 1 (which represents the number of cells on the first row of the upper half of the grid) and increment by 2 for each subsequent row. This gives us the sequence:\\n\\n1, 3, 5, ..., 2n-1\\n\\nThe last term in this sequence (2n-1) represents the number of cells on the last row of the upper half of the grid. If we sum up all the terms in this sequence, we get:\\n\\n1 + 3 + 5 + ... + 2n-1\\n\\nThis is equivalent to the sum of the first n odd numbers, which is n^2. Therefore, we can represent this sequence as:\\n\\n1, 3, 5, ..., 2n-1 = n^2\\n\\nFor the second sequence, we start with 1 (which represents the number of cells on the first row of the lower half of the grid) and increment by 2 for each subsequent row. This gives us the sequence:\\n\\n1, 3, 5, ..., 2n-3\\n\\nThe last term in this sequence (2n-3) represents the number of cells on the last row of the lower half of the grid. If we sum up all the terms in this sequence, we get:\\n\\n1 + 3 + 5 + ... + 2n-3\\n\\nThis is equivalent to the sum of the first (n-1) odd numbers, which is (n-1)^2. Therefore, we can represent this sequence as:\\n\\n1, 3, 5, ..., 2n-3 = (n-1)^2\\n\\nThese two sequences together represent the total number of cells on each row of the grid. The sum of the squares of these sequences gives us the total number of cells that will be colored blue after n minutes. Therefore, the provided code calculates the total number of colored cells as:\\n\\nn^2 + (n-1)^2 \\n\\nwhich is the sum of the squares of the two sequences.\\n\\n# Complexity\\n- Time complexity: $$O(1)$$\\n\\n- Space complexity: $$O(1)$$\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return (long long)n * n + (long long)(n - 1) * (n - 1);\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return (long long)n * n + (long long)(n - 1) * (n - 1);\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256164,
+                "title": "java-python-3-sum-of-square-of-n-and-n-1",
+                "content": "By obersance, there are `2` arithmetic sequences if we divide the cells right below the horizontal middle cells, and they are:\\n\\n1, 3, 5,..., 2 * i - 1, ..., 2 * n - 1 =  n * n.\\n1, 3, 5,..., 2 * i - 1, ..., 2 * n - 3 = (n -  1) * (n - 1).\\n\\n```java\\n    public long coloredCells(int n) {\\n        return (long)n * n + (long)(n - 1) * (n - 1);\\n    }\\n```\\n\\n```python\\n    def coloredCells(self, n: int) -> int:\\n        return n ** 2 + (n - 1) ** 2\\n```\\n\\n**Analysis:**\\n\\nTime & space: `O(1)`.\\n\\n----\\n\\nAnother Easy way of doing this problem -- credit to **@Himanshu3889**\\n\\nObserve we are increasing stairs on all four sides Left-up , Left-down , Right-up Right-down this means previous stairs contributes 4* prevStairs to the next n and in each directions a new stair is coming\\n`O(n)` dp\\n\\n```python\\ndef coloredCells(self, n: int) -> int:\\n    res = 1   # for n == 1\\n    for stairs in range(1,n):  # prev stairs\\n        res += stairs*4\\n    return res\\n```\\n`O(1)` using maths\\n\\nNow use the maths see sequence\\n`1 + 1* 4 + 2* 4 + 3* 4....(n-1) * 4`\\n`1 + 4 * (1+2+3+4 ..n-1) = 1 + 4* (sum of n-1 natural numbers)`\\n\\n```python\\ndef coloredCells(self, n: int) -> int:\\n    return 1 + 4*n*(n-1)//2\\n```",
+                "solutionTags": [
+                    "Java",
+                    "Python3"
+                ],
+                "code": "```java\\n    public long coloredCells(int n) {\\n        return (long)n * n + (long)(n - 1) * (n - 1);\\n    }\\n```\n```python\\n    def coloredCells(self, n: int) -> int:\\n        return n ** 2 + (n - 1) ** 2\\n```\n```python\\ndef coloredCells(self, n: int) -> int:\\n    res = 1   # for n == 1\\n    for stairs in range(1,n):  # prev stairs\\n        res += stairs*4\\n    return res\\n```\n```python\\ndef coloredCells(self, n: int) -> int:\\n    return 1 + 4*n*(n-1)//2\\n```",
+                "codeTag": "Python3"
+            },
+            {
+                "id": 3267428,
+                "title": "two-squares",
+                "content": "We can fold out the resulting shape into two squares - one with the side of `n`, antoher - `n - 1`.\\n\\n![image](https://assets.leetcode.com/users/images/da68db7d-83fb-4eb3-b0e6-334d6ebb6e0e_1678171052.0323522.png)\\n\\n**C++**\\n```cpp\\nlong long coloredCells(long long n) {\\n\\treturn n * n + (n - 1) * (n - 1);\\n}\\n```",
+                "solutionTags": [],
+                "code": "```cpp\\nlong long coloredCells(long long n) {\\n\\treturn n * n + (n - 1) * (n - 1);\\n}\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3256911,
+                "title": "white-board-solution-pattern-finding",
+                "content": "# Video Solution\\nhttps://www.youtube.com/watch?v=X62t7f_7afc\\n\\n# Approach & Intution\\nHeads up - Once the pattern is recognised, you can also do the problem in O(1) by using sum of first n numbers formula as: 1+2+3+....n = n(n+1)/2\\n\\n![image.png](https://assets.leetcode.com/users/images/3fe816d2-fe29-4e0e-9880-8759b00681f1_1677951693.8882813.png)\\n![image.png](https://assets.leetcode.com/users/images/7f7a431e-00a8-4041-b9e8-96dbd5b3a0bc_1677951701.6379302.png)\\n\\n\\n# Code\\n```\\n#define ll long long int\\n\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        ll ans = 1;\\n        ll val = 4;\\n        \\n        if(n==1 )\\n            return 1;\\n        \\n        for(int i=2;i<=n;i++){\\n            ans += val;\\n            val = 4 * i;\\n        }\\n        \\n        return ans;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\n#define ll long long int\\n\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        ll ans = 1;\\n        ll val = 4;\\n        \\n        if(n==1 )\\n            return 1;\\n        \\n        for(int i=2;i<=n;i++){\\n            ans += val;\\n            val = 4 * i;\\n        }\\n        \\n        return ans;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3258801,
+                "title": "python-3-1-line-w-explanation-t-m-30-ms-13-8-mb",
+                "content": "Explanation without too many words:\\n\\n![image.png](https://assets.leetcode.com/users/images/5622ce31-e1d8-4306-a347-c5971493fbd9_1677994705.9367437.png)\\n\\nAfter some algebra, *Area*  =  2*k*(*k*\\u20131)+ 1.\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return 2*n*(n-1)+1\\n```\\n[](http://)\\n\\nI could be wrong, but I think that time complexity is *O*(1) and space complexity is *O*(1).\\n\\n",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return 2*n*(n-1)+1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256233,
+                "title": "c-py-js-java-image-explanation-step-by-step-math-o-1-beginner-friendly",
+                "content": "**Check the image carefully**\\n\\n![image](https://assets.leetcode.com/users/images/a72612a1-31ee-43d5-9514-8a6d200018ca_1677944608.7016056.png)\\n\\nIn every step it increases n * 4 - 4 cells.\\nHere you can see the pattern :\\nn = 1 => 1    => 1            => 1 + (1-0) * 2 * 1  \\nn = 2 => 5    => 1 + 4     => 1 + (2-1) * 2 * 2\\nn = 3 => 13  => 5 + 8     => 1 + (3-1) * 2 * 3\\nn = 4 => 25  => 13 + 12 => 1 + (4-1) * 2 * 4\\n\\n**c++**\\n```\\npublic long ColoredCells(int n) {\\n    return (long)(n - 1) * 2 * n + 1;\\n}\\n```\\n\\n**Javascript**\\n```\\nvar coloredCells = function(n) {\\n    return (n - 1) * 2 * n + 1;\\n};\\n```\\n\\n**Python**\\n```\\ndef coloredCells(self, n):\\n        return (n - 1) * 2 * n + 1\\n```\\n\\n**Java**\\n```\\npublic long coloredCells(int n) {\\n        return (long)(n - 1) * 2 * n + 1;\\n    }\\n```\\n\\n**Complexity**\\n**Time:** : ```O(1)```\\n**Space** : ```O(1)```\\n",
+                "solutionTags": [
+                    "Java",
+                    "Python",
+                    "C",
+                    "JavaScript"
+                ],
+                "code": "```\\npublic long ColoredCells(int n) {\\n    return (long)(n - 1) * 2 * n + 1;\\n}\\n```\n```\\nvar coloredCells = function(n) {\\n    return (n - 1) * 2 * n + 1;\\n};\\n```\n```\\ndef coloredCells(self, n):\\n        return (n - 1) * 2 * n + 1\\n```\n```\\npublic long coloredCells(int n) {\\n        return (long)(n - 1) * 2 * n + 1;\\n    }\\n```\n```O(1)```\n```O(1)```",
+                "codeTag": "Python3"
+            },
+            {
+                "id": 3256180,
+                "title": "2579-solution-with-step-by-step-explanation",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n1. n*n: This calculates the number of cells in a square grid of size n by n. This is the number of cells that will be colored.\\n\\n2. (n-1)*(n-1): This calculates the number of cells that will be colored by the diagonals of the grid. Each diagonal consists of n-1 cells, so there are n-1 diagonals in each direction (horizontal and vertical). The total number of cells colored by the diagonals is therefore (n-1)*(n-1).\\n\\n3. n*n + (n-1)*(n-1): This adds the number of cells colored by the diagonals to the number of cells in the grid to get the total number of colored cells.\\n\\n4. The final result is returned as an integer value.\\n\\nSo, in summary, the function coloredCells calculates the total number of cells that will be colored in a square grid of size n, where the cells are colored in a diagonal pattern as well.\\n\\nThe time complexity of the given algorithm is O(1) as the calculations involved are basic arithmetic operations that take constant time. Similarly, the space complexity of the algorithm is also O(1) as we are not using any additional data structure.\\n\\n# Complexity\\n- Time complexity:\\nO(1)\\n\\n- Space complexity:\\nO(1)\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return n*n + (n-1)*(n-1)\\n\\n```",
+                "solutionTags": [
+                    "Python",
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return n*n + (n-1)*(n-1)\\n\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256137,
+                "title": "c-use-pic-representation-logic-simple-solution",
+                "content": "# Intuition\\nFrom pictorial representation it is clear that each time faces increased by multiple of 4 times like-\\nn=1: 1;\\nn=2: 1 + 4x1 = 5;\\nn=2: 5 + 4x2 = 13;\\nn=3: 13 + 4x3 = 25;\\nn=4: 25 + 4x4 = 41; \\nUse this logic to code the problem.\\n\\n# Code\\n```\\nclass Solution \\n{\\npublic:\\n    long long coloredCells(int n) \\n    {\\n        long long cells=1, face=4;\\n        for(int i=2; i<=n; i++)\\n        {\\n            cells += (i-1)*face;\\n        }\\n        return cells;\\n    }\\n};\\n```\\n\\n# Please upvote if you like this approach :)",
+                "solutionTags": [
+                    "C++",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution \\n{\\npublic:\\n    long long coloredCells(int n) \\n    {\\n        long long cells=1, face=4;\\n        for(int i=2; i<=n; i++)\\n        {\\n            cells += (i-1)*face;\\n        }\\n        return cells;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256563,
+                "title": "simple-solution-4-prev-min",
+                "content": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long sum=1L;\\n        if(n==1)return sum;\\n        for(int i=2;i<=n;i++){\\n            sum+=(long)(4L*(long)(i-1));\\n        }\\n        return sum;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long sum=1L;\\n        if(n==1)return sum;\\n        for(int i=2;i<=n;i++){\\n            sum+=(long)(4L*(long)(i-1));\\n        }\\n        return sum;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256103,
+                "title": "java",
+                "content": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n==1)\\n            return 1l;\\n        long x=1;\\n        long i=1;\\n        while(n-->1){\\n            x+=(i*4l);\\n            i++;\\n        }\\n        return x;\\n    }\\n}\\n```\\n![image](https://assets.leetcode.com/users/images/e93f98f0-7bec-4d4e-8cb0-755ec1a2525e_1677945692.4111717.jpeg)\\n",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n==1)\\n            return 1l;\\n        long x=1;\\n        long i=1;\\n        while(n-->1){\\n            x+=(i*4l);\\n            i++;\\n        }\\n        return x;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3280449,
+                "title": "java-solution-easy-to-understand",
+                "content": "Please **UPVOTE** if you like my solution!\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long[] nums = new long[n+1];\\n        nums[0] = 1L;\\n        for(int i = 1;i<nums.length;i++){\\n            nums[i] = nums[i-1] + 4*i;\\n        }\\n        \\n        return nums[n-1];\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long[] nums = new long[n+1];\\n        nums[0] = 1L;\\n        for(int i = 1;i<nums.length;i++){\\n            nums[i] = nums[i-1] + 4*i;\\n        }\\n        \\n        return nums[n-1];\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256066,
+                "title": "simple-java-solution",
+                "content": "# Intuition\\nFollows sequence 1,5,13,25,and so on.....\\n\\n\\n# Complexity\\n- Time complexity: $$O(n)$$\\n\\n- Space complexity: $$O(1)$$\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long k=1,p=4;;\\n        while(n>1)\\n        {\\n            k+=p;\\n            p+=4;\\n            n--;\\n        }\\n        return k;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long k=1,p=4;;\\n        while(n>1)\\n        {\\n            k+=p;\\n            p+=4;\\n            n--;\\n        }\\n        return k;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3534887,
+                "title": "1-line-100-optimized-c",
+                "content": "# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return (n*1LL*(n+1))/2 + (n*1LL*(n-1)) + ((n-1)*1LL*(n-2))/2;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return (n*1LL*(n+1))/2 + (n*1LL*(n-1)) + ((n-1)*1LL*(n-2))/2;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3258997,
+                "title": "c-simple-solution-constant-time",
+                "content": "# Approach\\n<!-- Describe your approach to solving the problem. -->\\n                                n = 1     2     3      4      5     ...\\n    total number of colored cells = 1  +  4  +  8  +  12  +  16  +  ...\\n                                  = 1 + 4*(1 + 2 + 3 + 4 + n-1)\\n                                  = 1 + 2*n*(n-1)\\n\\n# Complexity\\n- Time complexity: O(1)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\n/*\\n\\n*/\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long N = (long long)n;\\n        return 2*N*(N-1) + 1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Math",
+                    "Brainteaser",
+                    "Counting"
+                ],
+                "code": "```\\n/*\\n\\n*/\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long N = (long long)n;\\n        return 2*N*(N-1) + 1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3257212,
+                "title": "java-solution-easy-pattern-easy-understanding",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:O(n)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long sum=(n*2-1);\\n        n-=1;\\n        while(n>=1)\\n        {\\n            sum+=(n*2-1)*2;\\n            n-=1;\\n        }\\n        return sum;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long sum=(n*2-1);\\n        n-=1;\\n        while(n>=1)\\n        {\\n            sum+=(n*2-1)*2;\\n            n-=1;\\n        }\\n        return sum;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256370,
+                "title": "very-easy-to-understand-python-solution-beats-100-of-other-solution",
+                "content": "Please upvote if you liked it\\n\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        if n ==1 :\\n            return 1\\n        prev = 1\\n        for i in range(2,n):\\n            prev = prev + (i)*4\\n        return prev+4",
+                "solutionTags": [
+                    "Python",
+                    "Python3"
+                ],
+                "code": "Please upvote if you liked it\\n\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        if n ==1 :\\n            return 1\\n        prev = 1\\n        for i in range(2,n):\\n            prev = prev + (i)*4\\n        return prev+4",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256337,
+                "title": "simple-soution",
+                "content": "# Intuition\\nIf we try to calculate additions for several numbers we can figure out that for n=2 - sum[2] = sum[1] + 4, n=3 - sum[3] = sum[2] + 8, sum[4] = sum[3] + 12 ... etc. Having formula we can calculate the sum[n]\\n\\n# Approach\\nIn cycle iterate up to n and calculate sum[n]\\n\\n# Complexity\\n- Time complexity:\\nO(N)\\n- Space complexity:\\nO(1)\\n\\n# Code\\n```\\n/**\\n * @param {number} n\\n * @return {number}\\n */\\nvar coloredCells = function(n) {\\n    let sum = 1\\n    let add = 4\\n    for(let i = 2; i <=n; i++ ){\\n        sum += add;\\n        add += 4;\\n    }\\n    \\n    return sum\\n};\\n```",
+                "solutionTags": [
+                    "JavaScript"
+                ],
+                "code": "```\\n/**\\n * @param {number} n\\n * @return {number}\\n */\\nvar coloredCells = function(n) {\\n    let sum = 1\\n    let add = 4\\n    for(let i = 2; i <=n; i++ ){\\n        sum += add;\\n        add += 4;\\n    }\\n    \\n    return sum\\n};\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3256226,
+                "title": "iterative-explained-with-pictures",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\ngot so frustrated after taking 10 mins in one. i started thinking greedily.\\n1. logic at any ith time there are (i-1) squares to fil between the edges . the black boxes represent the boxes that will be filled.\\n![Screenshot 2023-03-04 at 9.25.14 PM.png](https://assets.leetcode.com/users/images/5fd71f2d-7b73-438b-b51c-062ba3c51c98_1677945710.9313629.png)\\n![Screenshot 2023-03-04 at 9.27.05 PM.png](https://assets.leetcode.com/users/images/38d976f8-2c0f-4410-9c4e-98350dac7031_1677945726.5279834.png)\\n\\n2. we multiply it with four since we need it for all four sides.\\nex\\n3. then we add the 4 squares for the top, bottom, left ,right sides.\\n\\nloop until the nth time stand and return the answer.\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\no(n)\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long ans=1;\\n        for(int i =1;i<n;i++)\\n        {\\n            ans+=(i-1)*4;\\n            ans+=4;\\n        }\\n        \\n        return ans;\\n    }\\n};\\n```\\nLesson learned -> Greedy is not when you are lazy but when you have a tight time constraint \\uD83D\\uDE02\\uD83D\\uDE02",
+                "solutionTags": [
+                    "C++",
+                    "Greedy"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long ans=1;\\n        for(int i =1;i<n;i++)\\n        {\\n            ans+=(i-1)*4;\\n            ans+=4;\\n        }\\n        \\n        return ans;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256173,
+                "title": "clean-short-one-line-o-1-java-javascript-python-c",
+                "content": "# Code\\n```java []\\nclass Solution {\\n    public long coloredCells(int n) {\\n        return (long)Math.pow(n,2) + (long)Math.pow(n-1,2);\\n    }\\n}\\n```\\n```javascript []\\nvar coloredCells = function(n) {\\n    return Math.pow(n,2) + Math.pow(n-1,2)\\n};\\n```\\n```Python []\\nclass Solution(object):\\n    def coloredCells(self, n):\\n        return pow(n,2) + pow(n-1,2)\\n```\\n```C++ []\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return pow(n,2) + pow(n-1,2);\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Java",
+                    "Python",
+                    "JavaScript"
+                ],
+                "code": "```java []\\nclass Solution {\\n    public long coloredCells(int n) {\\n        return (long)Math.pow(n,2) + (long)Math.pow(n-1,2);\\n    }\\n}\\n```\n```javascript []\\nvar coloredCells = function(n) {\\n    return Math.pow(n,2) + Math.pow(n-1,2)\\n};\\n```\n```Python []\\nclass Solution(object):\\n    def coloredCells(self, n):\\n        return pow(n,2) + pow(n-1,2)\\n```\n```C++ []\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return pow(n,2) + pow(n-1,2);\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256117,
+                "title": "1-line-o-1-solution",
+                "content": "# Approach\\n**Sum of first (n-1) natural numbers = n * (n-1) / 2\\nTotalColoredCells = Sum of first (n-1) numbers * 4 + 1**\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity: **O(1)**\\n<!-- Add your time complexity here, e.g. $$O(n)$$ --> \\n\\n- Space complexity: **O(1)**\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return (((long long) n*(n-1) / 2) * 4) + 1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return (((long long) n*(n-1) / 2) * 4) + 1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4033852,
+                "title": "count-number-colored-cells-o-n-javascript-memory-95-45-meaningful-vars",
+                "content": "Time Complexity: O(1)\\nSpace Complexity: O(1)\\n```\\nvar coloredCells = function(n) {\\n    return (n*n) + ((n-1)*(n-1))\\n};\\n```",
+                "solutionTags": [
+                    "JavaScript"
+                ],
+                "code": "```\\nvar coloredCells = function(n) {\\n    return (n*n) + ((n-1)*(n-1))\\n};\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3472587,
+                "title": "java-o-n-easiest-solution-in-one-loop",
+                "content": "# Please upvote if you like\\n# Intuition\\nThe number of cell are increasing in multiple of 4.\\n\\n# Approach\\nThe inner cells are similar to its previous cell. The outer cells are increasing at multiple of 4.\\n\\n# Complexity\\n- Time complexity:\\n$$O(n)$$\\n\\n- Space complexity:\\n$$O(1)$$\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long col = 1;\\n\\n        for(int i = 0; i < n; i++){\\n            col += (4*i);\\n        }\\n        return col;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long col = 1;\\n\\n        for(int i = 0; i < n; i++){\\n            col += (4*i);\\n        }\\n        return col;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3291390,
+                "title": "easiest-solution-o-1-java-fastest",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\nFor 1 minute : 1 cell coloured\\nFor 2 minute : 1 + 4 cell coloured\\nfor 3 minute : 1 + 4 + 8 cells coloured\\nfor 4 minute : 1 + 4 + 8 + 12 cells coloured\\nforn n minutes :1 +4*(1+2+3+4... +(n-1)) = 1+2*(n-1)*n\\n# Complexity\\n- Time complexity:\\nO(1)\\n- Space complexity:\\nO(1)\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        return 1l+(2l*n*(n-1));\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        return 1l+(2l*n*(n-1));\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3261762,
+                "title": "easy-python-solution-using-recursion",
+                "content": "# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        if n==1:\\n            return 1\\n        else:\\n            return (4*(n-1))+self.coloredCells(n-1)\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        if n==1:\\n            return 1\\n        else:\\n            return (4*(n-1))+self.coloredCells(n-1)\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3260459,
+                "title": "no-space-o-1-const-time-solution-o-1-ap-formula",
+                "content": "```\\nclass Solution\\n{\\n    public:\\n        long long coloredCells(int n)\\n        {\\n            return 1 + (long(n) - 1) *(2* long(n));\\n        }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution\\n{\\n    public:\\n        long long coloredCells(int n)\\n        {\\n            return 1 + (long(n) - 1) *(2* long(n));\\n        }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3260172,
+                "title": "beats-100-diagram-explain-c-two-approaches",
+                "content": "# Intuition and Approach\\nThis is an observation based Question as you can see below diagrams,\\n![Screenshot 2023-03-05 174955.png](https://assets.leetcode.com/users/images/f2f929dd-f416-4be5-98ed-41712ed0f468_1678018816.4196181.png)\\n\\nFrom diagrams you can observe that the new cell which are spawing are the multiple of 4 \\n(the dot on block represent that they are spawned at that step)\\n\\nThere is another Observation is that the new count of cell is previous cell count + multiple of 4\\ni.e. `prev + i*4` where i=0,1,2,3,...\\n\\nHere n represent no. of seconds we have to make our loop work \\nand every second the growth of cell are `i*4`\\n\\nUpvote Motivates Me my Friend so do it\\n\\n# Complexity\\n- Time complexity:O(n)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code - 01\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long prev=1,i=0;\\n        while(n--){\\n            prev = prev + i*4;\\n            i++;\\n        }\\n        return prev;\\n    }\\n};\\n```\\n# Complexity\\n- Time complexity:O(1)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n# Code - 02 \\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {       \\n        n--;        \\n        return 1+2*1ll*n*(n+1);\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Java",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long prev=1,i=0;\\n        while(n--){\\n            prev = prev + i*4;\\n            i++;\\n        }\\n        return prev;\\n    }\\n};\\n```\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {       \\n        n--;        \\n        return 1+2*1ll*n*(n+1);\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3258030,
+                "title": "6-line-code-c-time-o-1",
+                "content": "```\\nlong long coloredCells(int n) {\\n        if(n==1)return 1;\\n        long long int ans = 0;\\n        ans += (n*1LL*n+(n-1)*1LL*(n-1));\\n        return ans;\\n    }\\n```",
+                "solutionTags": [
+                    "C++",
+                    "C",
+                    "Math"
+                ],
+                "code": "```\\nlong long coloredCells(int n) {\\n        if(n==1)return 1;\\n        long long int ans = 0;\\n        ans += (n*1LL*n+(n-1)*1LL*(n-1));\\n        return ans;\\n    }\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3257421,
+                "title": "c-most-detailed-solution-solved-using-simple-logic",
+                "content": "We see that for n=1 it is1 for n=2 it is 5 for n=3 it is 13 for n=4 it is 25\\nso \\n1,5,13,25,....(arr1)\\ndiference between two consecutive nos from (arr1):4,8,12,..... (arr2)\\ndifference between consecutive nos from (arr2):4,4,4,.....\\nso we can consider nth term as `a*n*n+b*n+c `where n is given no 1,2,3,.....\\nequating we get a=2,b=-2,c=1\\nso nth term is `2*n*n-2*n+1`\\n```\\ntypedef long long ll;\\nll mod=1e9+7;\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        ll x=(2*n*1LL*n*1LL),y=(2*n*1LL);\\n        return (x-y+1)*1LL;\\n    }\\n};\\n```\\n**Please Upvote if you like the Solution**",
+                "solutionTags": [],
+                "code": "```\\ntypedef long long ll;\\nll mod=1e9+7;\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        ll x=(2*n*1LL*n*1LL),y=(2*n*1LL);\\n        return (x-y+1)*1LL;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256973,
+                "title": "concise-dp-solution-c",
+                "content": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        vector<long long> dp(n + 1);\\n        dp[0] = 1;\\n        long long a = 0;\\n        for(int i=1; i<=n; i++) {\\n            dp[i] = a + dp[i - 1];\\n            a += 4;\\n        }\\n        return dp[n];\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Dynamic Programming"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        vector<long long> dp(n + 1);\\n        dp[0] = 1;\\n        long long a = 0;\\n        for(int i=1; i<=n; i++) {\\n            dp[i] = a + dp[i - 1];\\n            a += 4;\\n        }\\n        return dp[n];\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256956,
+                "title": "python-code-using-pattern-approach",
+                "content": "# Intuition\\nafter writting some output of succeding number of minutes we can obtain a pattern which looks like (nx4)+(n+1x4)...\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:O(n)\\n- Space complexity:O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        if(n==1):return 1\\n        if(n==2):return 5\\n        res=5\\n        for i in range(2,n):\\n            res+=i*4\\n        return res\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        if(n==1):return 1\\n        if(n==2):return 5\\n        res=5\\n        for i in range(2,n):\\n            res+=i*4\\n        return res\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256630,
+                "title": "very-easy-java-solution-beats-100-upvote",
+                "content": "\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n==1){\\n            return 1;\\n        }\\n        long prev=1;\\n        for(int i=2;i<n;i++){\\n            prev=prev+(i)*4L;\\n        }\\n        return prev+4L;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n==1){\\n            return 1;\\n        }\\n        long prev=1;\\n        for(int i=2;i<n;i++){\\n            prev=prev+(i)*4L;\\n        }\\n        return prev+4L;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256504,
+                "title": "kotlin-1-line-with-formula-and-drawing",
+                "content": "Consider the problem this way, \\n\\n![image.png](https://assets.leetcode.com/users/images/cc00e6e9-1b50-4f06-8a1a-c13d5f07b834_1677947673.6114874.png)\\n\\n\\n# Formula\\n\\n$$ 1 + \\\\sum_2^n (i - 1) * 4 $$\\n\\n# Complexity\\n- Time complexity: $$O(1)$$\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: $$O(1)$$\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n  fun coloredCells(n: Int) = 1L + (n * (n - 1L) * 2L)\\n}\\n```",
+                "solutionTags": [
+                    "Kotlin",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\n  fun coloredCells(n: Int) = 1L + (n * (n - 1L) * 2L)\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256484,
+                "title": "recursive-approch-o-n",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long solve(int n){\\n        if(n==1){\\n            return 1;\\n        }\\n        return (n-1)*4 + solve(n-1);\\n    }\\n    long long coloredCells(int n) {\\n        return solve(n);\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long solve(int n){\\n        if(n==1){\\n            return 1;\\n        }\\n        return (n-1)*4 + solve(n-1);\\n    }\\n    long long coloredCells(int n) {\\n        return solve(n);\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256382,
+                "title": "c-one-line-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\nas we will not create the matrix with colored cells as it will take huge space and time complexity so we have to find a pattern between n and number of colored nodes\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\nwe have to find out a pattern\\n1: if n==1 then only one cell is colored\\n2: if n==2 then 5\\n3: if n==3 then 13\\n4: if n==4 then 25\\nso by observing a sequence is made with difference in G.P.\\n1,5,13,25......... \\nand the difference is 4,8,12\\nso we\\'ve to find out the general formula\\nafter calculating the formula is 2*n(n+1)+1\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\nO(1)\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\nO(1)\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(long long n) {\\n        return 2*n*(n-1)+1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(long long n) {\\n        return 2*n*(n-1)+1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256320,
+                "title": "pattern-simple-and-easy-c-solution",
+                "content": "# Pattern\\n#### *n**n+((n-1)**(n-1))*\\n# Complexity\\n> - Time complexity:\\n$$O(n)$$\\n# Code\\n```\\nclass Solution\\n{\\npublic:\\n    long long coloredCells(int n)\\n    {\\n       long long ans = n;\\n\\n        return ans * ans + ((ans - 1) * (ans - 1));\\n    }\\n};\\n\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution\\n{\\npublic:\\n    long long coloredCells(int n)\\n    {\\n       long long ans = n;\\n\\n        return ans * ans + ((ans - 1) * (ans - 1));\\n    }\\n};\\n\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3883673,
+                "title": "1-line-c-solution-mathematics",
+                "content": "# Approach\\nThis is a mathematics problem. Just think a bit about it and generate the formula.\\nTo avoiding runtime error just store the value n into a new long long variable.\\n\\n# Complexity\\n- Time complexity:\\ne.g. $$O(1)$$\\n\\n- Space complexity:\\ne.g. $$O(1)$$\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long m=n;\\n        return 2*(m)*(m-1)+1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long m=n;\\n        return 2*(m)*(m-1)+1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3552747,
+                "title": "c-easy-solution",
+                "content": "\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(long long n) {\\n        if(n==1)\\n        return 1;\\n      \\n       long long  ans = n*n + (n-1)*(n-1);\\n        return ans;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(long long n) {\\n        if(n==1)\\n        return 1;\\n      \\n       long long  ans = n*n + (n-1)*(n-1);\\n        return ans;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3534495,
+                "title": "2579-count-total-number-of-colored-cells-java",
+                "content": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long ans=1;\\n        if(n==1)\\n            return ans;\\n        for(int i=2;i<=n;i++)\\n            ans+=(i-1)*4;\\n        return ans;\\n    }\\n}\\n```",
+                "solutionTags": [],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long ans=1;\\n        if(n==1)\\n            return ans;\\n        for(int i=2;i<=n;i++)\\n            ans+=(i-1)*4;\\n        return ans;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3470632,
+                "title": "easy-to-understand-best-solution",
+                "content": "# Please Upvote \\uD83D\\uDE4F\\n\\n\\n# Approach\\nIf you look at the problem you will find a pattern that the cells are adding in the multiles of 4.\\n\\n# Complexity\\n- Time complexity:\\no(n)\\n\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long col=1;\\n        for(int i = 0 ;i < n ; i++ ){\\n            col=col+(4*(i));\\n        }\\n\\n        return col;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long col=1;\\n        for(int i = 0 ;i < n ; i++ ){\\n            col=col+(4*(i));\\n        }\\n\\n        return col;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3408413,
+                "title": "c-1-line-solution-0ms-100",
+                "content": "# Intuition\\nAppears to be a series.\\n\\n# Approach\\nReduce the approach into the correct Arithmetic Progression.\\nFind the Sum of series for the Arithmetic Progression.\\n# Complexity\\n- Time complexity:\\nO(1)\\n\\n- Space complexity:\\nO(1)\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return (long long)2*n*n-2*n+1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return (long long)2*n*n-2*n+1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3303254,
+                "title": "single-line-python-code-easy-method",
+                "content": "\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        count = 1\\n        for i in range(1,n):count += 4*i\\n        return count\\n\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        count = 1\\n        for i in range(1,n):count += 4*i\\n        return count\\n\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3293229,
+                "title": "damn-easy-java-solution-o-1-3-lines-beginner-friendly",
+                "content": "**If you really found my solution helpful please upvote it, as it motivates me to post such kind of codes and help the coding community, if you have some queries or some improvements please feel free to comment and share your views.**\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n == 1){\\n            return 1;\\n        }\\n        return (long)Math.pow(n,2) + (long)Math.pow(n-1,2);\\n    }\\n}\\n```\\n![42b90dac-a6e9-4f9d-99f5-d07a676b1819_1676256247.436845.jpeg](https://assets.leetcode.com/users/images/3b15b1d7-32f9-40ae-a7ba-1a9cb4c85559_1678731044.9163675.jpeg)\\n",
+                "solutionTags": [
+                    "Java",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n == 1){\\n            return 1;\\n        }\\n        return (long)Math.pow(n,2) + (long)Math.pow(n-1,2);\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3274570,
+                "title": "one-liner-c-solution-easy",
+                "content": "# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return pow(n,2)+pow(n-1,2);\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return pow(n,2)+pow(n-1,2);\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3271479,
+                "title": "java-very-basic-one-o-n",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        /*\\n        1-1\\n        2-1+(1*4)\\n        3-5+(2*4)\\n        4-13+(3*4)\\n        */\\n        long res=1;\\n        for(int i=1;i<n;i++)\\n        {\\n            res+=(i*4);\\n\\n        }\\n        return res;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        /*\\n        1-1\\n        2-1+(1*4)\\n        3-5+(2*4)\\n        4-13+(3*4)\\n        */\\n        long res=1;\\n        for(int i=1;i<n;i++)\\n        {\\n            res+=(i*4);\\n\\n        }\\n        return res;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3265235,
+                "title": "with-constant-time-complexity",
+                "content": "# Intuition\\nN   box     difference\\n1   1       5-1=4\\n2   5       13-5=8\\n3   13      25-13=12\\n4   25      41-25=16\\n5   41\\n\\n# Approach\\nans=n^2+(n-1)^2;\\n\\n# Complexity\\n- Time complexity:\\nO(1) time complexity\\n- Space complexity:\\n- O(1)\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        return ((long)Math.pow(n,2)) + ((long)Math.pow(n-1,2));\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        return ((long)Math.pow(n,2)) + ((long)Math.pow(n-1,2));\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3264647,
+                "title": "i-have-done-this-que-by-recursion-but-in-description-one-line-solution-is-also-there",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n1st way to solve\\nusing recursion\\n\\n2nd way to solve\\n    return pow(n,2) + pow(n-1,2);\\n\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:0(n) using 1st approach\\n- Time complexity:0(1) using 2nd approach\\n\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n- in 1st apprach space complexity is O(N)\\nin 2nd approach space complexity is constant \\n\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nlong long coloredCells(int n){\\n       \\n if(n==1)\\n{\\n    return 1;\\n}\\nelse\\n{\\n    return 4*(n-1)+coloredCells(n-1);\\n}\\n\\n}\\n\\n\\n",
+                "solutionTags": [
+                    "C",
+                    "Recursion"
+                ],
+                "code": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n1st way to solve\\nusing recursion\\n\\n2nd way to solve\\n    return pow(n,2) + pow(n-1,2);\\n\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:0(n) using 1st approach\\n- Time complexity:0(1) using 2nd approach\\n\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n- in 1st apprach space complexity is O(N)\\nin 2nd approach space complexity is constant \\n\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nlong long coloredCells(int n){\\n       \\n if(n==1)\\n{\\n    return 1;\\n}\\nelse\\n{\\n    return 4*(n-1)+coloredCells(n-1);\\n}\\n\\n}\\n\\n\\n",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3260512,
+                "title": "c-simple-solution-easy-to-understand",
+                "content": "\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        int m = 4;\\n        long long ans = 1;\\n        long long mul;\\n        for(int i = 2;i <=n;i++)\\n        {\\n            mul = (i-1)*m;\\n            ans += mul;\\n        }\\n        return ans;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Math",
+                    "Greedy"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        int m = 4;\\n        long long ans = 1;\\n        long long mul;\\n        for(int i = 2;i <=n;i++)\\n        {\\n            mul = (i-1)*m;\\n            ans += mul;\\n        }\\n        return ans;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3258725,
+                "title": "simple-observation-solution-c-dp",
+                "content": "**INTUITION**\\n\\nEvery minute a coloured cell, colors its adjacent non-coloured cell, so in first go it looks like a BFS question.\\n\\nBut here, there is a simple observation that after every minute ***the number of cells which are added(coloured) are four more than the previously added(coloured) cells***.\\n\\n![image](https://assets.leetcode.com/users/images/2fd44adc-848c-4df1-8cac-ec697d58eddc_1677994083.3869739.png)\\n\\nFrom this Image we can observe that \\n**for n=1,  cells = 1**\\n**for n=2, new added cells are 4**     (total = 1+4=5)\\n**for n=3, new added cells are 8**     (total = 1+4+8=13)\\n**for n=4, new added cells are 12**   (total = 1+4+8+12=25)\\n.\\n.\\n.\\n.\\nans so onnn\\n\\n**Now,\\nwe can use a dp array to store the new added cells every time and then at at last sum up all to get our answer.**\\n\\n![image](https://assets.leetcode.com/users/images/256b01ee-9c01-46db-89f1-049b8820a70c_1677994408.8434503.jpeg)\\n\\n**C++ CODE**\\n\\n```\\n    long long coloredCells(int n) {\\n        if(n==1)\\n            return 1LL;\\n        if(n==2)\\n            return 5LL;\\n        \\n        long long ans=0;\\n        vector<long long>dp(n+1,0);\\n        \\n\\t\\t// base values\\n        dp[0]=0; \\n        dp[1]=1;\\n        dp[2]=4;\\n\\t\\t\\n\\t\\t// calculating new added cells every minute\\n        for(int i=3;i<=n;i++)  \\n        {\\n            dp[i]=dp[i-1]+4;\\n        }\\n\\t\\t\\n\\t\\t// suming up all to get our answer\\n        for(int i=1;i<=n;i++)\\n        {\\n            ans=ans+dp[i];\\n        }\\n\\t\\t\\n        return ans;\\n    }\\n```\\n\\n\\n",
+                "solutionTags": [
+                    "C",
+                    "Dynamic Programming"
+                ],
+                "code": "```\\n    long long coloredCells(int n) {\\n        if(n==1)\\n            return 1LL;\\n        if(n==2)\\n            return 5LL;\\n        \\n        long long ans=0;\\n        vector<long long>dp(n+1,0);\\n        \\n\\t\\t// base values\\n        dp[0]=0; \\n        dp[1]=1;\\n        dp[2]=4;\\n\\t\\t\\n\\t\\t// calculating new added cells every minute\\n        for(int i=3;i<=n;i++)  \\n        {\\n            dp[i]=dp[i-1]+4;\\n        }\\n\\t\\t\\n\\t\\t// suming up all to get our answer\\n        for(int i=1;i<=n;i++)\\n        {\\n            ans=ans+dp[i];\\n        }\\n\\t\\t\\n        return ans;\\n    }\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3258513,
+                "title": "simple-one-liner-just-do-n-2-n-1-2",
+                "content": "\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return n**2 + (n-1)**2\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return n**2 + (n-1)**2\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3257877,
+                "title": "python-faster-than-100-26ms-one-liner",
+                "content": "the original formula is n*(n-1)/2 * d + na -2n + 1\\nsubstitute a=1, d=2, as we can see, it is a stack of columns of 1,3,5,7,5,3,1 sequence\\nwhile the formula can be come from memorizing the arithmetic mean, it can actually be derived from a paper easily.\\nLet a be initial number in sequence, and the following numbers are greater than a by constant difference d, \\na, a+d, a+2d, ...,a+(n-1)d\\n\\nWe can extract n * a from the sum first, the remaining are d,1d,2d,...(n-1)d\\nfactor out d, the remaining is just a famous summation formula from gauss, that should be taught in primary school maths, basically combine head with tail to derive this formula \\n\\nFinally, we derive the formula, we need to times 2 first, because we have a symmetric shape, and finally, the middle column/row is double counted, the longest row in the shape is found by 2n-1 and need to be subtracted from the formula.\\n\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return 2*n**2 - 2*n + 1\\n\\t\\t\\n",
+                "solutionTags": [
+                    "Math"
+                ],
+                "code": "the original formula is n*(n-1)/2 * d + na -2n + 1\\nsubstitute a=1, d=2, as we can see, it is a stack of columns of 1,3,5,7,5,3,1 sequence\\nwhile the formula can be come from memorizing the arithmetic mean, it can actually be derived from a paper easily.\\nLet a be initial number in sequence, and the following numbers are greater than a by constant difference d, \\na, a+d, a+2d, ...,a+(n-1)d\\n\\nWe can extract n * a from the sum first, the remaining are d,1d,2d,...(n-1)d\\nfactor out d, the remaining is just a famous summation formula from gauss, that should be taught in primary school maths, basically combine head with tail to derive this formula \\n\\nFinally, we derive the formula, we need to times 2 first, because we have a symmetric shape, and finally, the middle column/row is double counted, the longest row in the shape is found by 2n-1 and need to be subtracted from the formula.\\n\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return 2*n**2 - 2*n + 1\\n\\t\\t\\n",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3257637,
+                "title": "python-it-is-a-math-problem-explained",
+                "content": "Here is the pattern:\\nT = 1:  1\\nT = 2:  1 + 4\\nT = 3:  (1 + 4) + 4  + 4\\nT = 4:  ((1 + 4) + 4 + 4) + 4 + 8\\nT = 5:  (((1 + 4) + 4 + 4) + 4 + 8) + 4 + 12\\n\\nT = n: 1 + 4 * (n - 1) + 4 * ((n - 2) + (n - 3) + ... + 1)\\n\\n\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        ans = 1\\n        \\n        if n > 1:\\n            ans += 4 * (n - 1)\\n        if n > 2:\\n            ans += 4 * ((n - 1) * (n - 2) // 2)\\n            \\n        return ans\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        ans = 1\\n        \\n        if n > 1:\\n            ans += 4 * (n - 1)\\n        if n > 2:\\n            ans += 4 * ((n - 1) * (n - 2) // 2)\\n            \\n        return ans\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3257488,
+                "title": "javascript-2579-count-total-number-of-colored-cells",
+                "content": "\\n---\\n\\n# Intuition\\nMath\\n- Centered square numbers formula\\nOr\\n- Sums of two consecutive squares\\n\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\n// Formula - 2 * n * (n + 1) + 1, but for us n is n-1\\nvar coloredCells = function (n) {\\n    n--;\\n    let res = 2 * n * (n + 1) + 1;\\n    return res;\\n};\\n```\\n\\n2\\n```\\n// Formula - n^2 + (n-1)^2\\nvar coloredCells = function (n) {\\n    let res = n * n + (n - 1) * (n - 1);\\n    return res;\\n};\\n```\\n\\n---\\n\\n- Above code is from my contest submission\\nLink - https://leetcode.com/contest/biweekly-contest-99/ranking/53/\\n\\n![image.png](https://assets.leetcode.com/users/images/9136e8bc-0e32-42c8-8ebc-0ced2d8e0ea0_1677963955.2964978.png)\\n\\n- Rating change:\\nLink - https://lccn.lbao.site/predicted/biweekly-contest-99\\n\\n![image.png](https://assets.leetcode.com/users/images/9852a5eb-62df-42cc-969d-403d99c3e5db_1677965024.9956195.png)\\n\\n---\\n\\n## Biweekly Contest 99 answers\\n\\n- Q1 - https://leetcode.com/problems/split-with-minimum-sum/solutions/3257467/javascript-2578-split-with-minimum-sum/?orderBy=most_votes\\n- Q2 - https://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3257488/javascript-2579-count-total-number-of-colored-cells/?orderBy=most_votes\\n- Q3 - https://leetcode.com/problems/count-ways-to-group-overlapping-ranges/solutions/3257499/javascript-2580-count-ways-to-group-overlapping-ranges/?orderBy=most_votes\\n\\n---\\n",
+                "solutionTags": [
+                    "JavaScript"
+                ],
+                "code": "```\\n// Formula - 2 * n * (n + 1) + 1, but for us n is n-1\\nvar coloredCells = function (n) {\\n    n--;\\n    let res = 2 * n * (n + 1) + 1;\\n    return res;\\n};\\n```\n```\\n// Formula - n^2 + (n-1)^2\\nvar coloredCells = function (n) {\\n    let res = n * n + (n - 1) * (n - 1);\\n    return res;\\n};\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3257388,
+                "title": "kotlin-o-1-solution-with-detailed-explanation",
+                "content": "# Brute force approach\\nBrute force solution is O(n) and intuition is to sum up all the levels up to n.\\nBesides level 1 (ans is 1)\\nWe just calculate count of level(i) from this image:\\n![test.png](https://assets.leetcode.com/uploads/2023/01/10/example-copy-2.png)\\n\\nWe see that n = 2 adds 2 squares to diagonal, level 3 adds 3 levels. So level n adds n levels to top left and bottom right diagonal.  \\n\\nBut what about bottom left and top right one ?\\nThey add exactly n-2 levels.\\n\\nSo we can come up with brute force:\\n```\\nlevel(1) = 1\\nlevel(i) = 2*n + 2*(n-2)\\n```\\nAnd sum at n is:\\n$$ \\\\sum_{1}^{n}{level(i)} $$\\n\\n# Complexity\\n- Time complexity:\\n$$O(n)$$\\n\\n- Space complexity:\\n$$O(1)$$\\n\\n# Code\\n```\\nclass Solution {\\n    fun coloredCells(n: Int): Long {\\n        var sum = 1L\\n        for (i in 2..n) {\\n            val curSum = 2*i + (2*(i-2))\\n            sum += curSum\\n        }\\n        return sum\\n    }\\n}\\n```\\n\\n# O(1) time approach\\nIf we just need to sum up something, we can use gauss trick to do it in O(1):\\n$$ \\\\sum_{1}^{n}{i} == \\\\frac{n*(n-1)}{2} $$\\n\\nIt is very intuitive to come up with an O(1) solution from this:\\n$$ 1+ \\\\sum_{2}^{n}{2*i + 2*(i-2)} $$ \\nEquals with:\\n$$ 2 * \\\\frac{n*(n+1)}{2} + 2 * \\\\frac{(n-2)*(n-1)}{2} - 1 $$ \\nSimplified to:\\n$$ n*(n+1) + (n-2)*(n-1) - 1 $$ \\n\\nThe minus one is needed because we add number one twice and need to subtract one of them.\\n\\n```\\nclass Solution {\\n    fun coloredCells(n: Int): Long {\\n        val s1 = n.toLong()*(n+1).toLong()\\n        val s2 = (n-2).toLong()*(n-1).toLong()\\n\\n        return s1+s2-1L\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Kotlin"
+                ],
+                "code": "```\\nlevel(1) = 1\\nlevel(i) = 2*n + 2*(n-2)\\n```\n```\\nclass Solution {\\n    fun coloredCells(n: Int): Long {\\n        var sum = 1L\\n        for (i in 2..n) {\\n            val curSum = 2*i + (2*(i-2))\\n            sum += curSum\\n        }\\n        return sum\\n    }\\n}\\n```\n```\\nclass Solution {\\n    fun coloredCells(n: Int): Long {\\n        val s1 = n.toLong()*(n+1).toLong()\\n        val s2 = (n-2).toLong()*(n-1).toLong()\\n\\n        return s1+s2-1L\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3257206,
+                "title": "easy-to-understand-c-solution-o-1-o-1",
+                "content": "# Complexity\\n- Time complexity: $$O(1)$$\\n\\n- Space complexity: $$O(1)$$\\n\\n# Code\\n```\\npublic class Solution \\n{\\n    public long ColoredCells(int n)\\n    {\\n        var horizontalLine = 2 * n - 1;\\n        \\n        // central cell is excluded\\n        var verticalLine = 2 * n - 2;\\n        \\n        // sum of cells on 4 sides with excluded central horizontal and vertical lines as borders\\n        var sides = 4 * Sum(n - 2);\\n        return horizontalLine + verticalLine + sides;\\n    }\\n\\n    private long Sum(long n)\\n    {\\n        return n * (n + 1) / 2;\\n    }\\n}\\n```\\n\\n![pleaseupvote.jpg](https://assets.leetcode.com/users/images/a8ad3aa2-133c-4190-8256-a94f7d9963d9_1677956396.5771945.jpeg)\\n",
+                "solutionTags": [
+                    "C#",
+                    "Math"
+                ],
+                "code": "```\\npublic class Solution \\n{\\n    public long ColoredCells(int n)\\n    {\\n        var horizontalLine = 2 * n - 1;\\n        \\n        // central cell is excluded\\n        var verticalLine = 2 * n - 2;\\n        \\n        // sum of cells on 4 sides with excluded central horizontal and vertical lines as borders\\n        var sides = 4 * Sum(n - 2);\\n        return horizontalLine + verticalLine + sides;\\n    }\\n\\n    private long Sum(long n)\\n    {\\n        return n * (n + 1) / 2;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3257019,
+                "title": "simple-and-easy-to-understand-solution-recursion-java-arithmetic",
+                "content": "**Understand the Approach**\\n![image](https://assets.leetcode.com/users/images/b6f30139-8c8d-42f8-8346-6a73b8793365_1677952224.340183.png)\\n\\ncount the blocks\\nfor 1=1\\nfor 2=5\\nfor 3=13\\n\\nand if you draw the diagram for 4 and 5 then no of blocks will be 25 and 40 respectively.\\n\\nso now notice the diffrence between them,its a recursion based question\\n\\nwhen n=1 we will return 1 because there will be a single block, now see...\\nfor 2 the answer will be ((n-1)*4) + (the value which we get from n=1) i.e. ((2-1)*4)+1 = 5 and we will return this result to upper number which is 3\\n\\nfor 3 the answer will be ((n-1)*4) +(the value which we get from n=2) i.e. ((3-1)*4)+5 = 13 and we will return this result to upper number which is 4\\n\\nfor 3 the answer will be ((n-1)*4) +(the value which we get from n=3) i.e. ((4-1)*4)+13 = 25 and we will return this result to upper number which is 5\\n\\n\\ni hope now you understand the flow of question please check out the below code.\\n\\n\\n\\n\\n\\n    public long coloredCells(int n) {\\n        if(n==1) return 1;   //if n=1 return 1\\n        long res=coloredCells(n-1);     // the answer we got from n-1 value\\n        res += (n-1)*4;     // our formula which we discussed above\\n        return res;         //finally return the answer\\n    }\\n\\n![image](https://assets.leetcode.com/users/images/a8f8ca55-eba7-49e7-b0a1-c35e0f2e1b5b_1677953378.1708515.png)\\n",
+                "solutionTags": [
+                    "Recursion"
+                ],
+                "code": "**Understand the Approach**\\n![image](https://assets.leetcode.com/users/images/b6f30139-8c8d-42f8-8346-6a73b8793365_1677952224.340183.png)\\n\\ncount the blocks\\nfor 1=1\\nfor 2=5\\nfor 3=13\\n\\nand if you draw the diagram for 4 and 5 then no of blocks will be 25 and 40 respectively.\\n\\nso now notice the diffrence between them,its a recursion based question\\n\\nwhen n=1 we will return 1 because there will be a single block, now see...\\nfor 2 the answer will be ((n-1)*4) + (the value which we get from n=1) i.e. ((2-1)*4)+1 = 5 and we will return this result to upper number which is 3\\n\\nfor 3 the answer will be ((n-1)*4) +(the value which we get from n=2) i.e. ((3-1)*4)+5 = 13 and we will return this result to upper number which is 4\\n\\nfor 3 the answer will be ((n-1)*4) +(the value which we get from n=3) i.e. ((4-1)*4)+13 = 25 and we will return this result to upper number which is 5\\n\\n\\ni hope now you understand the flow of question please check out the below code.\\n\\n\\n\\n\\n\\n    public long coloredCells(int n) {\\n        if(n==1) return 1;   //if n=1 return 1\\n        long res=coloredCells(n-1);     // the answer we got from n-1 value\\n        res += (n-1)*4;     // our formula which we discussed above\\n        return res;         //finally return the answer\\n    }\\n\\n![image](https://assets.leetcode.com/users/images/a8f8ca55-eba7-49e7-b0a1-c35e0f2e1b5b_1677953378.1708515.png)\\n",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3256904,
+                "title": "one-pass-solution-with-steps",
+                "content": "**1.If n = 1, return 1 (there is only one colored cell after 1 minute).**\\n**2.Initialize a variable ans to 1 (to account for the initially **colored cell at minute 1).**\\n3.For each integer i from 2 to n:**\\n******a. Compute the number of newly colored cells at minute i as 4*(i-1).\\nb. Add this number to ans.*****\\n**4.Return ans.**\\n\\n# Complexity\\n- Time complexity:\\nO(N)\\n\\n- Space complexity:\\nO(1)\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n    long ans = 1;\\n    for (int i = 2; i <= n; i++) {\\n        ans += ((long) i - 1) << 2;\\n    }\\n    return ans;\\n    }\\n}\\n```\\n# Upvoting is Much Appreciated",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n    long ans = 1;\\n    for (int i = 2; i <= n; i++) {\\n        ans += ((long) i - 1) << 2;\\n    }\\n    return ans;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256784,
+                "title": "2-line-c-recursion",
+                "content": "\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n==1) return 1;\\n        return coloredCells(n-1)+(n-1)*4;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n==1) return 1;\\n        return coloredCells(n-1)+(n-1)*4;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256704,
+                "title": "easy-recursive-c-code-2-liner-code",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\nEvery time unit the number of coloured blocke were being increased by a multiple of 4.\\nfor n=1, 1 block\\nfor n=2, 5 blocks\\nfor n=3, 13 blocks\\nfor n=4, 25 blocks\\nfor n=5, 41 blocks\\n\\nobserve that the difference in blocks for any consecutive time is a multiple of 4, always.\\nso basically every time unit the blocks were increasing by : 4,8,12,16\\n\\n\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n==1) return 1;\\n        return (n-1)*4 + coloredCells(n-1);\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Math",
+                    "Recursion"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n==1) return 1;\\n        return (n-1)*4 + coloredCells(n-1);\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256679,
+                "title": "java-easy-to-understand",
+                "content": "Here,\\nfor\\n1 : 1\\n2 : 1 + 3 + 1\\n3: 1 + 3 + 5 + 7 + 5+ 3 + 1\\n4: 1 + 3 + 5 + 7 + 9 + 7 + 5+ 3 + 1\\nSo for that,\\n\\n\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long ans = 0;\\n        int i, odd = 1;\\n        for(i = 1; i < n; i++){\\n            ans += (2 * odd);\\n            odd += 2;\\n        }\\n        ans += odd;\\n        return ans;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long ans = 0;\\n        int i, odd = 1;\\n        for(i = 1; i < n; i++){\\n            ans += (2 * odd);\\n            odd += 2;\\n        }\\n        ans += odd;\\n        return ans;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256544,
+                "title": "easy-c-solution-basic-math-simple-approach",
+                "content": "## Complexity\\n- Time complexity: $$O(1)$$\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: $$O(1)$$\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n## Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if (n==1)return 1;\\n        long long ans=0;\\n        ans= 2*(((long long)n-1)*((long long)n-1));\\n        ans+= (2*(long long)n)-1;\\n        return ans;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Math",
+                    "Brainteaser",
+                    "Counting",
+                    "Number Theory"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if (n==1)return 1;\\n        long long ans=0;\\n        ans= 2*(((long long)n-1)*((long long)n-1));\\n        ans+= (2*(long long)n)-1;\\n        return ans;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256448,
+                "title": "iterative-o-n",
+                "content": "\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n       vector<long long> arr(n+1,1LL);\\n       for(int i = 2, curr = 4;i<=n;i++,curr+=4)arr[i] =arr[i-1] + curr;\\n       return arr.back();\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n       vector<long long> arr(n+1,1LL);\\n       for(int i = 2, curr = 4;i<=n;i++,curr+=4)arr[i] =arr[i-1] + curr;\\n       return arr.back();\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256386,
+                "title": "symmetry-math",
+                "content": "**length of the biggest horizontal line is 2*n - 1**\\n* starting from the middle row, if we go one row up we reduce number of coloured cells by two.\\n* starting from the middle row, if we go one row down we reduce number of coloured cells by two.\\n``` answer += 2 * temp ``` adds both top and down lines simultaneously\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long answer = 2 * n - 1; //  middle row\\n        long temp = answer - 2;\\n        long top = 0;\\n        while (temp > 0) {\\n            answer += 2 * temp;\\n            temp -= 2;\\n        }\\n        return answer;\\n    }\\n}",
+                "solutionTags": [],
+                "code": "``` answer += 2 * temp ```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3256383,
+                "title": "easy-code-with-100-beats",
+                "content": "\\n\\n# Code\\n\\nclass Solution {\\npublic:\\n    long long coloredCells(long long n) {\\n\\n        if(n==1)\\n        {\\n            return 1;\\n        }\\n      return (n*n)+(n-1)*(n-1);\\n       \\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "class Solution {\\npublic:\\n    long long coloredCells(long long n) {\\n\\n        if(n==1)\\n        {\\n            return 1;\\n        }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256374,
+                "title": "easy-solution-in-c-5-line-code-o-n-time-complexity",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n      long long dp[n];\\n          dp[0]=1;\\n        for(int i=1;i<n;i++)\\n            dp[i]=dp[i-1]+i*4;\\n        return dp[n-1];\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n      long long dp[n];\\n          dp[0]=1;\\n        for(int i=1;i<n;i++)\\n            dp[i]=dp[i-1]+i*4;\\n        return dp[n-1];\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256336,
+                "title": "easiest-python-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        summ = 1\\n        for i in range(1, n):\\n            summ += 4*i\\n        return summ\\n        \\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        summ = 1\\n        for i in range(1, n):\\n            summ += 4*i\\n        return summ\\n        \\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256285,
+                "title": "dp-soln-in-cpp",
+                "content": "\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n==1) return 1;\\n        vector<long long>dp(n);\\n        dp[0]=1;\\n        for(int i=1;i<n;i++){\\n            dp[i]=dp[i-1]+(4*i);\\n            // cout<<dp[i-1]<<\" \"<<4*i<<\" \"<<dp[i]<<endl;\\n        }\\n        return dp[n-1];\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Dynamic Programming"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n==1) return 1;\\n        vector<long long>dp(n);\\n        dp[0]=1;\\n        for(int i=1;i<n;i++){\\n            dp[i]=dp[i-1]+(4*i);\\n            // cout<<dp[i-1]<<\" \"<<4*i<<\" \"<<dp[i]<<endl;\\n        }\\n        return dp[n-1];\\n    }\\n};\\n```",
+                "codeTag": "C++"
+            },
+            {
+                "id": 3256241,
+                "title": "python-easy-to-understand-math-sequence-and-series",
+                "content": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        if n<=1:\\n            return n\\n        ans = 0\\n\\t\\t# hint: The Given sequence is arithmetic sequence\\n\\t\\t# finding the nth term of arithmetic progression \\n        an = (1+(n-1)*2)\\n\\t\\t# formulae to find sum of 2*n terms\\n        sn = n*(1+an)\\n\\t\\t# the middle layer is appeared twice so remove it to get the ans\\n        return sn - 2*n + 1\\n```",
+                "solutionTags": [
+                    "Python",
+                    "Python3",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        if n<=1:\\n            return n\\n        ans = 0\\n\\t\\t# hint: The Given sequence is arithmetic sequence\\n\\t\\t# finding the nth term of arithmetic progression \\n        an = (1+(n-1)*2)\\n\\t\\t# formulae to find sum of 2*n terms\\n        sn = n*(1+an)\\n\\t\\t# the middle layer is appeared twice so remove it to get the ans\\n        return sn - 2*n + 1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256232,
+                "title": "simple-pattern-java-faster-than-100",
+                "content": "## Approach:\\nFollow the **pattern** by simply counting: 1, 1+2, 1+2+4, 1+2+4+8, 1+2+4+8+16 and so on\\nThus we can see, `multiple of 2` are getting added at each iteration.\\n\\nDo UPVOTE \\n```\\npublic long coloredCells(int n) {\\n       if(n == 1) return 1;\\n        \\n        long s = 1; int c = 2;\\n        for(int i=2;i<=n;i++){\\n            s += (2*c);\\n            c += 2;\\n        }\\n        return s;\\n    }\\n```",
+                "solutionTags": [
+                    "Java",
+                    "Math"
+                ],
+                "code": "```\\npublic long coloredCells(int n) {\\n       if(n == 1) return 1;\\n        \\n        long s = 1; int c = 2;\\n        for(int i=2;i<=n;i++){\\n            s += (2*c);\\n            c += 2;\\n        }\\n        return s;\\n    }\\n```",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3256212,
+                "title": "simple-and-easy-solution-0ms-faster-than-100-c-user-o-1-tc",
+                "content": "\\n# Complexity\\n- Time complexity:\\nO(1) constant\\n\\n- Space complexity:\\nO(1) constant\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n == 1)\\n            return 1;\\n        long long num = n;\\n        return (num * num) + ((num - 1) * (num - 1));\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n == 1)\\n            return 1;\\n        long long num = n;\\n        return (num * num) + ((num - 1) * (num - 1));\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256201,
+                "title": "no-dp-recursion-python",
+                "content": "# Intuition\\nIt was a great recursive problem where with each cell u can traverse into 4 other cells with previous stored cells.\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        if n == 1:\\n            return 1\\n        @cache\\n        def recur(i, cells):\\n            if i == 1:\\n                cells = 1\\n                return cells\\n            val = 4 * (i-1) # can traverse into 4 directions\\n            return val + recur(i-1, cells)\\n        return(recur(n, 0))\\n        \\n        \\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        if n == 1:\\n            return 1\\n        @cache\\n        def recur(i, cells):\\n            if i == 1:\\n                cells = 1\\n                return cells\\n            val = 4 * (i-1) # can traverse into 4 directions\\n            return val + recur(i-1, cells)\\n        return(recur(n, 0))\\n        \\n        \\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256200,
+                "title": "just-use-arithmetic-progression-python",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\nWe can solve this through an arithmetic progression. As you can see in the picture, the cells increase by 2 on each line until the middle. And then it decreases to 1. in the end, we just need to calculate the sum of the arithmetic progression for n and n - 1\\n\\n![\\u0411\\u0435\\u0437\\u044B\\u043C\\u044F\\u043D\\u043D\\u044B\\u0439-1_\\u041C\\u043E\\u043D\\u0442\\u0430\\u0436\\u043D\\u0430\\u044F \\u043E\\u0431\\u043B\\u0430\\u0441\\u0442\\u044C 1.jpg](https://assets.leetcode.com/users/images/b45a5352-2099-478a-ba97-9cbbd40c7cec_1677945673.9197185.jpeg)\\n\\n\\n\\n# Complexity\\n- Time complexity: O(1)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        def func(n):\\n            s = ((2 + 2 * (n - 1)) * n) // 2\\n            return s\\n        return func(n) + func(n - 1)\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        def func(n):\\n            s = ((2 + 2 * (n - 1)) * n) // 2\\n            return s\\n        return func(n) + func(n - 1)\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256199,
+                "title": "easy-o-1-solution-c-java-js-paython",
+                "content": "\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        \\n        long long ans=1;\\n        for(int i=1;i<n;i++)\\n         ans+=(long long int)4*i;\\n        \\n        return ans;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Java",
+                    "Python",
+                    "JavaScript"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        \\n        long long ans=1;\\n        for(int i=1;i<n;i++)\\n         ans+=(long long int)4*i;\\n        \\n        return ans;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256149,
+                "title": "python-3-math",
+                "content": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return 2 * n * (n - 1) + 1\\n```",
+                "solutionTags": [
+                    "Python",
+                    "Python3",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return 2 * n * (n - 1) + 1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256098,
+                "title": "c-easiest-solution",
+                "content": "\\n\\n# Complexity\\n- Time complexity: O(n)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(long long n) {\\n        int x = 1, l=1;\\n        long long int y=1;\\n        if(n==1)return 1;\\n        for(int i=1;i<n;i++) y = y+(4*(l++));  \\n        return y;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(long long n) {\\n        int x = 1, l=1;\\n        long long int y=1;\\n        if(n==1)return 1;\\n        for(int i=1;i<n;i++) y = y+(4*(l++));  \\n        return y;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256094,
+                "title": "python-single-line",
+                "content": "\\tclass Solution:\\n\\t\\tdef coloredCells(self, n: int) -> int:\\n\\t\\t\\treturn n**2 + (n-1)**2",
+                "solutionTags": [
+                    "Python"
+                ],
+                "code": "\\tclass Solution:\\n\\t\\tdef coloredCells(self, n: int) -> int:\\n\\t\\t\\treturn n**2 + (n-1)**2",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256083,
+                "title": "python-4-on-each-step",
+                "content": "Naive approach, we could see that is just +4 new block on each step.\\n\\nBrute force solution is O(N):\\n```python\\nreturn 1 + 4*sum(range(n))\\n```\\n\\nBut it\\'s easy to translate it to O(1):\\n```python\\nreturn 1 + 4*(n*(n - 1) // 2)\\n```\\nhttps://en.wikipedia.org/wiki/Arithmetic_progression\\n\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return 1 + 4*(n*(n - 1) // 2)\\n```",
+                "solutionTags": [
+                    "Python",
+                    "Math"
+                ],
+                "code": "```python\\nreturn 1 + 4*sum(range(n))\\n```\n```python\\nreturn 1 + 4*(n*(n - 1) // 2)\\n```\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return 1 + 4*(n*(n - 1) // 2)\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256079,
+                "title": "c-n-2-n-1-2-formula",
+                "content": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return pow(n,2)+pow(n-1,2);\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "C",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return pow(n,2)+pow(n-1,2);\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3256074,
+                "title": "best-java-solution",
+                "content": "# class Solution {\\n    public long coloredCells(long n) {\\n      return (n)*(n)+(n-1)*(n-1);\\n    }\\n}",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "class Solution {\\n    public long coloredCells(long n) {\\n      return (n)*(n)+(n-1)*(n-1);\\n    }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4079319,
+                "title": "easy-and-simple-short-1-liner-using-math-pow",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        return (long)Math.pow(n,2)+(long)Math.pow(n-1,2);\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        return (long)Math.pow(n,2)+(long)Math.pow(n-1,2);\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4062588,
+                "title": "easy-c-solution",
+                "content": "\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) \\n    {\\n        long long cur=4;\\n        long long ans=1;\\n        for (int i=2;i<=n;i++)\\n        {\\n          ans+=cur;\\n          cur+=4;\\n        }\\n        return ans;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) \\n    {\\n        long long cur=4;\\n        long long ans=1;\\n        for (int i=2;i<=n;i++)\\n        {\\n          ans+=cur;\\n          cur+=4;\\n        }\\n        return ans;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4042706,
+                "title": "solution-2579-count-total-number-of-colored-cells",
+                "content": "# Intuition\\nThis problem involves counting colored cells in a grid based on a specific pattern.\\n\\n# Approach\\n- Initialize \\'ans\\' to 1.\\n- If \\'n\\' is 1, return \\'ans\\'.\\n- Use a loop to iterate from 1 to \\'n-1\\' and add \\'i * 4\\' to \\'ans\\' in each iteration.\\n- Return \\'ans\\'.\\n\\n# Complexity\\n- Time complexity: O(n)\\n- Space complexity: O(1)\\n\\n```python\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        ans = 1\\n\\n        if n == 1:\\n            return ans\\n        \\n        for i in range(1, n):\\n            ans += i * 4\\n        \\n        return ans\\n",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "# Intuition\\nThis problem involves counting colored cells in a grid based on a specific pattern.\\n\\n# Approach\\n- Initialize \\'ans\\' to 1.\\n- If \\'n\\' is 1, return \\'ans\\'.\\n- Use a loop to iterate from 1 to \\'n-1\\' and add \\'i * 4\\' to \\'ans\\' in each iteration.\\n- Return \\'ans\\'.\\n\\n# Complexity\\n- Time complexity: O(n)\\n- Space complexity: O(1)\\n\\n```python\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        ans = 1\\n\\n        if n == 1:\\n            return ans\\n        \\n        for i in range(1, n):\\n            ans += i * 4\\n        \\n        return ans\\n",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4039812,
+                "title": "count-total-number-of-colored-cells",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long sum =1;\\n        if(n==1)\\n        return sum;\\n        for(int i=2;i<=n;i++)\\n        {\\n            sum+=4*(i-1);\\n        }\\n        return sum;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long sum =1;\\n        if(n==1)\\n        return sum;\\n        for(int i=2;i<=n;i++)\\n        {\\n            sum+=4*(i-1);\\n        }\\n        return sum;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4031881,
+                "title": "easy-solution-with-with-diamond-shaped-pattern",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        if n==1:\\n            return 1\\n        n = n-1\\n        c = 0\\n        for i in range(1,2*n,2):\\n            c+=i\\n        return 2*c +2*n+1\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        if n==1:\\n            return 1\\n        n = n-1\\n        c = 0\\n        for i in range(1,2*n,2):\\n            c+=i\\n        return 2*c +2*n+1\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4010750,
+                "title": "solution-using-recursion-java",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\nCorrect and Sortest way/Approach to Solve problem\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\nif you foucs on pattern, it is increamenting each time with sum of product of 4 with (no. of block-1) \\ni.e for \\nn=1:-1\\nn=2:-1+4=5\\nn=3:-1+4+4*2=13\\nn=4:-1+4+4+4*2+4*3=25\\n.\\n.\\nso, we have to call function repeatedly by incrementing value each time by 4*(no. of repeatation-1)\\n\\nand Here base recursion is,\\nfor n==1 return 1;\\n\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n<=1)\\n            return n;\\n        return coloredCells(n-1)+4*(n-1);\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n<=1)\\n            return n;\\n        return coloredCells(n-1)+4*(n-1);\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 4000069,
+                "title": "swift-0ms-and-o-1-beating-100-users-in-runtime-memory",
+                "content": "# Intuition\\nTo look into the serialized pattern before attempting to solve.\\n\\n# Complexity\\n- Time complexity:\\n$$O(1)$$\\n\\n- Space complexity:\\n$$O(n)$$\\n\\n# Code\\n```\\nclass Solution {\\n    func coloredCells(_ n: Int) -> Int {\\n        // guarding 1 as 1 minute colors only 1 cell (stated)\\n        guard n>1 else { return 1}\\n        // the number of Blue colored cells after n minutes\\n        return n*(n+n)-(n+n-1)\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Swift",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\n    func coloredCells(_ n: Int) -> Int {\\n        // guarding 1 as 1 minute colors only 1 cell (stated)\\n        guard n>1 else { return 1}\\n        // the number of Blue colored cells after n minutes\\n        return n*(n+n)-(n+n-1)\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3979371,
+                "title": "simple-math-o-n-one-liner",
+                "content": "\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return (n**2) + (n-1)**2\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return (n**2) + (n-1)**2\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3975530,
+                "title": "java-one-liner-fastest-code-ever",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n    \\n    long num=n;\\n   \\n    return num*num+(num-1)*(num-1);\\n}\\n}\\n```",
+                "solutionTags": [
+                    "Java",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n    \\n    long num=n;\\n   \\n    return num*num+(num-1)*(num-1);\\n}\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3960529,
+                "title": "recursion-fibonacci-related-question-easy-explanation-cpp",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n1-> 5-> 13-> 25\\n\\n1st term = 1+(4*0)\\n2nd term = 1st + 4*1\\n3rd term = 2nd + 4*2 \\n.\\n.\\n.\\n\\nfib(n,i)-> \\nreturning statement : fib(n-1, i+1) + 4*i;\\n\\nn-1 -> previous number \\ni+1 -> incremented 4\\'s multiple\\n\\n\\n\\n# Complexity\\n- Time complexity:O(n)\\n\\n- Space complexity:O(n)\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long fib(int x, int i){\\n        if(x==1)\\n            return 1;\\n        if(x==2)\\n            return 5;\\n        return fib(x-1,i+1) + (4*i);\\n    }\\n    long long coloredCells(int n) {\\n        return fib(n,2);\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Recursion"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long fib(int x, int i){\\n        if(x==1)\\n            return 1;\\n        if(x==2)\\n            return 5;\\n        return fib(x-1,i+1) + (4*i);\\n    }\\n    long long coloredCells(int n) {\\n        return fib(n,2);\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3932994,
+                "title": "python-one-line-code-100-tc-and-100-sc",
+                "content": "# Intuition Using squares\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach Mathematical\\n<!-- Describe your approach to solving the problem. -->\\nIn N minute total N^2 and (N-1)^2 squares are formed\\n\\n# Complexity\\n- Time complexity: O(1)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        k = n*n\\n        m = (n-1)*(n-1)\\n        return k + m\\n\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        k = n*n\\n        m = (n-1)*(n-1)\\n        return k + m\\n\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3927154,
+                "title": "finding-the-coloured-cell",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:O(1)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long cc = (long)Math.pow(n,2) + (long)Math.pow(n-1,2);\\n        return cc;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long cc = (long)Math.pow(n,2) + (long)Math.pow(n-1,2);\\n        return cc;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3887130,
+                "title": "4-lines-code-very-easy",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n\\n        long long ans = 0;\\n        int s = 2*n-1;\\n        int t = s-2;\\n        while(t>=1)\\n        {\\n            ans = ans+2*t;\\n            t=t-2;\\n        }\\n        ans+=s;\\n        return ans; \\n  \\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n\\n        long long ans = 0;\\n        int s = 2*n-1;\\n        int t = s-2;\\n        while(t>=1)\\n        {\\n            ans = ans+2*t;\\n            t=t-2;\\n        }\\n        ans+=s;\\n        return ans; \\n  \\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3823351,
+                "title": "0ms-c-solution-using-math-formula",
+                "content": "# Intuition\\nAfter each minute the number of cells are calculated by a formula (n x n)+(n-1 x n-1) where n is minutes passed.\\n\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long t=n;\\n        if(n==0){return 0;}\\n        long long s=t*t;\\n        t--;\\n        long long s2=t*t;\\n        return s+s2;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long t=n;\\n        if(n==0){return 0;}\\n        long long s=t*t;\\n        t--;\\n        long long s2=t*t;\\n        return s+s2;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3814670,
+                "title": "simple-sol-easy-to-understand",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        return (long)n*n + (long)(n-1)*(n-1);   \\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        return (long)n*n + (long)(n-1)*(n-1);   \\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3801200,
+                "title": "count-total-number-of-colored-cells-easy-one-line-code-c",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n         return (long)n*(n-1)*2+1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n         return (long)n*(n-1)*2+1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3794791,
+                "title": "direct-approach-using-dart",
+                "content": "# Using the pattern of (i*2)+1\\n\\n# Dart Code\\n```\\nclass Solution {\\n    int coloredCells(int n) {\\n        int count = 0;\\n        for( int i =0;i<n;i++)\\n           count+= (i*2)+1;\\n        for(int i=n-2;i>=0;i--)\\n           count+=(i*2)+1;\\n        return count;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Dart"
+                ],
+                "code": "```\\nclass Solution {\\n    int coloredCells(int n) {\\n        int count = 0;\\n        for( int i =0;i<n;i++)\\n           count+= (i*2)+1;\\n        for(int i=n-2;i>=0;i--)\\n           count+=(i*2)+1;\\n        return count;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3794790,
+                "title": "direct-approach-using-dart",
+                "content": "# Using the pattern of (i*2)+1\\n\\n# Dart Code\\n```\\nclass Solution {\\n    int coloredCells(int n) {\\n        int count = 0;\\n        for( int i =0;i<n;i++)\\n           count+= (i*2)+1;\\n        for(int i=n-2;i>=0;i--)\\n           count+=(i*2)+1;\\n        return count;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Dart"
+                ],
+                "code": "```\\nclass Solution {\\n    int coloredCells(int n) {\\n        int count = 0;\\n        for( int i =0;i<n;i++)\\n           count+= (i*2)+1;\\n        for(int i=n-2;i>=0;i--)\\n           count+=(i*2)+1;\\n        return count;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3794787,
+                "title": "direct-approach-using-java",
+                "content": "\\n\\n# Java Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n      long count = 0;\\n       for( int i =0;i<n;i++)\\n           count+= (i*2)+1;\\n       for(int i=n-2;i>=0;i--)\\n           count+=(i*2)+1;\\n        return count;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n      long count = 0;\\n       for( int i =0;i<n;i++)\\n           count+= (i*2)+1;\\n       for(int i=n-2;i>=0;i--)\\n           count+=(i*2)+1;\\n        return count;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3779991,
+                "title": "simple-observation-and-wollah",
+                "content": "# Complexity\\n- Time complexity:$$O(n)$$\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:$$O(1)$$\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long ans = 1l;\\n        long sum = 4l;\\n        for( int i = 1 ; i <= n-1 ; i++ ){\\n            ans += sum;\\n            sum += 4;\\n        }\\n        return ans;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long ans = 1l;\\n        long sum = 4l;\\n        for( int i = 1 ; i <= n-1 ; i++ ){\\n            ans += sum;\\n            sum += 4;\\n        }\\n        return ans;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3770045,
+                "title": "two-line-of-code",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n==1)\\n        {\\n            return 1;\\n        }\\n        long firstpower=(long)Math.pow(n-1,2);\\n        long Secondpower=(long)Math.pow(n,2);\\n            return firstpower+Secondpower;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n==1)\\n        {\\n            return 1;\\n        }\\n        long firstpower=(long)Math.pow(n-1,2);\\n        long Secondpower=(long)Math.pow(n,2);\\n            return firstpower+Secondpower;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3767055,
+                "title": "easy-c-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:O(n)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    //-->sequence  1    5   13   25\\n    //didtance is     4    8   12\\n    long long coloredCells(int n) {\\n        long long ans=1;\\n        long long z=4;\\n        for(int i=1;i<n;i++){\\n            ans+=z;\\n            z+=4;\\n        }\\n        return ans;\\n    }\\n};\\n```\\n\\n# Complexity\\n- Time complexity:O(1)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n# Code2\\n```\\nclass Solution {\\npublic:\\n    //-->sequence  1    5   13   25\\n    //didtance is     4    8   12\\n    // formula is (2n*n) +(2n)+1 where n = num-1\\n    long long coloredCells(int n) {\\n        long long p=pow(n-1,2);\\n        return 2*p + 2*(n-1) + 1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    //-->sequence  1    5   13   25\\n    //didtance is     4    8   12\\n    long long coloredCells(int n) {\\n        long long ans=1;\\n        long long z=4;\\n        for(int i=1;i<n;i++){\\n            ans+=z;\\n            z+=4;\\n        }\\n        return ans;\\n    }\\n};\\n```\n```\\nclass Solution {\\npublic:\\n    //-->sequence  1    5   13   25\\n    //didtance is     4    8   12\\n    // formula is (2n*n) +(2n)+1 where n = num-1\\n    long long coloredCells(int n) {\\n        long long p=pow(n-1,2);\\n        return 2*p + 2*(n-1) + 1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3759643,
+                "title": "whoa",
+                "content": "# Intuition\\nMental Mathematics\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\nMaths & Observation\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity: O (1)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: O (1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int nn) {\\n        long n=nn;  \\n        return n*n + (n-1)*(n-1); \\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int nn) {\\n        long n=nn;  \\n        return n*n + (n-1)*(n-1); \\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3758785,
+                "title": "easy-to-get-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n    \\n     if(n==1)return 1;\\n       return (long)n * n + (long)(n - 1) * (n - 1);\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n    \\n     if(n==1)return 1;\\n       return (long)n * n + (long)(n - 1) * (n - 1);\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3757622,
+                "title": "count-total-number-of-colored-cells-easy-approach-fast-simple",
+                "content": "\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) \\n    {\\n        long long cells=1, face=4;\\n        for(int i=2; i<=n; i++)\\n        {\\n            cells += (i-1)*face;\\n        }\\n        return cells;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) \\n    {\\n        long long cells=1, face=4;\\n        for(int i=2; i<=n; i++)\\n        {\\n            cells += (i-1)*face;\\n        }\\n        return cells;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3743289,
+                "title": "easiest-c-solution-100-beats",
+                "content": "# Intuition\\nfind a pattern\\n\\n# Approach\\nthere is pattern that for every n, total number is n^2 +(n-1)^2.\\n\\n# Complexity\\n- Time complexity:\\nO(1)\\n- Space complexity:\\nO(1)\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(long long n) {\\n        long long p = n*n + (n-1)*(n-1);\\n        return p;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(long long n) {\\n        long long p = n*n + (n-1)*(n-1);\\n        return p;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3735116,
+                "title": "python-3-math-easy-to-understand",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n- O(N)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n- O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        rin, incht = 1, 4\\n        for i in range(n-1):\\n            rin += incht\\n            incht += 4\\n        return rin\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        rin, incht = 1, 4\\n        for i in range(n-1):\\n            rin += incht\\n            incht += 4\\n        return rin\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3732980,
+                "title": "a-unique-way-of-solving-with-the-help-of-pattern-observation",
+                "content": "# Intuition\\nTry doing some casework and observe pattern\\n\\n# Approach\\n![8julyleetcode.png](https://assets.leetcode.com/users/images/053a9883-8cc6-4b0d-b505-ce6ef1ac3f70_1688746317.1358712.png)\\nLet\\'s divide the blue area into two types \\'X\\' & \\'Y\\'\\n\\'X\\' represents sum of first (n-1) odd numbers (i = 1, 2 * n - 3).\\nIt can be observed for 4 part \\'x\\' goes uptil 5\\nfor 5 it goes uptil 7 \\nand so on.. giving the formula 2 * n - 3\\nand part y is nothing but part \\'X\\' + 2 - > 2 * n - 1\\n\\n# Complexity\\n- Time complexity:\\n$$O(1)$$\\n\\n- Space complexity:\\n$$O(1)$$\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n == 1) return 1;\\n        // sum of first (n-1) odd numbers;\\n        long long ans = (n-1) *1ll* (n-1);\\n        /* another way to do (O(N))\\n        long long ans = 0;\\n        for(int i=1; i<=2*n-3; i+=2) ans +=i;\\n        */\\n        ans *= 2;\\n        ans += (2 * n - 1);\\n        return ans;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n == 1) return 1;\\n        // sum of first (n-1) odd numbers;\\n        long long ans = (n-1) *1ll* (n-1);\\n        /* another way to do (O(N))\\n        long long ans = 0;\\n        for(int i=1; i<=2*n-3; i+=2) ans +=i;\\n        */\\n        ans *= 2;\\n        ans += (2 * n - 1);\\n        return ans;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3721552,
+                "title": "3-line-code-clean-codes-python-3",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\nArithmatic Progression (AP)\\nsum of AP\\n\\n# Complexity\\n- Time complexity: $$O(1)$$\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: $$O(1)$$\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution(object):\\n    def coloredCells(self, n):\\n        if n == 1:\\n            return 1\\n\\n        return (n*(4*(n-1))//2 + 1)\\n        \"\"\"\\n        :type n: int\\n        :rtype: int\\n        \"\"\"\\n```",
+                "solutionTags": [
+                    "Python"
+                ],
+                "code": "```\\nclass Solution(object):\\n    def coloredCells(self, n):\\n        if n == 1:\\n            return 1\\n\\n        return (n*(4*(n-1))//2 + 1)\\n        \"\"\"\\n        :type n: int\\n        :rtype: int\\n        \"\"\"\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3717941,
+                "title": "iterative-approach",
+                "content": "# Intuition\\nI didn\\'t come up with a graceful formula. I noticed every minute it grows by 4, 8, 12, 16, ...\\nSo here is the iterative solution\\n \\n# Complexity\\n- Time complexity:\\nO(n)\\n\\n- Space complexity:\\nO(1)\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        r, inc = 1, 4\\n        for i in range(n-1):\\n            r += inc\\n            inc += 4\\n        return r\\n        \\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        r, inc = 1, 4\\n        for i in range(n-1):\\n            r += inc\\n            inc += 4\\n        return r\\n        \\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3706801,
+                "title": "java-o-1-1line-code",
+                "content": "# Intution\\nFind a mathematical logic which satisfies the change in value with increase in every minute.\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\nuse n^2 +(n-1)^2\\n\\n# Complexity\\n- Time complexity:O(1)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n\\n- Space complexity:O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        return (long)Math.pow(n,2)+ (long)Math.pow(n-1,2);\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        return (long)Math.pow(n,2)+ (long)Math.pow(n-1,2);\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3704107,
+                "title": "very-easy-and-basic-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\nO(1)\\n- Space complexity:\\nO(1)\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n       return 2l*n*(n-1) + 1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n       return 2l*n*(n-1) + 1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3703764,
+                "title": "easy-1-line-code-o-1-solution-with-approach-explained",
+                "content": "# Intuition\\nJust Find some initial answers and then you will see the pattern.\\n\\n# Approach\\nSuppose f(n) is the function for finding the number of cells in nth minute. Then we can see that\\nf(1)=1\\nf(2)=5\\nf(3)=13\\nf(4)=25\\nand so on\\n\\nSO we can see that the difference of consecutive numbers are in Arithmetic Progression.\\nexample 5-1=4   13-5=8  25-13=12    \\nHere we can see that 4 8 12 are in Arithmetic progression.\\n\\nSo for this kind of series the general term is f(n)=an^2+bn+c. \\nPut values of n=1,2,3 and f(n)=1,5,13 respectively and find values of a,b,c. \\nAfter solving we get 2n^2-2n+1.\\nJust return it, its your answer :).\\nPlz Upvote If u liked it.\\n\\n# Complexity\\n- Time complexity:\\nO(1)\\n\\n- Space complexity:\\nO(1)\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return ((1LL*2*n*n) - (2*n) + 1);\\n    }\\n};\\n\\n\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Math",
+                    "Number Theory"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return ((1LL*2*n*n) - (2*n) + 1);\\n    }\\n};\\n\\n\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3694353,
+                "title": "easy-to-think-c-solution",
+                "content": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n==1)\\n            return 1;\\n        //1+4*1+4*2+4*3...\\n        long long a=1+2*(long)(n-1)*n;\\n        return a;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n==1)\\n            return 1;\\n        //1+4*1+4*2+4*3...\\n        long long a=1+2*(long)(n-1)*n;\\n        return a;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3693712,
+                "title": "c-0-ms-runtime-easy-4-line-solution-simple-dimple-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\nObserve the Pattern.\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\nOnce you make 4 or 5 patterns you will see an Arithmetic Progresion int which the middle layer will be equal to 2*n - 1.\\nThe layer above than the middle layer will be equal to (2*n-1)-2 , (2*n-1) - 4 ans so on ans the last layer will be equal to 1.\\nSame pattern can be observe on the layer which is below the middle layer ,Let me give you an example so that you will understand that in a better way \\nn = 5 \\nSo theh blue colored cell will be like :\\n1\\n3\\n5\\n7\\n9   (Middle Layer) ---> This can be determined using 2*n-1 formula\\n7\\n5\\n3\\n1     \\nAre you able to see that A.P (Arithmetic Progression)\\nNow Let\\'s Solve the AP for an upper halp inluding the middle layer too \\nFirst find the  number of termrs an = a +(n-1)2 {a will be 1,an will be the nth term } \\nupper layer will be :- 1,3,5,7,9 find the number of terms using above formula an = start , a = 1 so n = (start-1)/2 + 1\\nnow you know the Number of terms,then the sum will be equal to \\nSn = n/2(2a + (n-1) d )  {d = 2,a=1} \\nn/2(2a + 2n -2) => n/2(2+2n-2) => n^2\\nsum will be equal to n^2;\\nsimilarly for the lower half ,we will multiply the sum with 2 but have you observer that in the lower half we have added middle layer and in the upper half too so i will subtract the layer once from the sum .\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        int start = 2 * n - 1;\\n        long long number_of_terms = ((start -1)/2 + 1);\\n        long long sum = (2 * (number_of_terms * number_of_terms) - start);\\n        return sum;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        int start = 2 * n - 1;\\n        long long number_of_terms = ((start -1)/2 + 1);\\n        long long sum = (2 * (number_of_terms * number_of_terms) - start);\\n        return sum;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3692351,
+                "title": "easiest-best-solution-beats-100-in-c",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long count=1;\\n\\n        for(int i =1;i<n;i++){\\n            count=count+(4*i);\\n        }\\n\\n        return count;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long count=1;\\n\\n        for(int i =1;i<n;i++){\\n            count=count+(4*i);\\n        }\\n\\n        return count;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3690428,
+                "title": "c-solution-simple-easy-and-optimized",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\nThe intuition behind this approach is that the number of colored cells in a larger grid (n x n) can be obtained by adding the colored cells in a smaller grid ((n-1) x (n-1)) to the colored cells in the additional outer row and column.\\n\\nOverall, the approach is based on the observation that the number of colored cells in the grid can be expressed as a sum of two parts: the colored cells in the smaller grid and the colored cells in the additional outer row and column. By breaking down the calculation in this way, the function efficiently calculates the total number of colored cells in the grid.\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\nThe approach used in the function is relatively straightforward. It involves breaking down the calculation into two parts:\\n\\n1. Calculate the number of colored cells in a grid of size (n-1) x (n-1) and assign it to the variable a. This is done by subtracting 1 from n and squaring the result: (n - 1) * (n - 1). This step represents the colored cells in the inner portion of the grid.\\n\\n2. Calculate the number of colored cells in the entire grid of size n x n and assign it to the variable b. This is done by multiplying n by itself: n * n. This step represents the colored cells in the entire grid, including the additional outer row and column.\\n\\nFinally, the function returns the sum of a and b, which represents the total number of colored cells in the grid.\\n\\n# Complexity\\n- Time complexity: O(1)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\nThe time complexity of the coloredCells function is O(1), which means it has a constant time complexity. This is because the function performs a fixed number of arithmetic operations regardless of the value of n. The calculations involve simple multiplication, subtraction, and addition, which all have constant time complexity.\\n\\n- Space complexity: O(1)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\nThe space complexity of the function is also O(1), indicating that it requires a constant amount of additional space to perform the calculations. The function uses a few variables (a, b), but their space requirements do not depend on the input size n. Therefore, the space complexity remains constant regardless of the value of n.\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n      long long a = (long long)(n - 1) * (long long)(n - 1);\\n    long long b = (long long)n * n;\\n    return a + b;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n      long long a = (long long)(n - 1) * (long long)(n - 1);\\n    long long b = (long long)n * n;\\n    return a + b;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3687119,
+                "title": "python-another-visualization",
+                "content": "Rotate 45\\u02DA right and see what\\'s going on\\n\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        \"\"\"\\n        *\\n        \\n        * * 2\\n         * 1\\n        * * 2\\n        \\n        * * * 3\\n         * * 2 \\n        * * * 3\\n         * * 2\\n        * * * 3\\n\\n        * * * * 4\\n         * * * 3\\n        * * * * 4\\n         * * * 3\\n        * * * * 4\\n         * * * 3\\n        * * * * 4\\n        ....\\n        n^2 + (n - 1)^2\\n        \"\"\"\\n        return n ** 2 + (n - 1) ** 2\\n```",
+                "solutionTags": [
+                    "Python",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        \"\"\"\\n        *\\n        \\n        * * 2\\n         * 1\\n        * * 2\\n        \\n        * * * 3\\n         * * 2 \\n        * * * 3\\n         * * 2\\n        * * * 3\\n\\n        * * * * 4\\n         * * * 3\\n        * * * * 4\\n         * * * 3\\n        * * * * 4\\n         * * * 3\\n        * * * * 4\\n        ....\\n        n^2 + (n - 1)^2\\n        \"\"\"\\n        return n ** 2 + (n - 1) ** 2\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3683034,
+                "title": "dart-centered-square-number-solution",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\nlooking at the first three values, we see this sequence:\\n- 1, 5, 13, ...\\n\\nFrom this sequence, we can determine that the interval between these numbers are in multiples of 4\\n\\n1. 1 + 0 = 1, when $$n = 1$$\\n2. 1 + 4 = 5, when $$n = 2$$\\n3. 5 + 8 = 13, when $$n = 3$$\\n4. 13 + 12 = 25, when $$n = 4$$\\n5. 25 + 16 = 41, when $$n = 5$$\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\ntaking a look at the [Centerd Square Number Formula](https://en.wikipedia.org/wiki/Centered_square_number)\\n\\nwe see that the formula is: $$C  =  1  +  4(n(n - 1))  /  2$$\\n\\nwhere $$n$$ represents the number of minutes\\n\\nFor example, If we want to count how many sqaures when 5 minutes pass:\\n\\n1. $$C  =  1  +  (4(5(5 - 1))  /  2)$$\\n2. $$C  =  1  +  (4(5(4))  /  2)$$\\n3. $$C  =  1  +  (4(20)  /  2)$$\\n4. $$C  =  1  +  (80  /  2)$$\\n5. $$C  =  1  +  40$$\\n6. $$C  =  41$$\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n  int coloredCells(int n) {\\n      final centeredSquareNumber = 1 + 4 * ((n * (n-1)) / 2);\\n      return centeredSquareNumber.toInt();\\n  }\\n}\\n```",
+                "solutionTags": [
+                    "Dart"
+                ],
+                "code": "```\\nclass Solution {\\n  int coloredCells(int n) {\\n      final centeredSquareNumber = 1 + 4 * ((n * (n-1)) / 2);\\n      return centeredSquareNumber.toInt();\\n  }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3680001,
+                "title": "python-linear-pattern-recognition-solution",
+                "content": "# Intuition\\nlooking at the outcomes we can conclude the formula , i.e., i + 4 + prevVal where prevVal is previoulsy calculated colored tiles and 1 <= i < n\\n\\n# Complexity\\n- Time complexity:\\nO(n)\\n\\n- Space complexity:\\nO(1)\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        prev = 1\\n        for i in range(n):\\n            prev = 4 * i + prev\\n        return prev\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        prev = 1\\n        for i in range(n):\\n            prev = 4 * i + prev\\n        return prev\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3660521,
+                "title": "easy-c-solution-simple-approach",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return pow(n,2) + pow(n-1,2);\\n    }\\n};\\n```\\nPLEASE UPVOTE \\u2B06\\uFE0F\\u2B06\\uFE0F IF YOU LIKE THE SOLUTION !!!",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return pow(n,2) + pow(n-1,2);\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3643749,
+                "title": "easy-c-solution-recursion",
+                "content": "\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n==1) return 1;\\n        return 4*(n-1)+coloredCells(n-1);\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if(n==1) return 1;\\n        return 4*(n-1)+coloredCells(n-1);\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3627063,
+                "title": "satisfying-explanation",
+                "content": "# Intuition\\nI was just lucky and I thought about the problem in a way that was easy to implement, plus it is very satisfying, so I want to share it.\\nNotice how 2 squares emerge from the pictures.\\n\\n![obr\\xE1zek_2023-06-12_005932578.png](https://assets.leetcode.com/users/images/31d6c6c0-1235-432e-9da0-573c3a8c8c5a_1686524373.3387039.png)\\n![obr\\xE1zek_2023-06-12_010024466.png](https://assets.leetcode.com/users/images/e8f3f78f-8d87-4004-bed7-21d23e1f516d_1686524425.1885388.png)\\n![obr\\xE1zek_2023-06-12_010114525.png](https://assets.leetcode.com/users/images/152749ce-03b2-415a-afcc-2cfe197eb65d_1686524475.2646415.png)\\n![obr\\xE1zek_2023-06-12_010158149.png](https://assets.leetcode.com/users/images/d540550b-e93a-42cb-a458-d470cc0330b5_1686524518.8963687.png)\\n\\n*I decided to use two colors and this style, because I couldn\\'t keep track of the current iteration with just one color and squares, no problem solving advice here, sorry... (Apart from alwys make a picture - no matter if it is a binary search, tree, or cell automaton, or anything else drawable - always draw a picture, works for me...)\\n\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return (n-1)**2 + n**2\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return (n-1)**2 + n**2\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3613455,
+                "title": "c-easy-solution",
+                "content": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long res = 1;\\n        for(int i = 1;i < n;i++){\\n            res += i*4;\\n        }\\n        return res;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long res = 1;\\n        for(int i = 1;i < n;i++){\\n            res += i*4;\\n        }\\n        return res;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3610163,
+                "title": "easiest-soution-java",
+                "content": "# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n==1){\\n            return 1;\\n        }\\n        long ans = 1;\\n        for(int i=1;i<n;i++){\\n            ans += (long)i*4;\\n        }\\n        return ans;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n==1){\\n            return 1;\\n        }\\n        long ans = 1;\\n        for(int i=1;i<n;i++){\\n            ans += (long)i*4;\\n        }\\n        return ans;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3600816,
+                "title": "simple-1-line-javascript-solution-that-beats-100",
+                "content": "Problem example has a fairly easy pattern:\\nn = 1 gives an answer of 1 (1^2 + 0^2)\\nn = 2 gives an answer of 5 (2^2 + 1^2)\\nn = 3 gives an answer of 13 (3^2 + 2^2)\\nn =50 give an answer of 4901 (50^2 + 49^2)\\n\\nSo that\\'s quite easy to code as it\\'s essentially n^2 + (n-1)^2\\n\\n```/**\\n * @param {number} n\\n * @return {number}\\n */\\nvar coloredCells = function(n) {\\n    return n ** 2 + (n-1) ** 2    \\n};",
+                "solutionTags": [
+                    "JavaScript"
+                ],
+                "code": "Problem example has a fairly easy pattern:\\nn = 1 gives an answer of 1 (1^2 + 0^2)\\nn = 2 gives an answer of 5 (2^2 + 1^2)\\nn = 3 gives an answer of 13 (3^2 + 2^2)\\nn =50 give an answer of 4901 (50^2 + 49^2)\\n\\nSo that\\'s quite easy to code as it\\'s essentially n^2 + (n-1)^2\\n\\n```/**\\n * @param {number} n\\n * @return {number}\\n */\\nvar coloredCells = function(n) {\\n    return n ** 2 + (n-1) ** 2    \\n};",
+                "codeTag": "Unknown"
+            },
+            {
+                "id": 3581056,
+                "title": "java-simple-solution-o-n",
+                "content": "# Complexity\\n- Time complexity: $$O(n)$$\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: $$O(1)$$\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long m = 4;\\n        long result = 1;\\n        for (int i = 0; i < n - 1; i++) {\\n            result += m;\\n            m += 4;\\n        }\\n        \\n        return result;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long m = 4;\\n        long result = 1;\\n        for (int i = 0; i < n - 1; i++) {\\n            result += m;\\n            m += 4;\\n        }\\n        \\n        return result;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3575670,
+                "title": "java-o-1-constant-time-constant-space-using-quadratic-sequence",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\nThe problem follows a quadratic sequence\\n\\n1, 5, 13, 25\\n-> 1\\n-> 1 +4 = 5\\n-> 5 + 4 + 4 = 13\\n-> 13 +4 +4 +4 = 25\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\nUse the quadratic sequence formula an2+bn+c and we get 2n2-2n+1\\n# Complexity\\n- Time complexity:O(1)\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:O(10)\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long intN = n;\\n        long ans = (2*(intN)*(intN))-(2*intN)+1;\\n        return ans;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long intN = n;\\n        long ans = (2*(intN)*(intN))-(2*intN)+1;\\n        return ans;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3558954,
+                "title": "in-o-1-count-total-number-of-colored-cells",
+                "content": "class Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if (n == 1) {\\n            return 1;\\n        }\\n        \\n        long long ans = n * n + (n - 1) * (n - 1);\\n        \\n        return ans;\\n    }\\n};\\n",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "class Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        if (n == 1) {\\n            return 1;\\n        }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3558928,
+                "title": "easiest-solution-in-java-100-beats",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\nO(n)\\n\\n- Space complexity:\\nO(n)\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n      return (long)n*n + (long)(n-1)*(n-1);  \\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n      return (long)n*n + (long)(n-1)*(n-1);  \\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3558330,
+                "title": "c-faster-than-100-ap-well-explained-solution-t-o-1-s-o-1",
+                "content": "Just observe it as 2D Array having upper and lower parts and try to find total number of elements if row number is given.\\nit will eventually come out upper part is sum of first $$n$$ odd number and lower part is sum of first $$(n - 1)$$ odd numbers.\\nUsing Basics of Arithematic Progressing:\\n$$x$$ = Sum of first $n$ odd numbers = $$n^2$$\\n$$y$$ = Sum of first $n - 1$ odd numbers = $$(n - 1)^2$$\\nour $$ans = x + y$$\\n\\nAs n*n can overflow keep changing it to long long by multiplying it with $$1*LL$$\\n\\n# Complexity\\n- Time complexity:\\n$$O(1)$$\\n\\n- Space complexity:\\n$$O(1)$$\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n\\n    long long coloredCells(int n) {\\n        long long x = 1LL*n*n;\\n        long long y = x - 2*n + 1;\\n        return x + y;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n\\n    long long coloredCells(int n) {\\n        long long x = 1LL*n*n;\\n        long long y = x - 2*n + 1;\\n        return x + y;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3551380,
+                "title": "java-python-very-easy-solution",
+                "content": "\\n# Code\\n\\n1) Java\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long ans=1;\\n        for(int i=0;i<n;i++){\\n            ans=ans+i*4;\\n        }\\n        return(ans);\\n    }\\n}\\n```\\n2) Python3\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        ans=1\\n        for i in range(n):\\n            ans=ans+(i)*4\\n        return ans",
+                "solutionTags": [
+                    "Java",
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long ans=1;\\n        for(int i=0;i<n;i++){\\n            ans=ans+i*4;\\n        }\\n        return(ans);\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3515905,
+                "title": "easy-java-solution-simple-mathematics",
+                "content": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n==1)\\n            return n;\\n        long ans=1;\\n        for(int i=2;i<=n;i++) {\\n            ans=ans+4*(i-1);\\n            }\\n        return ans;\\n    }\\n}\\n```",
+                "solutionTags": [],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n==1)\\n            return n;\\n        long ans=1;\\n        for(int i=2;i<=n;i++) {\\n            ans=ans+4*(i-1);\\n            }\\n        return ans;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3474144,
+                "title": "100-beat-run-time",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n![i = n-1.png](https://assets.leetcode.com/users/images/06140fac-3521-49de-91d3-2bed0a2f60c7_1682954099.8619776.png)\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity: O(n);\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:O(1);\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long sum =1;\\n\\n        for(int i=1;i<n;i++){\\n            if(i==n-1) sum *=2;\\n            sum += 2*i +1; \\n        }\\n        return sum;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long sum =1;\\n\\n        for(int i=1;i<n;i++){\\n            if(i==n-1) sum *=2;\\n            sum += 2*i +1; \\n        }\\n        return sum;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3474114,
+                "title": "java-bruteforce-to-o-1-step-by-step",
+                "content": "we check the cases and difference, the pattern is obvious: +4 for diff every time. so we code it: \\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long res =1;\\n        for (int i=2;i<=n;i++){\\n            res+=4*(i-1);\\n        }\\n        return res;\\n    }\\n    \\n    //1 1 \\n    //2 5    4\\n    //3 13   8\\n    //4 25   12\\n    //5 41   16\\n}\\n```\\nthe code can be improved a little bit: \\n```\\n    public long coloredCells(int n) {\\n        long res = 1;\\n        for (int i=1;i<n;i++){\\n            res+=4*(i);\\n        }\\n        return res;\\n    }\\n```\\nthe code can be improved further, since we can use a formulae for a sum of arithmetic progression. Which is `a1 + an * (n/2)` , which means that we sum first and the last number in a progression and then, multiply it by number of pairs. It works because in a sequence like this : `1,2,3,4,5` we can see that `1+5==6` as well as `2+4=6`, `3+3` and so on and so forth. \\n\\nThus, we can calculate sum of arithmetic progression and multiply it by `4`.\\n\\n```\\npublic long coloredCells(int n) {\\n\\tif (n==1) return 1;\\n\\tlong res = 1 + (long)(4*((n-1)*(n/2.)));\\n\\treturn res;\\n}\\n//4* (1...2) = 4*( ...)\\n//0....5\\n//(a1+an)*(n/2.)\\n```\\n\\nand after simplifying the expression we get the following: \\n```\\n   public long coloredCells(long n) {\\n        return  1 + 2L*(n*n-n);\\n    }\\n```",
+                "solutionTags": [],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long res =1;\\n        for (int i=2;i<=n;i++){\\n            res+=4*(i-1);\\n        }\\n        return res;\\n    }\\n    \\n    //1 1 \\n    //2 5    4\\n    //3 13   8\\n    //4 25   12\\n    //5 41   16\\n}\\n```\n```\\n    public long coloredCells(int n) {\\n        long res = 1;\\n        for (int i=1;i<n;i++){\\n            res+=4*(i);\\n        }\\n        return res;\\n    }\\n```\n```\\npublic long coloredCells(int n) {\\n\\tif (n==1) return 1;\\n\\tlong res = 1 + (long)(4*((n-1)*(n/2.)));\\n\\treturn res;\\n}\\n//4* (1...2) = 4*( ...)\\n//0....5\\n//(a1+an)*(n/2.)\\n```\n```\\n   public long coloredCells(long n) {\\n        return  1 + 2L*(n*n-n);\\n    }\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3471972,
+                "title": "python",
+                "content": "# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        if n ==1:\\n            return 1\\n        if n ==2:\\n            return 5\\n        \\n        return (2*n-1)*(n-1)+n\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        if n ==1:\\n            return 1\\n        if n ==2:\\n            return 5\\n        \\n        return (2*n-1)*(n-1)+n\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3464419,
+                "title": "o-1-with-simple-mathematical-full-proof-rust-python",
+                "content": "# Intuition\\nLets assume that we know the answer of $a_{n - 1}$ and need to know the answer for $a_n$\\n\\n\\n```\\n    X          |\\n  X X X        | this height is (n - 1)\\nX X X X X      |\\n  X X X\\n    X\\n```\\n\\nHow many points will we add next turn? If we add them in this manner,\\n\\n```\\n      .\\n    * X .\\n  * X X X .\\n. X X X X X .\\n  . X X X *\\n    . X *\\n      .\\n```\\n\\nWe see that we will add $2 n$ dots and $2(n - 2)$ stars. So in total we add $4(n - 1)$. \\n\\nSo we have a recursive function:\\n \\n- $a_1 = 1$\\n- $a_n = a_{n - 1} + 4 (n - 1)$\\n\\nUnwinding this recursion we get \\n\\n$ a_n = a_{n - 1} + 4 (n - 1) = a_{n-2} + 4 (n - 1 + n - 2) = ... = 1 + 4 (n - 1 + n - 2 + ... + 3 + 2 + 1)$\\n\\nUsing arithmetic progression we get:\\n\\n$$a_n = 1 + 2 n(n-1)$$ \\n\\n\\n# Complexity\\n- Time complexity: $O(1)$\\n- Space complexity: $O(1)$\\n\\n```Rust []\\nimpl Solution {\\n  pub fn colored_cells(n: i32) -> i64 {\\n    let n = n as i64;\\n    return 1 + 2 * n * (n - 1);\\n  }\\n}\\n```\\n```python []\\nclass Solution:\\n  def coloredCells(self, n: int) -> int:\\n    return 1 + 2 n * (n - 1)\\n```\\n",
+                "solutionTags": [
+                    "Python",
+                    "Rust"
+                ],
+                "code": "```\\n    X          |\\n  X X X        | this height is (n - 1)\\nX X X X X      |\\n  X X X\\n    X\\n```\n```\\n      .\\n    * X .\\n  * X X X .\\n. X X X X X .\\n  . X X X *\\n    . X *\\n      .\\n```\n```Rust []\\nimpl Solution {\\n  pub fn colored_cells(n: i32) -> i64 {\\n    let n = n as i64;\\n    return 1 + 2 * n * (n - 1);\\n  }\\n}\\n```\n```python []\\nclass Solution:\\n  def coloredCells(self, n: int) -> int:\\n    return 1 + 2 n * (n - 1)\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3459312,
+                "title": "java",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long sum = 1;\\n        if(n==1){\\n            return sum;\\n        }else{\\n            for(int i = 2;i<=n;i++){\\n                sum+=((i-1)*4);\\n            }\\n        }\\n\\n        return sum;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long sum = 1;\\n        if(n==1){\\n            return sum;\\n        }else{\\n            for(int i = 2;i<=n;i++){\\n                sum+=((i-1)*4);\\n            }\\n        }\\n\\n        return sum;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3449536,
+                "title": "bfs",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        \\n        visited = set() \\n        \\n        q = collections.deque()\\n        q.append((0,0,1))\\n        res = 1 \\n        directions = [[0,1],[0,-1],[-1,0],[1,0]]\\n        visited.add((0,0))\\n        while q: \\n            \\n            x,y,layer = q.popleft()\\n            \\n            for dr,dc in directions: \\n                new_x, new_y = x + dr, y + dc\\n                if layer + 1 <= n and (new_x,new_y) not in visited:\\n                    q.append((new_x,new_y,layer+1))\\n                    visited.add((new_x,new_y))\\n                    res+=1\\n             \\n              \\n        return res\\n",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        \\n        visited = set() \\n        \\n        q = collections.deque()\\n        q.append((0,0,1))\\n        res = 1 \\n        directions = [[0,1],[0,-1],[-1,0],[1,0]]\\n        visited.add((0,0))\\n        while q: \\n            \\n            x,y,layer = q.popleft()\\n            \\n            for dr,dc in directions: \\n                new_x, new_y = x + dr, y + dc\\n                if layer + 1 <= n and (new_x,new_y) not in visited:\\n                    q.append((new_x,new_y,layer+1))\\n                    visited.add((new_x,new_y))\\n                    res+=1\\n             \\n              \\n        return res\\n",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3445970,
+                "title": "intuitive-solution-c",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity: O(1) no loops to n\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity: O(1) no space used\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        \\n        return (long)2*n*n - 2*n + 1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        \\n        return (long)2*n*n - 2*n + 1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3444299,
+                "title": "its-impossible-to-intend-the-code-beyond-this-approach-must-see",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:$$O(1)$$\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:$$O(1)$$\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n==1)return 1;\\n        return ((2*((long)n-1)*((long)n)))+1;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        if(n==1)return 1;\\n        return ((2*((long)n-1)*((long)n)))+1;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3406253,
+                "title": "o-1-time-complexity-c",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\nO(1)\\n\\n- Space complexity:\\nO(1)\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long nn = n-1;\\n        return 2*nn*nn + 2*nn + 1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long nn = n-1;\\n        return 2*nn*nn + 2*nn + 1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3396875,
+                "title": "recursion",
+                "content": "\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long ans;\\n        if(n==1) return 1;\\n        if(n==2) return 5;\\n        else return coloredCells(n-1)+(n-2)*4+4;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++",
+                    "Recursion"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        long long ans;\\n        if(n==1) return 1;\\n        if(n==2) return 5;\\n        else return coloredCells(n-1)+(n-2)*4+4;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3394523,
+                "title": "c-arithmetic-progression",
+                "content": "```\\npublic class Solution {\\n    public long ColoredCells(int n) {\\n        long[] dp = new long[n + 1];\\n        dp[1] = 1;\\n        \\n        for(int i = 2; i <= n; i++)\\n        {\\n            dp[i] = dp[i - 1] + ((i - 1) * 4); //Arithmetic progression\\n        }\\n        \\n        return dp[n];\\n    }\\n}",
+                "solutionTags": [],
+                "code": "class Solution {\\n    public long ColoredCells(int n) {\\n        long[] dp = new long[n + 1];\\n        dp[1] = 1;\\n        \\n        for(int i = 2; i <= n; i++)\\n        {\\n            dp[i] = dp[i - 1] + ((i - 1) * 4); //Arithmetic progression\\n        }",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3391015,
+                "title": "easy-java-solution-beats-100",
+                "content": "\\n\\n# Approach\\nlogic= n^2+(n-1)^2\\n\\n\\n# Code\\n```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long ans=(long)Math.pow(n,2)+(long)Math.pow(n-1,2);\\n        return ans;\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Java",
+                    "Math"
+                ],
+                "code": "```\\nclass Solution {\\n    public long coloredCells(int n) {\\n        long ans=(long)Math.pow(n,2)+(long)Math.pow(n-1,2);\\n        return ans;\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3381371,
+                "title": "python",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        m = 1 + 2*(n - 1)\\n        i = 0\\n        for j in range(n):\\n            i += j\\n\\n        return m**2 - i*4\\n\\n\\n\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        m = 1 + 2*(n - 1)\\n        i = 0\\n        for j in range(n):\\n            i += j\\n\\n        return m**2 - i*4\\n\\n\\n\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3361751,
+                "title": "accepted-swift",
+                "content": "```\\nclass Solution {\\n    func coloredCells(_ n: Int) -> Int {\\n        guard n > 1 else { return 1 }\\n        return (n - 1) * 4 + coloredCells(n - 1)\\n    }\\n}\\n```",
+                "solutionTags": [
+                    "Swift"
+                ],
+                "code": "```\\nclass Solution {\\n    func coloredCells(_ n: Int) -> Int {\\n        guard n > 1 else { return 1 }\\n        return (n - 1) * 4 + coloredCells(n - 1)\\n    }\\n}\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3361446,
+                "title": "one-liner-o-1",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return 2LL * (n-1) * (n-1) + 2*n - 1;\\n    }\\n};\\n```",
+                "solutionTags": [
+                    "C++"
+                ],
+                "code": "```\\nclass Solution {\\npublic:\\n    long long coloredCells(int n) {\\n        return 2LL * (n-1) * (n-1) + 2*n - 1;\\n    }\\n};\\n```",
+                "codeTag": "Java"
+            },
+            {
+                "id": 3354684,
+                "title": "code",
+                "content": "# Intuition\\n<!-- Describe your first thoughts on how to solve this problem. -->\\n\\n# Approach\\n<!-- Describe your approach to solving the problem. -->\\n\\n# Complexity\\n- Time complexity:\\n<!-- Add your time complexity here, e.g. $$O(n)$$ -->\\n\\n- Space complexity:\\n<!-- Add your space complexity here, e.g. $$O(n)$$ -->\\n\\n# Code\\n```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return ((2*n(n-1))+1)\\n        \\n\\n```",
+                "solutionTags": [
+                    "Python3"
+                ],
+                "code": "```\\nclass Solution:\\n    def coloredCells(self, n: int) -> int:\\n        return ((2*n(n-1))+1)\\n        \\n\\n```",
+                "codeTag": "Java"
+            }
+        ],
+        "discussions": [
+            {
+                "id": 1965609,
+                "content": [
+                    {
+                        "username": "geekyshark",
+                        "content": "This problem don\\'t even deserve easy tag, its elementary school level"
+                    },
+                    {
+                        "username": "Peet_code",
+                        "content": "nth term = n^2 + (n-1)^2"
+                    },
+                    {
+                        "username": "tyagidivyam47",
+                        "content": "Numbers os cells in outer part is increasing in multiple of 4.\\n\\nhttps://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3472587/java-on-easiest-solution-in-one-loop/"
+                    },
+                    {
+                        "username": "cOde_Ranvir25",
+                        "content": "Here is the Approach:-\\n\\n1.If n = 1, return 1 (there is only one colored cell after 1 minute).\\n\\n2.Initialize a variable ans to 1 (to account for the initially colored cell at minute 1).\\n\\n3.For each integer i from 2 to n:\\na. Compute the number of newly colored cells at minute i as 4*(i-1).\\nb. Add this number to ans.\\n\\n4.Return ans."
+                    },
+                    {
+                        "username": "cOde_Ranvir25",
+                        "content": "Here is the Code link for reference:-\\n\\nhttps://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3256904/one-pass-solution-with-steps/"
+                    },
+                    {
+                        "username": "Nobody_cares",
+                        "content": "The answer is:\\n1+4*(n-1)+2*(n-1)*(n-2)"
+                    },
+                    {
+                        "username": "ap3223",
+                        "content": "watch the patterns"
+                    },
+                    {
+                        "username": "ayushluthra62",
+                        "content": "C++ Easy and simple solution .\\nMy solution Link ;https://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3256067/0ms-c-easy-and-simple-solution/?orderBy=most_votes\\nDon\\'t forgot to upvote it"
+                    }
+                ]
+            },
+            {
+                "id": 1821754,
+                "content": [
+                    {
+                        "username": "geekyshark",
+                        "content": "This problem don\\'t even deserve easy tag, its elementary school level"
+                    },
+                    {
+                        "username": "Peet_code",
+                        "content": "nth term = n^2 + (n-1)^2"
+                    },
+                    {
+                        "username": "tyagidivyam47",
+                        "content": "Numbers os cells in outer part is increasing in multiple of 4.\\n\\nhttps://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3472587/java-on-easiest-solution-in-one-loop/"
+                    },
+                    {
+                        "username": "cOde_Ranvir25",
+                        "content": "Here is the Approach:-\\n\\n1.If n = 1, return 1 (there is only one colored cell after 1 minute).\\n\\n2.Initialize a variable ans to 1 (to account for the initially colored cell at minute 1).\\n\\n3.For each integer i from 2 to n:\\na. Compute the number of newly colored cells at minute i as 4*(i-1).\\nb. Add this number to ans.\\n\\n4.Return ans."
+                    },
+                    {
+                        "username": "cOde_Ranvir25",
+                        "content": "Here is the Code link for reference:-\\n\\nhttps://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3256904/one-pass-solution-with-steps/"
+                    },
+                    {
+                        "username": "Nobody_cares",
+                        "content": "The answer is:\\n1+4*(n-1)+2*(n-1)*(n-2)"
+                    },
+                    {
+                        "username": "ap3223",
+                        "content": "watch the patterns"
+                    },
+                    {
+                        "username": "ayushluthra62",
+                        "content": "C++ Easy and simple solution .\\nMy solution Link ;https://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3256067/0ms-c-easy-and-simple-solution/?orderBy=most_votes\\nDon\\'t forgot to upvote it"
+                    }
+                ]
+            },
+            {
+                "id": 1878991,
+                "content": [
+                    {
+                        "username": "geekyshark",
+                        "content": "This problem don\\'t even deserve easy tag, its elementary school level"
+                    },
+                    {
+                        "username": "Peet_code",
+                        "content": "nth term = n^2 + (n-1)^2"
+                    },
+                    {
+                        "username": "tyagidivyam47",
+                        "content": "Numbers os cells in outer part is increasing in multiple of 4.\\n\\nhttps://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3472587/java-on-easiest-solution-in-one-loop/"
+                    },
+                    {
+                        "username": "cOde_Ranvir25",
+                        "content": "Here is the Approach:-\\n\\n1.If n = 1, return 1 (there is only one colored cell after 1 minute).\\n\\n2.Initialize a variable ans to 1 (to account for the initially colored cell at minute 1).\\n\\n3.For each integer i from 2 to n:\\na. Compute the number of newly colored cells at minute i as 4*(i-1).\\nb. Add this number to ans.\\n\\n4.Return ans."
+                    },
+                    {
+                        "username": "cOde_Ranvir25",
+                        "content": "Here is the Code link for reference:-\\n\\nhttps://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3256904/one-pass-solution-with-steps/"
+                    },
+                    {
+                        "username": "Nobody_cares",
+                        "content": "The answer is:\\n1+4*(n-1)+2*(n-1)*(n-2)"
+                    },
+                    {
+                        "username": "ap3223",
+                        "content": "watch the patterns"
+                    },
+                    {
+                        "username": "ayushluthra62",
+                        "content": "C++ Easy and simple solution .\\nMy solution Link ;https://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3256067/0ms-c-easy-and-simple-solution/?orderBy=most_votes\\nDon\\'t forgot to upvote it"
+                    }
+                ]
+            },
+            {
+                "id": 1821831,
+                "content": [
+                    {
+                        "username": "geekyshark",
+                        "content": "This problem don\\'t even deserve easy tag, its elementary school level"
+                    },
+                    {
+                        "username": "Peet_code",
+                        "content": "nth term = n^2 + (n-1)^2"
+                    },
+                    {
+                        "username": "tyagidivyam47",
+                        "content": "Numbers os cells in outer part is increasing in multiple of 4.\\n\\nhttps://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3472587/java-on-easiest-solution-in-one-loop/"
+                    },
+                    {
+                        "username": "cOde_Ranvir25",
+                        "content": "Here is the Approach:-\\n\\n1.If n = 1, return 1 (there is only one colored cell after 1 minute).\\n\\n2.Initialize a variable ans to 1 (to account for the initially colored cell at minute 1).\\n\\n3.For each integer i from 2 to n:\\na. Compute the number of newly colored cells at minute i as 4*(i-1).\\nb. Add this number to ans.\\n\\n4.Return ans."
+                    },
+                    {
+                        "username": "cOde_Ranvir25",
+                        "content": "Here is the Code link for reference:-\\n\\nhttps://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3256904/one-pass-solution-with-steps/"
+                    },
+                    {
+                        "username": "Nobody_cares",
+                        "content": "The answer is:\\n1+4*(n-1)+2*(n-1)*(n-2)"
+                    },
+                    {
+                        "username": "ap3223",
+                        "content": "watch the patterns"
+                    },
+                    {
+                        "username": "ayushluthra62",
+                        "content": "C++ Easy and simple solution .\\nMy solution Link ;https://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3256067/0ms-c-easy-and-simple-solution/?orderBy=most_votes\\nDon\\'t forgot to upvote it"
+                    }
+                ]
+            },
+            {
+                "id": 1821690,
+                "content": [
+                    {
+                        "username": "geekyshark",
+                        "content": "This problem don\\'t even deserve easy tag, its elementary school level"
+                    },
+                    {
+                        "username": "Peet_code",
+                        "content": "nth term = n^2 + (n-1)^2"
+                    },
+                    {
+                        "username": "tyagidivyam47",
+                        "content": "Numbers os cells in outer part is increasing in multiple of 4.\\n\\nhttps://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3472587/java-on-easiest-solution-in-one-loop/"
+                    },
+                    {
+                        "username": "cOde_Ranvir25",
+                        "content": "Here is the Approach:-\\n\\n1.If n = 1, return 1 (there is only one colored cell after 1 minute).\\n\\n2.Initialize a variable ans to 1 (to account for the initially colored cell at minute 1).\\n\\n3.For each integer i from 2 to n:\\na. Compute the number of newly colored cells at minute i as 4*(i-1).\\nb. Add this number to ans.\\n\\n4.Return ans."
+                    },
+                    {
+                        "username": "cOde_Ranvir25",
+                        "content": "Here is the Code link for reference:-\\n\\nhttps://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3256904/one-pass-solution-with-steps/"
+                    },
+                    {
+                        "username": "Nobody_cares",
+                        "content": "The answer is:\\n1+4*(n-1)+2*(n-1)*(n-2)"
+                    },
+                    {
+                        "username": "ap3223",
+                        "content": "watch the patterns"
+                    },
+                    {
+                        "username": "ayushluthra62",
+                        "content": "C++ Easy and simple solution .\\nMy solution Link ;https://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3256067/0ms-c-easy-and-simple-solution/?orderBy=most_votes\\nDon\\'t forgot to upvote it"
+                    }
+                ]
+            },
+            {
+                "id": 1821628,
+                "content": [
+                    {
+                        "username": "geekyshark",
+                        "content": "This problem don\\'t even deserve easy tag, its elementary school level"
+                    },
+                    {
+                        "username": "Peet_code",
+                        "content": "nth term = n^2 + (n-1)^2"
+                    },
+                    {
+                        "username": "tyagidivyam47",
+                        "content": "Numbers os cells in outer part is increasing in multiple of 4.\\n\\nhttps://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3472587/java-on-easiest-solution-in-one-loop/"
+                    },
+                    {
+                        "username": "cOde_Ranvir25",
+                        "content": "Here is the Approach:-\\n\\n1.If n = 1, return 1 (there is only one colored cell after 1 minute).\\n\\n2.Initialize a variable ans to 1 (to account for the initially colored cell at minute 1).\\n\\n3.For each integer i from 2 to n:\\na. Compute the number of newly colored cells at minute i as 4*(i-1).\\nb. Add this number to ans.\\n\\n4.Return ans."
+                    },
+                    {
+                        "username": "cOde_Ranvir25",
+                        "content": "Here is the Code link for reference:-\\n\\nhttps://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3256904/one-pass-solution-with-steps/"
+                    },
+                    {
+                        "username": "Nobody_cares",
+                        "content": "The answer is:\\n1+4*(n-1)+2*(n-1)*(n-2)"
+                    },
+                    {
+                        "username": "ap3223",
+                        "content": "watch the patterns"
+                    },
+                    {
+                        "username": "ayushluthra62",
+                        "content": "C++ Easy and simple solution .\\nMy solution Link ;https://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3256067/0ms-c-easy-and-simple-solution/?orderBy=most_votes\\nDon\\'t forgot to upvote it"
+                    }
+                ]
+            },
+            {
+                "id": 1821581,
+                "content": [
+                    {
+                        "username": "geekyshark",
+                        "content": "This problem don\\'t even deserve easy tag, its elementary school level"
+                    },
+                    {
+                        "username": "Peet_code",
+                        "content": "nth term = n^2 + (n-1)^2"
+                    },
+                    {
+                        "username": "tyagidivyam47",
+                        "content": "Numbers os cells in outer part is increasing in multiple of 4.\\n\\nhttps://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3472587/java-on-easiest-solution-in-one-loop/"
+                    },
+                    {
+                        "username": "cOde_Ranvir25",
+                        "content": "Here is the Approach:-\\n\\n1.If n = 1, return 1 (there is only one colored cell after 1 minute).\\n\\n2.Initialize a variable ans to 1 (to account for the initially colored cell at minute 1).\\n\\n3.For each integer i from 2 to n:\\na. Compute the number of newly colored cells at minute i as 4*(i-1).\\nb. Add this number to ans.\\n\\n4.Return ans."
+                    },
+                    {
+                        "username": "cOde_Ranvir25",
+                        "content": "Here is the Code link for reference:-\\n\\nhttps://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3256904/one-pass-solution-with-steps/"
+                    },
+                    {
+                        "username": "Nobody_cares",
+                        "content": "The answer is:\\n1+4*(n-1)+2*(n-1)*(n-2)"
+                    },
+                    {
+                        "username": "ap3223",
+                        "content": "watch the patterns"
+                    },
+                    {
+                        "username": "ayushluthra62",
+                        "content": "C++ Easy and simple solution .\\nMy solution Link ;https://leetcode.com/problems/count-total-number-of-colored-cells/solutions/3256067/0ms-c-easy-and-simple-solution/?orderBy=most_votes\\nDon\\'t forgot to upvote it"
+                    }
+                ]
+            }
+        ]
+    }
+]

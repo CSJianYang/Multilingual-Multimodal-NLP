@@ -1,0 +1,60 @@
+[
+    {
+        "title": "First and Last Call On the Same Day",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1576138,
+                "content": [
+                    {
+                        "username": "ravdeep91",
+                        "content": "with temp as (\\nselect caller_id as user_id, recipient_id as to_id, call_time\\nfrom Calls\\nUnion\\nselect recipient_id as user_id, caller_id as to_id, call_time\\nfrom Calls\\norder by call_time\\n),\\n\\ntemp2 as (\\nselect user_id, to_id, to_char(call_time, \\'MM-DD-YYYY\\') as call_date,\\ndense_rank() over (partition by user_id, to_char(call_time, \\'YYYY-MM-DD\\') order by call_time) as first,\\ndense_rank() over (partition by user_id, to_char(call_time, \\'YYYY-MM-DD\\') order by call_time desc) as last\\nfrom temp\\n)\\n\\nselect distinct user_id\\nfrom temp2\\nwhere first = 1 or last = 1\\ngroup by user_id, call_date\\nhaving count(distinct to_id) = 1"
+                    },
+                    {
+                        "username": "Manikanta_Komuravelli",
+                        "content": "#Combining the entire table to have common called_id and recipient_id \\nwith cte as (select caller_id, recipient_id, call_time from calls\\nunion\\nselect recipient_id as caller_id, caller_id as recipient_id, call_time from calls),\\n\\n#Fetching the first call for each user_id\\ncte2 as (select caller_id, recipient_id, date(call_time) as date, row_number() over(partition by caller_id, date(call_time) order by call_time) as rank_ from cte),\\n\\nfcal as (select * from cte2\\nwhere rank_ = 1),\\n\\n#Fetching the last call for each user on a given day\\ncte3 as (select caller_id, recipient_id, date(call_time) as date, row_number() over(partition by caller_id, date(call_time) order by call_time desc) as rank_ from cte),\\n\\nlcal as (select * from cte3\\nwhere rank_= 1)\\n\\n#Returning users, whose first call and last call were to the same person on a given day\\nselect distinct fcal.caller_id as user_id from fcal\\njoin lcal \\non fcal.caller_id = lcal.caller_id and fcal.recipient_id = lcal.recipient_id and fcal.date=lcal.date"
+                    },
+                    {
+                        "username": "DataEngineer",
+                        "content": "\\nwith callers as( \\nselect caller_id as user_id, recipient_id, call_time from Calls\\nunion \\nselect recipient_id as user_id, caller_id as recipient_id, call_time from Calls\\n)\\n\\n,calllog as (\\nselect user_id, CONVERT(varchar(8),call_time,101) as CallDate, Min(call_time) as MinCallTime, Max(call_time) as MaxCalltime \\nfrom callers\\ngroup by user_id, CONVERT(varchar(8),call_time,101)\\n)\\n\\nselect distinct A.user_id\\nfrom callers as A\\njoin calllog as B \\non A.user_id = B.user_id and (A.call_time = B.MinCallTime or A.call_time = B.MaxCalltime)\\ngroup by A.user_id, B.CallDate\\nhaving count(distinct A.recipient_id) = 1\\norder by 1"
+                    }
+                ]
+            },
+            {
+                "id": 1575855,
+                "content": [
+                    {
+                        "username": "ravdeep91",
+                        "content": "with temp as (\\nselect caller_id as user_id, recipient_id as to_id, call_time\\nfrom Calls\\nUnion\\nselect recipient_id as user_id, caller_id as to_id, call_time\\nfrom Calls\\norder by call_time\\n),\\n\\ntemp2 as (\\nselect user_id, to_id, to_char(call_time, \\'MM-DD-YYYY\\') as call_date,\\ndense_rank() over (partition by user_id, to_char(call_time, \\'YYYY-MM-DD\\') order by call_time) as first,\\ndense_rank() over (partition by user_id, to_char(call_time, \\'YYYY-MM-DD\\') order by call_time desc) as last\\nfrom temp\\n)\\n\\nselect distinct user_id\\nfrom temp2\\nwhere first = 1 or last = 1\\ngroup by user_id, call_date\\nhaving count(distinct to_id) = 1"
+                    },
+                    {
+                        "username": "Manikanta_Komuravelli",
+                        "content": "#Combining the entire table to have common called_id and recipient_id \\nwith cte as (select caller_id, recipient_id, call_time from calls\\nunion\\nselect recipient_id as caller_id, caller_id as recipient_id, call_time from calls),\\n\\n#Fetching the first call for each user_id\\ncte2 as (select caller_id, recipient_id, date(call_time) as date, row_number() over(partition by caller_id, date(call_time) order by call_time) as rank_ from cte),\\n\\nfcal as (select * from cte2\\nwhere rank_ = 1),\\n\\n#Fetching the last call for each user on a given day\\ncte3 as (select caller_id, recipient_id, date(call_time) as date, row_number() over(partition by caller_id, date(call_time) order by call_time desc) as rank_ from cte),\\n\\nlcal as (select * from cte3\\nwhere rank_= 1)\\n\\n#Returning users, whose first call and last call were to the same person on a given day\\nselect distinct fcal.caller_id as user_id from fcal\\njoin lcal \\non fcal.caller_id = lcal.caller_id and fcal.recipient_id = lcal.recipient_id and fcal.date=lcal.date"
+                    },
+                    {
+                        "username": "DataEngineer",
+                        "content": "\\nwith callers as( \\nselect caller_id as user_id, recipient_id, call_time from Calls\\nunion \\nselect recipient_id as user_id, caller_id as recipient_id, call_time from Calls\\n)\\n\\n,calllog as (\\nselect user_id, CONVERT(varchar(8),call_time,101) as CallDate, Min(call_time) as MinCallTime, Max(call_time) as MaxCalltime \\nfrom callers\\ngroup by user_id, CONVERT(varchar(8),call_time,101)\\n)\\n\\nselect distinct A.user_id\\nfrom callers as A\\njoin calllog as B \\non A.user_id = B.user_id and (A.call_time = B.MinCallTime or A.call_time = B.MaxCalltime)\\ngroup by A.user_id, B.CallDate\\nhaving count(distinct A.recipient_id) = 1\\norder by 1"
+                    }
+                ]
+            },
+            {
+                "id": 1570588,
+                "content": [
+                    {
+                        "username": "ravdeep91",
+                        "content": "with temp as (\\nselect caller_id as user_id, recipient_id as to_id, call_time\\nfrom Calls\\nUnion\\nselect recipient_id as user_id, caller_id as to_id, call_time\\nfrom Calls\\norder by call_time\\n),\\n\\ntemp2 as (\\nselect user_id, to_id, to_char(call_time, \\'MM-DD-YYYY\\') as call_date,\\ndense_rank() over (partition by user_id, to_char(call_time, \\'YYYY-MM-DD\\') order by call_time) as first,\\ndense_rank() over (partition by user_id, to_char(call_time, \\'YYYY-MM-DD\\') order by call_time desc) as last\\nfrom temp\\n)\\n\\nselect distinct user_id\\nfrom temp2\\nwhere first = 1 or last = 1\\ngroup by user_id, call_date\\nhaving count(distinct to_id) = 1"
+                    },
+                    {
+                        "username": "Manikanta_Komuravelli",
+                        "content": "#Combining the entire table to have common called_id and recipient_id \\nwith cte as (select caller_id, recipient_id, call_time from calls\\nunion\\nselect recipient_id as caller_id, caller_id as recipient_id, call_time from calls),\\n\\n#Fetching the first call for each user_id\\ncte2 as (select caller_id, recipient_id, date(call_time) as date, row_number() over(partition by caller_id, date(call_time) order by call_time) as rank_ from cte),\\n\\nfcal as (select * from cte2\\nwhere rank_ = 1),\\n\\n#Fetching the last call for each user on a given day\\ncte3 as (select caller_id, recipient_id, date(call_time) as date, row_number() over(partition by caller_id, date(call_time) order by call_time desc) as rank_ from cte),\\n\\nlcal as (select * from cte3\\nwhere rank_= 1)\\n\\n#Returning users, whose first call and last call were to the same person on a given day\\nselect distinct fcal.caller_id as user_id from fcal\\njoin lcal \\non fcal.caller_id = lcal.caller_id and fcal.recipient_id = lcal.recipient_id and fcal.date=lcal.date"
+                    },
+                    {
+                        "username": "DataEngineer",
+                        "content": "\\nwith callers as( \\nselect caller_id as user_id, recipient_id, call_time from Calls\\nunion \\nselect recipient_id as user_id, caller_id as recipient_id, call_time from Calls\\n)\\n\\n,calllog as (\\nselect user_id, CONVERT(varchar(8),call_time,101) as CallDate, Min(call_time) as MinCallTime, Max(call_time) as MaxCalltime \\nfrom callers\\ngroup by user_id, CONVERT(varchar(8),call_time,101)\\n)\\n\\nselect distinct A.user_id\\nfrom callers as A\\njoin calllog as B \\non A.user_id = B.user_id and (A.call_time = B.MinCallTime or A.call_time = B.MaxCalltime)\\ngroup by A.user_id, B.CallDate\\nhaving count(distinct A.recipient_id) = 1\\norder by 1"
+                    }
+                ]
+            }
+        ]
+    }
+]

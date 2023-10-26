@@ -1,0 +1,305 @@
+[
+    {
+        "title": "Winning Candidate",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1565257,
+                "content": [
+                    {
+                        "username": "Peter233767",
+                        "content": "There is a case when people vote for someone who is not in the candidate. The solution is finding out the winner id from vote and match to candidate. Simple join will not work.\\n# Write your MySQL query statement below\\nSELECT C.Name FROM Candidate C\\nWHERE id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1);"
+                    },
+                    {
+                        "username": "MTB",
+                        "content": "All the solutions are assuming that there is never a tie I guess.\\n\\nThis takes care of the case when there is a tie too.\\n\\nselect C.Name from\\nCandidate C\\nJOIN(\\nselect CandidateId, dense_rank() OVER (ORDER BY count(CandidateId) desc) as rnk from Vote\\nGROUP BY CandidateId)Voting \\nON C.id = Voting.CandidateId\\nWHERE Voting.rnk=1"
+                    },
+                    {
+                        "username": "Masquerader",
+                        "content": "select Name from Candidate where id = (select candidateid from Vote group by candidateid order by count(candidateid) desc limit 1)"
+                    },
+                    {
+                        "username": "wenruiii",
+                        "content": "with cte as (select name,count(v.candidateId) as counts\\nfrom Candidate c left join Vote v\\non c.id=v.candidateId\\ngroup by c.id\\n)\\nselect name \\nfrom cte\\nwhere counts in\\n(select max(counts) from cte)"
+                    },
+                    {
+                        "username": "whitney218",
+                        "content": "![image](https://assets.leetcode.com/users/whitney218/image_1543593349.png)\\n# The result will show the null when there are no matched names.  Who can help me to fixed it?\\nselect name as Name from vote v left join candidate c on c.id=v.candidateid\\ngroup by candidateid\\norder by count(candidateid) desc\\nlimit 1"
+                    },
+                    {
+                        "username": "fodkastir",
+                        "content": "'''\\nSELECT Name FROM Candidate WHERE Id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1)\\n\\n'''"
+                    },
+                    {
+                        "username": "vinayakam19",
+                        "content": " `with winning as (select c1.id, c1.name, v1.id as vote_id, v1.candidateId, COUNT(v1.id) OVER(PARTITION BY name) as vote_counts from Candidate c1 LEFT JOIN Vote v1 on c1.id = v1.candidateId)\\n\\nselect DISTINCT(name) from winning where vote_counts = (select max(vote_counts) from winning);`"
+                    },
+                    {
+                        "username": "atharvagishere99",
+                        "content": "My solution with join and group by function.\\nselect c.name \\nfrom vote v\\nleft join candidate c \\non v.candidateId = c.id\\ngroup by c.name \\norder by count(*) desc limit 1"
+                    }
+                ]
+            },
+            {
+                "id": 1566111,
+                "content": [
+                    {
+                        "username": "Peter233767",
+                        "content": "There is a case when people vote for someone who is not in the candidate. The solution is finding out the winner id from vote and match to candidate. Simple join will not work.\\n# Write your MySQL query statement below\\nSELECT C.Name FROM Candidate C\\nWHERE id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1);"
+                    },
+                    {
+                        "username": "MTB",
+                        "content": "All the solutions are assuming that there is never a tie I guess.\\n\\nThis takes care of the case when there is a tie too.\\n\\nselect C.Name from\\nCandidate C\\nJOIN(\\nselect CandidateId, dense_rank() OVER (ORDER BY count(CandidateId) desc) as rnk from Vote\\nGROUP BY CandidateId)Voting \\nON C.id = Voting.CandidateId\\nWHERE Voting.rnk=1"
+                    },
+                    {
+                        "username": "Masquerader",
+                        "content": "select Name from Candidate where id = (select candidateid from Vote group by candidateid order by count(candidateid) desc limit 1)"
+                    },
+                    {
+                        "username": "wenruiii",
+                        "content": "with cte as (select name,count(v.candidateId) as counts\\nfrom Candidate c left join Vote v\\non c.id=v.candidateId\\ngroup by c.id\\n)\\nselect name \\nfrom cte\\nwhere counts in\\n(select max(counts) from cte)"
+                    },
+                    {
+                        "username": "whitney218",
+                        "content": "![image](https://assets.leetcode.com/users/whitney218/image_1543593349.png)\\n# The result will show the null when there are no matched names.  Who can help me to fixed it?\\nselect name as Name from vote v left join candidate c on c.id=v.candidateid\\ngroup by candidateid\\norder by count(candidateid) desc\\nlimit 1"
+                    },
+                    {
+                        "username": "fodkastir",
+                        "content": "'''\\nSELECT Name FROM Candidate WHERE Id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1)\\n\\n'''"
+                    },
+                    {
+                        "username": "vinayakam19",
+                        "content": " `with winning as (select c1.id, c1.name, v1.id as vote_id, v1.candidateId, COUNT(v1.id) OVER(PARTITION BY name) as vote_counts from Candidate c1 LEFT JOIN Vote v1 on c1.id = v1.candidateId)\\n\\nselect DISTINCT(name) from winning where vote_counts = (select max(vote_counts) from winning);`"
+                    },
+                    {
+                        "username": "atharvagishere99",
+                        "content": "My solution with join and group by function.\\nselect c.name \\nfrom vote v\\nleft join candidate c \\non v.candidateId = c.id\\ngroup by c.name \\norder by count(*) desc limit 1"
+                    }
+                ]
+            },
+            {
+                "id": 1567274,
+                "content": [
+                    {
+                        "username": "Peter233767",
+                        "content": "There is a case when people vote for someone who is not in the candidate. The solution is finding out the winner id from vote and match to candidate. Simple join will not work.\\n# Write your MySQL query statement below\\nSELECT C.Name FROM Candidate C\\nWHERE id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1);"
+                    },
+                    {
+                        "username": "MTB",
+                        "content": "All the solutions are assuming that there is never a tie I guess.\\n\\nThis takes care of the case when there is a tie too.\\n\\nselect C.Name from\\nCandidate C\\nJOIN(\\nselect CandidateId, dense_rank() OVER (ORDER BY count(CandidateId) desc) as rnk from Vote\\nGROUP BY CandidateId)Voting \\nON C.id = Voting.CandidateId\\nWHERE Voting.rnk=1"
+                    },
+                    {
+                        "username": "Masquerader",
+                        "content": "select Name from Candidate where id = (select candidateid from Vote group by candidateid order by count(candidateid) desc limit 1)"
+                    },
+                    {
+                        "username": "wenruiii",
+                        "content": "with cte as (select name,count(v.candidateId) as counts\\nfrom Candidate c left join Vote v\\non c.id=v.candidateId\\ngroup by c.id\\n)\\nselect name \\nfrom cte\\nwhere counts in\\n(select max(counts) from cte)"
+                    },
+                    {
+                        "username": "whitney218",
+                        "content": "![image](https://assets.leetcode.com/users/whitney218/image_1543593349.png)\\n# The result will show the null when there are no matched names.  Who can help me to fixed it?\\nselect name as Name from vote v left join candidate c on c.id=v.candidateid\\ngroup by candidateid\\norder by count(candidateid) desc\\nlimit 1"
+                    },
+                    {
+                        "username": "fodkastir",
+                        "content": "'''\\nSELECT Name FROM Candidate WHERE Id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1)\\n\\n'''"
+                    },
+                    {
+                        "username": "vinayakam19",
+                        "content": " `with winning as (select c1.id, c1.name, v1.id as vote_id, v1.candidateId, COUNT(v1.id) OVER(PARTITION BY name) as vote_counts from Candidate c1 LEFT JOIN Vote v1 on c1.id = v1.candidateId)\\n\\nselect DISTINCT(name) from winning where vote_counts = (select max(vote_counts) from winning);`"
+                    },
+                    {
+                        "username": "atharvagishere99",
+                        "content": "My solution with join and group by function.\\nselect c.name \\nfrom vote v\\nleft join candidate c \\non v.candidateId = c.id\\ngroup by c.name \\norder by count(*) desc limit 1"
+                    }
+                ]
+            },
+            {
+                "id": 1575934,
+                "content": [
+                    {
+                        "username": "Peter233767",
+                        "content": "There is a case when people vote for someone who is not in the candidate. The solution is finding out the winner id from vote and match to candidate. Simple join will not work.\\n# Write your MySQL query statement below\\nSELECT C.Name FROM Candidate C\\nWHERE id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1);"
+                    },
+                    {
+                        "username": "MTB",
+                        "content": "All the solutions are assuming that there is never a tie I guess.\\n\\nThis takes care of the case when there is a tie too.\\n\\nselect C.Name from\\nCandidate C\\nJOIN(\\nselect CandidateId, dense_rank() OVER (ORDER BY count(CandidateId) desc) as rnk from Vote\\nGROUP BY CandidateId)Voting \\nON C.id = Voting.CandidateId\\nWHERE Voting.rnk=1"
+                    },
+                    {
+                        "username": "Masquerader",
+                        "content": "select Name from Candidate where id = (select candidateid from Vote group by candidateid order by count(candidateid) desc limit 1)"
+                    },
+                    {
+                        "username": "wenruiii",
+                        "content": "with cte as (select name,count(v.candidateId) as counts\\nfrom Candidate c left join Vote v\\non c.id=v.candidateId\\ngroup by c.id\\n)\\nselect name \\nfrom cte\\nwhere counts in\\n(select max(counts) from cte)"
+                    },
+                    {
+                        "username": "whitney218",
+                        "content": "![image](https://assets.leetcode.com/users/whitney218/image_1543593349.png)\\n# The result will show the null when there are no matched names.  Who can help me to fixed it?\\nselect name as Name from vote v left join candidate c on c.id=v.candidateid\\ngroup by candidateid\\norder by count(candidateid) desc\\nlimit 1"
+                    },
+                    {
+                        "username": "fodkastir",
+                        "content": "'''\\nSELECT Name FROM Candidate WHERE Id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1)\\n\\n'''"
+                    },
+                    {
+                        "username": "vinayakam19",
+                        "content": " `with winning as (select c1.id, c1.name, v1.id as vote_id, v1.candidateId, COUNT(v1.id) OVER(PARTITION BY name) as vote_counts from Candidate c1 LEFT JOIN Vote v1 on c1.id = v1.candidateId)\\n\\nselect DISTINCT(name) from winning where vote_counts = (select max(vote_counts) from winning);`"
+                    },
+                    {
+                        "username": "atharvagishere99",
+                        "content": "My solution with join and group by function.\\nselect c.name \\nfrom vote v\\nleft join candidate c \\non v.candidateId = c.id\\ngroup by c.name \\norder by count(*) desc limit 1"
+                    }
+                ]
+            },
+            {
+                "id": 1572304,
+                "content": [
+                    {
+                        "username": "Peter233767",
+                        "content": "There is a case when people vote for someone who is not in the candidate. The solution is finding out the winner id from vote and match to candidate. Simple join will not work.\\n# Write your MySQL query statement below\\nSELECT C.Name FROM Candidate C\\nWHERE id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1);"
+                    },
+                    {
+                        "username": "MTB",
+                        "content": "All the solutions are assuming that there is never a tie I guess.\\n\\nThis takes care of the case when there is a tie too.\\n\\nselect C.Name from\\nCandidate C\\nJOIN(\\nselect CandidateId, dense_rank() OVER (ORDER BY count(CandidateId) desc) as rnk from Vote\\nGROUP BY CandidateId)Voting \\nON C.id = Voting.CandidateId\\nWHERE Voting.rnk=1"
+                    },
+                    {
+                        "username": "Masquerader",
+                        "content": "select Name from Candidate where id = (select candidateid from Vote group by candidateid order by count(candidateid) desc limit 1)"
+                    },
+                    {
+                        "username": "wenruiii",
+                        "content": "with cte as (select name,count(v.candidateId) as counts\\nfrom Candidate c left join Vote v\\non c.id=v.candidateId\\ngroup by c.id\\n)\\nselect name \\nfrom cte\\nwhere counts in\\n(select max(counts) from cte)"
+                    },
+                    {
+                        "username": "whitney218",
+                        "content": "![image](https://assets.leetcode.com/users/whitney218/image_1543593349.png)\\n# The result will show the null when there are no matched names.  Who can help me to fixed it?\\nselect name as Name from vote v left join candidate c on c.id=v.candidateid\\ngroup by candidateid\\norder by count(candidateid) desc\\nlimit 1"
+                    },
+                    {
+                        "username": "fodkastir",
+                        "content": "'''\\nSELECT Name FROM Candidate WHERE Id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1)\\n\\n'''"
+                    },
+                    {
+                        "username": "vinayakam19",
+                        "content": " `with winning as (select c1.id, c1.name, v1.id as vote_id, v1.candidateId, COUNT(v1.id) OVER(PARTITION BY name) as vote_counts from Candidate c1 LEFT JOIN Vote v1 on c1.id = v1.candidateId)\\n\\nselect DISTINCT(name) from winning where vote_counts = (select max(vote_counts) from winning);`"
+                    },
+                    {
+                        "username": "atharvagishere99",
+                        "content": "My solution with join and group by function.\\nselect c.name \\nfrom vote v\\nleft join candidate c \\non v.candidateId = c.id\\ngroup by c.name \\norder by count(*) desc limit 1"
+                    }
+                ]
+            },
+            {
+                "id": 1571775,
+                "content": [
+                    {
+                        "username": "Peter233767",
+                        "content": "There is a case when people vote for someone who is not in the candidate. The solution is finding out the winner id from vote and match to candidate. Simple join will not work.\\n# Write your MySQL query statement below\\nSELECT C.Name FROM Candidate C\\nWHERE id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1);"
+                    },
+                    {
+                        "username": "MTB",
+                        "content": "All the solutions are assuming that there is never a tie I guess.\\n\\nThis takes care of the case when there is a tie too.\\n\\nselect C.Name from\\nCandidate C\\nJOIN(\\nselect CandidateId, dense_rank() OVER (ORDER BY count(CandidateId) desc) as rnk from Vote\\nGROUP BY CandidateId)Voting \\nON C.id = Voting.CandidateId\\nWHERE Voting.rnk=1"
+                    },
+                    {
+                        "username": "Masquerader",
+                        "content": "select Name from Candidate where id = (select candidateid from Vote group by candidateid order by count(candidateid) desc limit 1)"
+                    },
+                    {
+                        "username": "wenruiii",
+                        "content": "with cte as (select name,count(v.candidateId) as counts\\nfrom Candidate c left join Vote v\\non c.id=v.candidateId\\ngroup by c.id\\n)\\nselect name \\nfrom cte\\nwhere counts in\\n(select max(counts) from cte)"
+                    },
+                    {
+                        "username": "whitney218",
+                        "content": "![image](https://assets.leetcode.com/users/whitney218/image_1543593349.png)\\n# The result will show the null when there are no matched names.  Who can help me to fixed it?\\nselect name as Name from vote v left join candidate c on c.id=v.candidateid\\ngroup by candidateid\\norder by count(candidateid) desc\\nlimit 1"
+                    },
+                    {
+                        "username": "fodkastir",
+                        "content": "'''\\nSELECT Name FROM Candidate WHERE Id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1)\\n\\n'''"
+                    },
+                    {
+                        "username": "vinayakam19",
+                        "content": " `with winning as (select c1.id, c1.name, v1.id as vote_id, v1.candidateId, COUNT(v1.id) OVER(PARTITION BY name) as vote_counts from Candidate c1 LEFT JOIN Vote v1 on c1.id = v1.candidateId)\\n\\nselect DISTINCT(name) from winning where vote_counts = (select max(vote_counts) from winning);`"
+                    },
+                    {
+                        "username": "atharvagishere99",
+                        "content": "My solution with join and group by function.\\nselect c.name \\nfrom vote v\\nleft join candidate c \\non v.candidateId = c.id\\ngroup by c.name \\norder by count(*) desc limit 1"
+                    }
+                ]
+            },
+            {
+                "id": 1812082,
+                "content": [
+                    {
+                        "username": "Peter233767",
+                        "content": "There is a case when people vote for someone who is not in the candidate. The solution is finding out the winner id from vote and match to candidate. Simple join will not work.\\n# Write your MySQL query statement below\\nSELECT C.Name FROM Candidate C\\nWHERE id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1);"
+                    },
+                    {
+                        "username": "MTB",
+                        "content": "All the solutions are assuming that there is never a tie I guess.\\n\\nThis takes care of the case when there is a tie too.\\n\\nselect C.Name from\\nCandidate C\\nJOIN(\\nselect CandidateId, dense_rank() OVER (ORDER BY count(CandidateId) desc) as rnk from Vote\\nGROUP BY CandidateId)Voting \\nON C.id = Voting.CandidateId\\nWHERE Voting.rnk=1"
+                    },
+                    {
+                        "username": "Masquerader",
+                        "content": "select Name from Candidate where id = (select candidateid from Vote group by candidateid order by count(candidateid) desc limit 1)"
+                    },
+                    {
+                        "username": "wenruiii",
+                        "content": "with cte as (select name,count(v.candidateId) as counts\\nfrom Candidate c left join Vote v\\non c.id=v.candidateId\\ngroup by c.id\\n)\\nselect name \\nfrom cte\\nwhere counts in\\n(select max(counts) from cte)"
+                    },
+                    {
+                        "username": "whitney218",
+                        "content": "![image](https://assets.leetcode.com/users/whitney218/image_1543593349.png)\\n# The result will show the null when there are no matched names.  Who can help me to fixed it?\\nselect name as Name from vote v left join candidate c on c.id=v.candidateid\\ngroup by candidateid\\norder by count(candidateid) desc\\nlimit 1"
+                    },
+                    {
+                        "username": "fodkastir",
+                        "content": "'''\\nSELECT Name FROM Candidate WHERE Id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1)\\n\\n'''"
+                    },
+                    {
+                        "username": "vinayakam19",
+                        "content": " `with winning as (select c1.id, c1.name, v1.id as vote_id, v1.candidateId, COUNT(v1.id) OVER(PARTITION BY name) as vote_counts from Candidate c1 LEFT JOIN Vote v1 on c1.id = v1.candidateId)\\n\\nselect DISTINCT(name) from winning where vote_counts = (select max(vote_counts) from winning);`"
+                    },
+                    {
+                        "username": "atharvagishere99",
+                        "content": "My solution with join and group by function.\\nselect c.name \\nfrom vote v\\nleft join candidate c \\non v.candidateId = c.id\\ngroup by c.name \\norder by count(*) desc limit 1"
+                    }
+                ]
+            },
+            {
+                "id": 1731072,
+                "content": [
+                    {
+                        "username": "Peter233767",
+                        "content": "There is a case when people vote for someone who is not in the candidate. The solution is finding out the winner id from vote and match to candidate. Simple join will not work.\\n# Write your MySQL query statement below\\nSELECT C.Name FROM Candidate C\\nWHERE id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1);"
+                    },
+                    {
+                        "username": "MTB",
+                        "content": "All the solutions are assuming that there is never a tie I guess.\\n\\nThis takes care of the case when there is a tie too.\\n\\nselect C.Name from\\nCandidate C\\nJOIN(\\nselect CandidateId, dense_rank() OVER (ORDER BY count(CandidateId) desc) as rnk from Vote\\nGROUP BY CandidateId)Voting \\nON C.id = Voting.CandidateId\\nWHERE Voting.rnk=1"
+                    },
+                    {
+                        "username": "Masquerader",
+                        "content": "select Name from Candidate where id = (select candidateid from Vote group by candidateid order by count(candidateid) desc limit 1)"
+                    },
+                    {
+                        "username": "wenruiii",
+                        "content": "with cte as (select name,count(v.candidateId) as counts\\nfrom Candidate c left join Vote v\\non c.id=v.candidateId\\ngroup by c.id\\n)\\nselect name \\nfrom cte\\nwhere counts in\\n(select max(counts) from cte)"
+                    },
+                    {
+                        "username": "whitney218",
+                        "content": "![image](https://assets.leetcode.com/users/whitney218/image_1543593349.png)\\n# The result will show the null when there are no matched names.  Who can help me to fixed it?\\nselect name as Name from vote v left join candidate c on c.id=v.candidateid\\ngroup by candidateid\\norder by count(candidateid) desc\\nlimit 1"
+                    },
+                    {
+                        "username": "fodkastir",
+                        "content": "'''\\nSELECT Name FROM Candidate WHERE Id = (SELECT CandidateId FROM Vote GROUP BY CandidateId ORDER BY COUNT(id) DESC LIMIT 1)\\n\\n'''"
+                    },
+                    {
+                        "username": "vinayakam19",
+                        "content": " `with winning as (select c1.id, c1.name, v1.id as vote_id, v1.candidateId, COUNT(v1.id) OVER(PARTITION BY name) as vote_counts from Candidate c1 LEFT JOIN Vote v1 on c1.id = v1.candidateId)\\n\\nselect DISTINCT(name) from winning where vote_counts = (select max(vote_counts) from winning);`"
+                    },
+                    {
+                        "username": "atharvagishere99",
+                        "content": "My solution with join and group by function.\\nselect c.name \\nfrom vote v\\nleft join candidate c \\non v.candidateId = c.id\\ngroup by c.name \\norder by count(*) desc limit 1"
+                    }
+                ]
+            }
+        ]
+    }
+]

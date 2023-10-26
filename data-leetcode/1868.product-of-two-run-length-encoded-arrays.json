@@ -1,0 +1,18 @@
+[
+    {
+        "title": "Product of Two Run-Length Encoded Arrays",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1993605,
+                "content": [
+                    {
+                        "username": "cvddl",
+                        "content": "The description does not mention that the two arrays have equal length of expanded array. I notice that by using test case encoded1 =[[1,3],[2,1],[3,2]] and encoded2 =[[2,1]]...."
+                    }
+                ]
+            }
+        ]
+    }
+]

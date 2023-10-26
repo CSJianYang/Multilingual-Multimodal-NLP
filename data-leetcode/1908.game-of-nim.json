@@ -1,0 +1,67 @@
+[
+    {
+        "title": "Game of Nim",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1779936,
+                "content": [
+                    {
+                        "username": "medmoe",
+                        "content": "for [1,2,3] how come bob always wins. what if the scenario goes this way\\nalice remove 3 stones  -> [1,2,0]\\nbob remove 2 stones -> [1,0,0]\\nAlice remove 1 stone -> [0,0,0]\\nbob has no stones left to remove so he lose the game. \\nexpected should be true"
+                    },
+                    {
+                        "username": "mahayat",
+                        "content": "[@medmoe](/medmoe) Both Alice and Bob play *optimally*"
+                    },
+                    {
+                        "username": "medmoe",
+                        "content": "[@happyAD](/happyAD) i see thank you"
+                    },
+                    {
+                        "username": "happyAD",
+                        "content": "They always find their respective optimal solutions, and they can remove any positive number of stones.\\nfor your example:\\nalice remove 3 stones -> [1,2,0]\\nbob remove 1 stones -> [1,1,0]\\nAlice remove 1 stone -> [0,1,0]\\nbob remove 1 stones -> [0,0,0]\\nSo, Bob wins."
+                    },
+                    {
+                        "username": "happyAD",
+                        "content": "just a AI problem"
+                    },
+                    {
+                        "username": "nikonok",
+                        "content": "ChatGPT? =)"
+                    }
+                ]
+            },
+            {
+                "id": 1779902,
+                "content": [
+                    {
+                        "username": "medmoe",
+                        "content": "for [1,2,3] how come bob always wins. what if the scenario goes this way\\nalice remove 3 stones  -> [1,2,0]\\nbob remove 2 stones -> [1,0,0]\\nAlice remove 1 stone -> [0,0,0]\\nbob has no stones left to remove so he lose the game. \\nexpected should be true"
+                    },
+                    {
+                        "username": "mahayat",
+                        "content": "[@medmoe](/medmoe) Both Alice and Bob play *optimally*"
+                    },
+                    {
+                        "username": "medmoe",
+                        "content": "[@happyAD](/happyAD) i see thank you"
+                    },
+                    {
+                        "username": "happyAD",
+                        "content": "They always find their respective optimal solutions, and they can remove any positive number of stones.\\nfor your example:\\nalice remove 3 stones -> [1,2,0]\\nbob remove 1 stones -> [1,1,0]\\nAlice remove 1 stone -> [0,1,0]\\nbob remove 1 stones -> [0,0,0]\\nSo, Bob wins."
+                    },
+                    {
+                        "username": "happyAD",
+                        "content": "just a AI problem"
+                    },
+                    {
+                        "username": "nikonok",
+                        "content": "ChatGPT? =)"
+                    }
+                ]
+            }
+        ]
+    }
+]

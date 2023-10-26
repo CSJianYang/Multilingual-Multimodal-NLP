@@ -1,0 +1,18 @@
+[
+    {
+        "title": "Find Latest Salaries",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1983461,
+                "content": [
+                    {
+                        "username": "manpreetsarao",
+                        "content": "select a.emp_id, a.firstname, a.lastname, a.salary,\\na.department_id from salary a\\njoin salary b on b.salary <=a.salary\\ngroup by emp_id\\norder by emp_id\\n\\ncan anyone help me with this code it worked well for all other test cases but failed the 21-test case without any reason, it gives the same output but still failed"
+                    }
+                ]
+            }
+        ]
+    }
+]

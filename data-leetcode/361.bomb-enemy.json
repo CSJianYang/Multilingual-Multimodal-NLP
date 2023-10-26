@@ -1,0 +1,93 @@
+[
+    {
+        "title": "Bomb Enemy",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1576509,
+                "content": [
+                    {
+                        "username": "fred042",
+                        "content": "![image](https://assets.leetcode.com/users/images/288eb665-8fd1-4318-83d5-a4cbb087c375_1647334519.7002983.png)\\n"
+                    },
+                    {
+                        "username": "tjcd",
+                        "content": "There are several solutions call themselves \"DP solutions\". Actually, they are just \"straightforward solutions\", which are optimized based on brute force solution. They are still not DP though. \\nIf you think you've written a DP solution, then \\n* what is your sub-problem definition? \\n* what is the relation between sub-problem and certain polynormial number of sub-sub-problems? \\nlike dp[sub] = func(dp[sub1],dp[sub2],.....,dp[subn])? \\n\\nCan anyone solve it in a true DP way?"
+                    },
+                    {
+                        "username": "mucle6",
+                        "content": "Obviously this scenario is not real, but I still don't like being asked to maximize the effectiveness of a bomb. Anyone else feel similar?"
+                    },
+                    {
+                        "username": "myxo945",
+                        "content": "This question is so scary."
+                    }
+                ]
+            },
+            {
+                "id": 1565670,
+                "content": [
+                    {
+                        "username": "fred042",
+                        "content": "![image](https://assets.leetcode.com/users/images/288eb665-8fd1-4318-83d5-a4cbb087c375_1647334519.7002983.png)\\n"
+                    },
+                    {
+                        "username": "tjcd",
+                        "content": "There are several solutions call themselves \"DP solutions\". Actually, they are just \"straightforward solutions\", which are optimized based on brute force solution. They are still not DP though. \\nIf you think you've written a DP solution, then \\n* what is your sub-problem definition? \\n* what is the relation between sub-problem and certain polynormial number of sub-sub-problems? \\nlike dp[sub] = func(dp[sub1],dp[sub2],.....,dp[subn])? \\n\\nCan anyone solve it in a true DP way?"
+                    },
+                    {
+                        "username": "mucle6",
+                        "content": "Obviously this scenario is not real, but I still don't like being asked to maximize the effectiveness of a bomb. Anyone else feel similar?"
+                    },
+                    {
+                        "username": "myxo945",
+                        "content": "This question is so scary."
+                    }
+                ]
+            },
+            {
+                "id": 1565748,
+                "content": [
+                    {
+                        "username": "fred042",
+                        "content": "![image](https://assets.leetcode.com/users/images/288eb665-8fd1-4318-83d5-a4cbb087c375_1647334519.7002983.png)\\n"
+                    },
+                    {
+                        "username": "tjcd",
+                        "content": "There are several solutions call themselves \"DP solutions\". Actually, they are just \"straightforward solutions\", which are optimized based on brute force solution. They are still not DP though. \\nIf you think you've written a DP solution, then \\n* what is your sub-problem definition? \\n* what is the relation between sub-problem and certain polynormial number of sub-sub-problems? \\nlike dp[sub] = func(dp[sub1],dp[sub2],.....,dp[subn])? \\n\\nCan anyone solve it in a true DP way?"
+                    },
+                    {
+                        "username": "mucle6",
+                        "content": "Obviously this scenario is not real, but I still don't like being asked to maximize the effectiveness of a bomb. Anyone else feel similar?"
+                    },
+                    {
+                        "username": "myxo945",
+                        "content": "This question is so scary."
+                    }
+                ]
+            },
+            {
+                "id": 1573407,
+                "content": [
+                    {
+                        "username": "fred042",
+                        "content": "![image](https://assets.leetcode.com/users/images/288eb665-8fd1-4318-83d5-a4cbb087c375_1647334519.7002983.png)\\n"
+                    },
+                    {
+                        "username": "tjcd",
+                        "content": "There are several solutions call themselves \"DP solutions\". Actually, they are just \"straightforward solutions\", which are optimized based on brute force solution. They are still not DP though. \\nIf you think you've written a DP solution, then \\n* what is your sub-problem definition? \\n* what is the relation between sub-problem and certain polynormial number of sub-sub-problems? \\nlike dp[sub] = func(dp[sub1],dp[sub2],.....,dp[subn])? \\n\\nCan anyone solve it in a true DP way?"
+                    },
+                    {
+                        "username": "mucle6",
+                        "content": "Obviously this scenario is not real, but I still don't like being asked to maximize the effectiveness of a bomb. Anyone else feel similar?"
+                    },
+                    {
+                        "username": "myxo945",
+                        "content": "This question is so scary."
+                    }
+                ]
+            }
+        ]
+    }
+]

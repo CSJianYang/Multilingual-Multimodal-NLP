@@ -1,0 +1,18 @@
+[
+    {
+        "title": "Beautiful Pairs",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1856759,
+                "content": [
+                    {
+                        "username": "Ante_",
+                        "content": "This is variation of the classical closest pair problem, difference is that in this problem we have Manhattan distance instead of Euclidean distance.\nIt has Divide and Conquer $$O(n log n)$$ solution"
+                    }
+                ]
+            }
+        ]
+    }
+]

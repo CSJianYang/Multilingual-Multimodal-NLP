@@ -1,0 +1,35 @@
+[
+    {
+        "title": "Intersection of Three Sorted Arrays",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1576231,
+                "content": [
+                    {
+                        "username": "rabbit2020",
+                        "content": "return sorted(list(set(arr1) & set(arr2) & set(arr3)))"
+                    },
+                    {
+                        "username": "LIGHTING_GO",
+                        "content": "\"&\" can be applied  for \"common elements of lists\" in python."
+                    }
+                ]
+            },
+            {
+                "id": 1763714,
+                "content": [
+                    {
+                        "username": "rabbit2020",
+                        "content": "return sorted(list(set(arr1) & set(arr2) & set(arr3)))"
+                    },
+                    {
+                        "username": "LIGHTING_GO",
+                        "content": "\"&\" can be applied  for \"common elements of lists\" in python."
+                    }
+                ]
+            }
+        ]
+    }
+]

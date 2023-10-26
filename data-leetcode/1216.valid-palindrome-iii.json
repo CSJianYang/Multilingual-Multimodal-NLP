@@ -1,0 +1,134 @@
+[
+    {
+        "title": "Valid Palindrome III",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1700538,
+                "content": [
+                    {
+                        "username": "pieceofpie",
+                        "content": "This is ***really*** hard..."
+                    },
+                    {
+                        "username": "zhongzec",
+                        "content": "python dfs with memorization approach. did not pass the last three test case\\n`class Solution:\\n    def isValidPalindrome(self, s: str, k: int) -> bool:\\n        def dfs(s, k):\\n            if s in self.memo:\\n                return self.memo[s]\\n            if k < 0:\\n                return False\\n            if k >= 0 and len(s) <= 1:\\n                return True\\n            if s[0] == s[-1]:\\n                bol = dfs(s[1:len(s)-1], k)\\n                self.memo[s] = bol\\n                return bol\\n            else:\\n                bol1 = dfs(s[0:len(s)-1], k-1)\\n                bol2 = dfs(s[1:], k-1)\\n                bol3 = dfs(s[1:len(s)-1], k-2)\\n                if bol1 or bol2 or bol3:\\n                    self.memo[s] = True\\n                    return True\\n                self.memo[s] = False\\n                return False\\n        self.memo = {}\\n        return dfs(s, k)`\\n\\nany clues?"
+                    },
+                    {
+                        "username": "MarkleJam",
+                        "content": "why my answer gets TLE. It\\'s almost same as other accepted ansers:\\n\\n\\n```\\nclass Solution:\\n    def isValidPalindrome(self, s: str, k: int) -> bool:        \\n        return self.isCurStrValid(s, 0, len(s) - 1, k)\\n    \\n    @lru_cache(maxsize = None)\\n    def isCurStrValid(self, s: str, l: int, r: int, remaining: int) -> bool:\\n        if l > r:        \\n            return False\\n\\n        if l == r or (l == r - 1 and s[l] == s[r]):            \\n            return True\\n\\n        if remaining <= 0 and s[l] != s[r]:            \\n            return False\\n\\n        if s[l] == s[r]:\\n            return self.isCurStrValid(s, l + 1, r - 1, remaining)                        \\n\\n        left_change, right_change = False, False\\n        if s[l] != s[r]:            \\n            right_change = self.isCurStrValid(\\n                s, l, r - 1, remaining - 1)            \\n            left_change = self.isCurStrValid(s, l + 1, r, remaining - 1)            \\n        return right_change or left_change\\n\\n```"
+                    },
+                    {
+                        "username": "shiningsunnyday",
+                        "content": "I was trying some fancy sub-quadratic method, but the N<=1000 constraint is a giveaway this can be solved with O(N^2) dp. Usually 10^6 is the maximum runtime without TLE."
+                    },
+                    {
+                        "username": "hopeNoPip",
+                        "content": "Is there a way to write this solution without using recursion? "
+                    }
+                ]
+            },
+            {
+                "id": 1957263,
+                "content": [
+                    {
+                        "username": "pieceofpie",
+                        "content": "This is ***really*** hard..."
+                    },
+                    {
+                        "username": "zhongzec",
+                        "content": "python dfs with memorization approach. did not pass the last three test case\\n`class Solution:\\n    def isValidPalindrome(self, s: str, k: int) -> bool:\\n        def dfs(s, k):\\n            if s in self.memo:\\n                return self.memo[s]\\n            if k < 0:\\n                return False\\n            if k >= 0 and len(s) <= 1:\\n                return True\\n            if s[0] == s[-1]:\\n                bol = dfs(s[1:len(s)-1], k)\\n                self.memo[s] = bol\\n                return bol\\n            else:\\n                bol1 = dfs(s[0:len(s)-1], k-1)\\n                bol2 = dfs(s[1:], k-1)\\n                bol3 = dfs(s[1:len(s)-1], k-2)\\n                if bol1 or bol2 or bol3:\\n                    self.memo[s] = True\\n                    return True\\n                self.memo[s] = False\\n                return False\\n        self.memo = {}\\n        return dfs(s, k)`\\n\\nany clues?"
+                    },
+                    {
+                        "username": "MarkleJam",
+                        "content": "why my answer gets TLE. It\\'s almost same as other accepted ansers:\\n\\n\\n```\\nclass Solution:\\n    def isValidPalindrome(self, s: str, k: int) -> bool:        \\n        return self.isCurStrValid(s, 0, len(s) - 1, k)\\n    \\n    @lru_cache(maxsize = None)\\n    def isCurStrValid(self, s: str, l: int, r: int, remaining: int) -> bool:\\n        if l > r:        \\n            return False\\n\\n        if l == r or (l == r - 1 and s[l] == s[r]):            \\n            return True\\n\\n        if remaining <= 0 and s[l] != s[r]:            \\n            return False\\n\\n        if s[l] == s[r]:\\n            return self.isCurStrValid(s, l + 1, r - 1, remaining)                        \\n\\n        left_change, right_change = False, False\\n        if s[l] != s[r]:            \\n            right_change = self.isCurStrValid(\\n                s, l, r - 1, remaining - 1)            \\n            left_change = self.isCurStrValid(s, l + 1, r, remaining - 1)            \\n        return right_change or left_change\\n\\n```"
+                    },
+                    {
+                        "username": "shiningsunnyday",
+                        "content": "I was trying some fancy sub-quadratic method, but the N<=1000 constraint is a giveaway this can be solved with O(N^2) dp. Usually 10^6 is the maximum runtime without TLE."
+                    },
+                    {
+                        "username": "hopeNoPip",
+                        "content": "Is there a way to write this solution without using recursion? "
+                    }
+                ]
+            },
+            {
+                "id": 1900318,
+                "content": [
+                    {
+                        "username": "pieceofpie",
+                        "content": "This is ***really*** hard..."
+                    },
+                    {
+                        "username": "zhongzec",
+                        "content": "python dfs with memorization approach. did not pass the last three test case\\n`class Solution:\\n    def isValidPalindrome(self, s: str, k: int) -> bool:\\n        def dfs(s, k):\\n            if s in self.memo:\\n                return self.memo[s]\\n            if k < 0:\\n                return False\\n            if k >= 0 and len(s) <= 1:\\n                return True\\n            if s[0] == s[-1]:\\n                bol = dfs(s[1:len(s)-1], k)\\n                self.memo[s] = bol\\n                return bol\\n            else:\\n                bol1 = dfs(s[0:len(s)-1], k-1)\\n                bol2 = dfs(s[1:], k-1)\\n                bol3 = dfs(s[1:len(s)-1], k-2)\\n                if bol1 or bol2 or bol3:\\n                    self.memo[s] = True\\n                    return True\\n                self.memo[s] = False\\n                return False\\n        self.memo = {}\\n        return dfs(s, k)`\\n\\nany clues?"
+                    },
+                    {
+                        "username": "MarkleJam",
+                        "content": "why my answer gets TLE. It\\'s almost same as other accepted ansers:\\n\\n\\n```\\nclass Solution:\\n    def isValidPalindrome(self, s: str, k: int) -> bool:        \\n        return self.isCurStrValid(s, 0, len(s) - 1, k)\\n    \\n    @lru_cache(maxsize = None)\\n    def isCurStrValid(self, s: str, l: int, r: int, remaining: int) -> bool:\\n        if l > r:        \\n            return False\\n\\n        if l == r or (l == r - 1 and s[l] == s[r]):            \\n            return True\\n\\n        if remaining <= 0 and s[l] != s[r]:            \\n            return False\\n\\n        if s[l] == s[r]:\\n            return self.isCurStrValid(s, l + 1, r - 1, remaining)                        \\n\\n        left_change, right_change = False, False\\n        if s[l] != s[r]:            \\n            right_change = self.isCurStrValid(\\n                s, l, r - 1, remaining - 1)            \\n            left_change = self.isCurStrValid(s, l + 1, r, remaining - 1)            \\n        return right_change or left_change\\n\\n```"
+                    },
+                    {
+                        "username": "shiningsunnyday",
+                        "content": "I was trying some fancy sub-quadratic method, but the N<=1000 constraint is a giveaway this can be solved with O(N^2) dp. Usually 10^6 is the maximum runtime without TLE."
+                    },
+                    {
+                        "username": "hopeNoPip",
+                        "content": "Is there a way to write this solution without using recursion? "
+                    }
+                ]
+            },
+            {
+                "id": 1801548,
+                "content": [
+                    {
+                        "username": "pieceofpie",
+                        "content": "This is ***really*** hard..."
+                    },
+                    {
+                        "username": "zhongzec",
+                        "content": "python dfs with memorization approach. did not pass the last three test case\\n`class Solution:\\n    def isValidPalindrome(self, s: str, k: int) -> bool:\\n        def dfs(s, k):\\n            if s in self.memo:\\n                return self.memo[s]\\n            if k < 0:\\n                return False\\n            if k >= 0 and len(s) <= 1:\\n                return True\\n            if s[0] == s[-1]:\\n                bol = dfs(s[1:len(s)-1], k)\\n                self.memo[s] = bol\\n                return bol\\n            else:\\n                bol1 = dfs(s[0:len(s)-1], k-1)\\n                bol2 = dfs(s[1:], k-1)\\n                bol3 = dfs(s[1:len(s)-1], k-2)\\n                if bol1 or bol2 or bol3:\\n                    self.memo[s] = True\\n                    return True\\n                self.memo[s] = False\\n                return False\\n        self.memo = {}\\n        return dfs(s, k)`\\n\\nany clues?"
+                    },
+                    {
+                        "username": "MarkleJam",
+                        "content": "why my answer gets TLE. It\\'s almost same as other accepted ansers:\\n\\n\\n```\\nclass Solution:\\n    def isValidPalindrome(self, s: str, k: int) -> bool:        \\n        return self.isCurStrValid(s, 0, len(s) - 1, k)\\n    \\n    @lru_cache(maxsize = None)\\n    def isCurStrValid(self, s: str, l: int, r: int, remaining: int) -> bool:\\n        if l > r:        \\n            return False\\n\\n        if l == r or (l == r - 1 and s[l] == s[r]):            \\n            return True\\n\\n        if remaining <= 0 and s[l] != s[r]:            \\n            return False\\n\\n        if s[l] == s[r]:\\n            return self.isCurStrValid(s, l + 1, r - 1, remaining)                        \\n\\n        left_change, right_change = False, False\\n        if s[l] != s[r]:            \\n            right_change = self.isCurStrValid(\\n                s, l, r - 1, remaining - 1)            \\n            left_change = self.isCurStrValid(s, l + 1, r, remaining - 1)            \\n        return right_change or left_change\\n\\n```"
+                    },
+                    {
+                        "username": "shiningsunnyday",
+                        "content": "I was trying some fancy sub-quadratic method, but the N<=1000 constraint is a giveaway this can be solved with O(N^2) dp. Usually 10^6 is the maximum runtime without TLE."
+                    },
+                    {
+                        "username": "hopeNoPip",
+                        "content": "Is there a way to write this solution without using recursion? "
+                    }
+                ]
+            },
+            {
+                "id": 1732632,
+                "content": [
+                    {
+                        "username": "pieceofpie",
+                        "content": "This is ***really*** hard..."
+                    },
+                    {
+                        "username": "zhongzec",
+                        "content": "python dfs with memorization approach. did not pass the last three test case\\n`class Solution:\\n    def isValidPalindrome(self, s: str, k: int) -> bool:\\n        def dfs(s, k):\\n            if s in self.memo:\\n                return self.memo[s]\\n            if k < 0:\\n                return False\\n            if k >= 0 and len(s) <= 1:\\n                return True\\n            if s[0] == s[-1]:\\n                bol = dfs(s[1:len(s)-1], k)\\n                self.memo[s] = bol\\n                return bol\\n            else:\\n                bol1 = dfs(s[0:len(s)-1], k-1)\\n                bol2 = dfs(s[1:], k-1)\\n                bol3 = dfs(s[1:len(s)-1], k-2)\\n                if bol1 or bol2 or bol3:\\n                    self.memo[s] = True\\n                    return True\\n                self.memo[s] = False\\n                return False\\n        self.memo = {}\\n        return dfs(s, k)`\\n\\nany clues?"
+                    },
+                    {
+                        "username": "MarkleJam",
+                        "content": "why my answer gets TLE. It\\'s almost same as other accepted ansers:\\n\\n\\n```\\nclass Solution:\\n    def isValidPalindrome(self, s: str, k: int) -> bool:        \\n        return self.isCurStrValid(s, 0, len(s) - 1, k)\\n    \\n    @lru_cache(maxsize = None)\\n    def isCurStrValid(self, s: str, l: int, r: int, remaining: int) -> bool:\\n        if l > r:        \\n            return False\\n\\n        if l == r or (l == r - 1 and s[l] == s[r]):            \\n            return True\\n\\n        if remaining <= 0 and s[l] != s[r]:            \\n            return False\\n\\n        if s[l] == s[r]:\\n            return self.isCurStrValid(s, l + 1, r - 1, remaining)                        \\n\\n        left_change, right_change = False, False\\n        if s[l] != s[r]:            \\n            right_change = self.isCurStrValid(\\n                s, l, r - 1, remaining - 1)            \\n            left_change = self.isCurStrValid(s, l + 1, r, remaining - 1)            \\n        return right_change or left_change\\n\\n```"
+                    },
+                    {
+                        "username": "shiningsunnyday",
+                        "content": "I was trying some fancy sub-quadratic method, but the N<=1000 constraint is a giveaway this can be solved with O(N^2) dp. Usually 10^6 is the maximum runtime without TLE."
+                    },
+                    {
+                        "username": "hopeNoPip",
+                        "content": "Is there a way to write this solution without using recursion? "
+                    }
+                ]
+            }
+        ]
+    }
+]

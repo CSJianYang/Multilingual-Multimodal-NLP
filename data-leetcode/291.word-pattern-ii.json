@@ -1,0 +1,134 @@
+[
+    {
+        "title": "Word Pattern II",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1737330,
+                "content": [
+                    {
+                        "username": "calm27",
+                        "content": "is it not actually hard? idk"
+                    },
+                    {
+                        "username": "bhattishan1301",
+                        "content": "The expected answer returned by the OJ for P = \"ats\", S=\"ataa\" is false although the mapping a->\"a\", t->\"t\", s->\"aa\" is perfectly valid."
+                    },
+                    {
+                        "username": "kp__",
+                        "content": "I\\'ve looked at a bunch of solutions and no one seems to be confident in the true time complexity of the solution for this problem. I\\'ve seen a few mentions of `O(N^M)` or `O(M^N` (where N == string length, M == pattern length). But overall no rigorous explaination for these.\\n\\nPersonally I was thinking if you build a new string at each backtracking call (`O(N)`) and for each symbol in the pattern you look at every substring in the input then it runtime would be closer to:\\n\\n`O(N * M * N^2) = O(MN^3)` because the total number of substrings is `N(N + 1) / 2`, for each symbol you look at every substring (worst case), and do a `O(N)` slicing of the input string.\\n\\nAnyone have feedback or advice on how to better approach this?"
+                    },
+                    {
+                        "username": "ruizhang84",
+                        "content": "I would say looking at the substring \"eeri\" in the \"electronicengineeringcomputerscience\",\\nwe may map \"eecs\" to \"eeri\" by letting \"e\"->\"e\", and \"c\"->r\" and \"s\"->i\".\\n\\nI am a little confused. Could anyone help my question? Thanks."
+                    },
+                    {
+                        "username": "zhou_jay",
+                        "content": "What is the time complexity for this"
+                    }
+                ]
+            },
+            {
+                "id": 1567947,
+                "content": [
+                    {
+                        "username": "calm27",
+                        "content": "is it not actually hard? idk"
+                    },
+                    {
+                        "username": "bhattishan1301",
+                        "content": "The expected answer returned by the OJ for P = \"ats\", S=\"ataa\" is false although the mapping a->\"a\", t->\"t\", s->\"aa\" is perfectly valid."
+                    },
+                    {
+                        "username": "kp__",
+                        "content": "I\\'ve looked at a bunch of solutions and no one seems to be confident in the true time complexity of the solution for this problem. I\\'ve seen a few mentions of `O(N^M)` or `O(M^N` (where N == string length, M == pattern length). But overall no rigorous explaination for these.\\n\\nPersonally I was thinking if you build a new string at each backtracking call (`O(N)`) and for each symbol in the pattern you look at every substring in the input then it runtime would be closer to:\\n\\n`O(N * M * N^2) = O(MN^3)` because the total number of substrings is `N(N + 1) / 2`, for each symbol you look at every substring (worst case), and do a `O(N)` slicing of the input string.\\n\\nAnyone have feedback or advice on how to better approach this?"
+                    },
+                    {
+                        "username": "ruizhang84",
+                        "content": "I would say looking at the substring \"eeri\" in the \"electronicengineeringcomputerscience\",\\nwe may map \"eecs\" to \"eeri\" by letting \"e\"->\"e\", and \"c\"->r\" and \"s\"->i\".\\n\\nI am a little confused. Could anyone help my question? Thanks."
+                    },
+                    {
+                        "username": "zhou_jay",
+                        "content": "What is the time complexity for this"
+                    }
+                ]
+            },
+            {
+                "id": 1570646,
+                "content": [
+                    {
+                        "username": "calm27",
+                        "content": "is it not actually hard? idk"
+                    },
+                    {
+                        "username": "bhattishan1301",
+                        "content": "The expected answer returned by the OJ for P = \"ats\", S=\"ataa\" is false although the mapping a->\"a\", t->\"t\", s->\"aa\" is perfectly valid."
+                    },
+                    {
+                        "username": "kp__",
+                        "content": "I\\'ve looked at a bunch of solutions and no one seems to be confident in the true time complexity of the solution for this problem. I\\'ve seen a few mentions of `O(N^M)` or `O(M^N` (where N == string length, M == pattern length). But overall no rigorous explaination for these.\\n\\nPersonally I was thinking if you build a new string at each backtracking call (`O(N)`) and for each symbol in the pattern you look at every substring in the input then it runtime would be closer to:\\n\\n`O(N * M * N^2) = O(MN^3)` because the total number of substrings is `N(N + 1) / 2`, for each symbol you look at every substring (worst case), and do a `O(N)` slicing of the input string.\\n\\nAnyone have feedback or advice on how to better approach this?"
+                    },
+                    {
+                        "username": "ruizhang84",
+                        "content": "I would say looking at the substring \"eeri\" in the \"electronicengineeringcomputerscience\",\\nwe may map \"eecs\" to \"eeri\" by letting \"e\"->\"e\", and \"c\"->r\" and \"s\"->i\".\\n\\nI am a little confused. Could anyone help my question? Thanks."
+                    },
+                    {
+                        "username": "zhou_jay",
+                        "content": "What is the time complexity for this"
+                    }
+                ]
+            },
+            {
+                "id": 1572480,
+                "content": [
+                    {
+                        "username": "calm27",
+                        "content": "is it not actually hard? idk"
+                    },
+                    {
+                        "username": "bhattishan1301",
+                        "content": "The expected answer returned by the OJ for P = \"ats\", S=\"ataa\" is false although the mapping a->\"a\", t->\"t\", s->\"aa\" is perfectly valid."
+                    },
+                    {
+                        "username": "kp__",
+                        "content": "I\\'ve looked at a bunch of solutions and no one seems to be confident in the true time complexity of the solution for this problem. I\\'ve seen a few mentions of `O(N^M)` or `O(M^N` (where N == string length, M == pattern length). But overall no rigorous explaination for these.\\n\\nPersonally I was thinking if you build a new string at each backtracking call (`O(N)`) and for each symbol in the pattern you look at every substring in the input then it runtime would be closer to:\\n\\n`O(N * M * N^2) = O(MN^3)` because the total number of substrings is `N(N + 1) / 2`, for each symbol you look at every substring (worst case), and do a `O(N)` slicing of the input string.\\n\\nAnyone have feedback or advice on how to better approach this?"
+                    },
+                    {
+                        "username": "ruizhang84",
+                        "content": "I would say looking at the substring \"eeri\" in the \"electronicengineeringcomputerscience\",\\nwe may map \"eecs\" to \"eeri\" by letting \"e\"->\"e\", and \"c\"->r\" and \"s\"->i\".\\n\\nI am a little confused. Could anyone help my question? Thanks."
+                    },
+                    {
+                        "username": "zhou_jay",
+                        "content": "What is the time complexity for this"
+                    }
+                ]
+            },
+            {
+                "id": 1901741,
+                "content": [
+                    {
+                        "username": "calm27",
+                        "content": "is it not actually hard? idk"
+                    },
+                    {
+                        "username": "bhattishan1301",
+                        "content": "The expected answer returned by the OJ for P = \"ats\", S=\"ataa\" is false although the mapping a->\"a\", t->\"t\", s->\"aa\" is perfectly valid."
+                    },
+                    {
+                        "username": "kp__",
+                        "content": "I\\'ve looked at a bunch of solutions and no one seems to be confident in the true time complexity of the solution for this problem. I\\'ve seen a few mentions of `O(N^M)` or `O(M^N` (where N == string length, M == pattern length). But overall no rigorous explaination for these.\\n\\nPersonally I was thinking if you build a new string at each backtracking call (`O(N)`) and for each symbol in the pattern you look at every substring in the input then it runtime would be closer to:\\n\\n`O(N * M * N^2) = O(MN^3)` because the total number of substrings is `N(N + 1) / 2`, for each symbol you look at every substring (worst case), and do a `O(N)` slicing of the input string.\\n\\nAnyone have feedback or advice on how to better approach this?"
+                    },
+                    {
+                        "username": "ruizhang84",
+                        "content": "I would say looking at the substring \"eeri\" in the \"electronicengineeringcomputerscience\",\\nwe may map \"eecs\" to \"eeri\" by letting \"e\"->\"e\", and \"c\"->r\" and \"s\"->i\".\\n\\nI am a little confused. Could anyone help my question? Thanks."
+                    },
+                    {
+                        "username": "zhou_jay",
+                        "content": "What is the time complexity for this"
+                    }
+                ]
+            }
+        ]
+    }
+]

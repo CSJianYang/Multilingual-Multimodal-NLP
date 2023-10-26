@@ -1,0 +1,183 @@
+[
+    {
+        "title": "Buildings With an Ocean View",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1564575,
+                "content": [
+                    {
+                        "username": "ksanthan",
+                        "content": "I think the difficulty level on this question is wrong"
+                    },
+                    {
+                        "username": "jkjvhf",
+                        "content": "MARK THIS EASY PLEASE!!"
+                    },
+                    {
+                        "username": "Michael_Teng6",
+                        "content": "Leetcode should mark this as hard."
+                    },
+                    {
+                        "username": "solodjavadev91",
+                        "content": "If I can do LC here, it means 99% folks can. This is what feels like to be an average."
+                    },
+                    {
+                        "username": "vicch7",
+                        "content": "I do want to live in a world where this is a legit medium."
+                    },
+                    {
+                        "username": "dolong2110",
+                        "content": "```\\ndef findBuildings(self, heights: List[int]) -> List[int]:\\n        stack = []\\n        for i in range(len(heights)):\\n            while stack and heights[stack[-1]] <= heights[i]:\\n                stack.pop()\\n            stack.append(i)\\n        return stack\\n```"
+                    }
+                ]
+            },
+            {
+                "id": 1570370,
+                "content": [
+                    {
+                        "username": "ksanthan",
+                        "content": "I think the difficulty level on this question is wrong"
+                    },
+                    {
+                        "username": "jkjvhf",
+                        "content": "MARK THIS EASY PLEASE!!"
+                    },
+                    {
+                        "username": "Michael_Teng6",
+                        "content": "Leetcode should mark this as hard."
+                    },
+                    {
+                        "username": "solodjavadev91",
+                        "content": "If I can do LC here, it means 99% folks can. This is what feels like to be an average."
+                    },
+                    {
+                        "username": "vicch7",
+                        "content": "I do want to live in a world where this is a legit medium."
+                    },
+                    {
+                        "username": "dolong2110",
+                        "content": "```\\ndef findBuildings(self, heights: List[int]) -> List[int]:\\n        stack = []\\n        for i in range(len(heights)):\\n            while stack and heights[stack[-1]] <= heights[i]:\\n                stack.pop()\\n            stack.append(i)\\n        return stack\\n```"
+                    }
+                ]
+            },
+            {
+                "id": 1826600,
+                "content": [
+                    {
+                        "username": "ksanthan",
+                        "content": "I think the difficulty level on this question is wrong"
+                    },
+                    {
+                        "username": "jkjvhf",
+                        "content": "MARK THIS EASY PLEASE!!"
+                    },
+                    {
+                        "username": "Michael_Teng6",
+                        "content": "Leetcode should mark this as hard."
+                    },
+                    {
+                        "username": "solodjavadev91",
+                        "content": "If I can do LC here, it means 99% folks can. This is what feels like to be an average."
+                    },
+                    {
+                        "username": "vicch7",
+                        "content": "I do want to live in a world where this is a legit medium."
+                    },
+                    {
+                        "username": "dolong2110",
+                        "content": "```\\ndef findBuildings(self, heights: List[int]) -> List[int]:\\n        stack = []\\n        for i in range(len(heights)):\\n            while stack and heights[stack[-1]] <= heights[i]:\\n                stack.pop()\\n            stack.append(i)\\n        return stack\\n```"
+                    }
+                ]
+            },
+            {
+                "id": 2066463,
+                "content": [
+                    {
+                        "username": "ksanthan",
+                        "content": "I think the difficulty level on this question is wrong"
+                    },
+                    {
+                        "username": "jkjvhf",
+                        "content": "MARK THIS EASY PLEASE!!"
+                    },
+                    {
+                        "username": "Michael_Teng6",
+                        "content": "Leetcode should mark this as hard."
+                    },
+                    {
+                        "username": "solodjavadev91",
+                        "content": "If I can do LC here, it means 99% folks can. This is what feels like to be an average."
+                    },
+                    {
+                        "username": "vicch7",
+                        "content": "I do want to live in a world where this is a legit medium."
+                    },
+                    {
+                        "username": "dolong2110",
+                        "content": "```\\ndef findBuildings(self, heights: List[int]) -> List[int]:\\n        stack = []\\n        for i in range(len(heights)):\\n            while stack and heights[stack[-1]] <= heights[i]:\\n                stack.pop()\\n            stack.append(i)\\n        return stack\\n```"
+                    }
+                ]
+            },
+            {
+                "id": 2056720,
+                "content": [
+                    {
+                        "username": "ksanthan",
+                        "content": "I think the difficulty level on this question is wrong"
+                    },
+                    {
+                        "username": "jkjvhf",
+                        "content": "MARK THIS EASY PLEASE!!"
+                    },
+                    {
+                        "username": "Michael_Teng6",
+                        "content": "Leetcode should mark this as hard."
+                    },
+                    {
+                        "username": "solodjavadev91",
+                        "content": "If I can do LC here, it means 99% folks can. This is what feels like to be an average."
+                    },
+                    {
+                        "username": "vicch7",
+                        "content": "I do want to live in a world where this is a legit medium."
+                    },
+                    {
+                        "username": "dolong2110",
+                        "content": "```\\ndef findBuildings(self, heights: List[int]) -> List[int]:\\n        stack = []\\n        for i in range(len(heights)):\\n            while stack and heights[stack[-1]] <= heights[i]:\\n                stack.pop()\\n            stack.append(i)\\n        return stack\\n```"
+                    }
+                ]
+            },
+            {
+                "id": 1718337,
+                "content": [
+                    {
+                        "username": "ksanthan",
+                        "content": "I think the difficulty level on this question is wrong"
+                    },
+                    {
+                        "username": "jkjvhf",
+                        "content": "MARK THIS EASY PLEASE!!"
+                    },
+                    {
+                        "username": "Michael_Teng6",
+                        "content": "Leetcode should mark this as hard."
+                    },
+                    {
+                        "username": "solodjavadev91",
+                        "content": "If I can do LC here, it means 99% folks can. This is what feels like to be an average."
+                    },
+                    {
+                        "username": "vicch7",
+                        "content": "I do want to live in a world where this is a legit medium."
+                    },
+                    {
+                        "username": "dolong2110",
+                        "content": "```\\ndef findBuildings(self, heights: List[int]) -> List[int]:\\n        stack = []\\n        for i in range(len(heights)):\\n            while stack and heights[stack[-1]] <= heights[i]:\\n                stack.pop()\\n            stack.append(i)\\n        return stack\\n```"
+                    }
+                ]
+            }
+        ]
+    }
+]

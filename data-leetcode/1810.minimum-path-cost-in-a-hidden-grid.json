@@ -1,0 +1,18 @@
+[
+    {
+        "title": "Minimum Path Cost in a Hidden Grid",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1955349,
+                "content": [
+                    {
+                        "username": "shouriesai7",
+                        "content": "why cant we do BFS to get shortest path directly instead of doing DFS and Djikstra\\'s? or am I missing something?"
+                    }
+                ]
+            }
+        ]
+    }
+]

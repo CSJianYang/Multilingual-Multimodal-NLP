@@ -1,0 +1,22 @@
+[
+    {
+        "title": "The Most Recent Three Orders",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1570534,
+                "content": [
+                    {
+                        "username": "nylost2011",
+                        "content": "![image](https://assets.leetcode.com/users/images/da08f115-faed-418b-96c6-deda454291c8_1628133536.974618.jpeg)\\nWhy the expected answer show Yaffah 4 times? It should be  most recent 3 orders of each user.  Do anyone know what is wrong here and why my solution is incorrect?"
+                    },
+                    {
+                        "username": "shuv13111",
+                        "content": "Should be partition by Customer_id, instead of name here."
+                    }
+                ]
+            }
+        ]
+    }
+]

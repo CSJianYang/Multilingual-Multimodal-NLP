@@ -1,0 +1,35 @@
+[
+    {
+        "title": "Minimum Subarrays in a Valid Split",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1849631,
+                "content": [
+                    {
+                        "username": "maliha69",
+                        "content": "For input [29,5,59,73,89,31,73,89,73,79,89,89,23,53,43,47,3,2,61,7] answer is 13 not 14, Can anyone explain me how?"
+                    },
+                    {
+                        "username": "countres",
+                        "content": "How is the answer to ```[17,11,19,53,97,89,7,23,89,61,61,17,13,43,43,73,89,83]``` 6? Shouldn't be -1 since we can't split the subarray from index 0 to nums.size() - 2 since all occurrences of 89, and 17 need to be in the same subarray"
+                    }
+                ]
+            },
+            {
+                "id": 1773471,
+                "content": [
+                    {
+                        "username": "maliha69",
+                        "content": "For input [29,5,59,73,89,31,73,89,73,79,89,89,23,53,43,47,3,2,61,7] answer is 13 not 14, Can anyone explain me how?"
+                    },
+                    {
+                        "username": "countres",
+                        "content": "How is the answer to ```[17,11,19,53,97,89,7,23,89,61,61,17,13,43,43,73,89,83]``` 6? Shouldn't be -1 since we can't split the subarray from index 0 to nums.size() - 2 since all occurrences of 89, and 17 need to be in the same subarray"
+                    }
+                ]
+            }
+        ]
+    }
+]

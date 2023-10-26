@@ -1,0 +1,134 @@
+[
+    {
+        "title": "Bank Account Summary",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1566976,
+                "content": [
+                    {
+                        "username": "shaotingliu007",
+                        "content": "![image](https://assets.leetcode.com/users/images/d69bd22a-39cc-4b88-833b-d5bb0041234c_1598380955.3770566.png)\\n"
+                    },
+                    {
+                        "username": "sumit_sameriya",
+                        "content": "/* Write your T-SQL query statement below */\\nWITH CTE AS\\n    (SELECT PAID_BY, SUM(amount) SUB FROM TRANSACTIONS GROUP BY PAID_BY)\\n, CTE2 AS\\n    (SELECT PAID_TO, SUM(amount) AD FROM TRANSACTIONS GROUP BY PAID_TO)\\nSELECT user_id, user_name , CREDIT - Isnull(SUB,0) + isnull(AD,0)  CREDIT,\\nCASE WHEN ( CREDIT - Isnull(SUB,0) + isnull(AD,0)) > 0 THEN \\'No\\' ELSE \\'Yes\\' END credit_limit_breached\\n FROM USERS U LEFT JOIN CTE C ON U.user_id = C.PAID_BY  LEFT JOIN CTE2 C2 ON U.user_id = C2.PAID_TO"
+                    },
+                    {
+                        "username": "rshah25",
+                        "content": "with cte as(\\nselect sum(totalamt) as finamt, paid_to from (\\nselect amount as totalamt,paid_to\\nfrom transactions t\\njoin users u\\non t.paid_to =u.user_id\\n--group by t.paid_to\\nunion all\\nselect -amount as totalamt ,paid_by\\nfrom transactions t\\njoin users u\\non t.paid_by =u.user_id \\n) a\\ngroup by paid_to\\n)\\n\\n\\nselect user_id, user_name,\\nisnull((u.credit+c.finamt),u.credit) as credit,\\ncase when isnull((u.credit+c.finamt), u.credit)>0 then \\'No\\' else \\'Yes\\'end as credit_limit_breached\\nfrom users u\\nleft join cte c\\non c.paid_to =u.user_id \\n\\n"
+                    },
+                    {
+                        "username": "chualan",
+                        "content": "\\'\\'\\'WITH t1 AS(\\nSELECT user_id, user_name, transacted_on, credit, CASE WHEN paid_by = user_id THEN -amount \\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t  WHEN amount IS NULL THEN 0 ELSE amount END balance\\nFROM users \\nLEFT JOIN transaction\\nON paid_by = user_id OR paid_to = user_id)\\n\\nSELECT user_id, user_name, t1.credit + sum(balance) credit, CASE WHEN t1.credit + sum(balance) < 1 THEN \"Yes\" ELSE \"No\" END credit_limit_breached \\nFROM t1 \\nGROUP BY 1, 2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "EASY SOLUTION using MSSQL (CTE):-\\nwith cte as\\n(select user_id, user_name,  \\n credit,  sum(case when user_id = paid_by then -amount else amount end)new_amount from  users u\\n left join transactions t on u.user_id = t.paid_by or u.user_id = t.paid_to\\n  group by user_id, user_name, credit)\\n\\nselect user_id, user_name,\\nisnull((credit+new_amount),credit)credit, \\n  (case when (credit+new_amount) <0 then \\'Yes\\' else \\'No\\' end)credit_limit_breached  \\n   from cte "
+                    }
+                ]
+            },
+            {
+                "id": 1574320,
+                "content": [
+                    {
+                        "username": "shaotingliu007",
+                        "content": "![image](https://assets.leetcode.com/users/images/d69bd22a-39cc-4b88-833b-d5bb0041234c_1598380955.3770566.png)\\n"
+                    },
+                    {
+                        "username": "sumit_sameriya",
+                        "content": "/* Write your T-SQL query statement below */\\nWITH CTE AS\\n    (SELECT PAID_BY, SUM(amount) SUB FROM TRANSACTIONS GROUP BY PAID_BY)\\n, CTE2 AS\\n    (SELECT PAID_TO, SUM(amount) AD FROM TRANSACTIONS GROUP BY PAID_TO)\\nSELECT user_id, user_name , CREDIT - Isnull(SUB,0) + isnull(AD,0)  CREDIT,\\nCASE WHEN ( CREDIT - Isnull(SUB,0) + isnull(AD,0)) > 0 THEN \\'No\\' ELSE \\'Yes\\' END credit_limit_breached\\n FROM USERS U LEFT JOIN CTE C ON U.user_id = C.PAID_BY  LEFT JOIN CTE2 C2 ON U.user_id = C2.PAID_TO"
+                    },
+                    {
+                        "username": "rshah25",
+                        "content": "with cte as(\\nselect sum(totalamt) as finamt, paid_to from (\\nselect amount as totalamt,paid_to\\nfrom transactions t\\njoin users u\\non t.paid_to =u.user_id\\n--group by t.paid_to\\nunion all\\nselect -amount as totalamt ,paid_by\\nfrom transactions t\\njoin users u\\non t.paid_by =u.user_id \\n) a\\ngroup by paid_to\\n)\\n\\n\\nselect user_id, user_name,\\nisnull((u.credit+c.finamt),u.credit) as credit,\\ncase when isnull((u.credit+c.finamt), u.credit)>0 then \\'No\\' else \\'Yes\\'end as credit_limit_breached\\nfrom users u\\nleft join cte c\\non c.paid_to =u.user_id \\n\\n"
+                    },
+                    {
+                        "username": "chualan",
+                        "content": "\\'\\'\\'WITH t1 AS(\\nSELECT user_id, user_name, transacted_on, credit, CASE WHEN paid_by = user_id THEN -amount \\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t  WHEN amount IS NULL THEN 0 ELSE amount END balance\\nFROM users \\nLEFT JOIN transaction\\nON paid_by = user_id OR paid_to = user_id)\\n\\nSELECT user_id, user_name, t1.credit + sum(balance) credit, CASE WHEN t1.credit + sum(balance) < 1 THEN \"Yes\" ELSE \"No\" END credit_limit_breached \\nFROM t1 \\nGROUP BY 1, 2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "EASY SOLUTION using MSSQL (CTE):-\\nwith cte as\\n(select user_id, user_name,  \\n credit,  sum(case when user_id = paid_by then -amount else amount end)new_amount from  users u\\n left join transactions t on u.user_id = t.paid_by or u.user_id = t.paid_to\\n  group by user_id, user_name, credit)\\n\\nselect user_id, user_name,\\nisnull((credit+new_amount),credit)credit, \\n  (case when (credit+new_amount) <0 then \\'Yes\\' else \\'No\\' end)credit_limit_breached  \\n   from cte "
+                    }
+                ]
+            },
+            {
+                "id": 1574295,
+                "content": [
+                    {
+                        "username": "shaotingliu007",
+                        "content": "![image](https://assets.leetcode.com/users/images/d69bd22a-39cc-4b88-833b-d5bb0041234c_1598380955.3770566.png)\\n"
+                    },
+                    {
+                        "username": "sumit_sameriya",
+                        "content": "/* Write your T-SQL query statement below */\\nWITH CTE AS\\n    (SELECT PAID_BY, SUM(amount) SUB FROM TRANSACTIONS GROUP BY PAID_BY)\\n, CTE2 AS\\n    (SELECT PAID_TO, SUM(amount) AD FROM TRANSACTIONS GROUP BY PAID_TO)\\nSELECT user_id, user_name , CREDIT - Isnull(SUB,0) + isnull(AD,0)  CREDIT,\\nCASE WHEN ( CREDIT - Isnull(SUB,0) + isnull(AD,0)) > 0 THEN \\'No\\' ELSE \\'Yes\\' END credit_limit_breached\\n FROM USERS U LEFT JOIN CTE C ON U.user_id = C.PAID_BY  LEFT JOIN CTE2 C2 ON U.user_id = C2.PAID_TO"
+                    },
+                    {
+                        "username": "rshah25",
+                        "content": "with cte as(\\nselect sum(totalamt) as finamt, paid_to from (\\nselect amount as totalamt,paid_to\\nfrom transactions t\\njoin users u\\non t.paid_to =u.user_id\\n--group by t.paid_to\\nunion all\\nselect -amount as totalamt ,paid_by\\nfrom transactions t\\njoin users u\\non t.paid_by =u.user_id \\n) a\\ngroup by paid_to\\n)\\n\\n\\nselect user_id, user_name,\\nisnull((u.credit+c.finamt),u.credit) as credit,\\ncase when isnull((u.credit+c.finamt), u.credit)>0 then \\'No\\' else \\'Yes\\'end as credit_limit_breached\\nfrom users u\\nleft join cte c\\non c.paid_to =u.user_id \\n\\n"
+                    },
+                    {
+                        "username": "chualan",
+                        "content": "\\'\\'\\'WITH t1 AS(\\nSELECT user_id, user_name, transacted_on, credit, CASE WHEN paid_by = user_id THEN -amount \\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t  WHEN amount IS NULL THEN 0 ELSE amount END balance\\nFROM users \\nLEFT JOIN transaction\\nON paid_by = user_id OR paid_to = user_id)\\n\\nSELECT user_id, user_name, t1.credit + sum(balance) credit, CASE WHEN t1.credit + sum(balance) < 1 THEN \"Yes\" ELSE \"No\" END credit_limit_breached \\nFROM t1 \\nGROUP BY 1, 2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "EASY SOLUTION using MSSQL (CTE):-\\nwith cte as\\n(select user_id, user_name,  \\n credit,  sum(case when user_id = paid_by then -amount else amount end)new_amount from  users u\\n left join transactions t on u.user_id = t.paid_by or u.user_id = t.paid_to\\n  group by user_id, user_name, credit)\\n\\nselect user_id, user_name,\\nisnull((credit+new_amount),credit)credit, \\n  (case when (credit+new_amount) <0 then \\'Yes\\' else \\'No\\' end)credit_limit_breached  \\n   from cte "
+                    }
+                ]
+            },
+            {
+                "id": 1574262,
+                "content": [
+                    {
+                        "username": "shaotingliu007",
+                        "content": "![image](https://assets.leetcode.com/users/images/d69bd22a-39cc-4b88-833b-d5bb0041234c_1598380955.3770566.png)\\n"
+                    },
+                    {
+                        "username": "sumit_sameriya",
+                        "content": "/* Write your T-SQL query statement below */\\nWITH CTE AS\\n    (SELECT PAID_BY, SUM(amount) SUB FROM TRANSACTIONS GROUP BY PAID_BY)\\n, CTE2 AS\\n    (SELECT PAID_TO, SUM(amount) AD FROM TRANSACTIONS GROUP BY PAID_TO)\\nSELECT user_id, user_name , CREDIT - Isnull(SUB,0) + isnull(AD,0)  CREDIT,\\nCASE WHEN ( CREDIT - Isnull(SUB,0) + isnull(AD,0)) > 0 THEN \\'No\\' ELSE \\'Yes\\' END credit_limit_breached\\n FROM USERS U LEFT JOIN CTE C ON U.user_id = C.PAID_BY  LEFT JOIN CTE2 C2 ON U.user_id = C2.PAID_TO"
+                    },
+                    {
+                        "username": "rshah25",
+                        "content": "with cte as(\\nselect sum(totalamt) as finamt, paid_to from (\\nselect amount as totalamt,paid_to\\nfrom transactions t\\njoin users u\\non t.paid_to =u.user_id\\n--group by t.paid_to\\nunion all\\nselect -amount as totalamt ,paid_by\\nfrom transactions t\\njoin users u\\non t.paid_by =u.user_id \\n) a\\ngroup by paid_to\\n)\\n\\n\\nselect user_id, user_name,\\nisnull((u.credit+c.finamt),u.credit) as credit,\\ncase when isnull((u.credit+c.finamt), u.credit)>0 then \\'No\\' else \\'Yes\\'end as credit_limit_breached\\nfrom users u\\nleft join cte c\\non c.paid_to =u.user_id \\n\\n"
+                    },
+                    {
+                        "username": "chualan",
+                        "content": "\\'\\'\\'WITH t1 AS(\\nSELECT user_id, user_name, transacted_on, credit, CASE WHEN paid_by = user_id THEN -amount \\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t  WHEN amount IS NULL THEN 0 ELSE amount END balance\\nFROM users \\nLEFT JOIN transaction\\nON paid_by = user_id OR paid_to = user_id)\\n\\nSELECT user_id, user_name, t1.credit + sum(balance) credit, CASE WHEN t1.credit + sum(balance) < 1 THEN \"Yes\" ELSE \"No\" END credit_limit_breached \\nFROM t1 \\nGROUP BY 1, 2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "EASY SOLUTION using MSSQL (CTE):-\\nwith cte as\\n(select user_id, user_name,  \\n credit,  sum(case when user_id = paid_by then -amount else amount end)new_amount from  users u\\n left join transactions t on u.user_id = t.paid_by or u.user_id = t.paid_to\\n  group by user_id, user_name, credit)\\n\\nselect user_id, user_name,\\nisnull((credit+new_amount),credit)credit, \\n  (case when (credit+new_amount) <0 then \\'Yes\\' else \\'No\\' end)credit_limit_breached  \\n   from cte "
+                    }
+                ]
+            },
+            {
+                "id": 1766417,
+                "content": [
+                    {
+                        "username": "shaotingliu007",
+                        "content": "![image](https://assets.leetcode.com/users/images/d69bd22a-39cc-4b88-833b-d5bb0041234c_1598380955.3770566.png)\\n"
+                    },
+                    {
+                        "username": "sumit_sameriya",
+                        "content": "/* Write your T-SQL query statement below */\\nWITH CTE AS\\n    (SELECT PAID_BY, SUM(amount) SUB FROM TRANSACTIONS GROUP BY PAID_BY)\\n, CTE2 AS\\n    (SELECT PAID_TO, SUM(amount) AD FROM TRANSACTIONS GROUP BY PAID_TO)\\nSELECT user_id, user_name , CREDIT - Isnull(SUB,0) + isnull(AD,0)  CREDIT,\\nCASE WHEN ( CREDIT - Isnull(SUB,0) + isnull(AD,0)) > 0 THEN \\'No\\' ELSE \\'Yes\\' END credit_limit_breached\\n FROM USERS U LEFT JOIN CTE C ON U.user_id = C.PAID_BY  LEFT JOIN CTE2 C2 ON U.user_id = C2.PAID_TO"
+                    },
+                    {
+                        "username": "rshah25",
+                        "content": "with cte as(\\nselect sum(totalamt) as finamt, paid_to from (\\nselect amount as totalamt,paid_to\\nfrom transactions t\\njoin users u\\non t.paid_to =u.user_id\\n--group by t.paid_to\\nunion all\\nselect -amount as totalamt ,paid_by\\nfrom transactions t\\njoin users u\\non t.paid_by =u.user_id \\n) a\\ngroup by paid_to\\n)\\n\\n\\nselect user_id, user_name,\\nisnull((u.credit+c.finamt),u.credit) as credit,\\ncase when isnull((u.credit+c.finamt), u.credit)>0 then \\'No\\' else \\'Yes\\'end as credit_limit_breached\\nfrom users u\\nleft join cte c\\non c.paid_to =u.user_id \\n\\n"
+                    },
+                    {
+                        "username": "chualan",
+                        "content": "\\'\\'\\'WITH t1 AS(\\nSELECT user_id, user_name, transacted_on, credit, CASE WHEN paid_by = user_id THEN -amount \\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t  WHEN amount IS NULL THEN 0 ELSE amount END balance\\nFROM users \\nLEFT JOIN transaction\\nON paid_by = user_id OR paid_to = user_id)\\n\\nSELECT user_id, user_name, t1.credit + sum(balance) credit, CASE WHEN t1.credit + sum(balance) < 1 THEN \"Yes\" ELSE \"No\" END credit_limit_breached \\nFROM t1 \\nGROUP BY 1, 2"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "EASY SOLUTION using MSSQL (CTE):-\\nwith cte as\\n(select user_id, user_name,  \\n credit,  sum(case when user_id = paid_by then -amount else amount end)new_amount from  users u\\n left join transactions t on u.user_id = t.paid_by or u.user_id = t.paid_to\\n  group by user_id, user_name, credit)\\n\\nselect user_id, user_name,\\nisnull((credit+new_amount),credit)credit, \\n  (case when (credit+new_amount) <0 then \\'Yes\\' else \\'No\\' end)credit_limit_breached  \\n   from cte "
+                    }
+                ]
+            }
+        ]
+    }
+]

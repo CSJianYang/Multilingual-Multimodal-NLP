@@ -1,0 +1,35 @@
+[
+    {
+        "title": "Ad-Free Sessions",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1570579,
+                "content": [
+                    {
+                        "username": "mahala",
+                        "content": "Hi all,\\n\\nCan you please tell me why this is a wrong solution?\\n\\nThank you so much.\\n\\nselect distinct p.session_id from playback as p\\ninner join ads as a\\non p.customer_id = a.customer_id \\nand a.timestamp not between p.start_time and p.end_time"
+                    },
+                    {
+                        "username": "Hello_YJ",
+                        "content": "select session_id\\nfrom Playback p\\nleft join Ads a\\non p.customer_id = a.customer_id\\nwhere end_time >= start_time and a.timestamp not between start_time and end_time;\\n\\n\\nDoes someone know why the above solution could not pass the submission?"
+                    }
+                ]
+            },
+            {
+                "id": 1725845,
+                "content": [
+                    {
+                        "username": "mahala",
+                        "content": "Hi all,\\n\\nCan you please tell me why this is a wrong solution?\\n\\nThank you so much.\\n\\nselect distinct p.session_id from playback as p\\ninner join ads as a\\non p.customer_id = a.customer_id \\nand a.timestamp not between p.start_time and p.end_time"
+                    },
+                    {
+                        "username": "Hello_YJ",
+                        "content": "select session_id\\nfrom Playback p\\nleft join Ads a\\non p.customer_id = a.customer_id\\nwhere end_time >= start_time and a.timestamp not between start_time and end_time;\\n\\n\\nDoes someone know why the above solution could not pass the submission?"
+                    }
+                ]
+            }
+        ]
+    }
+]

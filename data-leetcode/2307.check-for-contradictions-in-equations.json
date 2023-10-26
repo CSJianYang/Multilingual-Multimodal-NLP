@@ -1,0 +1,43 @@
+[
+    {
+        "title": "Check for Contradictions in Equations",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1955875,
+                "content": [
+                    {
+                        "username": "XixiangLiu",
+                        "content": "Hi guys, hope this finds you well!\nI write a solution that I think should work, but I get a wrong answer at the 62th / 68 testcase, so I am trying to see if someone could tell me why. I will really appreciate it if you would like to take a look!\n\nThe testcase is:\nEquations = [[\"oxlp\",\"rxekw\"],[\"wusp\",\"py\"],[\"jiljl\",\"ocki\"],[\"wna\",\"ahd\"],[\"btzo\",\"oxlp\"],[\"tf\",\"gdzjl\"],[\"btzo\",\"xfzuo\"],[\"jiljl\",\"gdzjl\"],[\"hpic\",\"wusp\"],[\"z\",\"qs\"],[\"tkgna\",\"wna\"],[\"wusp\",\"btzo\"],[\"ocki\",\"z\"],[\"ttfkc\",\"py\"],[\"xfzuo\",\"xfzuo\"],[\"ahd\",\"xfzuo\"],[\"ocki\",\"py\"],[\"jnsz\",\"py\"],[\"wna\",\"wna\"],[\"wusp\",\"wusp\"],[\"ttfkc\",\"py\"],[\"qs\",\"dci\"],[\"wusp\",\"wusp\"],[\"btzo\",\"oxlp\"],[\"tf\",\"tf\"],[\"ocki\",\"ocki\"],[\"z\",\"qs\"],[\"qs\",\"dci\"],[\"z\",\"qs\"],[\"btzo\",\"btzo\"]]\nValues = [8.32,9.23,2.96,8.64,8.66,1.55,1.5,4.12,7.2,9.26,5.62,8.07,9.75,2.03,1,1.08,3.96,8.41,1,1,1.35,6.59,1,7.47,1,1,9.26,6.59,9.26,1]\nwhere my solution returns false, while the answer is true.\n\nMy solution (using only bfs):\n```\nclass Solution:\n    def checkContradictions(self, equations: List[List[str]], values: List[float]) -> bool:\n        relations = defaultdict(lambda: defaultdict(float))\n        for (a, b), c in zip(equations, values):\n            relations[a][b] = c\n            relations[b][a] = 1/c\n\n        # fix dividend a\n        for a in relations:\n            considered = set()\n            # queue stores (divisor b, quotient c), assumed a is the dividend\n            # invariant: relations in queue has been recorded\n            queue = deque()\n            # bfs, iterate through possible divisors\n            for b in relations[a]:\n                c = relations[a][b]\n                queue.append((b, c))\n                considered.add(b)\n            while queue:\n                b, c = queue.popleft()\n                for new_b in relations[b]:\n                    new_c = c * relations[b][new_b]\n                    # if relation recorded, check\n                    if new_b in relations[a]:\n                        if abs(new_c - relations[a][new_b]) >= pow(10, -5):\n                            return True\n                    # else add to record\n                    else:\n                        relations[a][new_b] = new_c\n                    if new_b not in considered:\n                        queue.append((new_b, new_c))\n                        considered.add(new_b)\n\n        return False\n```\n\nI have looked at some other people's solution which pass all the testcases. It seems that they set makeup values for Ai, Bi, like setting Ai =2 and Bi = 1 if an equation says Ai/Bi is 2, to avoid dealing with calculating quotients like me, so I doubt that I get wrong answers due to precision problem."
+                    },
+                    {
+                        "username": "qyang412",
+                        "content": "look at the value of [\"btzo\",\"oxlp\"] in different index, it\\'s the contradiction we should find when build the grpah"
+                    },
+                    {
+                        "username": "Veloscocity",
+                        "content": "x/y = x/z * z/y"
+                    }
+                ]
+            },
+            {
+                "id": 2024452,
+                "content": [
+                    {
+                        "username": "XixiangLiu",
+                        "content": "Hi guys, hope this finds you well!\nI write a solution that I think should work, but I get a wrong answer at the 62th / 68 testcase, so I am trying to see if someone could tell me why. I will really appreciate it if you would like to take a look!\n\nThe testcase is:\nEquations = [[\"oxlp\",\"rxekw\"],[\"wusp\",\"py\"],[\"jiljl\",\"ocki\"],[\"wna\",\"ahd\"],[\"btzo\",\"oxlp\"],[\"tf\",\"gdzjl\"],[\"btzo\",\"xfzuo\"],[\"jiljl\",\"gdzjl\"],[\"hpic\",\"wusp\"],[\"z\",\"qs\"],[\"tkgna\",\"wna\"],[\"wusp\",\"btzo\"],[\"ocki\",\"z\"],[\"ttfkc\",\"py\"],[\"xfzuo\",\"xfzuo\"],[\"ahd\",\"xfzuo\"],[\"ocki\",\"py\"],[\"jnsz\",\"py\"],[\"wna\",\"wna\"],[\"wusp\",\"wusp\"],[\"ttfkc\",\"py\"],[\"qs\",\"dci\"],[\"wusp\",\"wusp\"],[\"btzo\",\"oxlp\"],[\"tf\",\"tf\"],[\"ocki\",\"ocki\"],[\"z\",\"qs\"],[\"qs\",\"dci\"],[\"z\",\"qs\"],[\"btzo\",\"btzo\"]]\nValues = [8.32,9.23,2.96,8.64,8.66,1.55,1.5,4.12,7.2,9.26,5.62,8.07,9.75,2.03,1,1.08,3.96,8.41,1,1,1.35,6.59,1,7.47,1,1,9.26,6.59,9.26,1]\nwhere my solution returns false, while the answer is true.\n\nMy solution (using only bfs):\n```\nclass Solution:\n    def checkContradictions(self, equations: List[List[str]], values: List[float]) -> bool:\n        relations = defaultdict(lambda: defaultdict(float))\n        for (a, b), c in zip(equations, values):\n            relations[a][b] = c\n            relations[b][a] = 1/c\n\n        # fix dividend a\n        for a in relations:\n            considered = set()\n            # queue stores (divisor b, quotient c), assumed a is the dividend\n            # invariant: relations in queue has been recorded\n            queue = deque()\n            # bfs, iterate through possible divisors\n            for b in relations[a]:\n                c = relations[a][b]\n                queue.append((b, c))\n                considered.add(b)\n            while queue:\n                b, c = queue.popleft()\n                for new_b in relations[b]:\n                    new_c = c * relations[b][new_b]\n                    # if relation recorded, check\n                    if new_b in relations[a]:\n                        if abs(new_c - relations[a][new_b]) >= pow(10, -5):\n                            return True\n                    # else add to record\n                    else:\n                        relations[a][new_b] = new_c\n                    if new_b not in considered:\n                        queue.append((new_b, new_c))\n                        considered.add(new_b)\n\n        return False\n```\n\nI have looked at some other people's solution which pass all the testcases. It seems that they set makeup values for Ai, Bi, like setting Ai =2 and Bi = 1 if an equation says Ai/Bi is 2, to avoid dealing with calculating quotients like me, so I doubt that I get wrong answers due to precision problem."
+                    },
+                    {
+                        "username": "qyang412",
+                        "content": "look at the value of [\"btzo\",\"oxlp\"] in different index, it\\'s the contradiction we should find when build the grpah"
+                    },
+                    {
+                        "username": "Veloscocity",
+                        "content": "x/y = x/z * z/y"
+                    }
+                ]
+            }
+        ]
+    }
+]

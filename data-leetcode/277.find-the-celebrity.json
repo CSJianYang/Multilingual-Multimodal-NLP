@@ -1,0 +1,1069 @@
+[
+    {
+        "title": "Find the Celebrity",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1567240,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1570868,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1570222,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1566960,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1575568,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1568563,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1774364,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1576518,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1573806,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1573599,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1567240,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1570868,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1570222,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1566960,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1575568,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1568563,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1774364,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1576518,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1573806,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            },
+            {
+                "id": 1573599,
+                "content": [
+                    {
+                        "username": "princessmaja",
+                        "content": "What does the input [[1,1],[1,1]] mean? Problem says \"n people (labeled from 0 to n - 1) \".\\nDoes this input mean there are two people labelled 1?"
+                    },
+                    {
+                        "username": "espertusnu",
+                        "content": "The input is meant to be an adjacency matrix. The input [[1,1],[1,1]] means that both nodes point to each other."
+                    },
+                    {
+                        "username": "user9260GC",
+                        "content": "There is no \\'graph\\' in the input but it\\'s specified in the input section. Very misleading. Only actual input is \\'n\\'."
+                    },
+                    {
+                        "username": "JinZhenlin",
+                        "content": "So in the example 1, the input is:\\n\\n\"graph = [[1,1,0],[0,1,0],[1,1,1]]\"\\n\\nHow does that exactly translate to the explanation? :\\n\\n\"There are three persons labeled with 0, 1 and 2. graph[i][j] = 1 means person i knows person j, otherwise graph[i][j] = 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.\" \\n\\n\\nIs anyone else just as confused as I am? Clarification is much appreciated! Thanks! \\n"
+                    },
+                    {
+                        "username": "snowAnna",
+                        "content": "I was stuck for a while since the system could not find \\'knows\\' ,We need to replace \\'knows\\' with Knows for c#"
+                    },
+                    {
+                        "username": "manik_x_mahajan",
+                        "content": "[[1,1,1],[1,1,0],[0,0,1]]\\n\\nThe expected  answer of this testcase is -1.\\nWe can clearly see that \\na. 2 knows no one.\\nb. 1 knows 0.\\nc. 0 knows 1,2.\\n\\nAs 2 don\\'t know anyone. The answer should be 2.\\nCan someone please clear it?\\n"
+                    },
+                    {
+                        "username": "hashrin",
+                        "content": "For 2 to be the celebrity, everyone else in the room should know 2. Here, 1 does not know 2."
+                    },
+                    {
+                        "username": "vyshnavkr",
+                        "content": "* A superb video solution from LC for bruteforce, optimal approaches and code. \\n* I mistook the question thinking the edges are already given and mentally tried solving using DFS and BFS. But later understood the catch of this problem is there are no edges for the nodes.\\n* I then mentally solved by brute force. Also observed that A knows B means B could be celebrity and A will never be celebrity. And tried to optimise ruling out A from celebrity possibility HashSet (which initially included all nodes). But failed in continuing. What I missed in observing is that if A doesn\\'t know B, then the opposite assumption is also possible, ie, A could be celebrity and B will never be the celebrity. \\n* Lesson learned: think in the opposite way too. Here I thought of the true case, but missed about the false case."
+                    },
+                    {
+                        "username": "RohitSgh",
+                        "content": "From every API call, we can **rule out one person**. This person **cannot** be celebrity.\\n\\n- if `knows(a, b)` returns `true`, this means `a` cannot be celebrity since the person knows someone.\\n- else if `knows(a, b)` returns `false`, this means `b` cannot be celebrity since there is one person which does not know about `b`\\n\\nThus, with $N-1$ API calls, we can rule out $N-1$ possibilities of celebrity, leaving us with only $1$ candidate for celebrity. "
+                    },
+                    {
+                        "username": "Lily_X",
+                        "content": "I thought the result will be 1 because 0 is a celebrity, but the correct answer is 0. Can someone help me on this?"
+                    },
+                    {
+                        "username": "SanketSingh",
+                        "content": "This question can be solved using graphs (indegree and outdegree concept) in O(N^2) Time complexity.\\nWe can also solve this question in O(N) time and O(1) space using simple two pointer concept.\\nWe are going to compare two persons at a time one from begining and other from end and we will remove that person from consideration which cannot be a celebrity. For example if there are two persons X and Y and X can identify person Y then surely X cannot be a celebrity as it knows a person inside this party. Other case would be when X does not know Y and in this case Y cannot be a celebrity as there is at least one person who does not know him/her inside party. Using this intuition two pointer concept can be applied to find the celebrity inside this party.\\nI found a good explanatory video on Youtube by algods.\\nYou can refer to this video for a better explanation.\\nVideo Link:\\n[https://youtu.be/aENYremq77I](http://)"
+                    },
+                    {
+                        "username": "tyhal",
+                        "content": "This test case will catch solutions that don\\'t check backwards.\\n\\n[ [0,0,1], [0,0,0], [0,0,0] ]\\n\\nSome solutions will pick p2 as the celebrity:\\n* They pick p2 because p0 knows p2 \\n* They don\\'t then check that p1 knows p2\\n\\n"
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,93 @@
+[
+    {
+        "title": "The Most Frequently Ordered Products for Each Customer",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1570447,
+                "content": [
+                    {
+                        "username": "aodish",
+                        "content": "with order_counts as (\\nSELECT\\no.customer_id,\\np.product_name,\\np.product_id,\\ncount(o.order_id) as order_count\\nFROM\\norders o\\nINNER JOIN products p ON p.product_id = o.product_id\\nGROUP BY 1,2,3)\\n\\nselect \\noc.customer_id,\\noc.product_id,\\noc.product_name\\nfrom order_counts oc\\nWHERE\\noc.order_count = (select MAX(order_count) from order_counts x where x.customer_id = oc.customer_id)\\n"
+                    },
+                    {
+                        "username": "divy3003",
+                        "content": "with ct as (select customer_id, product_id, rank()over(partition by customer_id order by count(product_id) desc) as rnk from orders group by customer_id, product_id)\\nselect c.customer_id, c.product_id, p.product_name\\nfrom ct c left join products p on c.product_id = p.product_id\\nwhere c.rnk = 1;"
+                    },
+                    {
+                        "username": "MelodieHe",
+                        "content": "WITH t1 AS (SELECT customer_id, product_id, RANK() OVER (PARTITION BY customer_id ORDER BY COUNT(order_date) DESC) AS rk FROM Orders GROUP BY customer_id, product_id)\\n\\nSELECT t1.customer_id, t1.product_id, P.product_name\\nFROM t1, Products P\\nWHERE rk = 1\\nAND t1.product_id = P.product_id\\nORDER BY t1.customer_id, t1.product_id \\n"
+                    },
+                    {
+                        "username": "vdhyasagr",
+                        "content": "A good case where you need to read the question properly. I could swear I read \"most recently\" and not \"most frequently\". That changed the whole dynamic. Straightforward solution otherwise"
+                    }
+                ]
+            },
+            {
+                "id": 1570376,
+                "content": [
+                    {
+                        "username": "aodish",
+                        "content": "with order_counts as (\\nSELECT\\no.customer_id,\\np.product_name,\\np.product_id,\\ncount(o.order_id) as order_count\\nFROM\\norders o\\nINNER JOIN products p ON p.product_id = o.product_id\\nGROUP BY 1,2,3)\\n\\nselect \\noc.customer_id,\\noc.product_id,\\noc.product_name\\nfrom order_counts oc\\nWHERE\\noc.order_count = (select MAX(order_count) from order_counts x where x.customer_id = oc.customer_id)\\n"
+                    },
+                    {
+                        "username": "divy3003",
+                        "content": "with ct as (select customer_id, product_id, rank()over(partition by customer_id order by count(product_id) desc) as rnk from orders group by customer_id, product_id)\\nselect c.customer_id, c.product_id, p.product_name\\nfrom ct c left join products p on c.product_id = p.product_id\\nwhere c.rnk = 1;"
+                    },
+                    {
+                        "username": "MelodieHe",
+                        "content": "WITH t1 AS (SELECT customer_id, product_id, RANK() OVER (PARTITION BY customer_id ORDER BY COUNT(order_date) DESC) AS rk FROM Orders GROUP BY customer_id, product_id)\\n\\nSELECT t1.customer_id, t1.product_id, P.product_name\\nFROM t1, Products P\\nWHERE rk = 1\\nAND t1.product_id = P.product_id\\nORDER BY t1.customer_id, t1.product_id \\n"
+                    },
+                    {
+                        "username": "vdhyasagr",
+                        "content": "A good case where you need to read the question properly. I could swear I read \"most recently\" and not \"most frequently\". That changed the whole dynamic. Straightforward solution otherwise"
+                    }
+                ]
+            },
+            {
+                "id": 1574582,
+                "content": [
+                    {
+                        "username": "aodish",
+                        "content": "with order_counts as (\\nSELECT\\no.customer_id,\\np.product_name,\\np.product_id,\\ncount(o.order_id) as order_count\\nFROM\\norders o\\nINNER JOIN products p ON p.product_id = o.product_id\\nGROUP BY 1,2,3)\\n\\nselect \\noc.customer_id,\\noc.product_id,\\noc.product_name\\nfrom order_counts oc\\nWHERE\\noc.order_count = (select MAX(order_count) from order_counts x where x.customer_id = oc.customer_id)\\n"
+                    },
+                    {
+                        "username": "divy3003",
+                        "content": "with ct as (select customer_id, product_id, rank()over(partition by customer_id order by count(product_id) desc) as rnk from orders group by customer_id, product_id)\\nselect c.customer_id, c.product_id, p.product_name\\nfrom ct c left join products p on c.product_id = p.product_id\\nwhere c.rnk = 1;"
+                    },
+                    {
+                        "username": "MelodieHe",
+                        "content": "WITH t1 AS (SELECT customer_id, product_id, RANK() OVER (PARTITION BY customer_id ORDER BY COUNT(order_date) DESC) AS rk FROM Orders GROUP BY customer_id, product_id)\\n\\nSELECT t1.customer_id, t1.product_id, P.product_name\\nFROM t1, Products P\\nWHERE rk = 1\\nAND t1.product_id = P.product_id\\nORDER BY t1.customer_id, t1.product_id \\n"
+                    },
+                    {
+                        "username": "vdhyasagr",
+                        "content": "A good case where you need to read the question properly. I could swear I read \"most recently\" and not \"most frequently\". That changed the whole dynamic. Straightforward solution otherwise"
+                    }
+                ]
+            },
+            {
+                "id": 1901712,
+                "content": [
+                    {
+                        "username": "aodish",
+                        "content": "with order_counts as (\\nSELECT\\no.customer_id,\\np.product_name,\\np.product_id,\\ncount(o.order_id) as order_count\\nFROM\\norders o\\nINNER JOIN products p ON p.product_id = o.product_id\\nGROUP BY 1,2,3)\\n\\nselect \\noc.customer_id,\\noc.product_id,\\noc.product_name\\nfrom order_counts oc\\nWHERE\\noc.order_count = (select MAX(order_count) from order_counts x where x.customer_id = oc.customer_id)\\n"
+                    },
+                    {
+                        "username": "divy3003",
+                        "content": "with ct as (select customer_id, product_id, rank()over(partition by customer_id order by count(product_id) desc) as rnk from orders group by customer_id, product_id)\\nselect c.customer_id, c.product_id, p.product_name\\nfrom ct c left join products p on c.product_id = p.product_id\\nwhere c.rnk = 1;"
+                    },
+                    {
+                        "username": "MelodieHe",
+                        "content": "WITH t1 AS (SELECT customer_id, product_id, RANK() OVER (PARTITION BY customer_id ORDER BY COUNT(order_date) DESC) AS rk FROM Orders GROUP BY customer_id, product_id)\\n\\nSELECT t1.customer_id, t1.product_id, P.product_name\\nFROM t1, Products P\\nWHERE rk = 1\\nAND t1.product_id = P.product_id\\nORDER BY t1.customer_id, t1.product_id \\n"
+                    },
+                    {
+                        "username": "vdhyasagr",
+                        "content": "A good case where you need to read the question properly. I could swear I read \"most recently\" and not \"most frequently\". That changed the whole dynamic. Straightforward solution otherwise"
+                    }
+                ]
+            }
+        ]
+    }
+]

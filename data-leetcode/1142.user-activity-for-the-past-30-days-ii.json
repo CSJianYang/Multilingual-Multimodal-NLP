@@ -1,0 +1,305 @@
+[
+    {
+        "title": "User Activity for the Past 30 Days II",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1568218,
+                "content": [
+                    {
+                        "username": "sudipta_lc",
+                        "content": "Why do none of the solutions here include the logic that would exclude user 4 as it had no activity except open and close the session?"
+                    },
+                    {
+                        "username": "parklark95",
+                        "content": "I\\'m not sure why we should consider date from 2019-06-28? Could you explain the reason?"
+                    },
+                    {
+                        "username": "kuaile1358",
+                        "content": "I understand the IFNULL function but confused about whay we\\'re using it here."
+                    },
+                    {
+                        "username": "samikdada",
+                        "content": "WITH CTE AS(\\nselect user_id, count(distinct session_id) as cnt\\nfrom\\nActivity\\nwhere activity_date BETWEEN DATE_SUB(\\'2019-07-27\\', INTERVAL 29 DAY) and \\'2019-07-27\\'\\ngroup by user_id\\n)\\nselect ifnull(Round(sum(cnt)/count(distinct user_id),2),0.00) as average_sessions_per_user\\nfrom\\nCTE;"
+                    },
+                    {
+                        "username": "Selfstudy9860",
+                        "content": "\\'\\'\\'\\n\\nSELECT\\nIFNULL(ROUND((COUNT(DISTINCT CONCAT(user_id,session_id ))/COUNT(DISTINCT user_id)),2),0) AS average_sessions_per_user \\nFROM Activity\\nWHERE DATEDIFF(\\'2019-07-27\\',activity_date) < 30\\n\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "chingtingfang659",
+                        "content": "I think the key to solve this problem is DATATYPE and NULL Value.\\n\\nSELECT\\nISNULL(ROUND(CAST(SUM(sub.num) AS FLOAT)/CAST(COUNT(sub.num) AS FLOAT),2),0) AS average_sessions_per_user\\nFROM\\n(SELECT\\nuser_id, COUNT(DISTINCT session_id) AS num\\nFROM Activity\\nWHERE activity_date BETWEEN DATEADD(day,-29,\\'2019-07-27\\') AND \\'2019-07-27\\'\\nGROUP BY user_id\\nHAVING COUNT(DISTINCT session_id) > 0 ) AS sub"
+                    },
+                    {
+                        "username": "VasudhaMishra",
+                        "content": "# Write your MySQL query statement below\\nwith cte as (select count(Distinct(session_id)) as average_sessions_per_user\\nfrom Activity\\nwhere\\ndatediff(\\'2019-07-27\\', activity_date)<30 and activity_date <=\\'2019-07-27\\'\\ngroup by user_id)\\n\\nselect coalesce(round(avg(average_sessions_per_user),2),0) as average_sessions_per_user\\nfrom cte\\n\\n#by Aniket Jana"
+                    },
+                    {
+                        "username": "yinwei_94",
+                        "content": "Why the HAVING function does not work?\\nSELECT IFNULL(ROUND(SUM(cnt) / COUNT(user_id), 2), 0.00) AS average_sessions_per_user\\nFROM (\\n    SELECT user_id, COUNT(DISTINCT(session_id)) AS cnt\\n    FROM Activity\\n    GROUP BY user_id\\n    HAVING MIN(activity_date) >= \\'2019-06-28\\' AND MAX(activity_date) <= \\'2019-07-27\\'\\n) AS temp"
+                    }
+                ]
+            },
+            {
+                "id": 1576686,
+                "content": [
+                    {
+                        "username": "sudipta_lc",
+                        "content": "Why do none of the solutions here include the logic that would exclude user 4 as it had no activity except open and close the session?"
+                    },
+                    {
+                        "username": "parklark95",
+                        "content": "I\\'m not sure why we should consider date from 2019-06-28? Could you explain the reason?"
+                    },
+                    {
+                        "username": "kuaile1358",
+                        "content": "I understand the IFNULL function but confused about whay we\\'re using it here."
+                    },
+                    {
+                        "username": "samikdada",
+                        "content": "WITH CTE AS(\\nselect user_id, count(distinct session_id) as cnt\\nfrom\\nActivity\\nwhere activity_date BETWEEN DATE_SUB(\\'2019-07-27\\', INTERVAL 29 DAY) and \\'2019-07-27\\'\\ngroup by user_id\\n)\\nselect ifnull(Round(sum(cnt)/count(distinct user_id),2),0.00) as average_sessions_per_user\\nfrom\\nCTE;"
+                    },
+                    {
+                        "username": "Selfstudy9860",
+                        "content": "\\'\\'\\'\\n\\nSELECT\\nIFNULL(ROUND((COUNT(DISTINCT CONCAT(user_id,session_id ))/COUNT(DISTINCT user_id)),2),0) AS average_sessions_per_user \\nFROM Activity\\nWHERE DATEDIFF(\\'2019-07-27\\',activity_date) < 30\\n\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "chingtingfang659",
+                        "content": "I think the key to solve this problem is DATATYPE and NULL Value.\\n\\nSELECT\\nISNULL(ROUND(CAST(SUM(sub.num) AS FLOAT)/CAST(COUNT(sub.num) AS FLOAT),2),0) AS average_sessions_per_user\\nFROM\\n(SELECT\\nuser_id, COUNT(DISTINCT session_id) AS num\\nFROM Activity\\nWHERE activity_date BETWEEN DATEADD(day,-29,\\'2019-07-27\\') AND \\'2019-07-27\\'\\nGROUP BY user_id\\nHAVING COUNT(DISTINCT session_id) > 0 ) AS sub"
+                    },
+                    {
+                        "username": "VasudhaMishra",
+                        "content": "# Write your MySQL query statement below\\nwith cte as (select count(Distinct(session_id)) as average_sessions_per_user\\nfrom Activity\\nwhere\\ndatediff(\\'2019-07-27\\', activity_date)<30 and activity_date <=\\'2019-07-27\\'\\ngroup by user_id)\\n\\nselect coalesce(round(avg(average_sessions_per_user),2),0) as average_sessions_per_user\\nfrom cte\\n\\n#by Aniket Jana"
+                    },
+                    {
+                        "username": "yinwei_94",
+                        "content": "Why the HAVING function does not work?\\nSELECT IFNULL(ROUND(SUM(cnt) / COUNT(user_id), 2), 0.00) AS average_sessions_per_user\\nFROM (\\n    SELECT user_id, COUNT(DISTINCT(session_id)) AS cnt\\n    FROM Activity\\n    GROUP BY user_id\\n    HAVING MIN(activity_date) >= \\'2019-06-28\\' AND MAX(activity_date) <= \\'2019-07-27\\'\\n) AS temp"
+                    }
+                ]
+            },
+            {
+                "id": 1576363,
+                "content": [
+                    {
+                        "username": "sudipta_lc",
+                        "content": "Why do none of the solutions here include the logic that would exclude user 4 as it had no activity except open and close the session?"
+                    },
+                    {
+                        "username": "parklark95",
+                        "content": "I\\'m not sure why we should consider date from 2019-06-28? Could you explain the reason?"
+                    },
+                    {
+                        "username": "kuaile1358",
+                        "content": "I understand the IFNULL function but confused about whay we\\'re using it here."
+                    },
+                    {
+                        "username": "samikdada",
+                        "content": "WITH CTE AS(\\nselect user_id, count(distinct session_id) as cnt\\nfrom\\nActivity\\nwhere activity_date BETWEEN DATE_SUB(\\'2019-07-27\\', INTERVAL 29 DAY) and \\'2019-07-27\\'\\ngroup by user_id\\n)\\nselect ifnull(Round(sum(cnt)/count(distinct user_id),2),0.00) as average_sessions_per_user\\nfrom\\nCTE;"
+                    },
+                    {
+                        "username": "Selfstudy9860",
+                        "content": "\\'\\'\\'\\n\\nSELECT\\nIFNULL(ROUND((COUNT(DISTINCT CONCAT(user_id,session_id ))/COUNT(DISTINCT user_id)),2),0) AS average_sessions_per_user \\nFROM Activity\\nWHERE DATEDIFF(\\'2019-07-27\\',activity_date) < 30\\n\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "chingtingfang659",
+                        "content": "I think the key to solve this problem is DATATYPE and NULL Value.\\n\\nSELECT\\nISNULL(ROUND(CAST(SUM(sub.num) AS FLOAT)/CAST(COUNT(sub.num) AS FLOAT),2),0) AS average_sessions_per_user\\nFROM\\n(SELECT\\nuser_id, COUNT(DISTINCT session_id) AS num\\nFROM Activity\\nWHERE activity_date BETWEEN DATEADD(day,-29,\\'2019-07-27\\') AND \\'2019-07-27\\'\\nGROUP BY user_id\\nHAVING COUNT(DISTINCT session_id) > 0 ) AS sub"
+                    },
+                    {
+                        "username": "VasudhaMishra",
+                        "content": "# Write your MySQL query statement below\\nwith cte as (select count(Distinct(session_id)) as average_sessions_per_user\\nfrom Activity\\nwhere\\ndatediff(\\'2019-07-27\\', activity_date)<30 and activity_date <=\\'2019-07-27\\'\\ngroup by user_id)\\n\\nselect coalesce(round(avg(average_sessions_per_user),2),0) as average_sessions_per_user\\nfrom cte\\n\\n#by Aniket Jana"
+                    },
+                    {
+                        "username": "yinwei_94",
+                        "content": "Why the HAVING function does not work?\\nSELECT IFNULL(ROUND(SUM(cnt) / COUNT(user_id), 2), 0.00) AS average_sessions_per_user\\nFROM (\\n    SELECT user_id, COUNT(DISTINCT(session_id)) AS cnt\\n    FROM Activity\\n    GROUP BY user_id\\n    HAVING MIN(activity_date) >= \\'2019-06-28\\' AND MAX(activity_date) <= \\'2019-07-27\\'\\n) AS temp"
+                    }
+                ]
+            },
+            {
+                "id": 1570309,
+                "content": [
+                    {
+                        "username": "sudipta_lc",
+                        "content": "Why do none of the solutions here include the logic that would exclude user 4 as it had no activity except open and close the session?"
+                    },
+                    {
+                        "username": "parklark95",
+                        "content": "I\\'m not sure why we should consider date from 2019-06-28? Could you explain the reason?"
+                    },
+                    {
+                        "username": "kuaile1358",
+                        "content": "I understand the IFNULL function but confused about whay we\\'re using it here."
+                    },
+                    {
+                        "username": "samikdada",
+                        "content": "WITH CTE AS(\\nselect user_id, count(distinct session_id) as cnt\\nfrom\\nActivity\\nwhere activity_date BETWEEN DATE_SUB(\\'2019-07-27\\', INTERVAL 29 DAY) and \\'2019-07-27\\'\\ngroup by user_id\\n)\\nselect ifnull(Round(sum(cnt)/count(distinct user_id),2),0.00) as average_sessions_per_user\\nfrom\\nCTE;"
+                    },
+                    {
+                        "username": "Selfstudy9860",
+                        "content": "\\'\\'\\'\\n\\nSELECT\\nIFNULL(ROUND((COUNT(DISTINCT CONCAT(user_id,session_id ))/COUNT(DISTINCT user_id)),2),0) AS average_sessions_per_user \\nFROM Activity\\nWHERE DATEDIFF(\\'2019-07-27\\',activity_date) < 30\\n\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "chingtingfang659",
+                        "content": "I think the key to solve this problem is DATATYPE and NULL Value.\\n\\nSELECT\\nISNULL(ROUND(CAST(SUM(sub.num) AS FLOAT)/CAST(COUNT(sub.num) AS FLOAT),2),0) AS average_sessions_per_user\\nFROM\\n(SELECT\\nuser_id, COUNT(DISTINCT session_id) AS num\\nFROM Activity\\nWHERE activity_date BETWEEN DATEADD(day,-29,\\'2019-07-27\\') AND \\'2019-07-27\\'\\nGROUP BY user_id\\nHAVING COUNT(DISTINCT session_id) > 0 ) AS sub"
+                    },
+                    {
+                        "username": "VasudhaMishra",
+                        "content": "# Write your MySQL query statement below\\nwith cte as (select count(Distinct(session_id)) as average_sessions_per_user\\nfrom Activity\\nwhere\\ndatediff(\\'2019-07-27\\', activity_date)<30 and activity_date <=\\'2019-07-27\\'\\ngroup by user_id)\\n\\nselect coalesce(round(avg(average_sessions_per_user),2),0) as average_sessions_per_user\\nfrom cte\\n\\n#by Aniket Jana"
+                    },
+                    {
+                        "username": "yinwei_94",
+                        "content": "Why the HAVING function does not work?\\nSELECT IFNULL(ROUND(SUM(cnt) / COUNT(user_id), 2), 0.00) AS average_sessions_per_user\\nFROM (\\n    SELECT user_id, COUNT(DISTINCT(session_id)) AS cnt\\n    FROM Activity\\n    GROUP BY user_id\\n    HAVING MIN(activity_date) >= \\'2019-06-28\\' AND MAX(activity_date) <= \\'2019-07-27\\'\\n) AS temp"
+                    }
+                ]
+            },
+            {
+                "id": 1575321,
+                "content": [
+                    {
+                        "username": "sudipta_lc",
+                        "content": "Why do none of the solutions here include the logic that would exclude user 4 as it had no activity except open and close the session?"
+                    },
+                    {
+                        "username": "parklark95",
+                        "content": "I\\'m not sure why we should consider date from 2019-06-28? Could you explain the reason?"
+                    },
+                    {
+                        "username": "kuaile1358",
+                        "content": "I understand the IFNULL function but confused about whay we\\'re using it here."
+                    },
+                    {
+                        "username": "samikdada",
+                        "content": "WITH CTE AS(\\nselect user_id, count(distinct session_id) as cnt\\nfrom\\nActivity\\nwhere activity_date BETWEEN DATE_SUB(\\'2019-07-27\\', INTERVAL 29 DAY) and \\'2019-07-27\\'\\ngroup by user_id\\n)\\nselect ifnull(Round(sum(cnt)/count(distinct user_id),2),0.00) as average_sessions_per_user\\nfrom\\nCTE;"
+                    },
+                    {
+                        "username": "Selfstudy9860",
+                        "content": "\\'\\'\\'\\n\\nSELECT\\nIFNULL(ROUND((COUNT(DISTINCT CONCAT(user_id,session_id ))/COUNT(DISTINCT user_id)),2),0) AS average_sessions_per_user \\nFROM Activity\\nWHERE DATEDIFF(\\'2019-07-27\\',activity_date) < 30\\n\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "chingtingfang659",
+                        "content": "I think the key to solve this problem is DATATYPE and NULL Value.\\n\\nSELECT\\nISNULL(ROUND(CAST(SUM(sub.num) AS FLOAT)/CAST(COUNT(sub.num) AS FLOAT),2),0) AS average_sessions_per_user\\nFROM\\n(SELECT\\nuser_id, COUNT(DISTINCT session_id) AS num\\nFROM Activity\\nWHERE activity_date BETWEEN DATEADD(day,-29,\\'2019-07-27\\') AND \\'2019-07-27\\'\\nGROUP BY user_id\\nHAVING COUNT(DISTINCT session_id) > 0 ) AS sub"
+                    },
+                    {
+                        "username": "VasudhaMishra",
+                        "content": "# Write your MySQL query statement below\\nwith cte as (select count(Distinct(session_id)) as average_sessions_per_user\\nfrom Activity\\nwhere\\ndatediff(\\'2019-07-27\\', activity_date)<30 and activity_date <=\\'2019-07-27\\'\\ngroup by user_id)\\n\\nselect coalesce(round(avg(average_sessions_per_user),2),0) as average_sessions_per_user\\nfrom cte\\n\\n#by Aniket Jana"
+                    },
+                    {
+                        "username": "yinwei_94",
+                        "content": "Why the HAVING function does not work?\\nSELECT IFNULL(ROUND(SUM(cnt) / COUNT(user_id), 2), 0.00) AS average_sessions_per_user\\nFROM (\\n    SELECT user_id, COUNT(DISTINCT(session_id)) AS cnt\\n    FROM Activity\\n    GROUP BY user_id\\n    HAVING MIN(activity_date) >= \\'2019-06-28\\' AND MAX(activity_date) <= \\'2019-07-27\\'\\n) AS temp"
+                    }
+                ]
+            },
+            {
+                "id": 1572912,
+                "content": [
+                    {
+                        "username": "sudipta_lc",
+                        "content": "Why do none of the solutions here include the logic that would exclude user 4 as it had no activity except open and close the session?"
+                    },
+                    {
+                        "username": "parklark95",
+                        "content": "I\\'m not sure why we should consider date from 2019-06-28? Could you explain the reason?"
+                    },
+                    {
+                        "username": "kuaile1358",
+                        "content": "I understand the IFNULL function but confused about whay we\\'re using it here."
+                    },
+                    {
+                        "username": "samikdada",
+                        "content": "WITH CTE AS(\\nselect user_id, count(distinct session_id) as cnt\\nfrom\\nActivity\\nwhere activity_date BETWEEN DATE_SUB(\\'2019-07-27\\', INTERVAL 29 DAY) and \\'2019-07-27\\'\\ngroup by user_id\\n)\\nselect ifnull(Round(sum(cnt)/count(distinct user_id),2),0.00) as average_sessions_per_user\\nfrom\\nCTE;"
+                    },
+                    {
+                        "username": "Selfstudy9860",
+                        "content": "\\'\\'\\'\\n\\nSELECT\\nIFNULL(ROUND((COUNT(DISTINCT CONCAT(user_id,session_id ))/COUNT(DISTINCT user_id)),2),0) AS average_sessions_per_user \\nFROM Activity\\nWHERE DATEDIFF(\\'2019-07-27\\',activity_date) < 30\\n\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "chingtingfang659",
+                        "content": "I think the key to solve this problem is DATATYPE and NULL Value.\\n\\nSELECT\\nISNULL(ROUND(CAST(SUM(sub.num) AS FLOAT)/CAST(COUNT(sub.num) AS FLOAT),2),0) AS average_sessions_per_user\\nFROM\\n(SELECT\\nuser_id, COUNT(DISTINCT session_id) AS num\\nFROM Activity\\nWHERE activity_date BETWEEN DATEADD(day,-29,\\'2019-07-27\\') AND \\'2019-07-27\\'\\nGROUP BY user_id\\nHAVING COUNT(DISTINCT session_id) > 0 ) AS sub"
+                    },
+                    {
+                        "username": "VasudhaMishra",
+                        "content": "# Write your MySQL query statement below\\nwith cte as (select count(Distinct(session_id)) as average_sessions_per_user\\nfrom Activity\\nwhere\\ndatediff(\\'2019-07-27\\', activity_date)<30 and activity_date <=\\'2019-07-27\\'\\ngroup by user_id)\\n\\nselect coalesce(round(avg(average_sessions_per_user),2),0) as average_sessions_per_user\\nfrom cte\\n\\n#by Aniket Jana"
+                    },
+                    {
+                        "username": "yinwei_94",
+                        "content": "Why the HAVING function does not work?\\nSELECT IFNULL(ROUND(SUM(cnt) / COUNT(user_id), 2), 0.00) AS average_sessions_per_user\\nFROM (\\n    SELECT user_id, COUNT(DISTINCT(session_id)) AS cnt\\n    FROM Activity\\n    GROUP BY user_id\\n    HAVING MIN(activity_date) >= \\'2019-06-28\\' AND MAX(activity_date) <= \\'2019-07-27\\'\\n) AS temp"
+                    }
+                ]
+            },
+            {
+                "id": 1801652,
+                "content": [
+                    {
+                        "username": "sudipta_lc",
+                        "content": "Why do none of the solutions here include the logic that would exclude user 4 as it had no activity except open and close the session?"
+                    },
+                    {
+                        "username": "parklark95",
+                        "content": "I\\'m not sure why we should consider date from 2019-06-28? Could you explain the reason?"
+                    },
+                    {
+                        "username": "kuaile1358",
+                        "content": "I understand the IFNULL function but confused about whay we\\'re using it here."
+                    },
+                    {
+                        "username": "samikdada",
+                        "content": "WITH CTE AS(\\nselect user_id, count(distinct session_id) as cnt\\nfrom\\nActivity\\nwhere activity_date BETWEEN DATE_SUB(\\'2019-07-27\\', INTERVAL 29 DAY) and \\'2019-07-27\\'\\ngroup by user_id\\n)\\nselect ifnull(Round(sum(cnt)/count(distinct user_id),2),0.00) as average_sessions_per_user\\nfrom\\nCTE;"
+                    },
+                    {
+                        "username": "Selfstudy9860",
+                        "content": "\\'\\'\\'\\n\\nSELECT\\nIFNULL(ROUND((COUNT(DISTINCT CONCAT(user_id,session_id ))/COUNT(DISTINCT user_id)),2),0) AS average_sessions_per_user \\nFROM Activity\\nWHERE DATEDIFF(\\'2019-07-27\\',activity_date) < 30\\n\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "chingtingfang659",
+                        "content": "I think the key to solve this problem is DATATYPE and NULL Value.\\n\\nSELECT\\nISNULL(ROUND(CAST(SUM(sub.num) AS FLOAT)/CAST(COUNT(sub.num) AS FLOAT),2),0) AS average_sessions_per_user\\nFROM\\n(SELECT\\nuser_id, COUNT(DISTINCT session_id) AS num\\nFROM Activity\\nWHERE activity_date BETWEEN DATEADD(day,-29,\\'2019-07-27\\') AND \\'2019-07-27\\'\\nGROUP BY user_id\\nHAVING COUNT(DISTINCT session_id) > 0 ) AS sub"
+                    },
+                    {
+                        "username": "VasudhaMishra",
+                        "content": "# Write your MySQL query statement below\\nwith cte as (select count(Distinct(session_id)) as average_sessions_per_user\\nfrom Activity\\nwhere\\ndatediff(\\'2019-07-27\\', activity_date)<30 and activity_date <=\\'2019-07-27\\'\\ngroup by user_id)\\n\\nselect coalesce(round(avg(average_sessions_per_user),2),0) as average_sessions_per_user\\nfrom cte\\n\\n#by Aniket Jana"
+                    },
+                    {
+                        "username": "yinwei_94",
+                        "content": "Why the HAVING function does not work?\\nSELECT IFNULL(ROUND(SUM(cnt) / COUNT(user_id), 2), 0.00) AS average_sessions_per_user\\nFROM (\\n    SELECT user_id, COUNT(DISTINCT(session_id)) AS cnt\\n    FROM Activity\\n    GROUP BY user_id\\n    HAVING MIN(activity_date) >= \\'2019-06-28\\' AND MAX(activity_date) <= \\'2019-07-27\\'\\n) AS temp"
+                    }
+                ]
+            },
+            {
+                "id": 1737319,
+                "content": [
+                    {
+                        "username": "sudipta_lc",
+                        "content": "Why do none of the solutions here include the logic that would exclude user 4 as it had no activity except open and close the session?"
+                    },
+                    {
+                        "username": "parklark95",
+                        "content": "I\\'m not sure why we should consider date from 2019-06-28? Could you explain the reason?"
+                    },
+                    {
+                        "username": "kuaile1358",
+                        "content": "I understand the IFNULL function but confused about whay we\\'re using it here."
+                    },
+                    {
+                        "username": "samikdada",
+                        "content": "WITH CTE AS(\\nselect user_id, count(distinct session_id) as cnt\\nfrom\\nActivity\\nwhere activity_date BETWEEN DATE_SUB(\\'2019-07-27\\', INTERVAL 29 DAY) and \\'2019-07-27\\'\\ngroup by user_id\\n)\\nselect ifnull(Round(sum(cnt)/count(distinct user_id),2),0.00) as average_sessions_per_user\\nfrom\\nCTE;"
+                    },
+                    {
+                        "username": "Selfstudy9860",
+                        "content": "\\'\\'\\'\\n\\nSELECT\\nIFNULL(ROUND((COUNT(DISTINCT CONCAT(user_id,session_id ))/COUNT(DISTINCT user_id)),2),0) AS average_sessions_per_user \\nFROM Activity\\nWHERE DATEDIFF(\\'2019-07-27\\',activity_date) < 30\\n\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "chingtingfang659",
+                        "content": "I think the key to solve this problem is DATATYPE and NULL Value.\\n\\nSELECT\\nISNULL(ROUND(CAST(SUM(sub.num) AS FLOAT)/CAST(COUNT(sub.num) AS FLOAT),2),0) AS average_sessions_per_user\\nFROM\\n(SELECT\\nuser_id, COUNT(DISTINCT session_id) AS num\\nFROM Activity\\nWHERE activity_date BETWEEN DATEADD(day,-29,\\'2019-07-27\\') AND \\'2019-07-27\\'\\nGROUP BY user_id\\nHAVING COUNT(DISTINCT session_id) > 0 ) AS sub"
+                    },
+                    {
+                        "username": "VasudhaMishra",
+                        "content": "# Write your MySQL query statement below\\nwith cte as (select count(Distinct(session_id)) as average_sessions_per_user\\nfrom Activity\\nwhere\\ndatediff(\\'2019-07-27\\', activity_date)<30 and activity_date <=\\'2019-07-27\\'\\ngroup by user_id)\\n\\nselect coalesce(round(avg(average_sessions_per_user),2),0) as average_sessions_per_user\\nfrom cte\\n\\n#by Aniket Jana"
+                    },
+                    {
+                        "username": "yinwei_94",
+                        "content": "Why the HAVING function does not work?\\nSELECT IFNULL(ROUND(SUM(cnt) / COUNT(user_id), 2), 0.00) AS average_sessions_per_user\\nFROM (\\n    SELECT user_id, COUNT(DISTINCT(session_id)) AS cnt\\n    FROM Activity\\n    GROUP BY user_id\\n    HAVING MIN(activity_date) >= \\'2019-06-28\\' AND MAX(activity_date) <= \\'2019-07-27\\'\\n) AS temp"
+                    }
+                ]
+            }
+        ]
+    }
+]

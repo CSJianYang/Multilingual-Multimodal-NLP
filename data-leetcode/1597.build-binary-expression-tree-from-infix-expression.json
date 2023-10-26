@@ -1,0 +1,113 @@
+[
+    {
+        "title": "The Most Frequently Ordered Products for Each Customer",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1570447,
+                "content": [
+                    {
+                        "username": "aodish",
+                        "content": "with order_counts as (\\nSELECT\\no.customer_id,\\np.product_name,\\np.product_id,\\ncount(o.order_id) as order_count\\nFROM\\norders o\\nINNER JOIN products p ON p.product_id = o.product_id\\nGROUP BY 1,2,3)\\n\\nselect \\noc.customer_id,\\noc.product_id,\\noc.product_name\\nfrom order_counts oc\\nWHERE\\noc.order_count = (select MAX(order_count) from order_counts x where x.customer_id = oc.customer_id)\\n"
+                    },
+                    {
+                        "username": "divy3003",
+                        "content": "with ct as (select customer_id, product_id, rank()over(partition by customer_id order by count(product_id) desc) as rnk from orders group by customer_id, product_id)\\nselect c.customer_id, c.product_id, p.product_name\\nfrom ct c left join products p on c.product_id = p.product_id\\nwhere c.rnk = 1;"
+                    },
+                    {
+                        "username": "MelodieHe",
+                        "content": "WITH t1 AS (SELECT customer_id, product_id, RANK() OVER (PARTITION BY customer_id ORDER BY COUNT(order_date) DESC) AS rk FROM Orders GROUP BY customer_id, product_id)\\n\\nSELECT t1.customer_id, t1.product_id, P.product_name\\nFROM t1, Products P\\nWHERE rk = 1\\nAND t1.product_id = P.product_id\\nORDER BY t1.customer_id, t1.product_id \\n"
+                    },
+                    {
+                        "username": "vdhyasagr",
+                        "content": "A good case where you need to read the question properly. I could swear I read \"most recently\" and not \"most frequently\". That changed the whole dynamic. Straightforward solution otherwise"
+                    }
+                ]
+            },
+            {
+                "id": 1570376,
+                "content": [
+                    {
+                        "username": "aodish",
+                        "content": "with order_counts as (\\nSELECT\\no.customer_id,\\np.product_name,\\np.product_id,\\ncount(o.order_id) as order_count\\nFROM\\norders o\\nINNER JOIN products p ON p.product_id = o.product_id\\nGROUP BY 1,2,3)\\n\\nselect \\noc.customer_id,\\noc.product_id,\\noc.product_name\\nfrom order_counts oc\\nWHERE\\noc.order_count = (select MAX(order_count) from order_counts x where x.customer_id = oc.customer_id)\\n"
+                    },
+                    {
+                        "username": "divy3003",
+                        "content": "with ct as (select customer_id, product_id, rank()over(partition by customer_id order by count(product_id) desc) as rnk from orders group by customer_id, product_id)\\nselect c.customer_id, c.product_id, p.product_name\\nfrom ct c left join products p on c.product_id = p.product_id\\nwhere c.rnk = 1;"
+                    },
+                    {
+                        "username": "MelodieHe",
+                        "content": "WITH t1 AS (SELECT customer_id, product_id, RANK() OVER (PARTITION BY customer_id ORDER BY COUNT(order_date) DESC) AS rk FROM Orders GROUP BY customer_id, product_id)\\n\\nSELECT t1.customer_id, t1.product_id, P.product_name\\nFROM t1, Products P\\nWHERE rk = 1\\nAND t1.product_id = P.product_id\\nORDER BY t1.customer_id, t1.product_id \\n"
+                    },
+                    {
+                        "username": "vdhyasagr",
+                        "content": "A good case where you need to read the question properly. I could swear I read \"most recently\" and not \"most frequently\". That changed the whole dynamic. Straightforward solution otherwise"
+                    }
+                ]
+            },
+            {
+                "id": 1574582,
+                "content": [
+                    {
+                        "username": "aodish",
+                        "content": "with order_counts as (\\nSELECT\\no.customer_id,\\np.product_name,\\np.product_id,\\ncount(o.order_id) as order_count\\nFROM\\norders o\\nINNER JOIN products p ON p.product_id = o.product_id\\nGROUP BY 1,2,3)\\n\\nselect \\noc.customer_id,\\noc.product_id,\\noc.product_name\\nfrom order_counts oc\\nWHERE\\noc.order_count = (select MAX(order_count) from order_counts x where x.customer_id = oc.customer_id)\\n"
+                    },
+                    {
+                        "username": "divy3003",
+                        "content": "with ct as (select customer_id, product_id, rank()over(partition by customer_id order by count(product_id) desc) as rnk from orders group by customer_id, product_id)\\nselect c.customer_id, c.product_id, p.product_name\\nfrom ct c left join products p on c.product_id = p.product_id\\nwhere c.rnk = 1;"
+                    },
+                    {
+                        "username": "MelodieHe",
+                        "content": "WITH t1 AS (SELECT customer_id, product_id, RANK() OVER (PARTITION BY customer_id ORDER BY COUNT(order_date) DESC) AS rk FROM Orders GROUP BY customer_id, product_id)\\n\\nSELECT t1.customer_id, t1.product_id, P.product_name\\nFROM t1, Products P\\nWHERE rk = 1\\nAND t1.product_id = P.product_id\\nORDER BY t1.customer_id, t1.product_id \\n"
+                    },
+                    {
+                        "username": "vdhyasagr",
+                        "content": "A good case where you need to read the question properly. I could swear I read \"most recently\" and not \"most frequently\". That changed the whole dynamic. Straightforward solution otherwise"
+                    }
+                ]
+            },
+            {
+                "id": 1901712,
+                "content": [
+                    {
+                        "username": "aodish",
+                        "content": "with order_counts as (\\nSELECT\\no.customer_id,\\np.product_name,\\np.product_id,\\ncount(o.order_id) as order_count\\nFROM\\norders o\\nINNER JOIN products p ON p.product_id = o.product_id\\nGROUP BY 1,2,3)\\n\\nselect \\noc.customer_id,\\noc.product_id,\\noc.product_name\\nfrom order_counts oc\\nWHERE\\noc.order_count = (select MAX(order_count) from order_counts x where x.customer_id = oc.customer_id)\\n"
+                    },
+                    {
+                        "username": "divy3003",
+                        "content": "with ct as (select customer_id, product_id, rank()over(partition by customer_id order by count(product_id) desc) as rnk from orders group by customer_id, product_id)\\nselect c.customer_id, c.product_id, p.product_name\\nfrom ct c left join products p on c.product_id = p.product_id\\nwhere c.rnk = 1;"
+                    },
+                    {
+                        "username": "MelodieHe",
+                        "content": "WITH t1 AS (SELECT customer_id, product_id, RANK() OVER (PARTITION BY customer_id ORDER BY COUNT(order_date) DESC) AS rk FROM Orders GROUP BY customer_id, product_id)\\n\\nSELECT t1.customer_id, t1.product_id, P.product_name\\nFROM t1, Products P\\nWHERE rk = 1\\nAND t1.product_id = P.product_id\\nORDER BY t1.customer_id, t1.product_id \\n"
+                    },
+                    {
+                        "username": "vdhyasagr",
+                        "content": "A good case where you need to read the question properly. I could swear I read \"most recently\" and not \"most frequently\". That changed the whole dynamic. Straightforward solution otherwise"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Build Binary Expression Tree From Infix Expression",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1837823,
+                "content": [
+                    {
+                        "username": "coderinterview",
+                        "content": "For the test case : \"(1/2/3)\"\\nExpected output is : [/,/,3,1,2]\\nMy output is : [/,1,/,null,null,2,3]\\nWhen my output is traversed in-order, same string is generated with operands in same order.\\nSo, why is it considered wrong ans?\\nMy Code:\\n```\\n/**\\n * Definition for a binary tree node.\\n * struct Node {\\n *     char val;\\n *     Node *left;\\n *     Node *right;\\n *     Node() : val(\\' \\'), left(nullptr), right(nullptr) {}\\n *     Node(char x) : val(x), left(nullptr), right(nullptr) {}\\n *     Node(char x, Node *left, Node *right) : val(x), left(left), right(right) {}\\n * };\\n */\\nclass Solution {\\npublic:\\n    int rank(char c){\\n        if(c == \\'+\\') return 1;\\n        else if(c == \\'-\\') return 2;\\n        else if(c == \\'/\\') return 3;\\n        else if (c == \\'*\\') return 4;\\n        return 5;\\n    }\\n    Node* solve(string &s,int l,int r){\\n        if(l>r) return nullptr;\\n        int mino=l;      \\n        int ob=0;\\n        for(int i=l;i<=r;i++){\\n            if(s[i] == \\'(\\') ob++;\\n            else if(s[i] == \\')\\') ob--;\\n            else if(rank(s[i]) < rank(s[mino]) && ob == 0) mino=i;\\n            \\n        }\\n        if(mino == l && r-l != 0){\\n            ob=-1;\\n            for(int i=l;i<=r;i++){\\n                if(s[i] == \\'(\\') ob++;\\n                else if(s[i] == \\')\\') ob--;\\n                else if(rank(s[i]) < rank(s[mino]) && ob == 0) mino=i;    \\n            }\\n            l++;\\n            r--;\\n        }\\n        Node *t = new Node(s[mino]);\\n        t->left = solve(s,l,mino-1);\\n        t->right = solve(s,mino+1,r);\\n        return t;\\n    }\\n    Node* expTree(string s) {\\n        Node *ans = solve(s,0,s.length()-1);\\n        return ans;\\n    }\\n};\\n```"
+                    },
+                    {
+                        "username": "ndrwknsh",
+                        "content": "I had the same problem in my code.\\n\\nThe output [/,1,/,null,null,2,3] is actually equivalent to \"1/(2/3)\"."
+                    }
+                ]
+            }
+        ]
+    }
+]

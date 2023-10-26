@@ -1,0 +1,35 @@
+[
+    {
+        "title": "Time Taken to Cross the Door",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 2056683,
+                "content": [
+                    {
+                        "username": "firezdog",
+                        "content": "I don't get the following example:\n\n[0,0,0,1,2,3,4] with [0,0,1,0,1,1,0]\n\nI would have thought you would get\n\n[1,2,0,3,4,5,6]\n\nbecause after the first three people, the final four are not making simultaneous demands on the door and will thus go in order.  But the actual answer is\n\n[1,2,0,3,5,6,4]\n\nwhere the people entering have priority over the people exiting as normal...\n\nThe explanation for this is that the door resource is granted to people *waiting* at the same time in accordance with the rules.   AS WE SERVE REQUESTS, TIME ADVANCES -- thus people who were not waiting at the same time originally are waiting at the same time now."
+                    },
+                    {
+                        "username": "MdoingIt",
+                        "content": "a tough simulation problem!"
+                    }
+                ]
+            },
+            {
+                "id": 1930195,
+                "content": [
+                    {
+                        "username": "firezdog",
+                        "content": "I don't get the following example:\n\n[0,0,0,1,2,3,4] with [0,0,1,0,1,1,0]\n\nI would have thought you would get\n\n[1,2,0,3,4,5,6]\n\nbecause after the first three people, the final four are not making simultaneous demands on the door and will thus go in order.  But the actual answer is\n\n[1,2,0,3,5,6,4]\n\nwhere the people entering have priority over the people exiting as normal...\n\nThe explanation for this is that the door resource is granted to people *waiting* at the same time in accordance with the rules.   AS WE SERVE REQUESTS, TIME ADVANCES -- thus people who were not waiting at the same time originally are waiting at the same time now."
+                    },
+                    {
+                        "username": "MdoingIt",
+                        "content": "a tough simulation problem!"
+                    }
+                ]
+            }
+        ]
+    }
+]

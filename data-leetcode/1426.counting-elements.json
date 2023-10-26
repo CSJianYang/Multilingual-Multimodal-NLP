@@ -1,0 +1,141 @@
+[
+    {
+        "title": "Counting Elements",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1564894,
+                "content": [
+                    {
+                        "username": "Cubicon",
+                        "content": "This problem is way too easy. Not sure about the reasoning to include this in the challenge.\\n\\nI was so excited, because a mail was sent from Leetcode that on 7th 12 am pst, a brand new problem is released. So I was wide awake, anticipating this one."
+                    },
+                    {
+                        "username": "AlecLC",
+                        "content": "The question is very easy, but surely easy problems are not aimed towards people anticipating & waiting for problem releases... probably hards are more your fort\\xE9"
+                    },
+                    {
+                        "username": "chrihop",
+                        "content": "The question is not well stated. \\n\\n> \"If there are duplicates in arr, count them separately.\"\\n\\nA common understanding of this condition is that, if the input has [1,1,2], then [1,2] is considered as a pair, and another 1 cannot be counted since there is no corresponding 2.\\n\\nHowever, the OJ actually counts [1,1,2] as two pairs. So, you should say:\\n\\n\"If there are duplicates in arr, they could be counted repeatedly.\"\\n"
+                    },
+                    {
+                        "username": "link_vb",
+                        "content": "+1, I misunderstood the question just like you described. The problem description should be made more clear."
+                    },
+                    {
+                        "username": "Sloman_",
+                        "content": "In case arr = [1,3,2,3,5,0]. \\nStep 1 - I\\'ve created a list object from the set(arr(x+1). So my list = [1, 2, 3, 4, 6] (Each unique element in the arr + 1)\\nStep 2 - Check how many number from my list are in the arr. Answer is 4 (1,3,2,3).\\n\\nWhy I got Wrong Answer with expected value=3? Do I misunderstand something? "
+                    },
+                    {
+                        "username": "aditya9219",
+                        "content": "I am also having the same query for this particular testcase. so, have you got clarity about it."
+                    },
+                    {
+                        "username": "ctlang",
+                        "content": "If you get tripped up by the explanations in the examples, note the misspelling:\\ncause -> \\'cus"
+                    }
+                ]
+            },
+            {
+                "id": 1705534,
+                "content": [
+                    {
+                        "username": "Cubicon",
+                        "content": "This problem is way too easy. Not sure about the reasoning to include this in the challenge.\\n\\nI was so excited, because a mail was sent from Leetcode that on 7th 12 am pst, a brand new problem is released. So I was wide awake, anticipating this one."
+                    },
+                    {
+                        "username": "AlecLC",
+                        "content": "The question is very easy, but surely easy problems are not aimed towards people anticipating & waiting for problem releases... probably hards are more your fort\\xE9"
+                    },
+                    {
+                        "username": "chrihop",
+                        "content": "The question is not well stated. \\n\\n> \"If there are duplicates in arr, count them separately.\"\\n\\nA common understanding of this condition is that, if the input has [1,1,2], then [1,2] is considered as a pair, and another 1 cannot be counted since there is no corresponding 2.\\n\\nHowever, the OJ actually counts [1,1,2] as two pairs. So, you should say:\\n\\n\"If there are duplicates in arr, they could be counted repeatedly.\"\\n"
+                    },
+                    {
+                        "username": "link_vb",
+                        "content": "+1, I misunderstood the question just like you described. The problem description should be made more clear."
+                    },
+                    {
+                        "username": "Sloman_",
+                        "content": "In case arr = [1,3,2,3,5,0]. \\nStep 1 - I\\'ve created a list object from the set(arr(x+1). So my list = [1, 2, 3, 4, 6] (Each unique element in the arr + 1)\\nStep 2 - Check how many number from my list are in the arr. Answer is 4 (1,3,2,3).\\n\\nWhy I got Wrong Answer with expected value=3? Do I misunderstand something? "
+                    },
+                    {
+                        "username": "aditya9219",
+                        "content": "I am also having the same query for this particular testcase. so, have you got clarity about it."
+                    },
+                    {
+                        "username": "ctlang",
+                        "content": "If you get tripped up by the explanations in the examples, note the misspelling:\\ncause -> \\'cus"
+                    }
+                ]
+            },
+            {
+                "id": 1818357,
+                "content": [
+                    {
+                        "username": "Cubicon",
+                        "content": "This problem is way too easy. Not sure about the reasoning to include this in the challenge.\\n\\nI was so excited, because a mail was sent from Leetcode that on 7th 12 am pst, a brand new problem is released. So I was wide awake, anticipating this one."
+                    },
+                    {
+                        "username": "AlecLC",
+                        "content": "The question is very easy, but surely easy problems are not aimed towards people anticipating & waiting for problem releases... probably hards are more your fort\\xE9"
+                    },
+                    {
+                        "username": "chrihop",
+                        "content": "The question is not well stated. \\n\\n> \"If there are duplicates in arr, count them separately.\"\\n\\nA common understanding of this condition is that, if the input has [1,1,2], then [1,2] is considered as a pair, and another 1 cannot be counted since there is no corresponding 2.\\n\\nHowever, the OJ actually counts [1,1,2] as two pairs. So, you should say:\\n\\n\"If there are duplicates in arr, they could be counted repeatedly.\"\\n"
+                    },
+                    {
+                        "username": "link_vb",
+                        "content": "+1, I misunderstood the question just like you described. The problem description should be made more clear."
+                    },
+                    {
+                        "username": "Sloman_",
+                        "content": "In case arr = [1,3,2,3,5,0]. \\nStep 1 - I\\'ve created a list object from the set(arr(x+1). So my list = [1, 2, 3, 4, 6] (Each unique element in the arr + 1)\\nStep 2 - Check how many number from my list are in the arr. Answer is 4 (1,3,2,3).\\n\\nWhy I got Wrong Answer with expected value=3? Do I misunderstand something? "
+                    },
+                    {
+                        "username": "aditya9219",
+                        "content": "I am also having the same query for this particular testcase. so, have you got clarity about it."
+                    },
+                    {
+                        "username": "ctlang",
+                        "content": "If you get tripped up by the explanations in the examples, note the misspelling:\\ncause -> \\'cus"
+                    }
+                ]
+            },
+            {
+                "id": 1920406,
+                "content": [
+                    {
+                        "username": "Cubicon",
+                        "content": "This problem is way too easy. Not sure about the reasoning to include this in the challenge.\\n\\nI was so excited, because a mail was sent from Leetcode that on 7th 12 am pst, a brand new problem is released. So I was wide awake, anticipating this one."
+                    },
+                    {
+                        "username": "AlecLC",
+                        "content": "The question is very easy, but surely easy problems are not aimed towards people anticipating & waiting for problem releases... probably hards are more your fort\\xE9"
+                    },
+                    {
+                        "username": "chrihop",
+                        "content": "The question is not well stated. \\n\\n> \"If there are duplicates in arr, count them separately.\"\\n\\nA common understanding of this condition is that, if the input has [1,1,2], then [1,2] is considered as a pair, and another 1 cannot be counted since there is no corresponding 2.\\n\\nHowever, the OJ actually counts [1,1,2] as two pairs. So, you should say:\\n\\n\"If there are duplicates in arr, they could be counted repeatedly.\"\\n"
+                    },
+                    {
+                        "username": "link_vb",
+                        "content": "+1, I misunderstood the question just like you described. The problem description should be made more clear."
+                    },
+                    {
+                        "username": "Sloman_",
+                        "content": "In case arr = [1,3,2,3,5,0]. \\nStep 1 - I\\'ve created a list object from the set(arr(x+1). So my list = [1, 2, 3, 4, 6] (Each unique element in the arr + 1)\\nStep 2 - Check how many number from my list are in the arr. Answer is 4 (1,3,2,3).\\n\\nWhy I got Wrong Answer with expected value=3? Do I misunderstand something? "
+                    },
+                    {
+                        "username": "aditya9219",
+                        "content": "I am also having the same query for this particular testcase. so, have you got clarity about it."
+                    },
+                    {
+                        "username": "ctlang",
+                        "content": "If you get tripped up by the explanations in the examples, note the misspelling:\\ncause -> \\'cus"
+                    }
+                ]
+            }
+        ]
+    }
+]

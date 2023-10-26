@@ -1,0 +1,72 @@
+[
+    {
+        "title": "User Purchase Platform",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1800081,
+                "content": [
+                    {
+                        "username": "b02203054",
+                        "content": "can anyone tell me what\\'s wrong in my code?\\nI try to filter the code with different platform and combine all of them, but it seems my solution doesn\\'t work out... \\n\\n\\n/* Write your PL/SQL query statement below */\\nwith platform_desktop as \\n        (select spend_time, \\n                platform, \\n                sum(amount) as total_amount, \\n                count(user_id) as total_users \\n        from Spending \\n        having platform = \\'desktop\\' \\n        group by spend_date)\\n    \\n    platform_mobile as (\\n        select spend_time, \\n                platform, \\n                sum(amount) as total_amount, \\n                count(user_id) as total_users \\n        from Spending \\n        having platform = \\'mobile\\' \\n        group by spend_date\\n    )\\n    platform_total as (\\n        select spend_time, \\n                both as platform, \\n                sum(amount) as total_amount, \\n                count(user_id) as total_users \\n        from Spending \\n        group by spend_date\\n    )\\n\\nselect *\\nfrom platform_desktop\\nunion \\nselect *\\nfrom platform_mobile\\nunion\\nselect *\\nfrom platform_total\\n\\n"
+                    },
+                    {
+                        "username": "wxdtony",
+                        "content": "Considering the requirement --- \\'Return the result table in any order.\\' my solution using window function get same result set in different order been rejected, seems a bug of this \\'problem\\', who can  help to fix this bug?"
+                    },
+                    {
+                        "username": "Wendy94wendy",
+                        "content": "what's wrong with this?\n```\nwith res as(\nselect spend_date, case when np=1 then r.platform else 'both' end as platform,\n    sum(amount) as total_amount, count(distinct user_id) as total_users\nfrom (\n    select user_id, spend_date, count(distinct platform) as np\n    from spending \n    group by 1,2 ) l\nright join spending r\nusing(user_id,spend_date)\ngroup by 1,2\n)\n\nselect spend_date, platform, \n        ifnull(total_amount,0) as total_amount, ifnull(total_users,0) as total_users\nfrom (\n    select distinct spending.spend_date, res.platform\n    from spending \n    cross join res) l\nleft join res\nusing(spend_date,platform)\n```"
+                    },
+                    {
+                        "username": "praut1606",
+                        "content": "my query is also right but still giving incorrect , output matches 100 %"
+                    }
+                ]
+            },
+            {
+                "id": 1780631,
+                "content": [
+                    {
+                        "username": "b02203054",
+                        "content": "can anyone tell me what\\'s wrong in my code?\\nI try to filter the code with different platform and combine all of them, but it seems my solution doesn\\'t work out... \\n\\n\\n/* Write your PL/SQL query statement below */\\nwith platform_desktop as \\n        (select spend_time, \\n                platform, \\n                sum(amount) as total_amount, \\n                count(user_id) as total_users \\n        from Spending \\n        having platform = \\'desktop\\' \\n        group by spend_date)\\n    \\n    platform_mobile as (\\n        select spend_time, \\n                platform, \\n                sum(amount) as total_amount, \\n                count(user_id) as total_users \\n        from Spending \\n        having platform = \\'mobile\\' \\n        group by spend_date\\n    )\\n    platform_total as (\\n        select spend_time, \\n                both as platform, \\n                sum(amount) as total_amount, \\n                count(user_id) as total_users \\n        from Spending \\n        group by spend_date\\n    )\\n\\nselect *\\nfrom platform_desktop\\nunion \\nselect *\\nfrom platform_mobile\\nunion\\nselect *\\nfrom platform_total\\n\\n"
+                    },
+                    {
+                        "username": "wxdtony",
+                        "content": "Considering the requirement --- \\'Return the result table in any order.\\' my solution using window function get same result set in different order been rejected, seems a bug of this \\'problem\\', who can  help to fix this bug?"
+                    },
+                    {
+                        "username": "Wendy94wendy",
+                        "content": "what's wrong with this?\n```\nwith res as(\nselect spend_date, case when np=1 then r.platform else 'both' end as platform,\n    sum(amount) as total_amount, count(distinct user_id) as total_users\nfrom (\n    select user_id, spend_date, count(distinct platform) as np\n    from spending \n    group by 1,2 ) l\nright join spending r\nusing(user_id,spend_date)\ngroup by 1,2\n)\n\nselect spend_date, platform, \n        ifnull(total_amount,0) as total_amount, ifnull(total_users,0) as total_users\nfrom (\n    select distinct spending.spend_date, res.platform\n    from spending \n    cross join res) l\nleft join res\nusing(spend_date,platform)\n```"
+                    },
+                    {
+                        "username": "praut1606",
+                        "content": "my query is also right but still giving incorrect , output matches 100 %"
+                    }
+                ]
+            },
+            {
+                "id": 1683266,
+                "content": [
+                    {
+                        "username": "b02203054",
+                        "content": "can anyone tell me what\\'s wrong in my code?\\nI try to filter the code with different platform and combine all of them, but it seems my solution doesn\\'t work out... \\n\\n\\n/* Write your PL/SQL query statement below */\\nwith platform_desktop as \\n        (select spend_time, \\n                platform, \\n                sum(amount) as total_amount, \\n                count(user_id) as total_users \\n        from Spending \\n        having platform = \\'desktop\\' \\n        group by spend_date)\\n    \\n    platform_mobile as (\\n        select spend_time, \\n                platform, \\n                sum(amount) as total_amount, \\n                count(user_id) as total_users \\n        from Spending \\n        having platform = \\'mobile\\' \\n        group by spend_date\\n    )\\n    platform_total as (\\n        select spend_time, \\n                both as platform, \\n                sum(amount) as total_amount, \\n                count(user_id) as total_users \\n        from Spending \\n        group by spend_date\\n    )\\n\\nselect *\\nfrom platform_desktop\\nunion \\nselect *\\nfrom platform_mobile\\nunion\\nselect *\\nfrom platform_total\\n\\n"
+                    },
+                    {
+                        "username": "wxdtony",
+                        "content": "Considering the requirement --- \\'Return the result table in any order.\\' my solution using window function get same result set in different order been rejected, seems a bug of this \\'problem\\', who can  help to fix this bug?"
+                    },
+                    {
+                        "username": "Wendy94wendy",
+                        "content": "what's wrong with this?\n```\nwith res as(\nselect spend_date, case when np=1 then r.platform else 'both' end as platform,\n    sum(amount) as total_amount, count(distinct user_id) as total_users\nfrom (\n    select user_id, spend_date, count(distinct platform) as np\n    from spending \n    group by 1,2 ) l\nright join spending r\nusing(user_id,spend_date)\ngroup by 1,2\n)\n\nselect spend_date, platform, \n        ifnull(total_amount,0) as total_amount, ifnull(total_users,0) as total_users\nfrom (\n    select distinct spending.spend_date, res.platform\n    from spending \n    cross join res) l\nleft join res\nusing(spend_date,platform)\n```"
+                    },
+                    {
+                        "username": "praut1606",
+                        "content": "my query is also right but still giving incorrect , output matches 100 %"
+                    }
+                ]
+            }
+        ]
+    }
+]

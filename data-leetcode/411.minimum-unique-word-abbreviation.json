@@ -1,0 +1,18 @@
+[
+    {
+        "title": "Minimum Unique Word Abbreviation",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1571687,
+                "content": [
+                    {
+                        "username": "coding2017",
+                        "content": "There is a test case:\\n\"aaaaaxaaaaa\"\\n[\"bbbbbxbbbbb\"]\\nMay I know why \"aa9\" is not a right answer, please?"
+                    }
+                ]
+            }
+        ]
+    }
+]

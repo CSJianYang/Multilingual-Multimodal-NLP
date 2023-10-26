@@ -1,0 +1,72 @@
+[
+    {
+        "title": "Status of Flight Tickets",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 2010587,
+                "content": [
+                    {
+                        "username": "nskybytskyi",
+                        "content": "If two passengers book the last ticket at the same time it does not make sense to confirm both as the flight will get overbooked. Either make booking_time unique or introduce a tiebreaker."
+                    },
+                    {
+                        "username": "siyu14",
+                        "content": "no sure why it does not work:\\n\\n```SQL\\nselect passenger_id\\n,case when row_number() over (partition by f.flight_id order by booking_time) <= capacity\\n then \\'Confirmed\\' else \\'Waitlist\\' end as Status\\nfrom flights f\\njoin passengers p on f.flight_id = p.flight_id\\norder by passenger_id\\n```"
+                    },
+                    {
+                        "username": "Th0mas_Raoult",
+                        "content": "Definitely not hard"
+                    }
+                ]
+            },
+            {
+                "id": 2014418,
+                "content": [
+                    {
+                        "username": "nskybytskyi",
+                        "content": "If two passengers book the last ticket at the same time it does not make sense to confirm both as the flight will get overbooked. Either make booking_time unique or introduce a tiebreaker."
+                    },
+                    {
+                        "username": "siyu14",
+                        "content": "no sure why it does not work:\\n\\n```SQL\\nselect passenger_id\\n,case when row_number() over (partition by f.flight_id order by booking_time) <= capacity\\n then \\'Confirmed\\' else \\'Waitlist\\' end as Status\\nfrom flights f\\njoin passengers p on f.flight_id = p.flight_id\\norder by passenger_id\\n```"
+                    },
+                    {
+                        "username": "Th0mas_Raoult",
+                        "content": "Definitely not hard"
+                    }
+                ]
+            },
+            {
+                "id": 1992022,
+                "content": [
+                    {
+                        "username": "nskybytskyi",
+                        "content": "If two passengers book the last ticket at the same time it does not make sense to confirm both as the flight will get overbooked. Either make booking_time unique or introduce a tiebreaker."
+                    },
+                    {
+                        "username": "siyu14",
+                        "content": "no sure why it does not work:\\n\\n```SQL\\nselect passenger_id\\n,case when row_number() over (partition by f.flight_id order by booking_time) <= capacity\\n then \\'Confirmed\\' else \\'Waitlist\\' end as Status\\nfrom flights f\\njoin passengers p on f.flight_id = p.flight_id\\norder by passenger_id\\n```"
+                    },
+                    {
+                        "username": "Th0mas_Raoult",
+                        "content": "Definitely not hard"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Create Object from Two Arrays",
+        "question_content": null,
+        "solutions": [],
+        "discussions": []
+    },
+    {
+        "title": "Parallel Execution of Promises for Individual Results Retrieval",
+        "question_content": null,
+        "solutions": [],
+        "discussions": []
+    }
+]

@@ -1,0 +1,255 @@
+[
+    {
+        "title": "Confusing Number II",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1772650,
+                "content": [
+                    {
+                        "username": "enrique11",
+                        "content": "Why is 1 not a confusing number?\nEDIT: My bad, it has to be a different number."
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "They just considered it like \"I\", but reality is it\\'s look like \"1\". \\n"
+                    },
+                    {
+                        "username": "SpadeJack91",
+                        "content": "How is 8000 after rotation 0008? As per the question only digits are rotated by 180 degree."
+                    },
+                    {
+                        "username": "takru",
+                        "content": "Why not 1 is a valid case"
+                    },
+                    {
+                        "username": "cswartzell",
+                        "content": "Obviously the following \"one liner\" is insane, but I got started and just couldnt stop. It works for 9 digit combos, but TLEs for 10, passing 63/64 tests,  Maybe I can optimize a bit to pass. 9 digit numbers takes about 6 seconds, but 10 digits takes almost 20 and far exceeds the time limit. \n```\nreturn sum([1 for x in set(\"\".join(x).lstrip(\"0\") for x in list(itertools.chain(*[itertools.product([\"0\", \"1\", \"6\", \"8\", \"9\"], repeat=i) for i in range(1, len(str(n))+ 1) ]))) if x != x.replace(\"6\", \"X\").replace(\"9\", \"6\").replace(\"X\", \"9\")[::-1] and int(x) <= n])\n```"
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "Why 69 is not a confusing number ?\\n\\nAccording to Example : \\nInput: n = 100\\nOutput: 19\\nExplanation: The confusing numbers are [6,9,10,16,18,19,60,61,66,68,80,81,86,89,90,91,98,99,100].\\n\\nBut According to my Solution:\\nInput = 100\\nOutput : 20\\nConfusing Numbers Are:\\n[6,9,10,16,18,19,60,61,66,68,69,80,81,86,89,90,91,98,99,100]\\n Number : 6 :: 9 : Rotated, Result = 1\\n Number : 9 :: 6 : Rotated, Result = 2\\n Number : 10 :: 1 : Rotated, Result = 3\\n Number : 16 :: 91 : Rotated, Result = 4\\n Number : 18 :: 81 : Rotated, Result = 5\\n Number : 19 :: 91 : Rotated, Result = 6\\n Number : 60 :: 9 : Rotated, Result = 7\\n Number : 61 :: 19 : Rotated, Result = 8\\n Number : 66 :: 99 : Rotated, Result = 9\\n Number : 68 :: 89 : Rotated, Result = 10\\n Number : 69 :: 99 : Rotated, Result = 11\\n Number : 80 :: 8 : Rotated, Result = 12\\n Number : 81 :: 18 : Rotated, Result = 13\\n Number : 86 :: 98 : Rotated, Result = 14\\n Number : 89 :: 98 : Rotated, Result = 15\\n Number : 90 :: 6 : Rotated, Result = 16\\n Number : 91 :: 16 : Rotated, Result = 17\\n Number : 98 :: 86 : Rotated, Result = 18\\n Number : 99 :: 96 : Rotated, Result = 19\\n Number : 100 :: 1 : Rotated, Result = 20"
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "Oh! Silly Mistake. I got it now. I haven\\'t rotated the digit 9\\n\\n    int rotated(int n){\\n        switch(n){\\n            case 0: return 0;\\n            case 1: return 1;\\n            case 6: return 9;\\n            case 9: return 9;\\n            case 8: return 8;\\n        }\\n        return n;\\n    }"
+                    },
+                    {
+                        "username": "medmoe",
+                        "content": "why this code fails large inputs although I am hashing calculated numbers? TLE\\n``` class Solution:\\n    def confusingNumberII(self, n: int) -> int:\\n        def is_valid(num):\\n            rotated = 0\\n            power = 10 ** (len(str(num)) - 1)\\n            \\n            N = num\\n            while N > 0:\\n                res = N % 10\\n                if res in invalid:\\n                    return False\\n                rotated += mapping[res] * power\\n                power = power // 10\\n                N = N // 10\\n                \\n            record[rotated] = 1 if rotated != num else 0\\n            return record[rotated]\\n\\n        mapping={6:9, 9:6, 1:1, 0:0, 8:8}\\n        invalid = set([2,3,4,5,7])\\n        record = dict()\\n        ans = 0\\n        for i in range(1, n + 1):\\n            if i in record:\\n                ans += record[i]\\n            else:\\n                if is_valid(i):\\n                    ans += 1\\n\\n        return ans"
+                    },
+                    {
+                        "username": "olchik",
+                        "content": "You might want to try to generate only numbers that consist only of valid digits. With the demonstrated solution you would have to check 1 000 000 000 numbers for the highest value. But amount of \"candidates\" that could be confusing is only 1 953 125"
+                    }
+                ]
+            },
+            {
+                "id": 1873697,
+                "content": [
+                    {
+                        "username": "enrique11",
+                        "content": "Why is 1 not a confusing number?\nEDIT: My bad, it has to be a different number."
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "They just considered it like \"I\", but reality is it\\'s look like \"1\". \\n"
+                    },
+                    {
+                        "username": "SpadeJack91",
+                        "content": "How is 8000 after rotation 0008? As per the question only digits are rotated by 180 degree."
+                    },
+                    {
+                        "username": "takru",
+                        "content": "Why not 1 is a valid case"
+                    },
+                    {
+                        "username": "cswartzell",
+                        "content": "Obviously the following \"one liner\" is insane, but I got started and just couldnt stop. It works for 9 digit combos, but TLEs for 10, passing 63/64 tests,  Maybe I can optimize a bit to pass. 9 digit numbers takes about 6 seconds, but 10 digits takes almost 20 and far exceeds the time limit. \n```\nreturn sum([1 for x in set(\"\".join(x).lstrip(\"0\") for x in list(itertools.chain(*[itertools.product([\"0\", \"1\", \"6\", \"8\", \"9\"], repeat=i) for i in range(1, len(str(n))+ 1) ]))) if x != x.replace(\"6\", \"X\").replace(\"9\", \"6\").replace(\"X\", \"9\")[::-1] and int(x) <= n])\n```"
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "Why 69 is not a confusing number ?\\n\\nAccording to Example : \\nInput: n = 100\\nOutput: 19\\nExplanation: The confusing numbers are [6,9,10,16,18,19,60,61,66,68,80,81,86,89,90,91,98,99,100].\\n\\nBut According to my Solution:\\nInput = 100\\nOutput : 20\\nConfusing Numbers Are:\\n[6,9,10,16,18,19,60,61,66,68,69,80,81,86,89,90,91,98,99,100]\\n Number : 6 :: 9 : Rotated, Result = 1\\n Number : 9 :: 6 : Rotated, Result = 2\\n Number : 10 :: 1 : Rotated, Result = 3\\n Number : 16 :: 91 : Rotated, Result = 4\\n Number : 18 :: 81 : Rotated, Result = 5\\n Number : 19 :: 91 : Rotated, Result = 6\\n Number : 60 :: 9 : Rotated, Result = 7\\n Number : 61 :: 19 : Rotated, Result = 8\\n Number : 66 :: 99 : Rotated, Result = 9\\n Number : 68 :: 89 : Rotated, Result = 10\\n Number : 69 :: 99 : Rotated, Result = 11\\n Number : 80 :: 8 : Rotated, Result = 12\\n Number : 81 :: 18 : Rotated, Result = 13\\n Number : 86 :: 98 : Rotated, Result = 14\\n Number : 89 :: 98 : Rotated, Result = 15\\n Number : 90 :: 6 : Rotated, Result = 16\\n Number : 91 :: 16 : Rotated, Result = 17\\n Number : 98 :: 86 : Rotated, Result = 18\\n Number : 99 :: 96 : Rotated, Result = 19\\n Number : 100 :: 1 : Rotated, Result = 20"
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "Oh! Silly Mistake. I got it now. I haven\\'t rotated the digit 9\\n\\n    int rotated(int n){\\n        switch(n){\\n            case 0: return 0;\\n            case 1: return 1;\\n            case 6: return 9;\\n            case 9: return 9;\\n            case 8: return 8;\\n        }\\n        return n;\\n    }"
+                    },
+                    {
+                        "username": "medmoe",
+                        "content": "why this code fails large inputs although I am hashing calculated numbers? TLE\\n``` class Solution:\\n    def confusingNumberII(self, n: int) -> int:\\n        def is_valid(num):\\n            rotated = 0\\n            power = 10 ** (len(str(num)) - 1)\\n            \\n            N = num\\n            while N > 0:\\n                res = N % 10\\n                if res in invalid:\\n                    return False\\n                rotated += mapping[res] * power\\n                power = power // 10\\n                N = N // 10\\n                \\n            record[rotated] = 1 if rotated != num else 0\\n            return record[rotated]\\n\\n        mapping={6:9, 9:6, 1:1, 0:0, 8:8}\\n        invalid = set([2,3,4,5,7])\\n        record = dict()\\n        ans = 0\\n        for i in range(1, n + 1):\\n            if i in record:\\n                ans += record[i]\\n            else:\\n                if is_valid(i):\\n                    ans += 1\\n\\n        return ans"
+                    },
+                    {
+                        "username": "olchik",
+                        "content": "You might want to try to generate only numbers that consist only of valid digits. With the demonstrated solution you would have to check 1 000 000 000 numbers for the highest value. But amount of \"candidates\" that could be confusing is only 1 953 125"
+                    }
+                ]
+            },
+            {
+                "id": 1831649,
+                "content": [
+                    {
+                        "username": "enrique11",
+                        "content": "Why is 1 not a confusing number?\nEDIT: My bad, it has to be a different number."
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "They just considered it like \"I\", but reality is it\\'s look like \"1\". \\n"
+                    },
+                    {
+                        "username": "SpadeJack91",
+                        "content": "How is 8000 after rotation 0008? As per the question only digits are rotated by 180 degree."
+                    },
+                    {
+                        "username": "takru",
+                        "content": "Why not 1 is a valid case"
+                    },
+                    {
+                        "username": "cswartzell",
+                        "content": "Obviously the following \"one liner\" is insane, but I got started and just couldnt stop. It works for 9 digit combos, but TLEs for 10, passing 63/64 tests,  Maybe I can optimize a bit to pass. 9 digit numbers takes about 6 seconds, but 10 digits takes almost 20 and far exceeds the time limit. \n```\nreturn sum([1 for x in set(\"\".join(x).lstrip(\"0\") for x in list(itertools.chain(*[itertools.product([\"0\", \"1\", \"6\", \"8\", \"9\"], repeat=i) for i in range(1, len(str(n))+ 1) ]))) if x != x.replace(\"6\", \"X\").replace(\"9\", \"6\").replace(\"X\", \"9\")[::-1] and int(x) <= n])\n```"
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "Why 69 is not a confusing number ?\\n\\nAccording to Example : \\nInput: n = 100\\nOutput: 19\\nExplanation: The confusing numbers are [6,9,10,16,18,19,60,61,66,68,80,81,86,89,90,91,98,99,100].\\n\\nBut According to my Solution:\\nInput = 100\\nOutput : 20\\nConfusing Numbers Are:\\n[6,9,10,16,18,19,60,61,66,68,69,80,81,86,89,90,91,98,99,100]\\n Number : 6 :: 9 : Rotated, Result = 1\\n Number : 9 :: 6 : Rotated, Result = 2\\n Number : 10 :: 1 : Rotated, Result = 3\\n Number : 16 :: 91 : Rotated, Result = 4\\n Number : 18 :: 81 : Rotated, Result = 5\\n Number : 19 :: 91 : Rotated, Result = 6\\n Number : 60 :: 9 : Rotated, Result = 7\\n Number : 61 :: 19 : Rotated, Result = 8\\n Number : 66 :: 99 : Rotated, Result = 9\\n Number : 68 :: 89 : Rotated, Result = 10\\n Number : 69 :: 99 : Rotated, Result = 11\\n Number : 80 :: 8 : Rotated, Result = 12\\n Number : 81 :: 18 : Rotated, Result = 13\\n Number : 86 :: 98 : Rotated, Result = 14\\n Number : 89 :: 98 : Rotated, Result = 15\\n Number : 90 :: 6 : Rotated, Result = 16\\n Number : 91 :: 16 : Rotated, Result = 17\\n Number : 98 :: 86 : Rotated, Result = 18\\n Number : 99 :: 96 : Rotated, Result = 19\\n Number : 100 :: 1 : Rotated, Result = 20"
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "Oh! Silly Mistake. I got it now. I haven\\'t rotated the digit 9\\n\\n    int rotated(int n){\\n        switch(n){\\n            case 0: return 0;\\n            case 1: return 1;\\n            case 6: return 9;\\n            case 9: return 9;\\n            case 8: return 8;\\n        }\\n        return n;\\n    }"
+                    },
+                    {
+                        "username": "medmoe",
+                        "content": "why this code fails large inputs although I am hashing calculated numbers? TLE\\n``` class Solution:\\n    def confusingNumberII(self, n: int) -> int:\\n        def is_valid(num):\\n            rotated = 0\\n            power = 10 ** (len(str(num)) - 1)\\n            \\n            N = num\\n            while N > 0:\\n                res = N % 10\\n                if res in invalid:\\n                    return False\\n                rotated += mapping[res] * power\\n                power = power // 10\\n                N = N // 10\\n                \\n            record[rotated] = 1 if rotated != num else 0\\n            return record[rotated]\\n\\n        mapping={6:9, 9:6, 1:1, 0:0, 8:8}\\n        invalid = set([2,3,4,5,7])\\n        record = dict()\\n        ans = 0\\n        for i in range(1, n + 1):\\n            if i in record:\\n                ans += record[i]\\n            else:\\n                if is_valid(i):\\n                    ans += 1\\n\\n        return ans"
+                    },
+                    {
+                        "username": "olchik",
+                        "content": "You might want to try to generate only numbers that consist only of valid digits. With the demonstrated solution you would have to check 1 000 000 000 numbers for the highest value. But amount of \"candidates\" that could be confusing is only 1 953 125"
+                    }
+                ]
+            },
+            {
+                "id": 1779111,
+                "content": [
+                    {
+                        "username": "enrique11",
+                        "content": "Why is 1 not a confusing number?\nEDIT: My bad, it has to be a different number."
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "They just considered it like \"I\", but reality is it\\'s look like \"1\". \\n"
+                    },
+                    {
+                        "username": "SpadeJack91",
+                        "content": "How is 8000 after rotation 0008? As per the question only digits are rotated by 180 degree."
+                    },
+                    {
+                        "username": "takru",
+                        "content": "Why not 1 is a valid case"
+                    },
+                    {
+                        "username": "cswartzell",
+                        "content": "Obviously the following \"one liner\" is insane, but I got started and just couldnt stop. It works for 9 digit combos, but TLEs for 10, passing 63/64 tests,  Maybe I can optimize a bit to pass. 9 digit numbers takes about 6 seconds, but 10 digits takes almost 20 and far exceeds the time limit. \n```\nreturn sum([1 for x in set(\"\".join(x).lstrip(\"0\") for x in list(itertools.chain(*[itertools.product([\"0\", \"1\", \"6\", \"8\", \"9\"], repeat=i) for i in range(1, len(str(n))+ 1) ]))) if x != x.replace(\"6\", \"X\").replace(\"9\", \"6\").replace(\"X\", \"9\")[::-1] and int(x) <= n])\n```"
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "Why 69 is not a confusing number ?\\n\\nAccording to Example : \\nInput: n = 100\\nOutput: 19\\nExplanation: The confusing numbers are [6,9,10,16,18,19,60,61,66,68,80,81,86,89,90,91,98,99,100].\\n\\nBut According to my Solution:\\nInput = 100\\nOutput : 20\\nConfusing Numbers Are:\\n[6,9,10,16,18,19,60,61,66,68,69,80,81,86,89,90,91,98,99,100]\\n Number : 6 :: 9 : Rotated, Result = 1\\n Number : 9 :: 6 : Rotated, Result = 2\\n Number : 10 :: 1 : Rotated, Result = 3\\n Number : 16 :: 91 : Rotated, Result = 4\\n Number : 18 :: 81 : Rotated, Result = 5\\n Number : 19 :: 91 : Rotated, Result = 6\\n Number : 60 :: 9 : Rotated, Result = 7\\n Number : 61 :: 19 : Rotated, Result = 8\\n Number : 66 :: 99 : Rotated, Result = 9\\n Number : 68 :: 89 : Rotated, Result = 10\\n Number : 69 :: 99 : Rotated, Result = 11\\n Number : 80 :: 8 : Rotated, Result = 12\\n Number : 81 :: 18 : Rotated, Result = 13\\n Number : 86 :: 98 : Rotated, Result = 14\\n Number : 89 :: 98 : Rotated, Result = 15\\n Number : 90 :: 6 : Rotated, Result = 16\\n Number : 91 :: 16 : Rotated, Result = 17\\n Number : 98 :: 86 : Rotated, Result = 18\\n Number : 99 :: 96 : Rotated, Result = 19\\n Number : 100 :: 1 : Rotated, Result = 20"
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "Oh! Silly Mistake. I got it now. I haven\\'t rotated the digit 9\\n\\n    int rotated(int n){\\n        switch(n){\\n            case 0: return 0;\\n            case 1: return 1;\\n            case 6: return 9;\\n            case 9: return 9;\\n            case 8: return 8;\\n        }\\n        return n;\\n    }"
+                    },
+                    {
+                        "username": "medmoe",
+                        "content": "why this code fails large inputs although I am hashing calculated numbers? TLE\\n``` class Solution:\\n    def confusingNumberII(self, n: int) -> int:\\n        def is_valid(num):\\n            rotated = 0\\n            power = 10 ** (len(str(num)) - 1)\\n            \\n            N = num\\n            while N > 0:\\n                res = N % 10\\n                if res in invalid:\\n                    return False\\n                rotated += mapping[res] * power\\n                power = power // 10\\n                N = N // 10\\n                \\n            record[rotated] = 1 if rotated != num else 0\\n            return record[rotated]\\n\\n        mapping={6:9, 9:6, 1:1, 0:0, 8:8}\\n        invalid = set([2,3,4,5,7])\\n        record = dict()\\n        ans = 0\\n        for i in range(1, n + 1):\\n            if i in record:\\n                ans += record[i]\\n            else:\\n                if is_valid(i):\\n                    ans += 1\\n\\n        return ans"
+                    },
+                    {
+                        "username": "olchik",
+                        "content": "You might want to try to generate only numbers that consist only of valid digits. With the demonstrated solution you would have to check 1 000 000 000 numbers for the highest value. But amount of \"candidates\" that could be confusing is only 1 953 125"
+                    }
+                ]
+            },
+            {
+                "id": 1777330,
+                "content": [
+                    {
+                        "username": "enrique11",
+                        "content": "Why is 1 not a confusing number?\nEDIT: My bad, it has to be a different number."
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "They just considered it like \"I\", but reality is it\\'s look like \"1\". \\n"
+                    },
+                    {
+                        "username": "SpadeJack91",
+                        "content": "How is 8000 after rotation 0008? As per the question only digits are rotated by 180 degree."
+                    },
+                    {
+                        "username": "takru",
+                        "content": "Why not 1 is a valid case"
+                    },
+                    {
+                        "username": "cswartzell",
+                        "content": "Obviously the following \"one liner\" is insane, but I got started and just couldnt stop. It works for 9 digit combos, but TLEs for 10, passing 63/64 tests,  Maybe I can optimize a bit to pass. 9 digit numbers takes about 6 seconds, but 10 digits takes almost 20 and far exceeds the time limit. \n```\nreturn sum([1 for x in set(\"\".join(x).lstrip(\"0\") for x in list(itertools.chain(*[itertools.product([\"0\", \"1\", \"6\", \"8\", \"9\"], repeat=i) for i in range(1, len(str(n))+ 1) ]))) if x != x.replace(\"6\", \"X\").replace(\"9\", \"6\").replace(\"X\", \"9\")[::-1] and int(x) <= n])\n```"
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "Why 69 is not a confusing number ?\\n\\nAccording to Example : \\nInput: n = 100\\nOutput: 19\\nExplanation: The confusing numbers are [6,9,10,16,18,19,60,61,66,68,80,81,86,89,90,91,98,99,100].\\n\\nBut According to my Solution:\\nInput = 100\\nOutput : 20\\nConfusing Numbers Are:\\n[6,9,10,16,18,19,60,61,66,68,69,80,81,86,89,90,91,98,99,100]\\n Number : 6 :: 9 : Rotated, Result = 1\\n Number : 9 :: 6 : Rotated, Result = 2\\n Number : 10 :: 1 : Rotated, Result = 3\\n Number : 16 :: 91 : Rotated, Result = 4\\n Number : 18 :: 81 : Rotated, Result = 5\\n Number : 19 :: 91 : Rotated, Result = 6\\n Number : 60 :: 9 : Rotated, Result = 7\\n Number : 61 :: 19 : Rotated, Result = 8\\n Number : 66 :: 99 : Rotated, Result = 9\\n Number : 68 :: 89 : Rotated, Result = 10\\n Number : 69 :: 99 : Rotated, Result = 11\\n Number : 80 :: 8 : Rotated, Result = 12\\n Number : 81 :: 18 : Rotated, Result = 13\\n Number : 86 :: 98 : Rotated, Result = 14\\n Number : 89 :: 98 : Rotated, Result = 15\\n Number : 90 :: 6 : Rotated, Result = 16\\n Number : 91 :: 16 : Rotated, Result = 17\\n Number : 98 :: 86 : Rotated, Result = 18\\n Number : 99 :: 96 : Rotated, Result = 19\\n Number : 100 :: 1 : Rotated, Result = 20"
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "Oh! Silly Mistake. I got it now. I haven\\'t rotated the digit 9\\n\\n    int rotated(int n){\\n        switch(n){\\n            case 0: return 0;\\n            case 1: return 1;\\n            case 6: return 9;\\n            case 9: return 9;\\n            case 8: return 8;\\n        }\\n        return n;\\n    }"
+                    },
+                    {
+                        "username": "medmoe",
+                        "content": "why this code fails large inputs although I am hashing calculated numbers? TLE\\n``` class Solution:\\n    def confusingNumberII(self, n: int) -> int:\\n        def is_valid(num):\\n            rotated = 0\\n            power = 10 ** (len(str(num)) - 1)\\n            \\n            N = num\\n            while N > 0:\\n                res = N % 10\\n                if res in invalid:\\n                    return False\\n                rotated += mapping[res] * power\\n                power = power // 10\\n                N = N // 10\\n                \\n            record[rotated] = 1 if rotated != num else 0\\n            return record[rotated]\\n\\n        mapping={6:9, 9:6, 1:1, 0:0, 8:8}\\n        invalid = set([2,3,4,5,7])\\n        record = dict()\\n        ans = 0\\n        for i in range(1, n + 1):\\n            if i in record:\\n                ans += record[i]\\n            else:\\n                if is_valid(i):\\n                    ans += 1\\n\\n        return ans"
+                    },
+                    {
+                        "username": "olchik",
+                        "content": "You might want to try to generate only numbers that consist only of valid digits. With the demonstrated solution you would have to check 1 000 000 000 numbers for the highest value. But amount of \"candidates\" that could be confusing is only 1 953 125"
+                    }
+                ]
+            },
+            {
+                "id": 1772868,
+                "content": [
+                    {
+                        "username": "enrique11",
+                        "content": "Why is 1 not a confusing number?\nEDIT: My bad, it has to be a different number."
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "They just considered it like \"I\", but reality is it\\'s look like \"1\". \\n"
+                    },
+                    {
+                        "username": "SpadeJack91",
+                        "content": "How is 8000 after rotation 0008? As per the question only digits are rotated by 180 degree."
+                    },
+                    {
+                        "username": "takru",
+                        "content": "Why not 1 is a valid case"
+                    },
+                    {
+                        "username": "cswartzell",
+                        "content": "Obviously the following \"one liner\" is insane, but I got started and just couldnt stop. It works for 9 digit combos, but TLEs for 10, passing 63/64 tests,  Maybe I can optimize a bit to pass. 9 digit numbers takes about 6 seconds, but 10 digits takes almost 20 and far exceeds the time limit. \n```\nreturn sum([1 for x in set(\"\".join(x).lstrip(\"0\") for x in list(itertools.chain(*[itertools.product([\"0\", \"1\", \"6\", \"8\", \"9\"], repeat=i) for i in range(1, len(str(n))+ 1) ]))) if x != x.replace(\"6\", \"X\").replace(\"9\", \"6\").replace(\"X\", \"9\")[::-1] and int(x) <= n])\n```"
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "Why 69 is not a confusing number ?\\n\\nAccording to Example : \\nInput: n = 100\\nOutput: 19\\nExplanation: The confusing numbers are [6,9,10,16,18,19,60,61,66,68,80,81,86,89,90,91,98,99,100].\\n\\nBut According to my Solution:\\nInput = 100\\nOutput : 20\\nConfusing Numbers Are:\\n[6,9,10,16,18,19,60,61,66,68,69,80,81,86,89,90,91,98,99,100]\\n Number : 6 :: 9 : Rotated, Result = 1\\n Number : 9 :: 6 : Rotated, Result = 2\\n Number : 10 :: 1 : Rotated, Result = 3\\n Number : 16 :: 91 : Rotated, Result = 4\\n Number : 18 :: 81 : Rotated, Result = 5\\n Number : 19 :: 91 : Rotated, Result = 6\\n Number : 60 :: 9 : Rotated, Result = 7\\n Number : 61 :: 19 : Rotated, Result = 8\\n Number : 66 :: 99 : Rotated, Result = 9\\n Number : 68 :: 89 : Rotated, Result = 10\\n Number : 69 :: 99 : Rotated, Result = 11\\n Number : 80 :: 8 : Rotated, Result = 12\\n Number : 81 :: 18 : Rotated, Result = 13\\n Number : 86 :: 98 : Rotated, Result = 14\\n Number : 89 :: 98 : Rotated, Result = 15\\n Number : 90 :: 6 : Rotated, Result = 16\\n Number : 91 :: 16 : Rotated, Result = 17\\n Number : 98 :: 86 : Rotated, Result = 18\\n Number : 99 :: 96 : Rotated, Result = 19\\n Number : 100 :: 1 : Rotated, Result = 20"
+                    },
+                    {
+                        "username": "Ruman_Hossain",
+                        "content": "Oh! Silly Mistake. I got it now. I haven\\'t rotated the digit 9\\n\\n    int rotated(int n){\\n        switch(n){\\n            case 0: return 0;\\n            case 1: return 1;\\n            case 6: return 9;\\n            case 9: return 9;\\n            case 8: return 8;\\n        }\\n        return n;\\n    }"
+                    },
+                    {
+                        "username": "medmoe",
+                        "content": "why this code fails large inputs although I am hashing calculated numbers? TLE\\n``` class Solution:\\n    def confusingNumberII(self, n: int) -> int:\\n        def is_valid(num):\\n            rotated = 0\\n            power = 10 ** (len(str(num)) - 1)\\n            \\n            N = num\\n            while N > 0:\\n                res = N % 10\\n                if res in invalid:\\n                    return False\\n                rotated += mapping[res] * power\\n                power = power // 10\\n                N = N // 10\\n                \\n            record[rotated] = 1 if rotated != num else 0\\n            return record[rotated]\\n\\n        mapping={6:9, 9:6, 1:1, 0:0, 8:8}\\n        invalid = set([2,3,4,5,7])\\n        record = dict()\\n        ans = 0\\n        for i in range(1, n + 1):\\n            if i in record:\\n                ans += record[i]\\n            else:\\n                if is_valid(i):\\n                    ans += 1\\n\\n        return ans"
+                    },
+                    {
+                        "username": "olchik",
+                        "content": "You might want to try to generate only numbers that consist only of valid digits. With the demonstrated solution you would have to check 1 000 000 000 numbers for the highest value. But amount of \"candidates\" that could be confusing is only 1 953 125"
+                    }
+                ]
+            }
+        ]
+    }
+]

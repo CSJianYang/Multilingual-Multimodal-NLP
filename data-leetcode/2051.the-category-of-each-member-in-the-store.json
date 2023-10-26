@@ -1,0 +1,174 @@
+[
+    {
+        "title": "The Category of Each Member in the Store",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1576448,
+                "content": [
+                    {
+                        "username": "TarunGrover6995",
+                        "content": "WITH cte AS\\n(SELECT member_id, 100*NVL(COUNT(charged_amount),0)/COUNT(visit_id) conversion_rate FROM \\nVisits LEFT JOIN Purchases USING (visit_id) GROUP BY member_id)\\n\\n\\nSELECT member_id, name, NVL(category,\\'Bronze\\') category FROM Members LEFT JOIN \\n(SELECT member_id, CASE WHEN conversion_rate >= 80 THEN \\'Diamond\\'\\n                                           WHEN conversion_rate >= 50 AND conversion_rate < 80 THEN \\'Gold\\'\\n                                           ELSE \\'Silver\\' END AS category FROM cte) USING (member_id)"
+                    },
+                    {
+                        "username": "Isabellaisgood",
+                        "content": "with cte as\\n(SELECT member_id, count(*) as \\'visit\\'\\nFROM Visits\\nGROUP BY member_id),\\ncte2 as\\n(SELECT b.member_id, count(*) as \\'spend\\'\\nFROM Purchases a left join Visits b on a.visit_id = b.visit_id\\nGROUP BY b.member_id)\\n\\n\\nSELECT p.member_id, p.name, (case when q.category IS NULL then \\'Bronze\\' else category end) as \\'category\\'\\nFROM Members p left join (SELECT m.member_id, (case when rate >= 80 then \\'Diamond\\' when rate >= 50 then \\'Gold\\' else \\'Silver\\' end) as \\'category\\'\\nFROM cte m left join (SELECT a.member_id, round(100*b.spend/a.visit,2) as \\'rate\\'\\nFROM cte a join cte2 b on a.member_id = b.member_id) n on m.member_id = n.member_id) q on p.member_id = q.member_id"
+                    },
+                    {
+                        "username": "leungkayu",
+                        "content": "Can somebody please help me with why the following code failed ? It passed 16/17 test cases , the test cases is freaking long and they look the same to me \\n\\nwith CTE as (select member_id , (count(charged_amount)/count(visit_date) *100) as conversion_rate\\nfrom Visits v left join Purchases p on v.visit_id = p.visit_id \\ngroup by member_id)\\n\\nselect m.member_id , name,\\nCASE \\nWHEN conversion_rate >80 then \\'Diamond\\'\\nWHEN conversion_rate >= 50 and conversion_rate < 80 then \\'Gold\\'\\nWHEN conversion_rate <50 then \\'Silver\\' \\nELSE \"Bronze\" End as category\\nfrom Members m left join CTE c on m.member_id = c.member_id\\norder by m.member_id"
+                    },
+                    {
+                        "username": "levixu7",
+                        "content": "=>80"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "(MS-SQL) Can someone pls tell me why I am getting error??  (16/17 testcases passed)\nwith cte as\n(select v.member_id,(100*count(charged_amount)*1.0/nullif(count(v.member_id),0))conversion_rate from Visits v \nleft join Purchases p on v.visit_id = p.visit_id\ngroup by v.member_id)\n\nselect m.member_id, name ,(case when conversion_rate> 80 then 'Diamond'\nwhen conversion_rate>=50 and conversion_rate < 80 then 'Gold'\nwhen conversion_rate < 50 then 'Silver'\nelse 'Bronze' end)category from cte c\nright join members m on c.member_id = m.member_id \n"
+                    },
+                    {
+                        "username": "levixu7",
+                        "content": "=>80"
+                    },
+                    {
+                        "username": "sherrill_zhang",
+                        "content": "My code is 13/17 cases right but I can\\'t find the difference\\n\\n# Write your MySQL query statement below\\nwith cte as (\\n    select m.member_id,m.name,count(p.charged_amount) as \\'tp\\',count(v.visit_id) as \\'tv\\'\\n    from (Members m left join Visits v on m.member_id = v.member_id) left join Purchases p on v.visit_id = p.visit_id\\n    group by v.member_id,m.name)\\nselect c.member_id , c.name,\\n    case when 100*sum(c.tp)/c.tv>=80 then \"Diamond\"\\n    when 100*sum(c.tp)/c.tv>=50 and c.tp/c.tv<80 then \"Gold\"\\n    when 100*sum(c.tp)/c.tv<50 then \"Silver\"\\n    else \"Bronze\"  end as \\'category\\'\\nfrom cte c\\ngroup by c.member_id\\norder by c.member_id"
+                    }
+                ]
+            },
+            {
+                "id": 1576199,
+                "content": [
+                    {
+                        "username": "TarunGrover6995",
+                        "content": "WITH cte AS\\n(SELECT member_id, 100*NVL(COUNT(charged_amount),0)/COUNT(visit_id) conversion_rate FROM \\nVisits LEFT JOIN Purchases USING (visit_id) GROUP BY member_id)\\n\\n\\nSELECT member_id, name, NVL(category,\\'Bronze\\') category FROM Members LEFT JOIN \\n(SELECT member_id, CASE WHEN conversion_rate >= 80 THEN \\'Diamond\\'\\n                                           WHEN conversion_rate >= 50 AND conversion_rate < 80 THEN \\'Gold\\'\\n                                           ELSE \\'Silver\\' END AS category FROM cte) USING (member_id)"
+                    },
+                    {
+                        "username": "Isabellaisgood",
+                        "content": "with cte as\\n(SELECT member_id, count(*) as \\'visit\\'\\nFROM Visits\\nGROUP BY member_id),\\ncte2 as\\n(SELECT b.member_id, count(*) as \\'spend\\'\\nFROM Purchases a left join Visits b on a.visit_id = b.visit_id\\nGROUP BY b.member_id)\\n\\n\\nSELECT p.member_id, p.name, (case when q.category IS NULL then \\'Bronze\\' else category end) as \\'category\\'\\nFROM Members p left join (SELECT m.member_id, (case when rate >= 80 then \\'Diamond\\' when rate >= 50 then \\'Gold\\' else \\'Silver\\' end) as \\'category\\'\\nFROM cte m left join (SELECT a.member_id, round(100*b.spend/a.visit,2) as \\'rate\\'\\nFROM cte a join cte2 b on a.member_id = b.member_id) n on m.member_id = n.member_id) q on p.member_id = q.member_id"
+                    },
+                    {
+                        "username": "leungkayu",
+                        "content": "Can somebody please help me with why the following code failed ? It passed 16/17 test cases , the test cases is freaking long and they look the same to me \\n\\nwith CTE as (select member_id , (count(charged_amount)/count(visit_date) *100) as conversion_rate\\nfrom Visits v left join Purchases p on v.visit_id = p.visit_id \\ngroup by member_id)\\n\\nselect m.member_id , name,\\nCASE \\nWHEN conversion_rate >80 then \\'Diamond\\'\\nWHEN conversion_rate >= 50 and conversion_rate < 80 then \\'Gold\\'\\nWHEN conversion_rate <50 then \\'Silver\\' \\nELSE \"Bronze\" End as category\\nfrom Members m left join CTE c on m.member_id = c.member_id\\norder by m.member_id"
+                    },
+                    {
+                        "username": "levixu7",
+                        "content": "=>80"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "(MS-SQL) Can someone pls tell me why I am getting error??  (16/17 testcases passed)\nwith cte as\n(select v.member_id,(100*count(charged_amount)*1.0/nullif(count(v.member_id),0))conversion_rate from Visits v \nleft join Purchases p on v.visit_id = p.visit_id\ngroup by v.member_id)\n\nselect m.member_id, name ,(case when conversion_rate> 80 then 'Diamond'\nwhen conversion_rate>=50 and conversion_rate < 80 then 'Gold'\nwhen conversion_rate < 50 then 'Silver'\nelse 'Bronze' end)category from cte c\nright join members m on c.member_id = m.member_id \n"
+                    },
+                    {
+                        "username": "levixu7",
+                        "content": "=>80"
+                    },
+                    {
+                        "username": "sherrill_zhang",
+                        "content": "My code is 13/17 cases right but I can\\'t find the difference\\n\\n# Write your MySQL query statement below\\nwith cte as (\\n    select m.member_id,m.name,count(p.charged_amount) as \\'tp\\',count(v.visit_id) as \\'tv\\'\\n    from (Members m left join Visits v on m.member_id = v.member_id) left join Purchases p on v.visit_id = p.visit_id\\n    group by v.member_id,m.name)\\nselect c.member_id , c.name,\\n    case when 100*sum(c.tp)/c.tv>=80 then \"Diamond\"\\n    when 100*sum(c.tp)/c.tv>=50 and c.tp/c.tv<80 then \"Gold\"\\n    when 100*sum(c.tp)/c.tv<50 then \"Silver\"\\n    else \"Bronze\"  end as \\'category\\'\\nfrom cte c\\ngroup by c.member_id\\norder by c.member_id"
+                    }
+                ]
+            },
+            {
+                "id": 1810406,
+                "content": [
+                    {
+                        "username": "TarunGrover6995",
+                        "content": "WITH cte AS\\n(SELECT member_id, 100*NVL(COUNT(charged_amount),0)/COUNT(visit_id) conversion_rate FROM \\nVisits LEFT JOIN Purchases USING (visit_id) GROUP BY member_id)\\n\\n\\nSELECT member_id, name, NVL(category,\\'Bronze\\') category FROM Members LEFT JOIN \\n(SELECT member_id, CASE WHEN conversion_rate >= 80 THEN \\'Diamond\\'\\n                                           WHEN conversion_rate >= 50 AND conversion_rate < 80 THEN \\'Gold\\'\\n                                           ELSE \\'Silver\\' END AS category FROM cte) USING (member_id)"
+                    },
+                    {
+                        "username": "Isabellaisgood",
+                        "content": "with cte as\\n(SELECT member_id, count(*) as \\'visit\\'\\nFROM Visits\\nGROUP BY member_id),\\ncte2 as\\n(SELECT b.member_id, count(*) as \\'spend\\'\\nFROM Purchases a left join Visits b on a.visit_id = b.visit_id\\nGROUP BY b.member_id)\\n\\n\\nSELECT p.member_id, p.name, (case when q.category IS NULL then \\'Bronze\\' else category end) as \\'category\\'\\nFROM Members p left join (SELECT m.member_id, (case when rate >= 80 then \\'Diamond\\' when rate >= 50 then \\'Gold\\' else \\'Silver\\' end) as \\'category\\'\\nFROM cte m left join (SELECT a.member_id, round(100*b.spend/a.visit,2) as \\'rate\\'\\nFROM cte a join cte2 b on a.member_id = b.member_id) n on m.member_id = n.member_id) q on p.member_id = q.member_id"
+                    },
+                    {
+                        "username": "leungkayu",
+                        "content": "Can somebody please help me with why the following code failed ? It passed 16/17 test cases , the test cases is freaking long and they look the same to me \\n\\nwith CTE as (select member_id , (count(charged_amount)/count(visit_date) *100) as conversion_rate\\nfrom Visits v left join Purchases p on v.visit_id = p.visit_id \\ngroup by member_id)\\n\\nselect m.member_id , name,\\nCASE \\nWHEN conversion_rate >80 then \\'Diamond\\'\\nWHEN conversion_rate >= 50 and conversion_rate < 80 then \\'Gold\\'\\nWHEN conversion_rate <50 then \\'Silver\\' \\nELSE \"Bronze\" End as category\\nfrom Members m left join CTE c on m.member_id = c.member_id\\norder by m.member_id"
+                    },
+                    {
+                        "username": "levixu7",
+                        "content": "=>80"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "(MS-SQL) Can someone pls tell me why I am getting error??  (16/17 testcases passed)\nwith cte as\n(select v.member_id,(100*count(charged_amount)*1.0/nullif(count(v.member_id),0))conversion_rate from Visits v \nleft join Purchases p on v.visit_id = p.visit_id\ngroup by v.member_id)\n\nselect m.member_id, name ,(case when conversion_rate> 80 then 'Diamond'\nwhen conversion_rate>=50 and conversion_rate < 80 then 'Gold'\nwhen conversion_rate < 50 then 'Silver'\nelse 'Bronze' end)category from cte c\nright join members m on c.member_id = m.member_id \n"
+                    },
+                    {
+                        "username": "levixu7",
+                        "content": "=>80"
+                    },
+                    {
+                        "username": "sherrill_zhang",
+                        "content": "My code is 13/17 cases right but I can\\'t find the difference\\n\\n# Write your MySQL query statement below\\nwith cte as (\\n    select m.member_id,m.name,count(p.charged_amount) as \\'tp\\',count(v.visit_id) as \\'tv\\'\\n    from (Members m left join Visits v on m.member_id = v.member_id) left join Purchases p on v.visit_id = p.visit_id\\n    group by v.member_id,m.name)\\nselect c.member_id , c.name,\\n    case when 100*sum(c.tp)/c.tv>=80 then \"Diamond\"\\n    when 100*sum(c.tp)/c.tv>=50 and c.tp/c.tv<80 then \"Gold\"\\n    when 100*sum(c.tp)/c.tv<50 then \"Silver\"\\n    else \"Bronze\"  end as \\'category\\'\\nfrom cte c\\ngroup by c.member_id\\norder by c.member_id"
+                    }
+                ]
+            },
+            {
+                "id": 1802120,
+                "content": [
+                    {
+                        "username": "TarunGrover6995",
+                        "content": "WITH cte AS\\n(SELECT member_id, 100*NVL(COUNT(charged_amount),0)/COUNT(visit_id) conversion_rate FROM \\nVisits LEFT JOIN Purchases USING (visit_id) GROUP BY member_id)\\n\\n\\nSELECT member_id, name, NVL(category,\\'Bronze\\') category FROM Members LEFT JOIN \\n(SELECT member_id, CASE WHEN conversion_rate >= 80 THEN \\'Diamond\\'\\n                                           WHEN conversion_rate >= 50 AND conversion_rate < 80 THEN \\'Gold\\'\\n                                           ELSE \\'Silver\\' END AS category FROM cte) USING (member_id)"
+                    },
+                    {
+                        "username": "Isabellaisgood",
+                        "content": "with cte as\\n(SELECT member_id, count(*) as \\'visit\\'\\nFROM Visits\\nGROUP BY member_id),\\ncte2 as\\n(SELECT b.member_id, count(*) as \\'spend\\'\\nFROM Purchases a left join Visits b on a.visit_id = b.visit_id\\nGROUP BY b.member_id)\\n\\n\\nSELECT p.member_id, p.name, (case when q.category IS NULL then \\'Bronze\\' else category end) as \\'category\\'\\nFROM Members p left join (SELECT m.member_id, (case when rate >= 80 then \\'Diamond\\' when rate >= 50 then \\'Gold\\' else \\'Silver\\' end) as \\'category\\'\\nFROM cte m left join (SELECT a.member_id, round(100*b.spend/a.visit,2) as \\'rate\\'\\nFROM cte a join cte2 b on a.member_id = b.member_id) n on m.member_id = n.member_id) q on p.member_id = q.member_id"
+                    },
+                    {
+                        "username": "leungkayu",
+                        "content": "Can somebody please help me with why the following code failed ? It passed 16/17 test cases , the test cases is freaking long and they look the same to me \\n\\nwith CTE as (select member_id , (count(charged_amount)/count(visit_date) *100) as conversion_rate\\nfrom Visits v left join Purchases p on v.visit_id = p.visit_id \\ngroup by member_id)\\n\\nselect m.member_id , name,\\nCASE \\nWHEN conversion_rate >80 then \\'Diamond\\'\\nWHEN conversion_rate >= 50 and conversion_rate < 80 then \\'Gold\\'\\nWHEN conversion_rate <50 then \\'Silver\\' \\nELSE \"Bronze\" End as category\\nfrom Members m left join CTE c on m.member_id = c.member_id\\norder by m.member_id"
+                    },
+                    {
+                        "username": "levixu7",
+                        "content": "=>80"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "(MS-SQL) Can someone pls tell me why I am getting error??  (16/17 testcases passed)\nwith cte as\n(select v.member_id,(100*count(charged_amount)*1.0/nullif(count(v.member_id),0))conversion_rate from Visits v \nleft join Purchases p on v.visit_id = p.visit_id\ngroup by v.member_id)\n\nselect m.member_id, name ,(case when conversion_rate> 80 then 'Diamond'\nwhen conversion_rate>=50 and conversion_rate < 80 then 'Gold'\nwhen conversion_rate < 50 then 'Silver'\nelse 'Bronze' end)category from cte c\nright join members m on c.member_id = m.member_id \n"
+                    },
+                    {
+                        "username": "levixu7",
+                        "content": "=>80"
+                    },
+                    {
+                        "username": "sherrill_zhang",
+                        "content": "My code is 13/17 cases right but I can\\'t find the difference\\n\\n# Write your MySQL query statement below\\nwith cte as (\\n    select m.member_id,m.name,count(p.charged_amount) as \\'tp\\',count(v.visit_id) as \\'tv\\'\\n    from (Members m left join Visits v on m.member_id = v.member_id) left join Purchases p on v.visit_id = p.visit_id\\n    group by v.member_id,m.name)\\nselect c.member_id , c.name,\\n    case when 100*sum(c.tp)/c.tv>=80 then \"Diamond\"\\n    when 100*sum(c.tp)/c.tv>=50 and c.tp/c.tv<80 then \"Gold\"\\n    when 100*sum(c.tp)/c.tv<50 then \"Silver\"\\n    else \"Bronze\"  end as \\'category\\'\\nfrom cte c\\ngroup by c.member_id\\norder by c.member_id"
+                    }
+                ]
+            },
+            {
+                "id": 1712848,
+                "content": [
+                    {
+                        "username": "TarunGrover6995",
+                        "content": "WITH cte AS\\n(SELECT member_id, 100*NVL(COUNT(charged_amount),0)/COUNT(visit_id) conversion_rate FROM \\nVisits LEFT JOIN Purchases USING (visit_id) GROUP BY member_id)\\n\\n\\nSELECT member_id, name, NVL(category,\\'Bronze\\') category FROM Members LEFT JOIN \\n(SELECT member_id, CASE WHEN conversion_rate >= 80 THEN \\'Diamond\\'\\n                                           WHEN conversion_rate >= 50 AND conversion_rate < 80 THEN \\'Gold\\'\\n                                           ELSE \\'Silver\\' END AS category FROM cte) USING (member_id)"
+                    },
+                    {
+                        "username": "Isabellaisgood",
+                        "content": "with cte as\\n(SELECT member_id, count(*) as \\'visit\\'\\nFROM Visits\\nGROUP BY member_id),\\ncte2 as\\n(SELECT b.member_id, count(*) as \\'spend\\'\\nFROM Purchases a left join Visits b on a.visit_id = b.visit_id\\nGROUP BY b.member_id)\\n\\n\\nSELECT p.member_id, p.name, (case when q.category IS NULL then \\'Bronze\\' else category end) as \\'category\\'\\nFROM Members p left join (SELECT m.member_id, (case when rate >= 80 then \\'Diamond\\' when rate >= 50 then \\'Gold\\' else \\'Silver\\' end) as \\'category\\'\\nFROM cte m left join (SELECT a.member_id, round(100*b.spend/a.visit,2) as \\'rate\\'\\nFROM cte a join cte2 b on a.member_id = b.member_id) n on m.member_id = n.member_id) q on p.member_id = q.member_id"
+                    },
+                    {
+                        "username": "leungkayu",
+                        "content": "Can somebody please help me with why the following code failed ? It passed 16/17 test cases , the test cases is freaking long and they look the same to me \\n\\nwith CTE as (select member_id , (count(charged_amount)/count(visit_date) *100) as conversion_rate\\nfrom Visits v left join Purchases p on v.visit_id = p.visit_id \\ngroup by member_id)\\n\\nselect m.member_id , name,\\nCASE \\nWHEN conversion_rate >80 then \\'Diamond\\'\\nWHEN conversion_rate >= 50 and conversion_rate < 80 then \\'Gold\\'\\nWHEN conversion_rate <50 then \\'Silver\\' \\nELSE \"Bronze\" End as category\\nfrom Members m left join CTE c on m.member_id = c.member_id\\norder by m.member_id"
+                    },
+                    {
+                        "username": "levixu7",
+                        "content": "=>80"
+                    },
+                    {
+                        "username": "vaibh_1406",
+                        "content": "(MS-SQL) Can someone pls tell me why I am getting error??  (16/17 testcases passed)\nwith cte as\n(select v.member_id,(100*count(charged_amount)*1.0/nullif(count(v.member_id),0))conversion_rate from Visits v \nleft join Purchases p on v.visit_id = p.visit_id\ngroup by v.member_id)\n\nselect m.member_id, name ,(case when conversion_rate> 80 then 'Diamond'\nwhen conversion_rate>=50 and conversion_rate < 80 then 'Gold'\nwhen conversion_rate < 50 then 'Silver'\nelse 'Bronze' end)category from cte c\nright join members m on c.member_id = m.member_id \n"
+                    },
+                    {
+                        "username": "levixu7",
+                        "content": "=>80"
+                    },
+                    {
+                        "username": "sherrill_zhang",
+                        "content": "My code is 13/17 cases right but I can\\'t find the difference\\n\\n# Write your MySQL query statement below\\nwith cte as (\\n    select m.member_id,m.name,count(p.charged_amount) as \\'tp\\',count(v.visit_id) as \\'tv\\'\\n    from (Members m left join Visits v on m.member_id = v.member_id) left join Purchases p on v.visit_id = p.visit_id\\n    group by v.member_id,m.name)\\nselect c.member_id , c.name,\\n    case when 100*sum(c.tp)/c.tv>=80 then \"Diamond\"\\n    when 100*sum(c.tp)/c.tv>=50 and c.tp/c.tv<80 then \"Gold\"\\n    when 100*sum(c.tp)/c.tv<50 then \"Silver\"\\n    else \"Bronze\"  end as \\'category\\'\\nfrom cte c\\ngroup by c.member_id\\norder by c.member_id"
+                    }
+                ]
+            }
+        ]
+    }
+]

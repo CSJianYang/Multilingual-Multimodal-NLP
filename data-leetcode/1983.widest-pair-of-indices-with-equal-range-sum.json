@@ -1,0 +1,18 @@
+[
+    {
+        "title": "Widest Pair of Indices With Equal Range Sum",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1753597,
+                "content": [
+                    {
+                        "username": "andrew_gagliostro",
+                        "content": "Anyone have a good explanation for why we\\'re using the prefix?"
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,93 @@
+[
+    {
+        "title": "Toss Strange Coins",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1898346,
+                "content": [
+                    {
+                        "username": "mrprashantkumar",
+                        "content": "Easy problem but terrible problem statement.\\n\\nCould be replaced with \\n\"Return the overall probability of getting heads, ``target`` number of times, if you toss every coin exactly once.\""
+                    },
+                    {
+                        "username": "rielan",
+                        "content": "The O(N^2) solution based on DP is straightforward. Here another idea is presented but I cannot write a simple code for it since it is based on Fast Fourier Transform.\\nLet\\'s break the input array into two sections with equivalent size, i.e. N/2. Let\\'s name the two subarrays as A and B.\\nLet\\'s define an array fA, fA[i] is the number of coins facing heads equaling i. Similarly let\\'s define another array fB.\\nThen for our input array prob, we can define another array fprob, such that fprob[i] is the number of coins facing heads equaling i.\\n\\nThen it is easy to see that fprob[i] = fA[0]* fB[i] + fA[1]* fB[i-1]+...+fA[i]* fB[0]. It would cost O(N^2) to compute the array fprob naively. Clearly this is a convolution, we can use Fast Fourier Transform to reduce of this computation to O(N* log(N)).\\n\\nA pseudo-code is shown as below:\\n\\n---------------------------------------------------------------------\\nrecursive_function(prob)\\nstep1: break prob into subarrays A and B.\\nstep2: let fA = recursive_function(A)\\n\\t\\t  let fB = recursive_function(B)\\nstep3: let fprob = IFFT(FFT(fA).* FFT(fB))\\nstep4: return real_part of fprob\\n---------------------------------------------------------------------\\n\\nAccording to the Master Theorm in divide-and-conquer algorithms, the overall complexity is O(N* log^2(N))."
+                    },
+                    {
+                        "username": "rohit__27",
+                        "content": "Probability of me getting through such a question in online tests or interview = 0"
+                    },
+                    {
+                        "username": "sam04101",
+                        "content": "It says  `Time Limit Exceeded` and `28 / 28 testcases passed` and the last executed input as empty :/  Anyone got this ambiguous output?"
+                    }
+                ]
+            },
+            {
+                "id": 1568232,
+                "content": [
+                    {
+                        "username": "mrprashantkumar",
+                        "content": "Easy problem but terrible problem statement.\\n\\nCould be replaced with \\n\"Return the overall probability of getting heads, ``target`` number of times, if you toss every coin exactly once.\""
+                    },
+                    {
+                        "username": "rielan",
+                        "content": "The O(N^2) solution based on DP is straightforward. Here another idea is presented but I cannot write a simple code for it since it is based on Fast Fourier Transform.\\nLet\\'s break the input array into two sections with equivalent size, i.e. N/2. Let\\'s name the two subarrays as A and B.\\nLet\\'s define an array fA, fA[i] is the number of coins facing heads equaling i. Similarly let\\'s define another array fB.\\nThen for our input array prob, we can define another array fprob, such that fprob[i] is the number of coins facing heads equaling i.\\n\\nThen it is easy to see that fprob[i] = fA[0]* fB[i] + fA[1]* fB[i-1]+...+fA[i]* fB[0]. It would cost O(N^2) to compute the array fprob naively. Clearly this is a convolution, we can use Fast Fourier Transform to reduce of this computation to O(N* log(N)).\\n\\nA pseudo-code is shown as below:\\n\\n---------------------------------------------------------------------\\nrecursive_function(prob)\\nstep1: break prob into subarrays A and B.\\nstep2: let fA = recursive_function(A)\\n\\t\\t  let fB = recursive_function(B)\\nstep3: let fprob = IFFT(FFT(fA).* FFT(fB))\\nstep4: return real_part of fprob\\n---------------------------------------------------------------------\\n\\nAccording to the Master Theorm in divide-and-conquer algorithms, the overall complexity is O(N* log^2(N))."
+                    },
+                    {
+                        "username": "rohit__27",
+                        "content": "Probability of me getting through such a question in online tests or interview = 0"
+                    },
+                    {
+                        "username": "sam04101",
+                        "content": "It says  `Time Limit Exceeded` and `28 / 28 testcases passed` and the last executed input as empty :/  Anyone got this ambiguous output?"
+                    }
+                ]
+            },
+            {
+                "id": 1914197,
+                "content": [
+                    {
+                        "username": "mrprashantkumar",
+                        "content": "Easy problem but terrible problem statement.\\n\\nCould be replaced with \\n\"Return the overall probability of getting heads, ``target`` number of times, if you toss every coin exactly once.\""
+                    },
+                    {
+                        "username": "rielan",
+                        "content": "The O(N^2) solution based on DP is straightforward. Here another idea is presented but I cannot write a simple code for it since it is based on Fast Fourier Transform.\\nLet\\'s break the input array into two sections with equivalent size, i.e. N/2. Let\\'s name the two subarrays as A and B.\\nLet\\'s define an array fA, fA[i] is the number of coins facing heads equaling i. Similarly let\\'s define another array fB.\\nThen for our input array prob, we can define another array fprob, such that fprob[i] is the number of coins facing heads equaling i.\\n\\nThen it is easy to see that fprob[i] = fA[0]* fB[i] + fA[1]* fB[i-1]+...+fA[i]* fB[0]. It would cost O(N^2) to compute the array fprob naively. Clearly this is a convolution, we can use Fast Fourier Transform to reduce of this computation to O(N* log(N)).\\n\\nA pseudo-code is shown as below:\\n\\n---------------------------------------------------------------------\\nrecursive_function(prob)\\nstep1: break prob into subarrays A and B.\\nstep2: let fA = recursive_function(A)\\n\\t\\t  let fB = recursive_function(B)\\nstep3: let fprob = IFFT(FFT(fA).* FFT(fB))\\nstep4: return real_part of fprob\\n---------------------------------------------------------------------\\n\\nAccording to the Master Theorm in divide-and-conquer algorithms, the overall complexity is O(N* log^2(N))."
+                    },
+                    {
+                        "username": "rohit__27",
+                        "content": "Probability of me getting through such a question in online tests or interview = 0"
+                    },
+                    {
+                        "username": "sam04101",
+                        "content": "It says  `Time Limit Exceeded` and `28 / 28 testcases passed` and the last executed input as empty :/  Anyone got this ambiguous output?"
+                    }
+                ]
+            },
+            {
+                "id": 1916745,
+                "content": [
+                    {
+                        "username": "mrprashantkumar",
+                        "content": "Easy problem but terrible problem statement.\\n\\nCould be replaced with \\n\"Return the overall probability of getting heads, ``target`` number of times, if you toss every coin exactly once.\""
+                    },
+                    {
+                        "username": "rielan",
+                        "content": "The O(N^2) solution based on DP is straightforward. Here another idea is presented but I cannot write a simple code for it since it is based on Fast Fourier Transform.\\nLet\\'s break the input array into two sections with equivalent size, i.e. N/2. Let\\'s name the two subarrays as A and B.\\nLet\\'s define an array fA, fA[i] is the number of coins facing heads equaling i. Similarly let\\'s define another array fB.\\nThen for our input array prob, we can define another array fprob, such that fprob[i] is the number of coins facing heads equaling i.\\n\\nThen it is easy to see that fprob[i] = fA[0]* fB[i] + fA[1]* fB[i-1]+...+fA[i]* fB[0]. It would cost O(N^2) to compute the array fprob naively. Clearly this is a convolution, we can use Fast Fourier Transform to reduce of this computation to O(N* log(N)).\\n\\nA pseudo-code is shown as below:\\n\\n---------------------------------------------------------------------\\nrecursive_function(prob)\\nstep1: break prob into subarrays A and B.\\nstep2: let fA = recursive_function(A)\\n\\t\\t  let fB = recursive_function(B)\\nstep3: let fprob = IFFT(FFT(fA).* FFT(fB))\\nstep4: return real_part of fprob\\n---------------------------------------------------------------------\\n\\nAccording to the Master Theorm in divide-and-conquer algorithms, the overall complexity is O(N* log^2(N))."
+                    },
+                    {
+                        "username": "rohit__27",
+                        "content": "Probability of me getting through such a question in online tests or interview = 0"
+                    },
+                    {
+                        "username": "sam04101",
+                        "content": "It says  `Time Limit Exceeded` and `28 / 28 testcases passed` and the last executed input as empty :/  Anyone got this ambiguous output?"
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,35 @@
+[
+    {
+        "title": "Longest Winning Streak",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1566050,
+                "content": [
+                    {
+                        "username": "ArulAuror",
+                        "content": "WITH cte AS (\\nSELECT player_id, result, match_day,\\nROW_NUMBER() OVER(PARTITION BY player_id ORDER BY match_day) AS rnk\\nFROM matches ),\\n`# Segregation of consecutive wins into separate groups for each player_id identified by group_id`\\ntemp AS (\\nSELECT player_id,\\nrnk - ROW_NUMBER() OVER(PARTITION BY player_id ORDER BY match_day) AS group_id\\nFROM cte\\nWHERE result = \\'Win\\')\\n\\nSELECT pl.player_id, IFNULL(MAX(ct.cnt),0) as longest_streak\\nFROM (SELECT DISTINCT player_id FROM matches) pl\\nLEFT JOIN\\n(SELECT player_id, group_id, COUNT(*) as cnt FROM temp GROUP BY 1, 2) ct\\nON pl.player_id = ct.player_id\\nGROUP BY 1\\n"
+                    },
+                    {
+                        "username": "awaisshah",
+                        "content": "with newnum as(\\nSELECT , ROWNUMBER() OVER (PARTITION BY playerid ORDER BY playerid,matchday) as rn\\nFROM Matches\\n), groups as (\\nSELECT playerid,matchday,result,rn-ROWNUMBER() OVER (PARTITION BY playerid ORDER BY playerid,matchday) as groupid\\nFROM newnum\\nWHERE result=\\'Win\\'\\n)\\n, groups2 as(\\nSELECT playerid,groupid,COUNT() cnt\\n    FROM groups\\n    GROUP BY playerid,groupid\\n)\\n\\nSELECT playerID,MAX(cnt) longeststreak\\nFROM\\n(\\nSELECT a.playerid,ISNULL(b.groupid,0) as streak,ISNULL(cnt,0) cnt  \\nFROM (SELECT DISTINCT playerid from Matches) a LEFT JOIN groups2 b on a.playerid=b.playerid\\n)x\\nGROUP BY playerid"
+                    }
+                ]
+            },
+            {
+                "id": 1576667,
+                "content": [
+                    {
+                        "username": "ArulAuror",
+                        "content": "WITH cte AS (\\nSELECT player_id, result, match_day,\\nROW_NUMBER() OVER(PARTITION BY player_id ORDER BY match_day) AS rnk\\nFROM matches ),\\n`# Segregation of consecutive wins into separate groups for each player_id identified by group_id`\\ntemp AS (\\nSELECT player_id,\\nrnk - ROW_NUMBER() OVER(PARTITION BY player_id ORDER BY match_day) AS group_id\\nFROM cte\\nWHERE result = \\'Win\\')\\n\\nSELECT pl.player_id, IFNULL(MAX(ct.cnt),0) as longest_streak\\nFROM (SELECT DISTINCT player_id FROM matches) pl\\nLEFT JOIN\\n(SELECT player_id, group_id, COUNT(*) as cnt FROM temp GROUP BY 1, 2) ct\\nON pl.player_id = ct.player_id\\nGROUP BY 1\\n"
+                    },
+                    {
+                        "username": "awaisshah",
+                        "content": "with newnum as(\\nSELECT , ROWNUMBER() OVER (PARTITION BY playerid ORDER BY playerid,matchday) as rn\\nFROM Matches\\n), groups as (\\nSELECT playerid,matchday,result,rn-ROWNUMBER() OVER (PARTITION BY playerid ORDER BY playerid,matchday) as groupid\\nFROM newnum\\nWHERE result=\\'Win\\'\\n)\\n, groups2 as(\\nSELECT playerid,groupid,COUNT() cnt\\n    FROM groups\\n    GROUP BY playerid,groupid\\n)\\n\\nSELECT playerID,MAX(cnt) longeststreak\\nFROM\\n(\\nSELECT a.playerid,ISNULL(b.groupid,0) as streak,ISNULL(cnt,0) cnt  \\nFROM (SELECT DISTINCT playerid from Matches) a LEFT JOIN groups2 b on a.playerid=b.playerid\\n)x\\nGROUP BY playerid"
+                    }
+                ]
+            }
+        ]
+    }
+]

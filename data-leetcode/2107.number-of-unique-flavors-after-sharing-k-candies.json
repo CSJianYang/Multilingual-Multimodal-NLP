@@ -1,0 +1,18 @@
+[
+    {
+        "title": "Number of Unique Flavors After Sharing K Candies",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 2045136,
+                "content": [
+                    {
+                        "username": "sukiboo",
+                        "content": "`candies.length <= 10**5`\\nThis is why almost 12% of americans have diabetes <_<"
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,84 @@
+[
+    {
+        "title": "Two Sum BSTs",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1805920,
+                "content": [
+                    {
+                        "username": "robertointerview",
+                        "content": "shall this be tagged as an easy one? or make it harder with some restrictions...?"
+                    },
+                    {
+                        "username": "rohit__27",
+                        "content": " make it a bit harder, else easy peasy."
+                    },
+                    {
+                        "username": "matthew106",
+                        "content": "Definitely a solid medium. Combining binary tree traversal with a variation of two sum. Not bad."
+                    },
+                    {
+                        "username": "daring-calf",
+                        "content": "I think this is a little bit indirect comparing to two sum, so a decent medium."
+                    },
+                    {
+                        "username": "ctlang",
+                        "content": "The fact the two datasets are ordered makes it seem like a clever solution is required, but using hashmap yields a simple and effective O(n1 + n2) solution and makes their ordering obsolete."
+                    }
+                ]
+            },
+            {
+                "id": 1941358,
+                "content": [
+                    {
+                        "username": "robertointerview",
+                        "content": "shall this be tagged as an easy one? or make it harder with some restrictions...?"
+                    },
+                    {
+                        "username": "rohit__27",
+                        "content": " make it a bit harder, else easy peasy."
+                    },
+                    {
+                        "username": "matthew106",
+                        "content": "Definitely a solid medium. Combining binary tree traversal with a variation of two sum. Not bad."
+                    },
+                    {
+                        "username": "daring-calf",
+                        "content": "I think this is a little bit indirect comparing to two sum, so a decent medium."
+                    },
+                    {
+                        "username": "ctlang",
+                        "content": "The fact the two datasets are ordered makes it seem like a clever solution is required, but using hashmap yields a simple and effective O(n1 + n2) solution and makes their ordering obsolete."
+                    }
+                ]
+            },
+            {
+                "id": 1965955,
+                "content": [
+                    {
+                        "username": "robertointerview",
+                        "content": "shall this be tagged as an easy one? or make it harder with some restrictions...?"
+                    },
+                    {
+                        "username": "rohit__27",
+                        "content": " make it a bit harder, else easy peasy."
+                    },
+                    {
+                        "username": "matthew106",
+                        "content": "Definitely a solid medium. Combining binary tree traversal with a variation of two sum. Not bad."
+                    },
+                    {
+                        "username": "daring-calf",
+                        "content": "I think this is a little bit indirect comparing to two sum, so a decent medium."
+                    },
+                    {
+                        "username": "ctlang",
+                        "content": "The fact the two datasets are ordered makes it seem like a clever solution is required, but using hashmap yields a simple and effective O(n1 + n2) solution and makes their ordering obsolete."
+                    }
+                ]
+            }
+        ]
+    }
+]

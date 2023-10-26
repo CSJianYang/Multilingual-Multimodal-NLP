@@ -1,0 +1,234 @@
+[
+    {
+        "title": "The Earliest Moment When Everyone Become Friends",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1714520,
+                "content": [
+                    {
+                        "username": "nllsdfx",
+                        "content": "Explain me pls, why my answer (8) is wrong when logs = [[9,3,0],[0,2,1],[8,0,1],[1,3,2],[2,2,0],[3,3,1]], n = 4?\\n\\n3-0, 2-1, 0-1? 0 connected with 1 and 3, and 1 knows about 2, right? Is it a bug?"
+                    },
+                    {
+                        "username": "Zhouyao_Xie",
+                        "content": "[@nllsdfx](/nllsdfx) thank you so much!!! i got so confused "
+                    },
+                    {
+                        "username": "mandrake",
+                        "content": "This suggestion saved hours worth of effort through trial and error."
+                    },
+                    {
+                        "username": "nllsdfx",
+                        "content": "Okay, it\\'s not obvious that it should be sorted, see https://github.com/LeetCode-Feedback/LeetCode-Feedback/issues/7713"
+                    },
+                    {
+                        "username": "jasperjoe",
+                        "content": "I am not quite familiar with Union-Find. Hopefully someone could share other ways to solve this kind of problems."
+                    },
+                    {
+                        "username": "yabbadabbadoo123",
+                        "content": "[@vivekh](/vivekh) While it can be solved that way it's not optimal. That solution is O(n^2). What makes Union Find so fast is the compressing of the graph."
+                    },
+                    {
+                        "username": "vivekh",
+                        "content": "You don't need to be familiar with Union-Find. BFS can also solve the problem:\nHint : Keep on adding nodes to the graph as you go through logs and let BFS count the number of nodes. When count == n, return the log time.\nAs a matter of fact , all the union-find problems can be solved using BFS/DFS. Check this out\n\nhttps://leetcode.com/problems/the-earliest-moment-when-everyone-become-friends/solutions/2779713/bfs-solution-no-union-find/"
+                    },
+                    {
+                        "username": "parkr96",
+                        "content": "Took me an embarrassing amount of time to realize logs isn\\'t sorted by timestamp from the start :D lol"
+                    },
+                    {
+                        "username": "DivSar_15",
+                        "content": "This problem is similar to [Redundant connection](https://leetcode.com/problems/redundant-connection/). We\\'re required to get the timestamp of the last non-redundant connecting edge between two disjoint sets."
+                    },
+                    {
+                        "username": "kebab-case",
+                        "content": "Hello, \n\nI am able to do it via union find, but I sorted matrix according to timestamp, is there any other better way?"
+                    }
+                ]
+            },
+            {
+                "id": 1569549,
+                "content": [
+                    {
+                        "username": "nllsdfx",
+                        "content": "Explain me pls, why my answer (8) is wrong when logs = [[9,3,0],[0,2,1],[8,0,1],[1,3,2],[2,2,0],[3,3,1]], n = 4?\\n\\n3-0, 2-1, 0-1? 0 connected with 1 and 3, and 1 knows about 2, right? Is it a bug?"
+                    },
+                    {
+                        "username": "Zhouyao_Xie",
+                        "content": "[@nllsdfx](/nllsdfx) thank you so much!!! i got so confused "
+                    },
+                    {
+                        "username": "mandrake",
+                        "content": "This suggestion saved hours worth of effort through trial and error."
+                    },
+                    {
+                        "username": "nllsdfx",
+                        "content": "Okay, it\\'s not obvious that it should be sorted, see https://github.com/LeetCode-Feedback/LeetCode-Feedback/issues/7713"
+                    },
+                    {
+                        "username": "jasperjoe",
+                        "content": "I am not quite familiar with Union-Find. Hopefully someone could share other ways to solve this kind of problems."
+                    },
+                    {
+                        "username": "yabbadabbadoo123",
+                        "content": "[@vivekh](/vivekh) While it can be solved that way it's not optimal. That solution is O(n^2). What makes Union Find so fast is the compressing of the graph."
+                    },
+                    {
+                        "username": "vivekh",
+                        "content": "You don't need to be familiar with Union-Find. BFS can also solve the problem:\nHint : Keep on adding nodes to the graph as you go through logs and let BFS count the number of nodes. When count == n, return the log time.\nAs a matter of fact , all the union-find problems can be solved using BFS/DFS. Check this out\n\nhttps://leetcode.com/problems/the-earliest-moment-when-everyone-become-friends/solutions/2779713/bfs-solution-no-union-find/"
+                    },
+                    {
+                        "username": "parkr96",
+                        "content": "Took me an embarrassing amount of time to realize logs isn\\'t sorted by timestamp from the start :D lol"
+                    },
+                    {
+                        "username": "DivSar_15",
+                        "content": "This problem is similar to [Redundant connection](https://leetcode.com/problems/redundant-connection/). We\\'re required to get the timestamp of the last non-redundant connecting edge between two disjoint sets."
+                    },
+                    {
+                        "username": "kebab-case",
+                        "content": "Hello, \n\nI am able to do it via union find, but I sorted matrix according to timestamp, is there any other better way?"
+                    }
+                ]
+            },
+            {
+                "id": 2031733,
+                "content": [
+                    {
+                        "username": "nllsdfx",
+                        "content": "Explain me pls, why my answer (8) is wrong when logs = [[9,3,0],[0,2,1],[8,0,1],[1,3,2],[2,2,0],[3,3,1]], n = 4?\\n\\n3-0, 2-1, 0-1? 0 connected with 1 and 3, and 1 knows about 2, right? Is it a bug?"
+                    },
+                    {
+                        "username": "Zhouyao_Xie",
+                        "content": "[@nllsdfx](/nllsdfx) thank you so much!!! i got so confused "
+                    },
+                    {
+                        "username": "mandrake",
+                        "content": "This suggestion saved hours worth of effort through trial and error."
+                    },
+                    {
+                        "username": "nllsdfx",
+                        "content": "Okay, it\\'s not obvious that it should be sorted, see https://github.com/LeetCode-Feedback/LeetCode-Feedback/issues/7713"
+                    },
+                    {
+                        "username": "jasperjoe",
+                        "content": "I am not quite familiar with Union-Find. Hopefully someone could share other ways to solve this kind of problems."
+                    },
+                    {
+                        "username": "yabbadabbadoo123",
+                        "content": "[@vivekh](/vivekh) While it can be solved that way it's not optimal. That solution is O(n^2). What makes Union Find so fast is the compressing of the graph."
+                    },
+                    {
+                        "username": "vivekh",
+                        "content": "You don't need to be familiar with Union-Find. BFS can also solve the problem:\nHint : Keep on adding nodes to the graph as you go through logs and let BFS count the number of nodes. When count == n, return the log time.\nAs a matter of fact , all the union-find problems can be solved using BFS/DFS. Check this out\n\nhttps://leetcode.com/problems/the-earliest-moment-when-everyone-become-friends/solutions/2779713/bfs-solution-no-union-find/"
+                    },
+                    {
+                        "username": "parkr96",
+                        "content": "Took me an embarrassing amount of time to realize logs isn\\'t sorted by timestamp from the start :D lol"
+                    },
+                    {
+                        "username": "DivSar_15",
+                        "content": "This problem is similar to [Redundant connection](https://leetcode.com/problems/redundant-connection/). We\\'re required to get the timestamp of the last non-redundant connecting edge between two disjoint sets."
+                    },
+                    {
+                        "username": "kebab-case",
+                        "content": "Hello, \n\nI am able to do it via union find, but I sorted matrix according to timestamp, is there any other better way?"
+                    }
+                ]
+            },
+            {
+                "id": 1872543,
+                "content": [
+                    {
+                        "username": "nllsdfx",
+                        "content": "Explain me pls, why my answer (8) is wrong when logs = [[9,3,0],[0,2,1],[8,0,1],[1,3,2],[2,2,0],[3,3,1]], n = 4?\\n\\n3-0, 2-1, 0-1? 0 connected with 1 and 3, and 1 knows about 2, right? Is it a bug?"
+                    },
+                    {
+                        "username": "Zhouyao_Xie",
+                        "content": "[@nllsdfx](/nllsdfx) thank you so much!!! i got so confused "
+                    },
+                    {
+                        "username": "mandrake",
+                        "content": "This suggestion saved hours worth of effort through trial and error."
+                    },
+                    {
+                        "username": "nllsdfx",
+                        "content": "Okay, it\\'s not obvious that it should be sorted, see https://github.com/LeetCode-Feedback/LeetCode-Feedback/issues/7713"
+                    },
+                    {
+                        "username": "jasperjoe",
+                        "content": "I am not quite familiar with Union-Find. Hopefully someone could share other ways to solve this kind of problems."
+                    },
+                    {
+                        "username": "yabbadabbadoo123",
+                        "content": "[@vivekh](/vivekh) While it can be solved that way it's not optimal. That solution is O(n^2). What makes Union Find so fast is the compressing of the graph."
+                    },
+                    {
+                        "username": "vivekh",
+                        "content": "You don't need to be familiar with Union-Find. BFS can also solve the problem:\nHint : Keep on adding nodes to the graph as you go through logs and let BFS count the number of nodes. When count == n, return the log time.\nAs a matter of fact , all the union-find problems can be solved using BFS/DFS. Check this out\n\nhttps://leetcode.com/problems/the-earliest-moment-when-everyone-become-friends/solutions/2779713/bfs-solution-no-union-find/"
+                    },
+                    {
+                        "username": "parkr96",
+                        "content": "Took me an embarrassing amount of time to realize logs isn\\'t sorted by timestamp from the start :D lol"
+                    },
+                    {
+                        "username": "DivSar_15",
+                        "content": "This problem is similar to [Redundant connection](https://leetcode.com/problems/redundant-connection/). We\\'re required to get the timestamp of the last non-redundant connecting edge between two disjoint sets."
+                    },
+                    {
+                        "username": "kebab-case",
+                        "content": "Hello, \n\nI am able to do it via union find, but I sorted matrix according to timestamp, is there any other better way?"
+                    }
+                ]
+            },
+            {
+                "id": 1787416,
+                "content": [
+                    {
+                        "username": "nllsdfx",
+                        "content": "Explain me pls, why my answer (8) is wrong when logs = [[9,3,0],[0,2,1],[8,0,1],[1,3,2],[2,2,0],[3,3,1]], n = 4?\\n\\n3-0, 2-1, 0-1? 0 connected with 1 and 3, and 1 knows about 2, right? Is it a bug?"
+                    },
+                    {
+                        "username": "Zhouyao_Xie",
+                        "content": "[@nllsdfx](/nllsdfx) thank you so much!!! i got so confused "
+                    },
+                    {
+                        "username": "mandrake",
+                        "content": "This suggestion saved hours worth of effort through trial and error."
+                    },
+                    {
+                        "username": "nllsdfx",
+                        "content": "Okay, it\\'s not obvious that it should be sorted, see https://github.com/LeetCode-Feedback/LeetCode-Feedback/issues/7713"
+                    },
+                    {
+                        "username": "jasperjoe",
+                        "content": "I am not quite familiar with Union-Find. Hopefully someone could share other ways to solve this kind of problems."
+                    },
+                    {
+                        "username": "yabbadabbadoo123",
+                        "content": "[@vivekh](/vivekh) While it can be solved that way it's not optimal. That solution is O(n^2). What makes Union Find so fast is the compressing of the graph."
+                    },
+                    {
+                        "username": "vivekh",
+                        "content": "You don't need to be familiar with Union-Find. BFS can also solve the problem:\nHint : Keep on adding nodes to the graph as you go through logs and let BFS count the number of nodes. When count == n, return the log time.\nAs a matter of fact , all the union-find problems can be solved using BFS/DFS. Check this out\n\nhttps://leetcode.com/problems/the-earliest-moment-when-everyone-become-friends/solutions/2779713/bfs-solution-no-union-find/"
+                    },
+                    {
+                        "username": "parkr96",
+                        "content": "Took me an embarrassing amount of time to realize logs isn\\'t sorted by timestamp from the start :D lol"
+                    },
+                    {
+                        "username": "DivSar_15",
+                        "content": "This problem is similar to [Redundant connection](https://leetcode.com/problems/redundant-connection/). We\\'re required to get the timestamp of the last non-redundant connecting edge between two disjoint sets."
+                    },
+                    {
+                        "username": "kebab-case",
+                        "content": "Hello, \n\nI am able to do it via union find, but I sorted matrix according to timestamp, is there any other better way?"
+                    }
+                ]
+            }
+        ]
+    }
+]

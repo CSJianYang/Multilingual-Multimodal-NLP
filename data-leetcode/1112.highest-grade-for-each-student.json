@@ -1,0 +1,207 @@
+[
+    {
+        "title": "Highest Grade For Each Student",
+        "question_content": null,
+        "solutions": [],
+        "discussions": [
+            {
+                "id": 1573406,
+                "content": [
+                    {
+                        "username": "catherinexie2015",
+                        "content": "\\'\\'\\'\\nselect student_id, min(course_id) as course_id,grade \\nfrom Enrollments\\nwhere (student_id, grade) in (\\n(select student_id, max(grade) as MaxGrade\\nfrom Enrollments\\ngroup by student_id) )\\ngroup by student_id\\norder by student_id;\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "cocaangle",
+                        "content": "**1. window functions**\\nselect student_id, course_id, grade\\nfrom\\n(select student_id,course_id,grade, rank()over(partition by student_id order by grade desc course_id asc)\\nfrom enrollments en) a\\nwhere a.rank=1\\norder by student_id \\n**2. subquery**\\nselect student_id, min(course_id) as course_id,grade\\nfrom enrollments\\nwhere (student_id,grade) in\\n(select student_id,max(grade)\\nfrom enrollments en\\ngroup by student_id)\\ngroup by student_id,grade\\norder by student_id"
+                    },
+                    {
+                        "username": "hpareek1995",
+                        "content": "select student_id, course_id, grade\\nfrom(\\nselect student_id,course_id,grade, rank()over(partition by student_id order by grade desc, course_id asc) as rn\\nfrom enrollments en) a\\nwhere rn=1\\norder by student_id\\n\\nThanks cocaangle but 1st one was showing error adding the corrected version."
+                    },
+                    {
+                        "username": "sagar5485",
+                        "content": "WITH CTE AS\\n(\\nSELECT  student_id, course_id, grade, \\n        rank() OVER(PARTITION BY student_id ORDER BY grade desc, course_id asc) as r2\\nFROM Enrollments\\n)\\n\\nSELECT student_id, course_id, grade\\nFROM CTE\\nWHERE r2 = 1\\nORDER BY student_id, course_id"
+                    },
+                    {
+                        "username": "xiakaifeng66",
+                        "content": "# Write your MySQL query statement below\\nselect student_id, min(course_id) as course_id, grade from Enrollments \\nwhere (student_id, grade) in (select student_id, max(grade) from Enrollments tmp group by student_id)\\ngroup by student_id\\norder by student_id, course_id\\n;"
+                    },
+                    {
+                        "username": "vinayakam19",
+                        "content": "Using CTE\\n\\n `with hsg as (select student_id, min(course_id) as course_id, grade, DENSE_RANK() OVER(PARTITION BY student_id ORDER BY grade desc) as value_rank from Enrollments group by student_id, grade)\\n\\nselect student_id, course_id, grade from hsg where value_rank = 1;`"
+                    },
+                    {
+                        "username": "T_Poojitha",
+                        "content": "select student_id,min(course_id),grade\\nfrom Enrollments\\nwhere (student_id,course_id,grade) in\\n(\\nSELECT student_id,course_id,max(grade)\\nfrom Enrollments\\ngroup by student_id\\n\\n)\\n\\nI got the solution, but I am trying to understand why the above query returns just one row while executing, shouldn\\'t it return two rows?"
+                    }
+                ]
+            },
+            {
+                "id": 1573120,
+                "content": [
+                    {
+                        "username": "catherinexie2015",
+                        "content": "\\'\\'\\'\\nselect student_id, min(course_id) as course_id,grade \\nfrom Enrollments\\nwhere (student_id, grade) in (\\n(select student_id, max(grade) as MaxGrade\\nfrom Enrollments\\ngroup by student_id) )\\ngroup by student_id\\norder by student_id;\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "cocaangle",
+                        "content": "**1. window functions**\\nselect student_id, course_id, grade\\nfrom\\n(select student_id,course_id,grade, rank()over(partition by student_id order by grade desc course_id asc)\\nfrom enrollments en) a\\nwhere a.rank=1\\norder by student_id \\n**2. subquery**\\nselect student_id, min(course_id) as course_id,grade\\nfrom enrollments\\nwhere (student_id,grade) in\\n(select student_id,max(grade)\\nfrom enrollments en\\ngroup by student_id)\\ngroup by student_id,grade\\norder by student_id"
+                    },
+                    {
+                        "username": "hpareek1995",
+                        "content": "select student_id, course_id, grade\\nfrom(\\nselect student_id,course_id,grade, rank()over(partition by student_id order by grade desc, course_id asc) as rn\\nfrom enrollments en) a\\nwhere rn=1\\norder by student_id\\n\\nThanks cocaangle but 1st one was showing error adding the corrected version."
+                    },
+                    {
+                        "username": "sagar5485",
+                        "content": "WITH CTE AS\\n(\\nSELECT  student_id, course_id, grade, \\n        rank() OVER(PARTITION BY student_id ORDER BY grade desc, course_id asc) as r2\\nFROM Enrollments\\n)\\n\\nSELECT student_id, course_id, grade\\nFROM CTE\\nWHERE r2 = 1\\nORDER BY student_id, course_id"
+                    },
+                    {
+                        "username": "xiakaifeng66",
+                        "content": "# Write your MySQL query statement below\\nselect student_id, min(course_id) as course_id, grade from Enrollments \\nwhere (student_id, grade) in (select student_id, max(grade) from Enrollments tmp group by student_id)\\ngroup by student_id\\norder by student_id, course_id\\n;"
+                    },
+                    {
+                        "username": "vinayakam19",
+                        "content": "Using CTE\\n\\n `with hsg as (select student_id, min(course_id) as course_id, grade, DENSE_RANK() OVER(PARTITION BY student_id ORDER BY grade desc) as value_rank from Enrollments group by student_id, grade)\\n\\nselect student_id, course_id, grade from hsg where value_rank = 1;`"
+                    },
+                    {
+                        "username": "T_Poojitha",
+                        "content": "select student_id,min(course_id),grade\\nfrom Enrollments\\nwhere (student_id,course_id,grade) in\\n(\\nSELECT student_id,course_id,max(grade)\\nfrom Enrollments\\ngroup by student_id\\n\\n)\\n\\nI got the solution, but I am trying to understand why the above query returns just one row while executing, shouldn\\'t it return two rows?"
+                    }
+                ]
+            },
+            {
+                "id": 1575470,
+                "content": [
+                    {
+                        "username": "catherinexie2015",
+                        "content": "\\'\\'\\'\\nselect student_id, min(course_id) as course_id,grade \\nfrom Enrollments\\nwhere (student_id, grade) in (\\n(select student_id, max(grade) as MaxGrade\\nfrom Enrollments\\ngroup by student_id) )\\ngroup by student_id\\norder by student_id;\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "cocaangle",
+                        "content": "**1. window functions**\\nselect student_id, course_id, grade\\nfrom\\n(select student_id,course_id,grade, rank()over(partition by student_id order by grade desc course_id asc)\\nfrom enrollments en) a\\nwhere a.rank=1\\norder by student_id \\n**2. subquery**\\nselect student_id, min(course_id) as course_id,grade\\nfrom enrollments\\nwhere (student_id,grade) in\\n(select student_id,max(grade)\\nfrom enrollments en\\ngroup by student_id)\\ngroup by student_id,grade\\norder by student_id"
+                    },
+                    {
+                        "username": "hpareek1995",
+                        "content": "select student_id, course_id, grade\\nfrom(\\nselect student_id,course_id,grade, rank()over(partition by student_id order by grade desc, course_id asc) as rn\\nfrom enrollments en) a\\nwhere rn=1\\norder by student_id\\n\\nThanks cocaangle but 1st one was showing error adding the corrected version."
+                    },
+                    {
+                        "username": "sagar5485",
+                        "content": "WITH CTE AS\\n(\\nSELECT  student_id, course_id, grade, \\n        rank() OVER(PARTITION BY student_id ORDER BY grade desc, course_id asc) as r2\\nFROM Enrollments\\n)\\n\\nSELECT student_id, course_id, grade\\nFROM CTE\\nWHERE r2 = 1\\nORDER BY student_id, course_id"
+                    },
+                    {
+                        "username": "xiakaifeng66",
+                        "content": "# Write your MySQL query statement below\\nselect student_id, min(course_id) as course_id, grade from Enrollments \\nwhere (student_id, grade) in (select student_id, max(grade) from Enrollments tmp group by student_id)\\ngroup by student_id\\norder by student_id, course_id\\n;"
+                    },
+                    {
+                        "username": "vinayakam19",
+                        "content": "Using CTE\\n\\n `with hsg as (select student_id, min(course_id) as course_id, grade, DENSE_RANK() OVER(PARTITION BY student_id ORDER BY grade desc) as value_rank from Enrollments group by student_id, grade)\\n\\nselect student_id, course_id, grade from hsg where value_rank = 1;`"
+                    },
+                    {
+                        "username": "T_Poojitha",
+                        "content": "select student_id,min(course_id),grade\\nfrom Enrollments\\nwhere (student_id,course_id,grade) in\\n(\\nSELECT student_id,course_id,max(grade)\\nfrom Enrollments\\ngroup by student_id\\n\\n)\\n\\nI got the solution, but I am trying to understand why the above query returns just one row while executing, shouldn\\'t it return two rows?"
+                    }
+                ]
+            },
+            {
+                "id": 1572887,
+                "content": [
+                    {
+                        "username": "catherinexie2015",
+                        "content": "\\'\\'\\'\\nselect student_id, min(course_id) as course_id,grade \\nfrom Enrollments\\nwhere (student_id, grade) in (\\n(select student_id, max(grade) as MaxGrade\\nfrom Enrollments\\ngroup by student_id) )\\ngroup by student_id\\norder by student_id;\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "cocaangle",
+                        "content": "**1. window functions**\\nselect student_id, course_id, grade\\nfrom\\n(select student_id,course_id,grade, rank()over(partition by student_id order by grade desc course_id asc)\\nfrom enrollments en) a\\nwhere a.rank=1\\norder by student_id \\n**2. subquery**\\nselect student_id, min(course_id) as course_id,grade\\nfrom enrollments\\nwhere (student_id,grade) in\\n(select student_id,max(grade)\\nfrom enrollments en\\ngroup by student_id)\\ngroup by student_id,grade\\norder by student_id"
+                    },
+                    {
+                        "username": "hpareek1995",
+                        "content": "select student_id, course_id, grade\\nfrom(\\nselect student_id,course_id,grade, rank()over(partition by student_id order by grade desc, course_id asc) as rn\\nfrom enrollments en) a\\nwhere rn=1\\norder by student_id\\n\\nThanks cocaangle but 1st one was showing error adding the corrected version."
+                    },
+                    {
+                        "username": "sagar5485",
+                        "content": "WITH CTE AS\\n(\\nSELECT  student_id, course_id, grade, \\n        rank() OVER(PARTITION BY student_id ORDER BY grade desc, course_id asc) as r2\\nFROM Enrollments\\n)\\n\\nSELECT student_id, course_id, grade\\nFROM CTE\\nWHERE r2 = 1\\nORDER BY student_id, course_id"
+                    },
+                    {
+                        "username": "xiakaifeng66",
+                        "content": "# Write your MySQL query statement below\\nselect student_id, min(course_id) as course_id, grade from Enrollments \\nwhere (student_id, grade) in (select student_id, max(grade) from Enrollments tmp group by student_id)\\ngroup by student_id\\norder by student_id, course_id\\n;"
+                    },
+                    {
+                        "username": "vinayakam19",
+                        "content": "Using CTE\\n\\n `with hsg as (select student_id, min(course_id) as course_id, grade, DENSE_RANK() OVER(PARTITION BY student_id ORDER BY grade desc) as value_rank from Enrollments group by student_id, grade)\\n\\nselect student_id, course_id, grade from hsg where value_rank = 1;`"
+                    },
+                    {
+                        "username": "T_Poojitha",
+                        "content": "select student_id,min(course_id),grade\\nfrom Enrollments\\nwhere (student_id,course_id,grade) in\\n(\\nSELECT student_id,course_id,max(grade)\\nfrom Enrollments\\ngroup by student_id\\n\\n)\\n\\nI got the solution, but I am trying to understand why the above query returns just one row while executing, shouldn\\'t it return two rows?"
+                    }
+                ]
+            },
+            {
+                "id": 1812057,
+                "content": [
+                    {
+                        "username": "catherinexie2015",
+                        "content": "\\'\\'\\'\\nselect student_id, min(course_id) as course_id,grade \\nfrom Enrollments\\nwhere (student_id, grade) in (\\n(select student_id, max(grade) as MaxGrade\\nfrom Enrollments\\ngroup by student_id) )\\ngroup by student_id\\norder by student_id;\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "cocaangle",
+                        "content": "**1. window functions**\\nselect student_id, course_id, grade\\nfrom\\n(select student_id,course_id,grade, rank()over(partition by student_id order by grade desc course_id asc)\\nfrom enrollments en) a\\nwhere a.rank=1\\norder by student_id \\n**2. subquery**\\nselect student_id, min(course_id) as course_id,grade\\nfrom enrollments\\nwhere (student_id,grade) in\\n(select student_id,max(grade)\\nfrom enrollments en\\ngroup by student_id)\\ngroup by student_id,grade\\norder by student_id"
+                    },
+                    {
+                        "username": "hpareek1995",
+                        "content": "select student_id, course_id, grade\\nfrom(\\nselect student_id,course_id,grade, rank()over(partition by student_id order by grade desc, course_id asc) as rn\\nfrom enrollments en) a\\nwhere rn=1\\norder by student_id\\n\\nThanks cocaangle but 1st one was showing error adding the corrected version."
+                    },
+                    {
+                        "username": "sagar5485",
+                        "content": "WITH CTE AS\\n(\\nSELECT  student_id, course_id, grade, \\n        rank() OVER(PARTITION BY student_id ORDER BY grade desc, course_id asc) as r2\\nFROM Enrollments\\n)\\n\\nSELECT student_id, course_id, grade\\nFROM CTE\\nWHERE r2 = 1\\nORDER BY student_id, course_id"
+                    },
+                    {
+                        "username": "xiakaifeng66",
+                        "content": "# Write your MySQL query statement below\\nselect student_id, min(course_id) as course_id, grade from Enrollments \\nwhere (student_id, grade) in (select student_id, max(grade) from Enrollments tmp group by student_id)\\ngroup by student_id\\norder by student_id, course_id\\n;"
+                    },
+                    {
+                        "username": "vinayakam19",
+                        "content": "Using CTE\\n\\n `with hsg as (select student_id, min(course_id) as course_id, grade, DENSE_RANK() OVER(PARTITION BY student_id ORDER BY grade desc) as value_rank from Enrollments group by student_id, grade)\\n\\nselect student_id, course_id, grade from hsg where value_rank = 1;`"
+                    },
+                    {
+                        "username": "T_Poojitha",
+                        "content": "select student_id,min(course_id),grade\\nfrom Enrollments\\nwhere (student_id,course_id,grade) in\\n(\\nSELECT student_id,course_id,max(grade)\\nfrom Enrollments\\ngroup by student_id\\n\\n)\\n\\nI got the solution, but I am trying to understand why the above query returns just one row while executing, shouldn\\'t it return two rows?"
+                    }
+                ]
+            },
+            {
+                "id": 1674647,
+                "content": [
+                    {
+                        "username": "catherinexie2015",
+                        "content": "\\'\\'\\'\\nselect student_id, min(course_id) as course_id,grade \\nfrom Enrollments\\nwhere (student_id, grade) in (\\n(select student_id, max(grade) as MaxGrade\\nfrom Enrollments\\ngroup by student_id) )\\ngroup by student_id\\norder by student_id;\\n\\'\\'\\'"
+                    },
+                    {
+                        "username": "cocaangle",
+                        "content": "**1. window functions**\\nselect student_id, course_id, grade\\nfrom\\n(select student_id,course_id,grade, rank()over(partition by student_id order by grade desc course_id asc)\\nfrom enrollments en) a\\nwhere a.rank=1\\norder by student_id \\n**2. subquery**\\nselect student_id, min(course_id) as course_id,grade\\nfrom enrollments\\nwhere (student_id,grade) in\\n(select student_id,max(grade)\\nfrom enrollments en\\ngroup by student_id)\\ngroup by student_id,grade\\norder by student_id"
+                    },
+                    {
+                        "username": "hpareek1995",
+                        "content": "select student_id, course_id, grade\\nfrom(\\nselect student_id,course_id,grade, rank()over(partition by student_id order by grade desc, course_id asc) as rn\\nfrom enrollments en) a\\nwhere rn=1\\norder by student_id\\n\\nThanks cocaangle but 1st one was showing error adding the corrected version."
+                    },
+                    {
+                        "username": "sagar5485",
+                        "content": "WITH CTE AS\\n(\\nSELECT  student_id, course_id, grade, \\n        rank() OVER(PARTITION BY student_id ORDER BY grade desc, course_id asc) as r2\\nFROM Enrollments\\n)\\n\\nSELECT student_id, course_id, grade\\nFROM CTE\\nWHERE r2 = 1\\nORDER BY student_id, course_id"
+                    },
+                    {
+                        "username": "xiakaifeng66",
+                        "content": "# Write your MySQL query statement below\\nselect student_id, min(course_id) as course_id, grade from Enrollments \\nwhere (student_id, grade) in (select student_id, max(grade) from Enrollments tmp group by student_id)\\ngroup by student_id\\norder by student_id, course_id\\n;"
+                    },
+                    {
+                        "username": "vinayakam19",
+                        "content": "Using CTE\\n\\n `with hsg as (select student_id, min(course_id) as course_id, grade, DENSE_RANK() OVER(PARTITION BY student_id ORDER BY grade desc) as value_rank from Enrollments group by student_id, grade)\\n\\nselect student_id, course_id, grade from hsg where value_rank = 1;`"
+                    },
+                    {
+                        "username": "T_Poojitha",
+                        "content": "select student_id,min(course_id),grade\\nfrom Enrollments\\nwhere (student_id,course_id,grade) in\\n(\\nSELECT student_id,course_id,max(grade)\\nfrom Enrollments\\ngroup by student_id\\n\\n)\\n\\nI got the solution, but I am trying to understand why the above query returns just one row while executing, shouldn\\'t it return two rows?"
+                    }
+                ]
+            }
+        ]
+    }
+]

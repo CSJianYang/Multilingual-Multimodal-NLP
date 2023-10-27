@@ -41,6 +41,6 @@ $ make
 
 ./afl-fuzz -i testcases/others/elf/ -o ./nm ../binutils-2.27/binutils/nm-new -a testcases/others/elf/small_exec.elf @@
 
-每次测试完以后记得直接截图保存，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法
+每次测试完以后记得直接截图保存以便统计数据，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法
 ![image](https://github.com/CSJianYang/Multilingual-Multimodal-NLP/assets/77664227/f44c2fad-7bee-402d-ab74-818afa68787b)
 

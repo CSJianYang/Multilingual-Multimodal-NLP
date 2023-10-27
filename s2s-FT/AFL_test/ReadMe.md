@@ -31,12 +31,16 @@ $ make
 
 **测试objdump的**
 
-timeout 12h ./afl-fuzz -i testcases/others/elf/ -o ./objdump ../binutils-2.27/binutils/objdump -x -a -d testcases/others/elf/small_exec.elf @@
+./afl-fuzz -i testcases/others/elf/ -o ./objdump ../binutils-2.27/binutils/objdump -x -a -d testcases/others/elf/small_exec.elf @@
 
 **测试readelf的**
 
-timeout 12h ./afl-fuzz -i testcases/others/elf/ -o ./readelf ../binutils-2.27/binutils/readelf -a testcases/others/elf/small_exec.elf @@
+./afl-fuzz -i testcases/others/elf/ -o ./readelf ../binutils-2.27/binutils/readelf -a testcases/others/elf/small_exec.elf @@
 
 **测试nm的**
 
-timeout 12h ./afl-fuzz -i testcases/others/elf/ -o ./nm ../binutils-2.27/binutils/nm-new -a testcases/others/elf/small_exec.elf @@
+./afl-fuzz -i testcases/others/elf/ -o ./nm ../binutils-2.27/binutils/nm-new -a testcases/others/elf/small_exec.elf @@
+
+每次测试完以后记得直接截图保存，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法
+![image](https://github.com/CSJianYang/Multilingual-Multimodal-NLP/assets/77664227/f44c2fad-7bee-402d-ab74-818afa68787b)
+

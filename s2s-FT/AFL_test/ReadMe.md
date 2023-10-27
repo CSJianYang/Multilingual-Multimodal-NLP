@@ -13,16 +13,6 @@ $ pip install torch==1.12.0+cu113 torchaudio==0.12.0+cu113 torchvision==0.13.0+c
 ```
 $ cd afl-2.52b
 ```
-找到Makefile，对Makefile文件进行修改，在下面这个图这里将-I，-L中改为自己电脑下的/XX/include/python3.9和/XX/lib
-```
-$ vim Makefile
-```
-
-![image](https://github.com/CSJianYang/Multilingual-Multimodal-NLP/assets/77664227/a05ec713-fa71-4938-9e68-5c997a8cb365)
-```
-如果出现libpython3.9m.so.1.0: cannot open shared object file，请将/XX/lib下的libpython3.9m.so.1.0放入/usr/lib里面
-对工具进行初始化
-```
 ```
 $ make 
 $ sudo make install

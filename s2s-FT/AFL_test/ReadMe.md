@@ -28,6 +28,12 @@ $ cp afl-fuzz3.c afl-fuzz.c
 $ make 
 ```
 如果测试的时候是保证调用模型的次数相同，那么每次测试的时候需要**设置number.txt为0**
+另外如果想要修改控制模型的次数，请使用下面的命令，然后在下图中修改值，默认为1000，大概在代码5120行左右
+```
+$ vim afl-fuzz3.c
+```
+![image](https://github.com/CSJianYang/Multilingual-Multimodal-NLP/assets/77664227/00eeca71-d3ed-4ac3-9cf9-489f82cd1864)
+
 
 **测试objdump的**
 

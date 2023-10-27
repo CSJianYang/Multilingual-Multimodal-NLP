@@ -4,6 +4,7 @@
 利用conda搭建3.9环境(或者有3.9环境的python也可以)
 ```
 $ conda create -n work python=3.9
+$ conda activate work
 ```
 安装相关库
 ```

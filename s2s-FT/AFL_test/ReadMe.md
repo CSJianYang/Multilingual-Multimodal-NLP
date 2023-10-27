@@ -6,7 +6,7 @@
 $ conda create -n work python=3.9
 $ conda activate work
 ```
-安装相关库
+安装相关库(注意这里使用的cuda的版本，cuda的版本不一定要统一，但是其他python库的版本必须统一)
 ```
 $ pip install torch==1.12.0+cu113 torchaudio==0.12.0+cu113 torchvision==0.13.0+cu113 pandas tqdm einops timm
 ```

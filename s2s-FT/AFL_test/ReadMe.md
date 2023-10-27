@@ -28,6 +28,7 @@ $ cp afl-fuzz3.c afl-fuzz.c
 $ make 
 ```
 如果测试的时候是保证调用模型的次数相同，那么每次测试的时候需要**设置number.txt为0**
+
 **测试objdump的**
 
 timeout 12h ./afl-fuzz -i testcases/others/elf/ -o ./objdump ../binutils-2.27/binutils/objdump -x -a -d testcases/others/elf/small_exec.elf @@

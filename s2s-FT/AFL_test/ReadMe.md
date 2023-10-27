@@ -13,7 +13,15 @@ $ pip install torch==1.12.0+cu113 torchaudio==0.12.0+cu113 torchvision==0.13.0+c
 ```
 $ cd afl-2.52b
 ```
+如果想要控制变异的cycle为1
 ```
+$ cp afl-fuzz2.c afl-fuzz.c
+$ make 
+$ sudo make install
+```
+如果想要控制调用模型的次数相同
+```
+$ cp afl-fuzz3.c afl-fuzz.c
 $ make 
 $ sudo make install
 ```

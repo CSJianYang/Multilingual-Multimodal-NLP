@@ -7,7 +7,7 @@ $ conda create -n work python=3.9
 ```
 安装相关库
 ```
-$ pip install torch==1.12.0+cu113 torchaudio==0.12.0+cu113 torchvision==0.13.0+cu113 pandas tqdm einops
+$ pip install torch==1.12.0+cu113 torchaudio==0.12.0+cu113 torchvision==0.13.0+cu113 pandas tqdm einops timm
 ```
 进入afl-2.52b文件夹
 ```

@@ -67,8 +67,8 @@ def run(data):
     decoder = None
     try:
         # 这里得是绝对路径
-        encoder = torch.load('/home/wangzixiang-b17/wcr_work/Program/CtoPython/PyDOC/obj_LLEnet.pth', map_location=device)
-        decoder = torch.load('/home/wangzixiang-b17/wcr_work/Program/CtoPython/PyDOC/obj_LLDnet.pth', map_location=device)
+        encoder = torch.load('./obj_LLEnet.pth', map_location=device)
+        decoder = torch.load('./obj_LLDnet.pth', map_location=device)
     except Exception as e:
         writefragment(e)
         print(e)
@@ -130,6 +130,14 @@ def writeerr(mes):
     	
 if __name__ == '__main__':
     data = readdoc()
-    result = run(data)
+    try:
+        result = run(data)
+    except Exception as e:
+        writeerr(e)
+<<<<<<< HEAD
+        result=""
+=======
+        result = ""
+>>>>>>> 3a4cbf24e12b0cd408f0248d23fdb8ee7cdd2480
     writedoc(result)
         

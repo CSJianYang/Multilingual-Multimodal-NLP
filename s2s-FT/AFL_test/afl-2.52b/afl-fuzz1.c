@@ -56,6 +56,7 @@
 #include <sys/ioctl.h>
 #include <sys/file.h>
 
+
 #if defined(__APPLE__) || defined(__FreeBSD__) || defined (__OpenBSD__)
 #  include <sys/sysctl.h>
 #endif /* __APPLE__ || __FreeBSD__ || __OpenBSD__ */
@@ -4041,9 +4042,7 @@ static void show_stats(void) {
   SAYF(bV bSTOP "        run time : " cRST "%-34s " bSTG bV bSTOP
        "  cycles done : %s%-5s  " bSTG bV "\n",
        DTD(cur_ms, start_time), tmp, DI(queue_cycle - 1));
-  if (queue_cycle == 2) {
-  	exit(1);
-  }
+
   /* We want to warn people about not seeing new paths after a full cycle,
      except when resuming fuzzing or running in non-instrumented mode. */
 
@@ -5132,10 +5131,8 @@ static u8 fuzz_one(char** argv) {
   rewind (out_fp);
   
   output_sequence = malloc(lSize);
-  int f_check1 = fread(output_sequence, 1, lSize, out_fp);
-  if (f_check1 == 0)
-    exit(1);
-
+  fread(output_sequence, 1, lSize, out_fp);
+  
   fclose(out_fp);
 
   /*********************************************

@@ -69,9 +69,8 @@ afl-as: afl-as.c afl-as.h $(COMM_HDR) | test_x86
 	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
 	ln -sf afl-as as
 
-afl-fuzz: afl-fuzz.c module.h  $(COMM_HDR) | test_x86
-	$(CC) $(CFLAGS) $@.c module.o -o $@ $(LDFLAGS) -lstdc++ -lm -I/home/wangzixiang-b17/data/miniconda3/envs/wcrwork/include/python3.9 -L/home/wangzixiang-b17/data/miniconda3/envs/wcrwork/lib -lpython3.9
-	ln -sf module.o module	
+afl-fuzz: afl-fuzz.c $(COMM_HDR) | test_x86
+	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
 
 afl-showmap: afl-showmap.c $(COMM_HDR) | test_x86
 	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)

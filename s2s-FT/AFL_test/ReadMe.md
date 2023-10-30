@@ -23,7 +23,10 @@ $ python module_app.py
 ```
 $ cd afl-2.52b
 ```
+**下面是两种测试方案，请根据需要选择相应的方案**
+
 如果想要控制变异的cycle为1
+
 ```
 $ cp afl-fuzz2.c afl-fuzz.c
 $ make 

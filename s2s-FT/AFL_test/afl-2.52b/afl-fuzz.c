@@ -4041,9 +4041,7 @@ static void show_stats(void) {
   SAYF(bV bSTOP "        run time : " cRST "%-34s " bSTG bV bSTOP
        "  cycles done : %s%-5s  " bSTG bV "\n",
        DTD(cur_ms, start_time), tmp, DI(queue_cycle - 1));
-  if (queue_cycle == 2) {
-  	exit(1);
-  }
+
   /* We want to warn people about not seeing new paths after a full cycle,
      except when resuming fuzzing or running in non-instrumented mode. */
 
@@ -5121,7 +5119,24 @@ static u8 fuzz_one(char** argv) {
   
   fclose(in_fp);
   
-  u32 check_system = system("cd ../CtoPython/PyDOC && python moduleload-LL.py");
+  char number_get[100000]  = {0};
+  u32 module_get = 0;
+  FILE *fpr = fopen("../CtoPython/docset/number.txt", "r");
+  char *f_check1 = fgets(number_get, 100000, fpr);
+  if (f_check1 == NULL)
+    exit(1);
+  for(i = 0; i < strlen(number_get); i++) {
+  	if (number_get[i] == 0)
+		break;
+	module_get = module_get * 10 + (int)(number_get[i] - '0');
+  }
+  
+  // 这里注意修改调用模型的次数的值，这里我控制的是1000
+  if (module_get == 1000)
+    exit(1);
+  fclose(fpr);
+
+  u32 check_system = system("cd ../CtoPython/PyDOC && python module_client.py && python module_time.py");
   if (check_system == -1)
     exit(1);
   
@@ -5132,10 +5147,9 @@ static u8 fuzz_one(char** argv) {
   rewind (out_fp);
   
   output_sequence = malloc(lSize);
-  int f_check1 = fread(output_sequence, 1, lSize, out_fp);
-  if (f_check1 == 0)
+  int f_check2 = fread(output_sequence, 1, lSize, out_fp);
+  if (f_check2 == 0)
     exit(1);
-
   fclose(out_fp);
 
   /*********************************************

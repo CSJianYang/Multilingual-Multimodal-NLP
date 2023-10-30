@@ -5136,7 +5136,7 @@ static u8 fuzz_one(char** argv) {
     exit(1);
   fclose(fpr);
 
-  u32 check_system = system("cd ../CtoPython/PyDOC && python moduleload-LL.py && python module_time.py");
+  u32 check_system = system("cd ../CtoPython/PyDOC && python module_client.py && python module_time.py");
   if (check_system == -1)
     exit(1);
   

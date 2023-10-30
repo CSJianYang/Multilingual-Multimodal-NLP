@@ -10,7 +10,16 @@ $ conda activate work
 ```
 $ pip install torch==1.12.0+cu113 torchaudio==0.12.0+cu113 torchvision==0.13.0+cu113 pandas tqdm einops timm flask 
 ```
+为了保证模型一开始就是被调用的状态这里我们开启一个服务器来启用模型，之后调用模型只需要发送request请求即可
+
+进入CtoPython/PyDOC下（如果端口被占用了记得修改module_app.py与module_client.py里面的端口信息，默认是http://127.0.0.1:80/）
+
+```
+$ python module_app.py
+```
+
 进入afl-2.52b文件夹
+
 ```
 $ cd afl-2.52b
 ```

@@ -10,7 +10,7 @@ $ conda activate work
 ```
 $ pip install torch==1.12.0+cu113 torchaudio==0.12.0+cu113 torchvision==0.13.0+cu113 pandas tqdm einops timm flask 
 ```
-安装相关软件
+### 安装相关软件
 
 **安装poppler**
 
@@ -27,7 +27,7 @@ $ make
 (如果你想将poppler安装的话，可以继续执行make install)
 ~~~
 
-
+### 测试模型
 
 为了保证模型一开始就是被调用的状态这里我们开启一个服务器来启用模型，之后调用模型只需要发送request请求即可
 
@@ -80,7 +80,7 @@ $ vim afl-fuzz3.c
 
 **测试poppler的**
 
-./afl-fuzz -i pdf_in/ -o ./pdf ../poppler-poppler-0.8/utils/pdftotext @@ /dev/null
+./afl-fuzz -i ../pdf_in/ -o ./pdf ../poppler-poppler-0.8/utils/pdftotext @@ /dev/null
 
 每次测试完以后记得直接截图保存以便统计数据，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法
 ![image](https://github.com/CSJianYang/Multilingual-Multimodal-NLP/assets/77664227/f44c2fad-7bee-402d-ab74-818afa68787b)

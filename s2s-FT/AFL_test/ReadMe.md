@@ -10,6 +10,25 @@ $ conda activate work
 ```
 $ pip install torch==1.12.0+cu113 torchaudio==0.12.0+cu113 torchvision==0.13.0+cu113 pandas tqdm einops timm flask 
 ```
+安装相关软件
+
+**安装poppler**
+
+~~~
+$ tar -xf poppler-poppler-0.8.tar.gz
+$ cd poppler-poppler-0.8
+$ apt-get install libfreetype6-dev libfontconfig1-dev libgpm-dev
+$ ./autogen.sh
+其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
+$ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
+比如举个例子，可以写成如下
+$ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++"
+$ make
+(如果你想将poppler安装的话，可以继续执行make install)
+~~~
+
+
+
 为了保证模型一开始就是被调用的状态这里我们开启一个服务器来启用模型，之后调用模型只需要发送request请求即可
 
 进入CtoPython/PyDOC下（如果端口被占用了记得修改module_app.py与module_client.py里面的端口信息，默认是http://127.0.0.1:80/）
@@ -58,6 +77,10 @@ $ vim afl-fuzz3.c
 **测试nm的**
 
 ./afl-fuzz -i testcases/others/elf/ -o ./nm ../binutils-2.27/binutils/nm-new -a testcases/others/elf/small_exec.elf @@
+
+**测试poppler的**
+
+./afl-fuzz -i pdf_in/ -o ./pdf ../poppler-poppler-0.8/utils/pdftotext @@ /dev/null
 
 每次测试完以后记得直接截图保存以便统计数据，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法
 ![image](https://github.com/CSJianYang/Multilingual-Multimodal-NLP/assets/77664227/f44c2fad-7bee-402d-ab74-818afa68787b)

@@ -27,6 +27,22 @@ $ make
 (如果你想将poppler安装的话，可以继续执行make install)
 ~~~
 
+**安装libxml2**
+
+~~~
+$ tar -xf libxml2-2.9.2.tar.gz
+$ cd libxml2-2.9.2
+$ ./autogen.sh
+其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
+$ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
+比如举个例子，可以写成如下
+$ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++"
+$ make
+(如果你想将libxml2安装的话，可以继续执行make install)
+~~~
+
+
+
 ### 测试模型
 
 为了保证模型一开始就是被调用的状态这里我们开启一个服务器来启用模型，之后调用模型只需要发送request请求即可
@@ -80,7 +96,21 @@ $ vim afl-fuzz3.c
 
 **测试poppler的**
 
+~~~
+未安装或者安装了poppler的测试方法：
 ./afl-fuzz -i ../pdf_in/ -o ./pdf ../poppler-poppler-0.8/utils/pdftotext @@ /dev/null
+安装了poppler的测试方法：
+./afl-fuzz -i ../pdf_in/ -o ./pdf pdftotext @@ /dev/null
+~~~
+
+**测试libxml2的**
+
+~~~
+未安装或者安装了libxml2的测试方法：
+./afl-fuzz -i ../xml_in/ -o ./xml ../libxml2-2.9.2/xmllint --valid --recover @@
+安装了libxml2的测试方法：
+./afl-fuzz -i ../xml_in/ -o ./xml xmllint --valid --recover @@
+~~~
 
 每次测试完以后记得直接截图保存以便统计数据，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法
 ![image](https://github.com/CSJianYang/Multilingual-Multimodal-NLP/assets/77664227/f44c2fad-7bee-402d-ab74-818afa68787b)

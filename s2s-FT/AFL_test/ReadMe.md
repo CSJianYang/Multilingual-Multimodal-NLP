@@ -24,7 +24,7 @@ $ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
 比如举个例子，可以写成如下
 $ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++"
 $ make
-(如果你想将poppler安装的话，可以继续执行make install)
+(如果你想将poppler安装的话，可以继续执行sudo make install)
 ~~~
 
 **安装libxml2**
@@ -38,7 +38,7 @@ $ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
 比如举个例子，可以写成如下
 $ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++"
 $ make
-(如果你想将libxml2安装的话，可以继续执行make install)
+(如果你想将libxml2安装的话，可以继续执行sudo make install)
 ~~~
 
 **安装libpng**
@@ -51,7 +51,7 @@ $ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
 比如举个例子，可以写成如下
 $ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++" 
 $ make
-(如果你想将libpng安装的话，可以继续执行make install)
+(如果你想将libpng安装的话，可以继续执行sudo make install)
 ~~~
 
 **安装libjpeg**
@@ -64,8 +64,23 @@ $ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
 比如举个例子，可以写成如下
 $ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++" 
 $ make
-(如果你想将libjpeg安装的话，可以继续执行make install)
+(如果你想将libjpeg安装的话，可以继续执行sudo make install)
 ~~~
+
+**安装ImageMagick**
+
+~~~
+$ tar xvfz ImageMagick-7.1.0-49.tar.gz
+$ cd ImageMagick-7.1.0-49
+其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
+$ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
+比如举个例子，可以写成如下
+$ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++" 
+$ make
+(如果你想将ImageMagick安装的话，可以继续执行sudo make install)
+~~~
+
+
 
 ## 测试模型
 
@@ -140,13 +155,19 @@ $ vim afl-fuzz3.c
 **测试libpng的**
 
 ~~~
-./afl-fuzz -i png_in/ -o /png_out ../libpng-1.6.37/pngtest @@ /dev/null
+./afl-fuzz -i ../png_in/ -o /png_out ../libpng-1.6.37/pngtest @@ /dev/null
 ~~~
 
 **测试libjpeg的**
 
 ~~~
-./afl-fuzz -i jpg_in/ -o /jpg_out ./jpeg-9e/jpegtran @@
+./afl-fuzz -i ../jpg_in/ -o /jpg_out ./jpeg-9e/jpegtran @@
+~~~
+
+**测试ImageMagick的**
+
+~~~
+./afl-fuzz -i testcases/images/gif -o /gif_out ./ImageMagick-7.1.0-49/utilities/magick identify @@
 ~~~
 
 每次测试完以后记得直接截图保存以便统计数据，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法

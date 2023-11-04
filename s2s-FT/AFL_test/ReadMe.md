@@ -80,6 +80,20 @@ $ make
 (如果你想将ImageMagick安装的话，可以继续执行sudo make install)
 ~~~
 
+**安装mp3gain**
+
+~~~
+$ mkdir mp3gain
+$ mv mp3gain-1_5_2-src.zip mp3gain/
+$ unzip mp3gain-1_5_2-src.zip
+$ vim Makefile
+修改其中CC的值，把gcc改为$afl-gcc$，$afl-gcc$是afl编译器的路径
+比如举个例子:
+CC=/root/software/afl-2.52b/afl-gcc
+$ make
+(如果你想将mp3gain安装的话，可以继续执行sudo make install)
+~~~
+
 
 
 ## 测试模型
@@ -168,6 +182,12 @@ $ vim afl-fuzz3.c
 
 ~~~
 ./afl-fuzz -i testcases/images/gif -o /gif_out ../ImageMagick-7.1.0-49/utilities/magick identify @@
+~~~
+
+**测试mp3gain的**
+
+~~~
+./afl-fuzz -i ../mp3_in/ -o mp3_out ../mp3gain/mp3gain @@
 ~~~
 
 每次测试完以后记得直接截图保存以便统计数据，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法

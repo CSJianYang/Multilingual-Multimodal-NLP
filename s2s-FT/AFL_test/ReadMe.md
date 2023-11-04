@@ -161,13 +161,13 @@ $ vim afl-fuzz3.c
 **测试libjpeg的**
 
 ~~~
-./afl-fuzz -i ../jpg_in/ -o /jpg_out ./jpeg-9e/jpegtran @@
+./afl-fuzz -i ../jpg_in/ -o /jpg_out ../jpeg-9e/jpegtran @@
 ~~~
 
 **测试ImageMagick的**
 
 ~~~
-./afl-fuzz -i testcases/images/gif -o /gif_out ./ImageMagick-7.1.0-49/utilities/magick identify @@
+./afl-fuzz -i testcases/images/gif -o /gif_out ../ImageMagick-7.1.0-49/utilities/magick identify @@
 ~~~
 
 每次测试完以后记得直接截图保存以便统计数据，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法

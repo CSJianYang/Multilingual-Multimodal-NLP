@@ -94,8 +94,6 @@ $ make
 (如果你想将mp3gain安装的话，可以继续执行sudo make install)
 ~~~
 
-
-
 ## 测试模型
 
 为了保证模型一开始就是被调用的状态这里我们开启一个服务器来启用模型，之后调用模型只需要发送request请求即可
@@ -113,13 +111,21 @@ $ cd afl-2.52b
 ```
 ### 下面是两种测试方案，请根据需要选择相应的方案
 
-如果想要控制变异的cycle为1
+**如果想要原始的afl**
+
+~~~
+$ cp afl-fuzz1.c afl-fuzz.c
+$ make
+~~~
+
+**如果想要控制变异的cycle为1**
 
 ```
 $ cp afl-fuzz2.c afl-fuzz.c
 $ make 
 ```
-如果想要控制调用模型的次数相同
+**如果想要控制调用模型的次数相同**
+
 ```
 1. 在CtoPython/docset下设置number.txt为0
 $ echo 0 > number.txt

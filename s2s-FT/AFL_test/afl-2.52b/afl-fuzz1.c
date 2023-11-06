@@ -56,7 +56,6 @@
 #include <sys/ioctl.h>
 #include <sys/file.h>
 
-
 #if defined(__APPLE__) || defined(__FreeBSD__) || defined (__OpenBSD__)
 #  include <sys/sysctl.h>
 #endif /* __APPLE__ || __FreeBSD__ || __OpenBSD__ */
@@ -4042,6 +4041,7 @@ static void show_stats(void) {
   SAYF(bV bSTOP "        run time : " cRST "%-34s " bSTG bV bSTOP
        "  cycles done : %s%-5s  " bSTG bV "\n",
        DTD(cur_ms, start_time), tmp, DI(queue_cycle - 1));
+  
 
   /* We want to warn people about not seeing new paths after a full cycle,
      except when resuming fuzzing or running in non-instrumented mode. */
@@ -5022,7 +5022,6 @@ static u8 fuzz_one(char** argv) {
    * CALIBRATION (only if failed earlier on) *
    *******************************************/
 
-
   if (queue_cur->cal_failed) {
 
     u8 res = FAULT_TMOUT;
@@ -5090,51 +5089,6 @@ static u8 fuzz_one(char** argv) {
 
   doing_det = 1;
 
-  char input_sequence[1000000];
-  
-  char* output_sequence;
-  
-  u32 result_point = 0;
-  
-  for (i = 0; i < len; i++){
-    u8 first = out_buf[i] / 16;
-    
-    u8 last = out_buf[i] % 16;
-    
-    if (first >= 0 && first <= 9)
-      input_sequence[i * 2] = '0' + first;
-    else if(first >= 10 && first <= 15)
-      input_sequence[i * 2] = 'a' + first - 10;
-    
-    if (last >= 0 && last <= 9)
-      input_sequence[i * 2 + 1] = '0' + last;
-    else if(last >= 10 && last <= 15)
-      input_sequence[i * 2 + 1] = 'a' + last - 10;
-  }
-  
-  input_sequence[len] = '\0';
-  	
-  FILE *in_fp = fopen("../CtoPython/docset/in.txt","w");
-  
-  fprintf(in_fp, "%s", input_sequence);
-  
-  fclose(in_fp);
-  
-  u32 check_system = system("cd ../CtoPython/PyDOC && python module_client.py");
-  if (check_system == -1)
-    exit(1);
-  
-  FILE * out_fp = fopen("../CtoPython/docset/out.txt","r");
-  
-  fseek(out_fp , 0 , SEEK_END);
-  u32 lSize = ftell (out_fp);
-  rewind (out_fp);
-  
-  output_sequence = malloc(lSize);
-  fread(output_sequence, 1, lSize, out_fp);
-  
-  fclose(out_fp);
-
   /*********************************************
    * SIMPLE BITFLIP (+dictionary construction) *
    *********************************************/
@@ -5156,53 +5110,10 @@ static u8 fuzz_one(char** argv) {
   orig_hit_cnt = queued_paths + unique_crashes;
 
   prev_cksum = queue_cur->exec_cksum;
-  
-  u32 check_sum = 100;
-  
-  char str[4];
-  char *endstr;
-  
-  u32 couple_num;
-  
-  couple_num = strlen(output_sequence);
-  
-  // printf("%s\n", output_sequence);
 
+  for (stage_cur = 0; stage_cur < stage_max; stage_cur++) {
 
-  if(couple_num != 0){
-
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    str[3] = '\0';
-  
-    check_sum = strtol(str, &endstr, 16);
-  }
-  
-  u32 counter = 0;
-  
-  while (check_sum == 1) {
-    counter += 1;
-    
-    str[0] = output_sequence[result_point + 3];
-    str[1] = output_sequence[result_point + 4];
-    str[2] = output_sequence[result_point + 5];
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    stage_cur = strtol(str, &endstr, 16);
-    
     stage_cur_byte = stage_cur >> 3;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-  
-    check_sum = strtol(str, &endstr, 16);
-    
-    if (stage_cur >= stage_max || stage_cur < 0){
-      break;
-    }
 
     FLIP_BIT(out_buf, stage_cur);
 
@@ -5276,13 +5187,13 @@ static u8 fuzz_one(char** argv) {
       }
 
     }
-    
+
   }
 
   new_hit_cnt = queued_paths + unique_crashes;
 
   stage_finds[STAGE_FLIP1]  += new_hit_cnt - orig_hit_cnt;
-  stage_cycles[STAGE_FLIP1] += counter;
+  stage_cycles[STAGE_FLIP1] += stage_max;
 
   /* Two walking bits. */
 
@@ -5291,47 +5202,11 @@ static u8 fuzz_one(char** argv) {
   stage_max   = (len << 3) - 1;
 
   orig_hit_cnt = new_hit_cnt;
-  
-  counter = 0;
-  
-  while (check_sum < 2){
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-  }
-  
-  
 
-  while (check_sum == 2) {
-    
-    counter += 1;
+  for (stage_cur = 0; stage_cur < stage_max; stage_cur++) {
 
-    str[0] = output_sequence[result_point + 3];
-    str[1] = output_sequence[result_point + 4];
-    str[2] = output_sequence[result_point + 5];
-    
-    stage_cur = strtol(str, &endstr, 16);
-    
     stage_cur_byte = stage_cur >> 3;
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-    if (stage_cur >= stage_max || stage_cur < 0){
-      break;
-    }
-    
+
     FLIP_BIT(out_buf, stage_cur);
     FLIP_BIT(out_buf, stage_cur + 1);
 
@@ -5339,14 +5214,13 @@ static u8 fuzz_one(char** argv) {
 
     FLIP_BIT(out_buf, stage_cur);
     FLIP_BIT(out_buf, stage_cur + 1);
-    
 
   }
 
   new_hit_cnt = queued_paths + unique_crashes;
 
   stage_finds[STAGE_FLIP2]  += new_hit_cnt - orig_hit_cnt;
-  stage_cycles[STAGE_FLIP2] += counter;
+  stage_cycles[STAGE_FLIP2] += stage_max;
 
   /* Four walking bits. */
 
@@ -5355,44 +5229,10 @@ static u8 fuzz_one(char** argv) {
   stage_max   = (len << 3) - 3;
 
   orig_hit_cnt = new_hit_cnt;
-  
-  counter = 0;
-  
-  while (check_sum < 3){
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-  }
 
-  while (check_sum == 3) {
-  
-    counter += 1;
+  for (stage_cur = 0; stage_cur < stage_max; stage_cur++) {
 
-    str[0] = output_sequence[result_point + 3];
-    str[1] = output_sequence[result_point + 4];
-    str[2] = output_sequence[result_point + 5];
-    
-    stage_cur = strtol(str, &endstr, 16);
-    
     stage_cur_byte = stage_cur >> 3;
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-    if (stage_cur >= stage_max || stage_cur < 0){
-      break;
-    }
 
     FLIP_BIT(out_buf, stage_cur);
     FLIP_BIT(out_buf, stage_cur + 1);
@@ -5411,7 +5251,7 @@ static u8 fuzz_one(char** argv) {
   new_hit_cnt = queued_paths + unique_crashes;
 
   stage_finds[STAGE_FLIP4]  += new_hit_cnt - orig_hit_cnt;
-  stage_cycles[STAGE_FLIP4] += counter;
+  stage_cycles[STAGE_FLIP4] += stage_max;
 
   /* Effector map setup. These macros calculate:
 
@@ -5444,43 +5284,10 @@ static u8 fuzz_one(char** argv) {
   stage_max   = len;
 
   orig_hit_cnt = new_hit_cnt;
-  
-  counter = 0;
-  
-  while (check_sum < 4){
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-  }
 
-  while (check_sum == 4) {
-  
-    counter += 1;
+  for (stage_cur = 0; stage_cur < stage_max; stage_cur++) {
 
-    str[0] = output_sequence[result_point + 3];
-    str[1] = output_sequence[result_point + 4];
-    str[2] = output_sequence[result_point + 5];
-    
-    stage_cur = strtol(str, &endstr, 16);
-    
-    stage_cur_byte = stage_cur >> 3;
-    
-    result_point = (result_point + 6) % couple_num;
-        
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-    if (stage_cur >= stage_max || stage_cur < 0)
-      break;
+    stage_cur_byte = stage_cur;
 
     out_buf[stage_cur] ^= 0xFF;
 
@@ -5536,7 +5343,7 @@ static u8 fuzz_one(char** argv) {
   new_hit_cnt = queued_paths + unique_crashes;
 
   stage_finds[STAGE_FLIP8]  += new_hit_cnt - orig_hit_cnt;
-  stage_cycles[STAGE_FLIP8] += counter;
+  stage_cycles[STAGE_FLIP8] += stage_max;
 
   /* Two walking bytes. */
 
@@ -5548,42 +5355,9 @@ static u8 fuzz_one(char** argv) {
   stage_max   = len - 1;
 
   orig_hit_cnt = new_hit_cnt;
-  
-  counter = 0;
-  
-  while (check_sum < 5){
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-  }
 
-  while (check_sum == 5) {
-  
-    counter += 1;
+  for (i = 0; i < len - 1; i++) {
 
-    str[0] = output_sequence[result_point + 3];
-    str[1] = output_sequence[result_point + 4];
-    str[2] = output_sequence[result_point + 5];
-    
-    i = strtol(str, &endstr, 16);
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-    if (i >= len - 1 || i < 0)
-      break;
-    
     /* Let's consult the effector map... */
 
     if (!eff_map[EFF_APOS(i)] && !eff_map[EFF_APOS(i + 1)]) {
@@ -5600,12 +5374,13 @@ static u8 fuzz_one(char** argv) {
 
     *(u16*)(out_buf + i) ^= 0xFFFF;
 
+
   }
 
   new_hit_cnt = queued_paths + unique_crashes;
 
   stage_finds[STAGE_FLIP16]  += new_hit_cnt - orig_hit_cnt;
-  stage_cycles[STAGE_FLIP16] += counter;
+  stage_cycles[STAGE_FLIP16] += stage_max;
 
   if (len < 4) goto skip_bitflip;
 
@@ -5617,41 +5392,8 @@ static u8 fuzz_one(char** argv) {
   stage_max   = len - 3;
 
   orig_hit_cnt = new_hit_cnt;
-  
-  counter = 0;
-  
-  while (check_sum < 6){
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-  }
 
-  while (check_sum == 6) {
-  
-    counter += 1;
-  
-    str[0] = output_sequence[result_point + 3];
-    str[1] = output_sequence[result_point + 4];
-    str[2] = output_sequence[result_point + 5];
-    
-    i = strtol(str, &endstr, 16);
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-    if (i >= len - 3 || i < 0)
-      break;
+  for (i = 0; i < len - 3; i++) {
 
     /* Let's consult the effector map... */
     if (!eff_map[EFF_APOS(i)] && !eff_map[EFF_APOS(i + 1)] &&
@@ -5674,7 +5416,7 @@ static u8 fuzz_one(char** argv) {
   new_hit_cnt = queued_paths + unique_crashes;
 
   stage_finds[STAGE_FLIP32]  += new_hit_cnt - orig_hit_cnt;
-  stage_cycles[STAGE_FLIP32] += counter;
+  stage_cycles[STAGE_FLIP32] += stage_max;
 
 skip_bitflip:
 
@@ -5694,41 +5436,8 @@ skip_bitflip:
   stage_val_type = STAGE_VAL_LE;
 
   orig_hit_cnt = new_hit_cnt;
-  
-  counter = 0;
-  
-  while (check_sum < 7){
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-  }
 
-  while (check_sum == 7) {
-  
-    counter += 1;
-  
-    str[0] = output_sequence[result_point + 3];
-    str[1] = output_sequence[result_point + 4];
-    str[2] = output_sequence[result_point + 5];
-    
-    i = strtol(str, &endstr, 16);
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-    if (i >= len || i < 0)
-      break;
+  for (i = 0; i < len; i++) {
 
     u8 orig = out_buf[i];
 
@@ -5779,7 +5488,7 @@ skip_bitflip:
   new_hit_cnt = queued_paths + unique_crashes;
 
   stage_finds[STAGE_ARITH8]  += new_hit_cnt - orig_hit_cnt;
-  stage_cycles[STAGE_ARITH8] += counter;
+  stage_cycles[STAGE_ARITH8] += stage_max;
 
   /* 16-bit arithmetics, both endians. */
 
@@ -5791,41 +5500,8 @@ skip_bitflip:
   stage_max   = 4 * (len - 1) * ARITH_MAX;
 
   orig_hit_cnt = new_hit_cnt;
-  
-  counter = 0;
-  
-  while (check_sum < 8){
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-  }
 
-  while (check_sum == 8) {
-  
-    counter += 1;
-  
-    str[0] = output_sequence[result_point + 3];
-    str[1] = output_sequence[result_point + 4];
-    str[2] = output_sequence[result_point + 5];
-    
-    i = strtol(str, &endstr, 16);
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-    if (i >= len - 1 || i < 0)
-      break;
+  for (i = 0; i < len - 1; i++) {
 
     u16 orig = *(u16*)(out_buf + i);
 
@@ -5906,7 +5582,7 @@ skip_bitflip:
   new_hit_cnt = queued_paths + unique_crashes;
 
   stage_finds[STAGE_ARITH16]  += new_hit_cnt - orig_hit_cnt;
-  stage_cycles[STAGE_ARITH16] += counter;
+  stage_cycles[STAGE_ARITH16] += stage_max;
 
   /* 32-bit arithmetics, both endians. */
 
@@ -5918,41 +5594,8 @@ skip_bitflip:
   stage_max   = 4 * (len - 3) * ARITH_MAX;
 
   orig_hit_cnt = new_hit_cnt;
-  
-  counter = 0;
-  
-  while (check_sum < 9){
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-  }
 
-  while (check_sum == 9) {
-  
-    counter += 1;
-
-    str[0] = output_sequence[result_point + 3];
-    str[1] = output_sequence[result_point + 4];
-    str[2] = output_sequence[result_point + 5];
-    
-    i = strtol(str, &endstr, 16);
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-    if (i >= len - 3 || i < 0)
-      break;
+  for (i = 0; i < len - 3; i++) {
 
     u32 orig = *(u32*)(out_buf + i);
 
@@ -6031,7 +5674,7 @@ skip_bitflip:
   new_hit_cnt = queued_paths + unique_crashes;
 
   stage_finds[STAGE_ARITH32]  += new_hit_cnt - orig_hit_cnt;
-  stage_cycles[STAGE_ARITH32] += counter;
+  stage_cycles[STAGE_ARITH32] += stage_max;
 
 skip_arith:
 
@@ -6049,42 +5692,9 @@ skip_arith:
   orig_hit_cnt = new_hit_cnt;
 
   /* Setting 8-bit integers. */
-  
-  counter = 0;
 
-  while (check_sum < 10){
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-  }
+  for (i = 0; i < len; i++) {
 
-  while (check_sum == 10) {
-  
-    counter += 1;
-  
-    str[0] = output_sequence[result_point + 3];
-    str[1] = output_sequence[result_point + 4];
-    str[2] = output_sequence[result_point + 5];
-    
-    i = strtol(str, &endstr, 16);
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-    if (i >= len || i < 0)
-      break;
-    
     u8 orig = out_buf[i];
 
     /* Let's consult the effector map... */
@@ -6121,7 +5731,7 @@ skip_arith:
   new_hit_cnt = queued_paths + unique_crashes;
 
   stage_finds[STAGE_INTEREST8]  += new_hit_cnt - orig_hit_cnt;
-  stage_cycles[STAGE_INTEREST8] += counter;
+  stage_cycles[STAGE_INTEREST8] += stage_max;
 
   /* Setting 16-bit integers, both endians. */
 
@@ -6133,42 +5743,8 @@ skip_arith:
   stage_max   = 2 * (len - 1) * (sizeof(interesting_16) >> 1);
 
   orig_hit_cnt = new_hit_cnt;
-  
-  counter = 0;
-  
-  while (check_sum < 11){
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-  }
 
-  while (check_sum == 11) {
-
-    counter += 1;
-
-    str[0] = output_sequence[result_point + 3];
-    str[1] = output_sequence[result_point + 4];
-    str[2] = output_sequence[result_point + 5];
-    
-    i = strtol(str, &endstr, 16);
-    
-    result_point = (result_point + 6) % couple_num;
-   
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-    if (i >= len - 1 || i < 0)
-      break;
+  for (i = 0; i < len - 1; i++) {
 
     u16 orig = *(u16*)(out_buf + i);
 
@@ -6223,7 +5799,7 @@ skip_arith:
   new_hit_cnt = queued_paths + unique_crashes;
 
   stage_finds[STAGE_INTEREST16]  += new_hit_cnt - orig_hit_cnt;
-  stage_cycles[STAGE_INTEREST16] += counter;
+  stage_cycles[STAGE_INTEREST16] += stage_max;
 
   if (len < 4) goto skip_interest;
 
@@ -6235,41 +5811,8 @@ skip_arith:
   stage_max   = 2 * (len - 3) * (sizeof(interesting_32) >> 2);
 
   orig_hit_cnt = new_hit_cnt;
-  
-  counter = 0;
-  
-  while (check_sum < 12){
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-  }
 
-  while (check_sum == 12) {
-  
-    counter += 1;
-  
-    str[0] = output_sequence[result_point + 3];
-    str[1] = output_sequence[result_point + 4];
-    str[2] = output_sequence[result_point + 5];
-    
-    i = strtol(str, &endstr, 16);
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-    if (i >= len - 3 || i < 0)
-      break;
+  for (i = 0; i < len - 3; i++) {
 
     u32 orig = *(u32*)(out_buf + i);
 
@@ -6325,7 +5868,7 @@ skip_arith:
   new_hit_cnt = queued_paths + unique_crashes;
 
   stage_finds[STAGE_INTEREST32]  += new_hit_cnt - orig_hit_cnt;
-  stage_cycles[STAGE_INTEREST32] += counter;
+  stage_cycles[STAGE_INTEREST32] += stage_max;
 
 skip_interest:
 
@@ -6454,41 +5997,8 @@ skip_user_extras:
   stage_val_type = STAGE_VAL_NONE;
 
   orig_hit_cnt = new_hit_cnt;
-  
-  counter = 0;
-  
-  while (check_sum < 13){
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-  }
 
-  while (check_sum == 13) {
-  
-    counter += 1;
-  
-    str[0] = output_sequence[result_point + 3];
-    str[1] = output_sequence[result_point + 4];
-    str[2] = output_sequence[result_point + 5];
-    
-    i = strtol(str, &endstr, 16);
-    
-    result_point = (result_point + 6) % couple_num;
-    
-    str[0] = output_sequence[result_point];
-    str[1] = output_sequence[result_point + 1];
-    str[2] = output_sequence[result_point + 2];
-    
-    check_sum = strtol(str, &endstr, 16);
-    
-    if (i >= len || i < 0)
-      break;
+  for (i = 0; i < len; i++) {
 
     u32 last_len = 0;
 
@@ -6520,16 +6030,12 @@ skip_user_extras:
     memcpy(out_buf + i, in_buf + i, last_len);
 
   }
-  
-  result_point = 0;
 
   new_hit_cnt = queued_paths + unique_crashes;
 
   stage_finds[STAGE_EXTRAS_AO]  += new_hit_cnt - orig_hit_cnt;
-  stage_cycles[STAGE_EXTRAS_AO] += counter;
-  
-  free(output_sequence);
-  
+  stage_cycles[STAGE_EXTRAS_AO] += stage_max;
+
 skip_extras:
 
   /* If we made this to here without jumping to havoc_stage or abandon_entry,
@@ -8501,7 +8007,6 @@ int main(int argc, char** argv) {
     cull_queue();
 
     if (!queue_cur) {
-
       queue_cycle++;
       current_entry     = 0;
       cur_skipped_paths = 0;

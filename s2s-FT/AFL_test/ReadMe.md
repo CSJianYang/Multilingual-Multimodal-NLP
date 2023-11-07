@@ -94,6 +94,26 @@ $ make
 (如果你想将mp3gain安装的话，可以继续执行sudo make install)
 ~~~
 
+**安装libpcap和tcpdump**
+
+~~~
+$ tar -zxvf libpcap-1.6.2.tar.gz
+$ cd libpcap-1.6.2
+其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
+$ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
+比如举个例子，可以写成如下
+$ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++" 
+$ make & sudo make install
+$ tar -zxvf tcpdump-4.6.2.tar.gz
+$ cd tcpdump-4.6.2
+其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
+$ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
+比如举个例子，可以写成如下
+$ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++"
+$ make
+(如果你想将tcpdump安装的话，可以继续执行sudo make install)
+~~~
+
 ## 测试模型
 
 为了保证模型一开始就是被调用的状态这里我们开启一个服务器来启用模型，之后调用模型只需要发送request请求即可
@@ -194,6 +214,12 @@ $ vim afl-fuzz3.c
 
 ~~~
 ./afl-fuzz -i ../mp3_in/ -o mp3_out ../mp3gain/mp3gain @@
+~~~
+
+**测试tcpdump的**
+
+~~~
+./afl-fuzz -i ../pcap_in/ -o pcap_out ../tcpdump-4.6.2/tcpdump -e -vv -nr @@
 ~~~
 
 每次测试完以后记得直接截图保存以便统计数据，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法

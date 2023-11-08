@@ -165,49 +165,49 @@ $ vim afl-fuzz3.c
 **测试objdump的**
 
 ~~~
-./afl-fuzz -i testcases/others/elf/ -o ./objdump_out ../binutils-2.27/binutils/objdump -x -a -d testcases/others/elf/small_exec.elf @@
+./afl-fuzz -i testcases/others/elf/ -o objdump_out ../binutils-2.27/binutils/objdump -x -a -d testcases/others/elf/small_exec.elf @@
 ~~~
 
 **测试readelf的**
 
 ~~~
-./afl-fuzz -i testcases/others/elf/ -o ./readelf_out ../binutils-2.27/binutils/readelf -a testcases/others/elf/small_exec.elf @@
+./afl-fuzz -i testcases/others/elf/ -o readelf_out ../binutils-2.27/binutils/readelf -a testcases/others/elf/small_exec.elf @@
 ~~~
 
 **测试nm的**
 
 ~~~
-./afl-fuzz -i testcases/others/elf/ -o ./nm_out ../binutils-2.27/binutils/nm-new -a testcases/others/elf/small_exec.elf @@
+./afl-fuzz -i testcases/others/elf/ -o nm_out ../binutils-2.27/binutils/nm-new -a testcases/others/elf/small_exec.elf @@
 ~~~
 
 **测试poppler的**
 
 ~~~
-./afl-fuzz -i ../pdf_in/ -o ./pdf_out ../poppler-poppler-0.8/utils/pdftotext @@ /dev/null
+./afl-fuzz -i ../pdf_in/ -o pdf_out ../poppler-poppler-0.8/utils/pdftotext @@ /dev/null
 ~~~
 
 **测试libxml2的**
 
 ~~~
-./afl-fuzz -i ../xml_in/ -o ./xml_out ../libxml2-2.9.2/xmllint --valid --recover @@
+./afl-fuzz -i ../xml_in/ -o xml_out ../libxml2-2.9.2/xmllint --valid --recover @@
 ~~~
 
 **测试libpng的**
 
 ~~~
-./afl-fuzz -i ../png_in/ -o /png_out ../libpng-1.6.37/pngtest @@ /dev/null
+./afl-fuzz -i ../png_in/ -o png_out ../libpng-1.6.37/pngtest @@ /dev/null
 ~~~
 
 **测试libjpeg的**
 
 ~~~
-./afl-fuzz -i ../jpg_in/ -o /jpg_out ../jpeg-9e/jpegtran @@
+./afl-fuzz -i ../jpg_in/ -o jpg_out ../jpeg-9e/jpegtran @@
 ~~~
 
 **测试ImageMagick的**
 
 ~~~
-./afl-fuzz -i testcases/images/gif -o /gif_out ../ImageMagick-7.1.0-49/utilities/magick identify @@
+./afl-fuzz -i testcases/images/gif -o gif_out ../ImageMagick-7.1.0-49/utilities/magick identify @@
 ~~~
 
 **测试mp3gain的**
@@ -222,6 +222,6 @@ $ vim afl-fuzz3.c
 ./afl-fuzz -i ../pcap_in/ -o pcap_out ../tcpdump-4.6.2/tcpdump -e -vv -nr @@
 ~~~
 
-每次测试完以后记得直接截图保存以便统计数据，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法
+每次测试完以后记得直接截图保存以便统计数据，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法。并且请将输出文件夹打包保存下来，用来探索其他指标时使用，比如pcap_out打包成一个zip文件保存下来
 ![image](https://github.com/CSJianYang/Multilingual-Multimodal-NLP/assets/77664227/f44c2fad-7bee-402d-ab74-818afa68787b)
 

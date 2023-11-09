@@ -12,6 +12,12 @@ $ pip install torch==1.12.0+cu113 torchaudio==0.12.0+cu113 torchvision==0.13.0+c
 ```
 ## 安装相关软件
 
+**解压binutils（nm、readelf、objdump要用）**
+
+~~~
+unzip binutils.zip
+~~~
+
 **安装poppler**
 
 ~~~

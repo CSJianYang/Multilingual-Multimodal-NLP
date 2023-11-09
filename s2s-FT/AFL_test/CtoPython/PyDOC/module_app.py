@@ -56,17 +56,20 @@ def gettopn(input_seq, p, c):
     return results, pre_value
 
 def post_process(dic):
+    # dic: [[op, pos], [op, pos], ...]
     new_dic = []
     for i in range(len(dic)):
         if dic[i][1] >= 1 and dic[i][1] < pad:
             new_dic.append(dic[i])
     new_dic.sort(key=lambda x: (x[0], x[1]))
+    # new_dic: [[op, pos], [op, pos], ...] 排序后并且删除了一些不满足条件的[op, pos]
     # print(dic)
     result = ""
     for i in new_dic:
         result += (hex(i[0])[2:].rjust(3, '0') + hex(i[1])[2:].rjust(3, '0'))
     # print(result)
     result += "00e001"
+    # result: 16进制每3位表示一个数字
     return result
 
 
@@ -74,6 +77,7 @@ app = Flask(__name__)
 device = torch.device("cuda:0")
 
 top_p = 0.5
+# top_p用于gettopn中的p
 encoder = None
 decoder = None
 try:
@@ -86,8 +90,9 @@ except Exception as e:
 
 @app.route('/')
 def get_output():
+    # 这个函数是主要用于输入得到的input，input是16进制的字符串，如"0011223344..."，但保证长度为2的倍数
     data = request.args.get('input', '')
-    print(data)
+    # print(data)
     data = data.strip().replace('\n', '').replace('\r', '')
     if data == '':
         return []
@@ -126,6 +131,8 @@ def get_output():
             for k in (middle_seq[i*2+1]):
                 if k != pad and [j,k] not in dic:
                     dic.append([j,k])
+    # dic: [[op, pos], [op, pos], ...]
+    # 必须在发送result之前用post_process处理dic再发送给client
     result = post_process(dic)
     return result
 

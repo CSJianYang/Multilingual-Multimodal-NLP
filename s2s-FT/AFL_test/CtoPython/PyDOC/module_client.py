@@ -9,6 +9,7 @@ def writefragment(mes):
         f.write("\n")
 
 def request_data(data):
+    # 用于请求数据
     url = 'http://127.0.0.1:80/'
     # 这里需要根据module_app里面的设置动态调整，现在调整的是一样的
     params = {'input': data}
@@ -17,6 +18,7 @@ def request_data(data):
 
 
 def run(data):
+    # data是16进制的字符串，如"0011223344..."，但保证长度为2的倍数
     data = data.strip().replace('\n', '').replace('\r', '')
     result = request_data(data)
     return result

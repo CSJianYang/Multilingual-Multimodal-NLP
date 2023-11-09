@@ -130,6 +130,8 @@ $ make
 $ python module_app.py
 ```
 
+**如果你想调用自己的模型，只需要修改module_app.py中的get_output函数即可，模仿着进行修改即可**
+
 进入afl-2.52b文件夹
 
 ```

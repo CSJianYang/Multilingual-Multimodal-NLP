@@ -15,7 +15,7 @@ $ pip install torch==1.12.0+cu113 torchaudio==0.12.0+cu113 torchvision==0.13.0+c
 **解压binutils（nm、readelf、objdump要用）**
 
 ~~~
-unzip binutils.zip
+$ unzip binutils.zip
 ~~~
 
 **安装poppler**
@@ -30,7 +30,7 @@ $ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
 比如举个例子，可以写成如下
 $ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++"
 $ make
-(如果你想将poppler安装的话，可以继续执行sudo make install)
+(如果你想将poppler安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
 
 **安装libxml2**
@@ -44,7 +44,7 @@ $ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
 比如举个例子，可以写成如下
 $ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++"
 $ make
-(如果你想将libxml2安装的话，可以继续执行sudo make install)
+(如果你想将libxml2安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
 
 **安装libpng**
@@ -57,7 +57,7 @@ $ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
 比如举个例子，可以写成如下
 $ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++" 
 $ make
-(如果你想将libpng安装的话，可以继续执行sudo make install)
+(如果你想将libpng安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
 
 **安装libjpeg**
@@ -70,7 +70,7 @@ $ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
 比如举个例子，可以写成如下
 $ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++" 
 $ make
-(如果你想将libjpeg安装的话，可以继续执行sudo make install)
+(如果你想将libjpeg安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
 
 **安装ImageMagick**
@@ -83,7 +83,7 @@ $ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
 比如举个例子，可以写成如下
 $ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++" 
 $ make
-(如果你想将ImageMagick安装的话，可以继续执行sudo make install)
+(如果你想将ImageMagick安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
 
 **安装mp3gain**
@@ -97,7 +97,7 @@ $ vim Makefile
 比如举个例子:
 CC=/root/software/afl-2.52b/afl-gcc
 $ make
-(如果你想将mp3gain安装的话，可以继续执行sudo make install)
+(如果你想将mp3gain安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
 
 **安装libpcap和tcpdump**
@@ -117,7 +117,20 @@ $ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
 比如举个例子，可以写成如下
 $ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++"
 $ make
-(如果你想将tcpdump安装的话，可以继续执行sudo make install)
+(如果你想将tcpdump安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
+~~~
+
+**安装libtiff**
+
+~~~
+$ tar -xf libtiff-Release-v3-9-7.tar.gz
+$ cd libtiff-Release-v3-9-7
+其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
+$ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
+比如举个例子，可以写成如下
+$ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++"
+$ make
+(如果你想将libtiff安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
 
 ## 测试模型
@@ -228,6 +241,12 @@ $ vim afl-fuzz3.c
 
 ~~~
 ./afl-fuzz -i ../pcap_in/ -o pcap_out ../tcpdump-4.6.2/tcpdump -e -vv -nr @@
+~~~
+
+**测试libtiff的**
+
+~~~
+./afl-fuzz -i ../tiff_in/ -o tiff_out ../libtiff-Release-v3-9-7/tools/tiffsplit @@
 ~~~
 
 每次测试完以后记得直接截图保存以便统计数据，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法。并且请将输出文件夹打包保存下来，用来探索其他指标时使用，比如pcap_out打包成一个zip文件保存下来

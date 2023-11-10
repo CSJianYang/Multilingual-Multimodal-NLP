@@ -249,6 +249,13 @@ $ vim afl-fuzz3.c
 ./afl-fuzz -i ../tiff_in/ -o tiff_out ../libtiff-Release-v3-9-7/tools/tiffsplit @@
 ~~~
 
-每次测试完以后记得直接截图保存以便统计数据，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法。并且请将输出文件夹打包保存下来，用来探索其他指标时使用，比如pcap_out打包成一个zip文件保存下来
+测试的时候如果运行afl-fuzz出现**Pipe at the begining of 'core pattern'**，请按下面步骤进行后再试着运行afl-fuzz
+
+~~~
+sudo su
+echo core >/proc/sys/kernel/core_pattern
+~~~
+
+每次**测试完以后记得直接截图保存以便统计数据**，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法。并且**请将输出文件夹打包保存下来**，用来探索其他指标时使用，比如pcap_out打包成一个zip文件保存下来
 ![image](https://github.com/CSJianYang/Multilingual-Multimodal-NLP/assets/77664227/f44c2fad-7bee-402d-ab74-818afa68787b)
 

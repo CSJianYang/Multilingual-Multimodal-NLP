@@ -133,6 +133,19 @@ $ make
 (如果你想将libtiff安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
 
+**安装zlib**
+
+~~~
+$ tar -xf zlib-1.2.11.tar.gz
+$ cd zlib-1.2.11
+其中$afl-gcc$是这个编译器的路径，这个编译器可以在afl-2.52b文件夹中找到
+$ CC=”$afl-gcc$” ./configure
+比如举个例子，可以写成如下
+$ CC="/root/software/afl-2.52b/afl-gcc" ./configure
+$ make
+(如果你想将zlib安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
+~~~
+
 ## 测试模型
 
 为了保证模型一开始就是被调用的状态这里我们开启一个服务器来启用模型，之后调用模型只需要发送request请求即可
@@ -247,6 +260,12 @@ $ vim afl-fuzz3.c
 
 ~~~
 ./afl-fuzz -i ../tiff_in/ -o tiff_out ../libtiff-Release-v3-9-7/tools/tiffsplit @@
+~~~
+
+**测试zlib的**
+
+~~~
+./afl-fuzz -i ../zlib_in/ -o zlib_out ../zlib-1.2.11/minigzip @@
 ~~~
 
 测试的时候如果运行afl-fuzz出现**Pipe at the begining of 'core pattern'**，请按下面步骤进行后再试着运行afl-fuzz

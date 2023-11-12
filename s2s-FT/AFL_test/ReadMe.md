@@ -107,9 +107,10 @@ $ mkdir mp3gain
 $ mv mp3gain-1_5_2-src.zip mp3gain/
 $ unzip mp3gain-1_5_2-src.zip
 $ vim Makefile
-修改其中CC的值，把gcc改为$afl-gcc$，$afl-gcc$是afl编译器的路径
+修改其中CCS的值，把gcc改为$afl-gcc$，$afl-gcc$是afl编译器的路径
+CC=$afl-gcc$ -fprofile-arcs -ftest-coverage
 比如举个例子:
-CC=/root/software/afl-2.52b/afl-gcc
+CC=/root/software/afl-2.52b/afl-gcc -fprofile-arcs -ftest-coverage
 $ make
 (如果你想将mp3gain安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
@@ -120,16 +121,16 @@ $ make
 $ tar -zxvf libpcap-1.6.2.tar.gz
 $ cd libpcap-1.6.2
 其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
-$ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
+$ ./configure --disable-shared CC="$afl-gcc$ -fprofile-arcs -ftest-coverage" CXX="$afl-g++$ -fprofile-arcs -ftest-coverage"
 比如举个例子，可以写成如下
-$ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++" 
+$ ./configure --disable-shared CC="/usr/local/bin/afl-gcc -fprofile-arcs -ftest-coverage" CXX="/usr/local/bin/afl-g++ -fprofile-arcs -ftest-coverage" 
 $ make & sudo make install
 $ tar -zxvf tcpdump-4.6.2.tar.gz
 $ cd tcpdump-4.6.2
 其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
-$ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
+$ ./configure --disable-shared CC="$afl-gcc$ -fprofile-arcs -ftest-coverage" CXX="$afl-g++$ -fprofile-arcs -ftest-coverage"
 比如举个例子，可以写成如下
-$ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++"
+$ ./configure --disable-shared CC="/usr/local/bin/afl-gcc -fprofile-arcs -ftest-coverage" CXX="/usr/local/bin/afl-g++ -fprofile-arcs -ftest-coverage"
 $ make
 (如果你想将tcpdump安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
@@ -140,9 +141,9 @@ $ make
 $ tar -xf libtiff-Release-v3-9-7.tar.gz
 $ cd libtiff-Release-v3-9-7
 其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
-$ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
+$ ./configure --disable-shared CC="$afl-gcc$ -fprofile-arcs -ftest-coverage" CXX="$afl-g++$ -fprofile-arcs -ftest-coverage"
 比如举个例子，可以写成如下
-$ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++"
+$ ./configure --disable-shared CC="/usr/local/bin/afl-gcc -fprofile-arcs -ftest-coverage" CXX="/usr/local/bin/afl-g++ -fprofile-arcs -ftest-coverage"
 $ make
 (如果你想将libtiff安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
@@ -153,9 +154,9 @@ $ make
 $ tar -xf zlib-1.2.11.tar.gz
 $ cd zlib-1.2.11
 其中$afl-gcc$是这个编译器的路径，这个编译器可以在afl-2.52b文件夹中找到
-$ CC=”$afl-gcc$” ./configure
+$ CC="$afl-gcc$ -fprofile-arcs -ftest-coverage" ./configure
 比如举个例子，可以写成如下
-$ CC="/root/software/afl-2.52b/afl-gcc" ./configure
+$ CC="/root/software/afl-2.52b/afl-gcc -fprofile-arcs -ftest-coverage" ./configure
 $ make
 (如果你想将zlib安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
@@ -279,31 +280,43 @@ $ ./afl-cov -d ../jpg_out -e "../jpeg-9e/jpegtran AFL_FILE" -c ../jpeg-9e --enab
 $ ./afl-fuzz -i testcases/images/gif -o ../gif_out ../ImageMagick-7.1.0-49/utilities/magick identify @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../gif_out -e "../ImageMagick-7.1.0-49/utilities/magick identify AFL_FILE" -c ../ImageMagick-7.1.0-49/utilities --enable-branch-coverage --overwrite
-
+记得最后将gif_out文件夹打包以供数据分析和统计
 ~~~
 
 **测试mp3gain的**
 
 ~~~
-./afl-fuzz -i ../mp3_in/ -o ../mp3_out ../mp3gain/mp3gain @@
+$ ./afl-fuzz -i ../mp3_in/ -o ../mp3_out ../mp3gain/mp3gain @@
+Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
+$ ./afl-cov -d ../mp3_out -e "../mp3gain/mp3gain AFL_FILE" -c ../mp3gain --enable-branch-coverage --overwrite
+记得最后将mp3_out文件夹打包以供数据分析和统计
 ~~~
 
 **测试tcpdump的**
 
 ~~~
-./afl-fuzz -i ../pcap_in/ -o ../pcap_out ../tcpdump-4.6.2/tcpdump -e -vv -nr @@
+$ ./afl-fuzz -i ../pcap_in/ -o ../pcap_out ../tcpdump-4.6.2/tcpdump -e -vv -nr @@
+Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
+$ ./afl-cov -d ../pcap_out -e "../tcpdump-4.6.2/tcpdump -e -vv -nr AFL_FILE" -c ../tcpdump-4.6.2 --enable-branch-coverage --overwrite
+记得最后将pcap_out文件夹打包以供数据分析和统计
 ~~~
 
 **测试libtiff的**
 
 ~~~
-./afl-fuzz -i ../tiff_in/ -o ../tiff_out ../libtiff-Release-v3-9-7/tools/tiffsplit @@
+$ ./afl-fuzz -i ../tiff_in/ -o ../tiff_out ../libtiff-Release-v3-9-7/tools/tiffsplit @@
+Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
+$ ./afl-cov -d ../tiff_out -e "../libtiff-Release-v3-9-7/tools/tiffsplit AFL_FILE" -c ../libtiff-Release-v3-9-7/tools/ --enable-branch-coverage --overwrite
+记得最后将tiff_out文件夹打包以供数据分析和统计
 ~~~
 
 **测试zlib的**
 
 ~~~
-./afl-fuzz -i ../zlib_in/ -o ../zlib_out ../zlib-1.2.11/minigzip @@
+$ ./afl-fuzz -i ../zlib_in/ -o ../zlib_out ../zlib-1.2.11/minigzip @@
+Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
+$ ./afl-cov -d ../zlib_out -e "../zlib-1.2.11/minigzip AFL_FILE" -c ../zlib-1.2.11 --enable-branch-coverage --overwrite
+记得最后将zlib_out文件夹打包以供数据分析和统计
 ~~~
 
 测试的时候如果运行afl-fuzz出现**Pipe at the begining of 'core pattern'**，请按下面步骤进行后再试着运行afl-fuzz

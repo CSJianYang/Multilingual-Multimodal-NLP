@@ -12,10 +12,15 @@ $ pip install torch==1.12.0+cu113 torchaudio==0.12.0+cu113 torchvision==0.13.0+c
 ```
 ## 安装相关软件
 
-**解压binutils（nm、readelf、objdump要用）**
+**安装binutils（nm、readelf、objdump要用）**
 
 ~~~
-$ unzip binutils.zip
+$ tar -xf binutils-2.27.tar.gz
+$ cd binutils-2.27
+其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
+$ ./configure CC="$afl-gcc$ -fprofile-arcs -ftest-coverage" CXX="$afl-g++$ -fprofile-arcs -ftest-coverage"
+比如举个例子，可以写成如下:
+$ ./configure CC="/usr/local/bin/afl-gcc -fprofile-arcs -ftest-coverage" CXX="/usr/local/bin/afl-g++ -fprofile-arcs -ftest-coverage"
 ~~~
 
 **安装poppler**

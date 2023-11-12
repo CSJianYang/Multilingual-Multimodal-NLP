@@ -91,6 +91,7 @@ $ make
 ~~~
 $ tar xvfz ImageMagick-7.1.0-49.tar.gz
 $ cd ImageMagick-7.1.0-49
+$ sudo apt-get install build-essential libjpeg-dev libpng-dev libtiff-dev libgif-dev zlib1g-dev libfreetype6-dev libfontconfig1-dev
 其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
 $ ./configure --disable-shared CC="$afl-gcc$ -fprofile-arcs -ftest-coverage" CXX="$afl-g++$ -fprofile-arcs -ftest-coverage"
 比如举个例子，可以写成如下

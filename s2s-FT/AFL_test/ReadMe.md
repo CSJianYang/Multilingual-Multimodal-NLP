@@ -10,6 +10,14 @@ $ conda activate work
 ```
 $ pip install torch==1.12.0+cu113 torchaudio==0.12.0+cu113 torchvision==0.13.0+cu113 pandas tqdm einops timm flask 
 ```
+安装afl-cov
+
+~~~
+$ apt-get install lcov
+$ unzip afl-cov-master.zip
+然后就可以看到一个afl-cov-master的文件夹
+~~~
+
 ## 安装相关软件
 
 **安装binutils（nm、readelf、objdump要用）**
@@ -31,9 +39,9 @@ $ cd poppler-poppler-0.8
 $ apt-get install libfreetype6-dev libfontconfig1-dev libgpm-dev
 $ ./autogen.sh
 其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
-$ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
+$ ./configure --disable-shared CC="$afl-gcc$ -fprofile-arcs -ftest-coverage" CXX="$afl-g++$ -fprofile-arcs -ftest-coverage"
 比如举个例子，可以写成如下
-$ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++"
+$ ./configure --disable-shared CC="/usr/local/bin/afl-gcc -fprofile-arcs -ftest-coverage" CXX="/usr/local/bin/afl-g++ -fprofile-arcs -ftest-coverage"
 $ make
 (如果你想将poppler安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
@@ -45,9 +53,9 @@ $ tar -xf libxml2-2.9.2.tar.gz
 $ cd libxml2-2.9.2
 $ ./autogen.sh
 其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
-$ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
+$ ./configure --disable-shared CC="$afl-gcc$ -fprofile-arcs -ftest-coverage" CXX="$afl-g++$ -fprofile-arcs -ftest-coverage"
 比如举个例子，可以写成如下
-$ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++"
+$ ./configure --disable-shared CC="/usr/local/bin/afl-gcc -fprofile-arcs -ftest-coverage" CXX="/usr/local/bin/afl-g++ -fprofile-arcs -ftest-coverage"
 $ make
 (如果你想将libxml2安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
@@ -58,9 +66,9 @@ $ make
 $ tar -xf libpng-1.6.37.tar.gz
 $ cd libpng-1.6.37
 其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
-$ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
+$ ./configure --disable-shared CC="$afl-gcc$ -fprofile-arcs -ftest-coverage" CXX="$afl-g++$ -fprofile-arcs -ftest-coverage"
 比如举个例子，可以写成如下
-$ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++" 
+$ ./configure --disable-shared CC="/usr/local/bin/afl-gcc -fprofile-arcs -ftest-coverage" CXX="/usr/local/bin/afl-g++ -fprofile-arcs -ftest-coverage"
 $ make
 (如果你想将libpng安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
@@ -71,9 +79,9 @@ $ make
 $ tar -xf jpegsrc.v9e.tar.gz
 $ cd jpeg-9e
 其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
-$ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
+$ ./configure --disable-shared CC="$afl-gcc$ -fprofile-arcs -ftest-coverage" CXX="$afl-g++$ -fprofile-arcs -ftest-coverage"
 比如举个例子，可以写成如下
-$ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++" 
+$ ./configure --disable-shared CC="/usr/local/bin/afl-gcc -fprofile-arcs -ftest-coverage" CXX="/usr/local/bin/afl-g++ -fprofile-arcs -ftest-coverage" 
 $ make
 (如果你想将libjpeg安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
@@ -84,9 +92,9 @@ $ make
 $ tar xvfz ImageMagick-7.1.0-49.tar.gz
 $ cd ImageMagick-7.1.0-49
 其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
-$ ./configure --disable-shared CC=”$afl-gcc$” CXX=”$afl-g++$”
+$ ./configure --disable-shared CC="$afl-gcc$ -fprofile-arcs -ftest-coverage" CXX="$afl-g++$ -fprofile-arcs -ftest-coverage"
 比如举个例子，可以写成如下
-$ ./configure --disable-shared CC="/root/software/afl-2.52b/afl-gcc" CXX="/root/software/afl-2.52b/afl-g++" 
+$ ./configure --disable-shared CC="/usr/local/bin/afl-gcc -fprofile-arcs -ftest-coverage" CXX="/usr/local/bin/afl-g++ -fprofile-arcs -ftest-coverage" 
 $ make
 (如果你想将ImageMagick安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
@@ -204,73 +212,97 @@ $ vim afl-fuzz3.c
 **测试objdump的**
 
 ~~~
-./afl-fuzz -i testcases/others/elf/ -o objdump_out ../binutils-2.27/binutils/objdump -x -a -d testcases/others/elf/small_exec.elf @@
+$ ./afl-fuzz -i testcases/others/elf/ -o ../objdump_out ../binutils-2.27/binutils/objdump -x -a -d @@
+Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
+$ ./afl-cov -d ../objdump_out -e "../binutils-2.27/binutils/objdump -x -a -d AFL_FILE" -c ../binutils-2.27/binutils --enable-branch-coverage --overwrite
+记得最后将objdump_out文件夹打包以供数据分析和统计
 ~~~
 
 **测试readelf的**
 
 ~~~
-./afl-fuzz -i testcases/others/elf/ -o readelf_out ../binutils-2.27/binutils/readelf -a testcases/others/elf/small_exec.elf @@
+$ ./afl-fuzz -i testcases/others/elf/ -o ../readelf_out ../binutils-2.27/binutils/readelf -a @@
+Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
+$ ./afl-cov -d ../readelf_out -e "../binutils-2.27/binutils/readelf -a AFL_FILE" -c ../binutils-2.27/binutils --enable-branch-coverage --overwrite
+记得最后将readelf_out文件夹打包以供数据分析和统计
 ~~~
 
 **测试nm的**
 
 ~~~
-./afl-fuzz -i testcases/others/elf/ -o nm_out ../binutils-2.27/binutils/nm-new -a testcases/others/elf/small_exec.elf @@
+$ ./afl-fuzz -i testcases/others/elf/ -o ../nm_out ../binutils-2.27/binutils/nm-new -a @@
+Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
+$ ./afl-cov -d ../nm_out -e "../binutils-2.27/binutils/nm-new -a AFL_FILE" -c ../binutils-2.27/binutils --enable-branch-coverage --overwrite
+记得最后将nm_out文件夹打包以供数据分析和统计
 ~~~
 
 **测试poppler的**
 
 ~~~
-./afl-fuzz -i ../pdf_in/ -o pdf_out ../poppler-poppler-0.8/utils/pdftotext @@ /dev/null
+$ ./afl-fuzz -i ../pdf_in/ -o ../pdf_out ../poppler-poppler-0.8/utils/pdftotext @@ /dev/null
+Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
+$ ./afl-cov -d ../pdf_out -e "../poppler-poppler-0.8/utils/pdftotext AFL_FILE /dev/null" -c ../poppler-poppler-0.8/utils --enable-branch-coverage --overwrite
+记得最后将pdf_out文件夹打包以供数据分析和统计
 ~~~
 
 **测试libxml2的**
 
 ~~~
-./afl-fuzz -i ../xml_in/ -o xml_out ../libxml2-2.9.2/xmllint --valid --recover @@
+$ ./afl-fuzz -i ../xml_in/ -o ../xml_out ../libxml2-2.9.2/xmllint --valid --recover @@
+Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
+$ ./afl-cov -d ../xml_out -e "../libxml2-2.9.2/xmllint --valid --recover AFL_FILE" -c ../libxml2-2.9.2 --enable-branch-coverage --overwrite
+记得最后将xml_out文件夹打包以供数据分析和统计
 ~~~
 
 **测试libpng的**
 
 ~~~
-./afl-fuzz -i ../png_in/ -o png_out ../libpng-1.6.37/pngtest @@ /dev/null
+$ ./afl-fuzz -i ../png_in/ -o ../png_out ../libpng-1.6.37/pngtest @@ /dev/null
+Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
+$ ./afl-cov -d ../png_out -e "../libpng-1.6.37/pngtest AFL_FILE" -c ../libpng-1.6.37 --enable-branch-coverage --overwrite
+记得最后将png_out文件夹打包以供数据分析和统计
 ~~~
 
 **测试libjpeg的**
 
 ~~~
-./afl-fuzz -i ../jpg_in/ -o jpg_out ../jpeg-9e/jpegtran @@
+$ ./afl-fuzz -i ../jpg_in/ -o ../jpg_out ../jpeg-9e/jpegtran @@
+Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
+$ ./afl-cov -d ../jpg_out -e "../jpeg-9e/jpegtran AFL_FILE" -c ../jpeg-9e --enable-branch-coverage --overwrite
+记得最后将jpg_out文件夹打包以供数据分析和统计
 ~~~
 
 **测试ImageMagick的**
 
 ~~~
-./afl-fuzz -i testcases/images/gif -o gif_out ../ImageMagick-7.1.0-49/utilities/magick identify @@
+$ ./afl-fuzz -i testcases/images/gif -o ../gif_out ../ImageMagick-7.1.0-49/utilities/magick identify @@
+Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
+$ ./afl-cov -d ../gif_out -e "../ImageMagick-7.1.0-49/utilities/magick identify AFL_FILE" -c ../ImageMagick-7.1.0-49/utilities --enable-branch-coverage --overwrite
+
 ~~~
 
 **测试mp3gain的**
 
 ~~~
-./afl-fuzz -i ../mp3_in/ -o mp3_out ../mp3gain/mp3gain @@
+./afl-fuzz -i ../mp3_in/ -o ../mp3_out ../mp3gain/mp3gain @@
 ~~~
 
 **测试tcpdump的**
 
 ~~~
-./afl-fuzz -i ../pcap_in/ -o pcap_out ../tcpdump-4.6.2/tcpdump -e -vv -nr @@
+./afl-fuzz -i ../pcap_in/ -o ../pcap_out ../tcpdump-4.6.2/tcpdump -e -vv -nr @@
 ~~~
 
 **测试libtiff的**
 
 ~~~
-./afl-fuzz -i ../tiff_in/ -o tiff_out ../libtiff-Release-v3-9-7/tools/tiffsplit @@
+./afl-fuzz -i ../tiff_in/ -o ../tiff_out ../libtiff-Release-v3-9-7/tools/tiffsplit @@
 ~~~
 
 **测试zlib的**
 
 ~~~
-./afl-fuzz -i ../zlib_in/ -o zlib_out ../zlib-1.2.11/minigzip @@
+./afl-fuzz -i ../zlib_in/ -o ../zlib_out ../zlib-1.2.11/minigzip @@
 ~~~
 
 测试的时候如果运行afl-fuzz出现**Pipe at the begining of 'core pattern'**，请按下面步骤进行后再试着运行afl-fuzz

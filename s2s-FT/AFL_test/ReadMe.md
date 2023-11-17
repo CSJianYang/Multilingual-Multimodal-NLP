@@ -29,6 +29,8 @@ $ cd binutils-2.27
 $ ./configure CC="$afl-gcc$ -fprofile-arcs -ftest-coverage" CXX="$afl-g++$ -fprofile-arcs -ftest-coverage"
 比如举个例子，可以写成如下:
 $ ./configure CC="/usr/local/bin/afl-gcc -fprofile-arcs -ftest-coverage" CXX="/usr/local/bin/afl-g++ -fprofile-arcs -ftest-coverage"
+$ make
+(如果你想将binutils安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
 
 **安装poppler**
@@ -217,6 +219,7 @@ $ vim afl-fuzz3.c
 $ ./afl-fuzz -i testcases/others/elf/ -o ../objdump_out ../binutils-2.27/binutils/objdump -x -a -d @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../objdump_out -e "../binutils-2.27/binutils/objdump -x -a -d AFL_FILE" -c ../binutils-2.27/binutils --enable-branch-coverage --overwrite
+$ python afl-showmap.py -f objdump_out -p objdump
 记得最后将objdump_out文件夹打包以供数据分析和统计
 ~~~
 
@@ -226,6 +229,7 @@ $ ./afl-cov -d ../objdump_out -e "../binutils-2.27/binutils/objdump -x -a -d AFL
 $ ./afl-fuzz -i testcases/others/elf/ -o ../readelf_out ../binutils-2.27/binutils/readelf -a @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../readelf_out -e "../binutils-2.27/binutils/readelf -a AFL_FILE" -c ../binutils-2.27/binutils --enable-branch-coverage --overwrite
+$ python afl-showmap.py -f readelf_out -p readelf
 记得最后将readelf_out文件夹打包以供数据分析和统计
 ~~~
 
@@ -235,6 +239,7 @@ $ ./afl-cov -d ../readelf_out -e "../binutils-2.27/binutils/readelf -a AFL_FILE"
 $ ./afl-fuzz -i testcases/others/elf/ -o ../nm_out ../binutils-2.27/binutils/nm-new -a @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../nm_out -e "../binutils-2.27/binutils/nm-new -a AFL_FILE" -c ../binutils-2.27/binutils --enable-branch-coverage --overwrite
+$ python afl-showmap.py -f nm_out -p nm
 记得最后将nm_out文件夹打包以供数据分析和统计
 ~~~
 
@@ -253,6 +258,7 @@ $ ./afl-cov -d ../pdf_out -e "../poppler-poppler-0.8/utils/pdftotext AFL_FILE /d
 $ ./afl-fuzz -i ../xml_in/ -o ../xml_out ../libxml2-2.9.2/xmllint --valid --recover @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../xml_out -e "../libxml2-2.9.2/xmllint --valid --recover AFL_FILE" -c ../libxml2-2.9.2 --enable-branch-coverage --overwrite
+$ python afl-showmap.py -f xml_out -p xmllint
 记得最后将xml_out文件夹打包以供数据分析和统计
 ~~~
 
@@ -271,6 +277,7 @@ $ ./afl-cov -d ../png_out -e "../libpng-1.6.37/pngtest AFL_FILE" -c ../libpng-1.
 $ ./afl-fuzz -i ../jpg_in/ -o ../jpg_out ../jpeg-9e/jpegtran @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../jpg_out -e "../jpeg-9e/jpegtran AFL_FILE" -c ../jpeg-9e --enable-branch-coverage --overwrite
+$ python afl-showmap.py -f jpg_out -p jpegtran
 记得最后将jpg_out文件夹打包以供数据分析和统计
 ~~~
 
@@ -280,6 +287,7 @@ $ ./afl-cov -d ../jpg_out -e "../jpeg-9e/jpegtran AFL_FILE" -c ../jpeg-9e --enab
 $ ./afl-fuzz -i testcases/images/gif -o ../gif_out ../ImageMagick-7.1.0-49/utilities/magick identify @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../gif_out -e "../ImageMagick-7.1.0-49/utilities/magick identify AFL_FILE" -c ../ImageMagick-7.1.0-49/utilities --enable-branch-coverage --overwrite
+$ python afl-showmap.py -f gif_out -p magick
 记得最后将gif_out文件夹打包以供数据分析和统计
 ~~~
 
@@ -289,6 +297,7 @@ $ ./afl-cov -d ../gif_out -e "../ImageMagick-7.1.0-49/utilities/magick identify 
 $ ./afl-fuzz -i ../mp3_in/ -o ../mp3_out ../mp3gain/mp3gain @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../mp3_out -e "../mp3gain/mp3gain AFL_FILE" -c ../mp3gain --enable-branch-coverage --overwrite
+$ python afl-showmap.py -f mp3_out -p mp3gain
 记得最后将mp3_out文件夹打包以供数据分析和统计
 ~~~
 
@@ -307,6 +316,7 @@ $ ./afl-cov -d ../pcap_out -e "../tcpdump-4.6.2/tcpdump -e -vv -nr AFL_FILE" -c 
 $ ./afl-fuzz -i ../tiff_in/ -o ../tiff_out ../libtiff-Release-v3-9-7/tools/tiffsplit @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../tiff_out -e "../libtiff-Release-v3-9-7/tools/tiffsplit AFL_FILE" -c ../libtiff-Release-v3-9-7/tools/ --enable-branch-coverage --overwrite
+$ python afl-showmap.py -f tiff_out -p tiffsplit
 记得最后将tiff_out文件夹打包以供数据分析和统计
 ~~~
 

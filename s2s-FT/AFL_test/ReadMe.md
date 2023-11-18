@@ -163,6 +163,20 @@ $ make
 (如果你想将zlib安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
 
+**安装ncurses**
+
+~~~
+$ tar -xf ncurses-6.1.tar.gz
+$ cd ncurses-6.1
+$ sudo apt-get install libncurses5-dev libncursesw5-dev
+其中$afl-gcc$和$afl-g++$是这两个编译器的路径，这两个编译器可以在afl-2.52b文件夹中找到
+$ ./configure --disable-shared CC="$afl-gcc$ -fprofile-arcs -ftest-coverage" CXX="$afl-g++$ -fprofile-arcs -ftest-coverage"
+比如举个例子，可以写成如下
+$ ./configure --disable-shared CC="/usr/local/bin/afl-gcc -fprofile-arcs -ftest-coverage" CXX="/usr/local/bin/afl-g++ -fprofile-arcs -ftest-coverage"
+$ make
+(如果你想将ncurses安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
+~~~
+
 ## 测试模型
 
 为了保证模型一开始就是被调用的状态这里我们开启一个服务器来启用模型，之后调用模型只需要发送request请求即可
@@ -327,6 +341,15 @@ $ ./afl-fuzz -i ../zlib_in/ -o ../zlib_out ../zlib-1.2.11/minigzip @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../zlib_out -e "../zlib-1.2.11/minigzip AFL_FILE" -c ../zlib-1.2.11 --enable-branch-coverage --overwrite
 记得最后将zlib_out文件夹打包以供数据分析和统计
+~~~
+
+**测试tic的**
+
+~~~
+$ ./afl-fuzz -i testcases/images/text -o ../tic_out ../ncurses-6.1/progs/tic -o /dev/null @@
+Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
+$ ./afl-cov -d ../tic_out -e "../ncurses-6.1/progs/tic -o /dev/null AFL_FILE" -c ../ncurses-6.1/progs --enable-branch-coverage --overwrite
+记得最后将tic_out文件夹打包以供数据分析和统计
 ~~~
 
 测试的时候如果运行afl-fuzz出现**Pipe at the begining of 'core pattern'**，请按下面步骤进行后再试着运行afl-fuzz

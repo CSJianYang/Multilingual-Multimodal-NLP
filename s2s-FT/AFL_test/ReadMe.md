@@ -227,6 +227,21 @@ $ vim afl-fuzz3.c
 
 ### 下面是测试不同程序的
 
+**加快测试速度**
+
+~~~
+设置主，从进程同时fuzz，主进程只设置一个，从进程可以多个注意命名
+$ ./afl-fuzz -i input_dir -o output_dir -M fuzzer1 -m none -- $执行的程序命令$
+$ ./afl-fuzz -i input_dir -o output_dir -S fuzzer2 -m none -- $执行的程序命令$
+$ ./afl-fuzz -i input_dir -o output_dir -S fuzzer3 -m none -- $执行的程序命令$
+......
+比如测试objdump的，可以
+$ ./afl-fuzz -i testcases/others/elf/ -o ../objdump_out  -M fuzzer1 -m none -- ../binutils-2.27/binutils/objdump -x -a -d @@
+$ ./afl-fuzz -i testcases/others/elf/ -o ../objdump_out  -S fuzzer2 -m none -- ../binutils-2.27/binutils/objdump -x -a -d @@
+$ ./afl-fuzz -i testcases/others/elf/ -o ../objdump_out  -S fuzzer3 -m none -- ../binutils-2.27/binutils/objdump -x -a -d @@
+......
+~~~
+
 **测试objdump的**
 
 ~~~

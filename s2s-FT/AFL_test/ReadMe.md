@@ -240,6 +240,14 @@ $ ./afl-fuzz -i testcases/others/elf/ -o ../objdump_out  -M fuzzer1 -m none -- .
 $ ./afl-fuzz -i testcases/others/elf/ -o ../objdump_out  -S fuzzer2 -m none -- ../binutils-2.27/binutils/objdump -x -a -d @@
 $ ./afl-fuzz -i testcases/others/elf/ -o ../objdump_out  -S fuzzer3 -m none -- ../binutils-2.27/binutils/objdump -x -a -d @@
 ......
+接着执行afl-cov
+$ ./afl-cov -d output_dir -e $执行的程序命令$ -c $执行的程序所在环境$ --enable-branch-coverage --overwrite
+比如测试objdump的，可以
+./afl-cov -d ../objdump_out -e "../binutils-2.27/binutils/objdump -x -a -d AFL_FILE" -c ../binutils-2.27/binutils --enable-branch-coverage --overwrite
+最后执行afl-showmap.py
+$ python afl-showmap.py -f output_dir -p $执行的程序$
+比如测试objdump的，可以
+$ python afl-showmap.py -f ../objdump_out -p objdump
 ~~~
 
 **测试objdump的**
@@ -248,7 +256,7 @@ $ ./afl-fuzz -i testcases/others/elf/ -o ../objdump_out  -S fuzzer3 -m none -- .
 $ ./afl-fuzz -i testcases/others/elf/ -o ../objdump_out ../binutils-2.27/binutils/objdump -x -a -d @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../objdump_out -e "../binutils-2.27/binutils/objdump -x -a -d AFL_FILE" -c ../binutils-2.27/binutils --enable-branch-coverage --overwrite
-$ python afl-showmap.py -f objdump_out -p objdump
+$ python afl-showmap.py -f ../objdump_out -p objdump
 记得最后将objdump_out文件夹打包以供数据分析和统计
 ~~~
 
@@ -258,7 +266,7 @@ $ python afl-showmap.py -f objdump_out -p objdump
 $ ./afl-fuzz -i testcases/others/elf/ -o ../readelf_out ../binutils-2.27/binutils/readelf -a @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../readelf_out -e "../binutils-2.27/binutils/readelf -a AFL_FILE" -c ../binutils-2.27/binutils --enable-branch-coverage --overwrite
-$ python afl-showmap.py -f readelf_out -p readelf
+$ python afl-showmap.py -f ../readelf_out -p readelf
 记得最后将readelf_out文件夹打包以供数据分析和统计
 ~~~
 
@@ -268,7 +276,7 @@ $ python afl-showmap.py -f readelf_out -p readelf
 $ ./afl-fuzz -i testcases/others/elf/ -o ../nm_out ../binutils-2.27/binutils/nm-new -a @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../nm_out -e "../binutils-2.27/binutils/nm-new -a AFL_FILE" -c ../binutils-2.27/binutils --enable-branch-coverage --overwrite
-$ python afl-showmap.py -f nm_out -p nm
+$ python afl-showmap.py -f ../nm_out -p nm
 记得最后将nm_out文件夹打包以供数据分析和统计
 ~~~
 
@@ -287,7 +295,7 @@ $ ./afl-cov -d ../pdf_out -e "../poppler-poppler-0.8/utils/pdftotext AFL_FILE /d
 $ ./afl-fuzz -i ../xml_in/ -o ../xml_out ../libxml2-2.9.2/xmllint --valid --recover @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../xml_out -e "../libxml2-2.9.2/xmllint --valid --recover AFL_FILE" -c ../libxml2-2.9.2 --enable-branch-coverage --overwrite
-$ python afl-showmap.py -f xml_out -p xmllint
+$ python afl-showmap.py -f ../xml_out -p xmllint
 记得最后将xml_out文件夹打包以供数据分析和统计
 ~~~
 
@@ -306,7 +314,7 @@ $ ./afl-cov -d ../png_out -e "../libpng-1.6.37/pngtest AFL_FILE" -c ../libpng-1.
 $ ./afl-fuzz -i ../jpg_in/ -o ../jpg_out ../jpeg-9e/jpegtran @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../jpg_out -e "../jpeg-9e/jpegtran AFL_FILE" -c ../jpeg-9e --enable-branch-coverage --overwrite
-$ python afl-showmap.py -f jpg_out -p jpegtran
+$ python afl-showmap.py -f ../jpg_out -p jpegtran
 记得最后将jpg_out文件夹打包以供数据分析和统计
 ~~~
 
@@ -316,7 +324,7 @@ $ python afl-showmap.py -f jpg_out -p jpegtran
 $ ./afl-fuzz -i testcases/images/gif -o ../gif_out ../ImageMagick-7.1.0-49/utilities/magick identify @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../gif_out -e "../ImageMagick-7.1.0-49/utilities/magick identify AFL_FILE" -c ../ImageMagick-7.1.0-49/utilities --enable-branch-coverage --overwrite
-$ python afl-showmap.py -f gif_out -p magick
+$ python afl-showmap.py -f ../gif_out -p magick
 记得最后将gif_out文件夹打包以供数据分析和统计
 ~~~
 
@@ -326,7 +334,7 @@ $ python afl-showmap.py -f gif_out -p magick
 $ ./afl-fuzz -i ../mp3_in/ -o ../mp3_out ../mp3gain/mp3gain @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
 $ ./afl-cov -d ../mp3_out -e "../mp3gain/mp3gain AFL_FILE" -c ../mp3gain --enable-branch-coverage --overwrite
-$ python afl-showmap.py -f mp3_out -p mp3gain
+$ python afl-showmap.py -f ../mp3_out -p mp3gain
 记得最后将mp3_out文件夹打包以供数据分析和统计
 ~~~
 

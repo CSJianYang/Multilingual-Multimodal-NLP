@@ -12,8 +12,7 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
-    pre_path = os.path.dirname(os.getcwd())
-    path = os.path.join(pre_path, args.folder, "queue")
+    pre_path = os.path.abspath(args.folder)
     program = args.program
     f_p = ""
     o_p = ""
@@ -37,21 +36,61 @@ if __name__ == '__main__':
     else:
         print("please input a program's name")
         sys.exit()
-    files = os.listdir(path)
-    if not os.path.exists(os.path.join(pre_path, args.folder, "map_data")):
-        os.system("mkdir " + os.path.join(pre_path, args.folder, "map_data"))
+    folders = os.listdir(pre_path)
+    if not os.path.exists(os.path.join(pre_path, "map_data")):
+        os.system("mkdir " + os.path.join(pre_path, "map_data"))
     lines_list = [[], []]
-    for file in files:
-        if "id" not in file:
-            continue
-        o_p = file + ".txt"
-        f_p = os.path.join(path, file)
-        full_command = "afl-showmap -o " + os.path.join(pre_path, args.folder, "map_data", o_p) + command + f_p
-        os.system(full_command)
-        with open(os.path.join(pre_path, args.folder, "map_data", o_p), "r") as f:
-            line_number = str(len(f.readlines()))
-            lines_list[0].append(line_number)
-            lines_list[1].append(os.path.join(pre_path, args.folder, "map_data", o_p))
-    with open(os.path.join(pre_path, args.folder, "map_data", "map_all.txt"), "w") as f:
+    map_dic = []
+    if "queue" not in folders:
+        for folder in folders:
+            if folder == "map_data":
+                continue
+            if not os.path.exists(os.path.join(pre_path, "map_data", folder)):
+                os.system("mkdir " + os.path.join(pre_path, "map_data", folder))
+            files = os.listdir(os.path.join(pre_path, folder, "queue"))
+            for file in files:
+                print(f"!!!!!!!!{pre_path}!!{folder}!{file}!!!!!!!!!")
+                if "id" not in file:
+                    continue
+                o_p = file + ".txt"
+                f_p = os.path.join(os.path.join(pre_path, folder, "queue", file))
+                full_command = "afl-showmap -o " + os.path.join(pre_path, "map_data", folder, o_p) + command + f_p
+                os.system(full_command)
+                with open(os.path.join(pre_path, "map_data", folder, o_p), "r") as f:
+                    lines = f.readlines()
+                    line_number = str(len(lines))
+                    lines_list[0].append(os.path.join(pre_path, "map_data", folder, o_p))
+                    lines_list[1].append(line_number)
+                    for line in lines:
+                        pos = line.find(":")
+                        num = line[:pos]
+                        if num not in map_dic:
+                            map_dic.append(num)
+    else:
+        files = os.listdir(os.path.join(pre_path, "queue"))
+        if not os.path.exists(os.path.join(pre_path, "map_data", "fuzzer-one")):
+            os.system("mkdir " + os.path.join(pre_path, "map_data", "fuzzer-one"))
+        for file in files:
+            if "id" not in file:
+                continue
+            o_p = file + ".txt"
+            f_p = os.path.join(pre_path, "queue", file)
+            full_command = "afl-showmap -o " + os.path.join(pre_path, "map_data", "fuzzer-one", o_p) + command + f_p
+            os.system(full_command)
+            with open(os.path.join(pre_path, "map_data", "fuzzer-one", o_p), "r") as f:
+                lines = f.readlines()
+                line_number = str(len(lines))
+                lines_list[0].append(os.path.join(pre_path, "map_data", "fuzzer-one", o_p))
+                lines_list[1].append(line_number)
+                for line in lines:
+                    pos = line.find(":")
+                    num = line[:pos]
+                    if num not in map_dic:
+                        map_dic.append(num)
+    with open(os.path.join(pre_path, "map_data", "map_all.txt"), "w") as f:
         for i in range(len(lines_list[0])):
-            f.write(lines_list[1][i] + ': ' + lines_list[0][i] + "\n")
+            f.write(lines_list[0][i] + ': ' + lines_list[1][i] + "\n")
+    with open(os.path.join(pre_path, "map_data", "map_density.txt"), "w") as f:
+        for i in map_dic:
+            f.write(i + "\n")
+        f.write(f"map_density_num:{len(map_dic)}\n")

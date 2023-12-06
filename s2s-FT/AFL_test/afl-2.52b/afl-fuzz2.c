@@ -4037,13 +4037,15 @@ static void show_stats(void) {
     else strcpy(tmp, cLBL);
 
   }
+  
+  if (queue_cycle >= 2) {
+  	exit(0);
+  }
 
   SAYF(bV bSTOP "        run time : " cRST "%-34s " bSTG bV bSTOP
        "  cycles done : %s%-5s  " bSTG bV "\n",
        DTD(cur_ms, start_time), tmp, DI(queue_cycle - 1));
-  if (queue_cycle == 2) {
-  	exit(1);
-  }
+
   /* We want to warn people about not seeing new paths after a full cycle,
      except when resuming fuzzing or running in non-instrumented mode. */
 

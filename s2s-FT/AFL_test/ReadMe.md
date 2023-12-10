@@ -18,6 +18,16 @@ $ unzip afl-cov-master.zip
 然后就可以看到一个afl-cov-master的文件夹
 ~~~
 
+配置最基础的afl-fuzz，这一步可以做可以不做，主要是为了方便其他afl工具的使用，比如afl-gcc等
+
+~~~
+进入AFL_test
+$ cd afl-2.52b
+$ cp afl-fuzz1.c afl-fuzz.c
+$ sudo make
+$ sudo make install
+~~~
+
 ## 安装相关软件
 
 **安装binutils（nm、readelf、objdump要用）**
@@ -181,11 +191,13 @@ $ make
 
 为了保证模型一开始就是被调用的状态这里我们开启一个服务器来启用模型，之后调用模型只需要发送request请求即可
 
-进入CtoPython/PyDOC下（如果端口被占用了记得修改module_app.py与module_client.py里面的端口信息，默认是http://127.0.0.1:80/）
+进入CtoPython/PyDOC下（如果端口被占用了记得修改module_app.py与module_client.py里面的端口信息，默认是http://127.0.0.1:5000/）
 
 ```
 $ python module_app.py
 ```
+
+如果是测试大模型的话，这里用的是module_app_model.py
 
 **如果你想调用自己的模型，只需要修改module_app.py中的get_output函数即可，模仿着进行修改即可**
 
@@ -230,15 +242,13 @@ $ vim afl-fuzz3.c
 **加快测试速度**
 
 ~~~
-设置主，从进程同时fuzz，主进程只设置一个，从进程可以多个注意命名
+设置主，从进程同时fuzz，主进程只设置一个，从进程可以设置多个注意命名，但感觉只设置两个就可以了
 $ ./afl-fuzz -i input_dir -o output_dir -M fuzzer1 -m none -- $执行的程序命令$
 $ ./afl-fuzz -i input_dir -o output_dir -S fuzzer2 -m none -- $执行的程序命令$
-$ ./afl-fuzz -i input_dir -o output_dir -S fuzzer3 -m none -- $执行的程序命令$
 ......
 比如测试objdump的，可以
 $ ./afl-fuzz -i testcases/others/elf/ -o ../objdump_out  -M fuzzer1 -m none -- ../binutils-2.27/binutils/objdump -x -a -d @@
 $ ./afl-fuzz -i testcases/others/elf/ -o ../objdump_out  -S fuzzer2 -m none -- ../binutils-2.27/binutils/objdump -x -a -d @@
-$ ./afl-fuzz -i testcases/others/elf/ -o ../objdump_out  -S fuzzer3 -m none -- ../binutils-2.27/binutils/objdump -x -a -d @@
 ......
 接着执行afl-cov
 $ ./afl-cov -d output_dir -e $执行的程序命令$ -c $执行的程序所在环境$ --enable-branch-coverage --overwrite
@@ -381,6 +391,8 @@ $ ./afl-cov -d ../tic_out -e "../ncurses-6.1/progs/tic -o /dev/null AFL_FILE" -c
 sudo su
 echo core >/proc/sys/kernel/core_pattern
 ~~~
+
+### 测试结束之后的注意事项
 
 每次**测试完以后记得直接截图保存以便统计数据**，因为可能会出现乱码，需要重新打开终端才会恢复，暂时没找到解决方法。并且**请将输出文件夹打包保存下来**，用来探索其他指标时使用，比如pcap_out打包成一个zip文件保存下来
 ![image](https://github.com/CSJianYang/Multilingual-Multimodal-NLP/assets/77664227/f44c2fad-7bee-402d-ab74-818afa68787b)

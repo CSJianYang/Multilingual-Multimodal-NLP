@@ -4039,6 +4039,48 @@ static void show_stats(void) {
   }
   
   if (queue_cycle >= 2) {
+    FILE * fp_out;
+    char out_fp_txt[500];
+    snprintf(out_fp_txt, sizeof(out_fp_txt), "%s/ui_result.txt", out_dir);
+    fp_out = fopen(out_fp_txt, "w");
+    fprintf(fp_out,          "sync_id: %s \n"
+                    "output directory: %s \n"
+                            "run time: %s \n"
+                         "cycles done: %lld \n"
+                        "total paths : %d \n"
+                        "uniq crashes: %lld \n"
+                          "uniq hangs: %lld \n"
+                         "map density: %0.02f%% / %0.02f%% \n"
+                       "favored paths: %d (%0.02f%%) \n"
+                        "new edges on: %d (%0.02f%%) \n"
+                       "total crashes: %lld \n"
+                        "total tmouts: %lld \n"
+                           "bit flips: %lld/%lld, %lld/%lld, %lld/%lld \n"
+                          "byte flips: %lld/%lld, %lld/%lld, %lld/%lld \n"
+                         "arithmetics: %lld/%lld, %lld/%lld, %lld/%lld \n"
+                          "known ints: %lld/%lld, %lld/%lld, %lld/%lld \n"
+                          "dictionary: %lld/%lld, %lld/%lld, %lld/%lld \n"
+                               "havoc: %lld/%lld, %lld/%lld \n"
+            , sync_id, out_dir, DTD(cur_ms, start_time), queue_cycle - 1, queued_paths, unique_crashes, unique_hangs, ((double)queue_cur->bitmap_size) * 
+          100 / MAP_SIZE, t_byte_ratio, queued_favored, ((double)queued_favored) * 100 / queued_paths, queued_with_cov, ((double)queued_with_cov) * 100 / queued_paths
+          , total_crashes, total_tmouts, 
+            stage_finds[STAGE_FLIP1], stage_cycles[STAGE_FLIP1],
+            stage_finds[STAGE_FLIP2], stage_cycles[STAGE_FLIP2],
+            stage_finds[STAGE_FLIP4], stage_cycles[STAGE_FLIP4], 
+            stage_finds[STAGE_FLIP8], stage_cycles[STAGE_FLIP8],
+            stage_finds[STAGE_FLIP16], stage_cycles[STAGE_FLIP16],
+            stage_finds[STAGE_FLIP32], stage_cycles[STAGE_FLIP32],
+            stage_finds[STAGE_ARITH8], stage_cycles[STAGE_ARITH8],
+            stage_finds[STAGE_ARITH16], stage_cycles[STAGE_ARITH16],
+            stage_finds[STAGE_ARITH32], stage_cycles[STAGE_ARITH32],
+            stage_finds[STAGE_INTEREST8], stage_cycles[STAGE_INTEREST8],
+            stage_finds[STAGE_INTEREST16], stage_cycles[STAGE_INTEREST16],
+            stage_finds[STAGE_INTEREST32], stage_cycles[STAGE_INTEREST32],
+            stage_finds[STAGE_EXTRAS_UO], stage_cycles[STAGE_EXTRAS_UO],
+            stage_finds[STAGE_EXTRAS_UI], stage_cycles[STAGE_EXTRAS_UI],
+            stage_finds[STAGE_EXTRAS_AO], stage_cycles[STAGE_EXTRAS_AO],
+            stage_finds[STAGE_HAVOC], stage_cycles[STAGE_HAVOC],
+            stage_finds[STAGE_SPLICE], stage_cycles[STAGE_SPLICE]);
   	exit(0);
   }
 

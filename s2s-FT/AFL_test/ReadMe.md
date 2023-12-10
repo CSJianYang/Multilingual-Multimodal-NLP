@@ -1,4 +1,13 @@
 # 测试用的命令，请在afl-2.52b下面进行测试
+## 测试的整个流程
+
+1. 完成**测试之前所需要的必须步骤**的内容
+2. 根据所需要测试的程序在**安装相关软件**中安装自己所需要的软件
+3. 根据自身需求在**测试模型**中选择不同测试模式
+4. 根据选择的测试程序不同执行相关测试命令
+5. 最后将测试结束后的afl-fuzz的UI进行截图保存，并将输出文件夹进行打包以供分析
+
+
 ## 测试之前所需要的必须步骤
 
 利用conda搭建3.9环境(或者有3.9环境的python也可以)
@@ -198,6 +207,14 @@ $ python module_app.py
 ```
 
 如果是测试大模型的话，这里用的是module_app_model.py
+
+~~~
+$ python module_app_model.py --program $程序的名字$
+比如我们如果测试的是objdump的话命令如下：
+$ python module_app_model.py --program objdump
+所有的程序有：
+objdump, readelf, tiffsplit, nm, mp3gain, magick, libxml, libjpeg
+~~~
 
 **如果你想调用自己的模型，只需要修改module_app.py中的get_output函数即可，模仿着进行修改即可**
 

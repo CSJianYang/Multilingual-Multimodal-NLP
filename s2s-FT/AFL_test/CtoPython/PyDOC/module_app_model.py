@@ -57,7 +57,7 @@ Output Sequence Definition:It consists of bytes represented in hexadecimal, sepa
 input sequence:{byte_input}Please list all possible mutation strategies (mutation position and mutation operation) with the JSON format as:output:{{    "mutation strategies": [        (op_1, pos_1),         (op_2, pos_2),         ... ,         (op_N, pos_N)    ]}}'''
     inputs = tokenizer(input_text, return_tensors="pt").to(model.device)
     # 这里应该是得到4个输出，所以下面用了for循环
-    outputs = model.generate(**inputs, max_length=128, topp=0.5, sampling_num=4)
+    outputs = model.generate(**inputs, max_length=128, top_p=0.5, sampling_num=4, do_sample=True)
     output_results = tokenizer.decode(outputs[0], skip_special_tokens=True)
     dic = []
     for output_one in output_results:

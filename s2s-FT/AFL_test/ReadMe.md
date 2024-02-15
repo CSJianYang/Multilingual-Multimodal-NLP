@@ -124,14 +124,13 @@ $ make
 **安装mp3gain**
 
 ~~~
-$ mkdir mp3gain
-$ mv mp3gain-1_5_2-src.zip mp3gain/
-$ unzip mp3gain-1_5_2-src.zip
+$ tar -xf mp3gain-1.5.2.tar.gz
+$ cd mp3gain-1.5.2/
 $ vim Makefile
 修改其中CCS的值，把gcc改为$afl-gcc$，$afl-gcc$是afl编译器的路径
 CC=$afl-gcc$ -fprofile-arcs -ftest-coverage
 比如举个例子:
-CC=/root/software/afl-2.52b/afl-gcc -fprofile-arcs -ftest-coverage
+CC=/usr/local/bin/afl-gcc -fprofile-arcs -ftest-coverage
 $ make
 (如果你想将mp3gain安装的话，可以继续执行sudo make install，测试的话到上面一步即可)
 ~~~
@@ -360,7 +359,7 @@ $ python afl-showmap.py -f ../gif_out -p magick
 ~~~
 $ ./afl-fuzz -i ../mp3_in/ -o ../mp3_out ../mp3gain/mp3gain @@
 Fuzz完毕后请先截图最后的运行界面，再进入afl-cov-master文件夹，执行下面命令
-$ ./afl-cov -d ../mp3_out -e "../mp3gain/mp3gain AFL_FILE" -c ../mp3gain --enable-branch-coverage --overwrite
+$ ./afl-cov -d ../mp3_out -e "../mp3gain-2.5.2/mp3gain AFL_FILE" -c ../mp3gain-1.5.2 --enable-branch-coverage --overwrite
 $ python afl-showmap.py -f ../mp3_out -p mp3gain
 记得最后将mp3_out文件夹打包以供数据分析和统计
 ~~~
